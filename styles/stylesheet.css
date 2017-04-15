@@ -1,0 +1,515 @@
+/* COLOR VARIABLES */
+:root {
+	--nav-base-grad1: rgb(58, 63, 68);
+	--nav-base-grad2: rgb(34, 34, 34);
+	--nav-active-grad1: rgb(34, 34, 34);
+	--nav-active-grad2: black;
+	--nav-base-text: #9D9D9D;
+	--nav-active-text: white;
+	--nav-border: rgb(0, 118, 163);
+
+	/* Main body colors */
+	--about-top-background: rgb(75, 82, 84);
+	--about-middle-background: rgb(44, 51, 54);
+	--about-bottom-background: rgb(21, 26, 28);
+	--main-base-background: rgb(34, 34, 34);
+	--main-base-text: rgb(200, 200, 200);
+	--main-highlighted-text: rgb(0, 177, 245);
+	--main-panel-border: rgb(0, 118, 163);
+	--main-panel-shadow: rgb(0, 0, 0);
+	--main-button-base: rgb(0, 118, 163);
+	--main-button-hover: rgb(0, 83, 114);
+}
+
+/* NAVBAR SELECTORS */
+.navbar-inverse {
+	background: -ms-linear-gradient(rgb(58, 63, 68), rgb(34, 34, 34));
+	background: -webkit-linear-gradient(var(--nav-base-grad1), var(--nav-base-grad2));
+	background: -o-linear-gradient(var(--nav-base-grad1), var(--nav-base-grad2));
+	background: linear-gradient(var(--nav-base-grad1), var(--nav-base-grad2));
+	border-bottom: 1px solid rgb(0, 118, 163);
+	border-bottom: 1px solid var(--nav-border);
+}
+
+.navbar-inverse .navbar-nav>li>a:focus,
+.navbar-inverse .navbar-nav>li>a:hover {
+	/* color: var(--nav-base-text); */
+	color: var(--nav-active-text);
+}
+
+.nav-link {
+	color: var(--nav-base-text);
+	/* For older versions of Safari */
+	-webkit-transition-property: color, background;
+	-webkit-transition-duration: 500ms;
+	-webkit-transition-delay: 0s;
+
+	transition-property: color, background;
+	transition-duration: 500ms;
+	transition-delay: 0s;
+}
+
+.nav-link:hover {
+	color: var(--nav-active-text);
+}
+
+/*
+.active {
+	color: var(--nav-active-text);
+}
+*/
+
+/*
+.navbar-inverse .navbar-nav>.active>a,
+.navbar-inverse .navbar-nav>.active>a:focus,
+.navbar-inverse .navbar-nav>.active>a:hover {
+	background: -ms-linear-gradient(rgb(34, 34, 34), black);
+	background: -webkit-linear-gradient(var(--nav-active-grad1), var(--nav-active-grad2));
+	background: -o-linear-gradient(var(--nav-active-grad1), var(--nav-active-grad2));
+	background: linear-gradient(var(--nav-active-grad1), var(--nav-active-grad2));
+}
+*/
+
+nav div ul li img {
+	margin-top: 9px;
+}
+
+nav > div > ul:nth-child(1) > li:nth-child(2) > a {
+	padding-left: 5px;
+}
+
+nav > div > ul:nth-child(3) > li:nth-child(2) > a {
+	padding-left: 5px;
+}
+
+/* BODY SELECTORS */
+html, body {
+	height: 100%;
+}
+
+body {
+	/* Add support for IE and Edge */
+	background-color: rgb(34, 34, 34);
+	background-color: var(--main-base-background);
+}
+
+.panel {
+	margin: 60px 0px 60px;
+	box-shadow: 0 0 30px black;
+	-webkit-box-shadow: 0 0 30px var(--main-panel-shadow);
+	-moz-box-shadow: 0 0 30px var(--main-panel-shadow);
+	box-shadow: 0 0 30px var(--main-panel-shadow);
+	border-radius: 0px;
+}
+
+.panel.panel-default {
+	/* Panel border gradient */
+	border: 1px solid rgb(0, 118, 163);
+	-webkit-border-image: -webkit-linear-gradient(top left, var(--main-panel-border), var(--nav-base-grad2), var(--main-panel-border));
+	-o-border-image: -o-linear-gradient(top left, var(--main-panel-border), var(--nav-base-grad2), var(--main-panel-border));
+	border-image: linear-gradient(to bottom right, var(--main-panel-border), var(--nav-base-grad2), var(--main-panel-border));
+	border-image-slice: 1;
+
+	/* Panel background gradient */
+	background: -ms-linear-gradient(rgb(34, 34, 34), rgb(58, 63, 68));
+	background: -webkit-linear-gradient(rgb(34, 34, 34), rgb(58, 63, 68));  /* For older versions of Safari */
+	background: -webkit-linear-gradient(var(--nav-base-grad2), var(--nav-base-grad1));
+	background: -o-linear-gradient(var(--nav-base-grad2), var(--nav-base-grad1));
+	background: linear-gradient(var(--nav-base-grad2), var(--nav-base-grad1));
+}
+
+h1, h2, h3, h4, h5, h6, p, li {
+	/* Add support for IE and Edge */
+	color: rgb(200, 200, 200);
+	color: var(--main-base-text);
+}
+
+section h1 {
+	text-align: center;
+}
+
+/* ABOUT SELECTORS */
+#about {
+	width: 100%;
+	text-align: center;
+}
+
+.profile-photo {
+	position: absolute;
+	width: 160px;
+	height: 160px;
+	top: 140px;
+	margin-left: -80px;
+	left: 50%;
+	vertical-align: middle;
+}
+
+.about-top-container {
+	background-color: rgb(75, 82, 84);
+	background-color: var(--about-top-background);
+	height: 220px;
+}
+
+.about-middle-container {
+	background-color: rgb(44, 51, 54);
+	background-color: var(--about-middle-background);
+	padding: 100px 0 20px 0;
+}
+
+.about-bottom-container {
+	background-color: rgb(21, 26, 28);
+	background-color: var(--about-bottom-background);
+	padding: 20px 20px;
+}
+
+.about-bottom-container p {
+	padding: 0 20% 0 20%;
+	margin-bottom: 0;
+}
+
+/* EDUCATION SELECTORS */
+.education-flex-row {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	justify-content: center;
+	-webkit-flex-wrap: wrap;
+	flex-wrap: wrap;
+}
+
+.education-flex-item {
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.education-flex-item > img {
+	width: 65px;
+	margin: 30px 15px 0 0;
+}
+
+.education-flex-item:nth-child(3) {
+	text-align: right;
+	margin-left: 15px;
+}
+
+/*
+.degree-flex-row {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	justify-content: space-around;
+}
+
+#education h1 {
+	margin-bottom: 25px;
+}
+
+.degree-flex-col1 {
+	margin: 0 15px 0 0;
+
+	border: 1px solid transparent;
+	border-image: linear-gradient(rgba(0, 0, 0, 0), var(--main-panel-border), rgba(0, 0, 0, 0));
+	border-image-slice: 0 1 0 0;
+	border-image-width: 3px;
+}
+
+.degree-flex-col1 img {
+	width: 65px;
+	height: 65px;
+	margin: 25px 15px 0 0;
+}
+
+#education > div > div > div:nth-child(3) {
+	margin-top: 25px;
+}
+*/
+
+/* SKILLS SELECTORS */
+.skills-flex-row {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	justify-content: space-around;  /* Use around for wrapping on smaller screens */
+	text-align: center;
+	-webkit-flex-wrap: wrap;
+	flex-wrap: wrap;
+}
+
+.skills-flex-item {
+	min-width: 300px;
+}
+
+.skills-flex-item h6 {
+	margin: 15px 0 0 0;
+}
+
+.skills-flex-item ul {
+	padding: 0 30px;
+}
+
+.skills-flex-item ul li {
+	text-align: left;
+	margin: 5px 0;
+}
+
+.skills-flex-item ul li span {
+	color: rgb(0, 177, 245);
+	color: var(--main-highlighted-text);
+}
+
+.skills-flex-item:nth-child(2) {
+	border: 1px solid transparent;
+	border-image: linear-gradient(transparent, var(--main-panel-border), transparent);
+	border-image-slice: 0 1 0 1;
+	border-image-width: 3px;
+}
+
+/* PORTFOLIO SELECTORS */
+.project-container {
+	text-align: center;  /* Align project image */
+	padding-bottom: 25px;
+
+	border: 1px solid transparent;
+	border-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--main-panel-border), rgba(0, 0, 0, 0));
+	border-image-slice: 0 0 1 0;
+	border-image-width: 3px;
+}
+
+.project-container img {
+	width: 40%;
+	margin: 30px;
+	box-shadow: 0 0 30px black;
+	-webkit-box-shadow: 0 0 30px var(--main-panel-shadow);
+	-moz-box-shadow: 0 0 30px var(--main-panel-shadow);
+	box-shadow: 0 0 30px var(--main-panel-shadow);
+}
+
+.project-container p {
+	margin: 10px 20%;
+}
+
+.project-container ul {
+	padding-left: 20px;
+	margin: 5px 30%;  /* Too narrow on mobile */
+}
+
+.project-container ul li {
+	text-align: left;
+	margin: 5px 0;
+}
+
+.project-container .hidden {
+	display: none;
+}
+
+.portfolio-flex-row {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	justify-content: space-around;  /* Use around for wrapping on smaller screens */
+	text-align: center;
+	-webkit-flex-wrap: wrap;
+	flex-wrap: wrap;
+	margin-bottom: 10px;
+}
+
+.portfolio-flex-row > a,
+.portfolio-flex-row > a:hover,
+.portfolio-flex-row > a:active {
+	text-decoration: none;
+}
+
+.portfolio-flex-item {
+	background-color: rgb(21, 26, 28);
+	background-color: var(--about-bottom-background);
+	padding: 3px;
+	margin-top: 25px;
+	-webkit-transition: all 500ms;
+	transition: all 500ms;
+	border: 1px solid black;
+}
+
+.portfolio-flex-item:hover {
+	box-shadow: 0 0 15px rgb(200, 200, 200);
+	-webkit-box-shadow: 0 0 15px var(--main-base-text);
+	-moz-box-shadow: 0 0 15px var(--main-base-text);
+	box-shadow: 0 0 15px var(--main-base-text);
+}
+
+.portfolio-flex-item > p {
+	font-size: 20px;
+	margin: 0px 0 3px 0;
+}
+
+.portfolio-flex-item > img {
+	max-width: 200px;
+	height: 180px;
+}
+
+/* PORTFOLIO CAROUSEL SELECTORS */
+#si-carousel, #amt-carousel, #gs-carousel, #jkp-carousel,
+#pw-carousel, #as-carousel, #des-carousel {
+	width: 70%;
+	margin: 30px auto;
+}
+
+.carousel-indicators {
+	bottom: -12%;
+}
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+	width: 50%;
+	margin: auto;
+}
+
+/*
+// Old portfolio section selectors
+#myCarousel {
+	width: 70%;
+	margin: 0 auto;
+	margin-bottom: 20px;
+}
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+	width: 500px;
+	height: 400px;
+	margin: auto;
+}
+*/
+
+/* CONTACT SELECTORS */
+#contact > div > div > div > div.contact-flex-item2 > h3 > a {
+	color: var(--main-panel-border);
+}
+
+#contact > div > div > div > div.contact-flex-item2 > h3 > a:hover {
+	color: var(--main-button-hover);
+}
+
+.contact-flex-row {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	justify-content: center;
+	margin: 25px 0 25px 0;
+}
+
+.contact-flex-item1 {
+	margin-right: 25px;
+	padding-right: 25px;
+
+	border: 1px solid transparent;
+	border-image: linear-gradient(rgba(0, 0, 0, 0), var(--main-panel-border), rgba(0, 0, 0, 0));
+	border-image-slice: 0 1 0 0;
+	border-image-width: 3px;
+}
+
+.contact-flex-item1 img {
+	width: 160px;
+	height: 160px;
+	margin-top: 41px;
+}
+
+#contact button {
+	margin: 10px 0 0 40px;
+
+	/* Fallback for IE */
+	color: white;
+	background-color: rgb(0, 118, 163);
+	box-shadow: 5px 5px 5px rgb(34, 34, 34);
+
+	color: var(--nav-active-text);
+	background-color: var(--main-button-base);
+	padding: 5px 15px;
+	border: none;
+	border-radius: 3px;
+	-webkit-box-shadow: 5px 5px 5px var(--nav-base-grad2);
+	-moz-box-shadow: 5px 5px 5px var(--nav-base-grad2);
+	box-shadow: 5px 5px 5px var(--nav-base-grad2);
+	-webkit-transition: background-color 500ms;
+	transition: background-color 500ms;
+}
+
+#contact button:hover {
+	background-color: rgb(0, 83, 114);
+	background-color: var(--main-button-hover);
+}
+
+#contact button:active {
+	box-shadow: inset 5px 5px 5px rgb(34, 34, 34);
+	box-shadow: inset 5px 5px 5px var(--nav-base-grad2);
+}
+
+#contact button:focus {
+	outline: none;
+}
+
+#contact button > img {
+	height: 20px;
+	padding-right: 5px;
+}
+
+/*
+	Add workarounds for flexbox stuff for the special case of
+	anyone using the outdated Windows version of Safari
+	(probably not necessary, but better safe than sorry)
+*/
+.skills-noflex-row {
+	display: block;
+	margin: inherit auto;
+}
+
+.skills-noflex-row:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+
+.skills-noflex-item {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.portfolio-noflex-row {
+	display: block;
+}
+
+.portfolio-noflex-item {
+	display: inline-block;
+	margin: 10px;
+}
+
+.contact-noflex-row {
+	display: block;
+	margin: inherit auto;
+}
+
+.contact-noflex-item1 {
+	display: inline-block;
+}
+
+.contact-noflex-item1 img {
+	margin-top: -200px;
+}
+
+.contact-noflex-item2 {
+	display: inline-block;
+	text-align: left;
+}
+
+/* Fix for IE covering the side of the navbar with the scrollbar */
+@-ms-viewport {
+	width: auto !important;
+}
+
+/* Center nav buttons in IE */
+@media(min-width: 768px) {
+  .navbar-nav.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
+  }
+}
