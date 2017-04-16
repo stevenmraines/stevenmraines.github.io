@@ -53,23 +53,6 @@
 	color: var(--nav-active-text);
 }
 
-/*
-.active {
-	color: var(--nav-active-text);
-}
-*/
-
-/*
-.navbar-inverse .navbar-nav>.active>a,
-.navbar-inverse .navbar-nav>.active>a:focus,
-.navbar-inverse .navbar-nav>.active>a:hover {
-	background: -ms-linear-gradient(rgb(34, 34, 34), black);
-	background: -webkit-linear-gradient(var(--nav-active-grad1), var(--nav-active-grad2));
-	background: -o-linear-gradient(var(--nav-active-grad1), var(--nav-active-grad2));
-	background: linear-gradient(var(--nav-active-grad1), var(--nav-active-grad2));
-}
-*/
-
 nav div ul li img {
 	margin-top: 9px;
 }
@@ -111,6 +94,7 @@ body {
 	border-image-slice: 1;
 
 	/* Panel background gradient */
+	background: rgb(58, 63, 68);
 	background: -ms-linear-gradient(rgb(34, 34, 34), rgb(58, 63, 68));
 	background: -webkit-linear-gradient(rgb(34, 34, 34), rgb(58, 63, 68));  /* For older versions of Safari */
 	background: -webkit-linear-gradient(var(--nav-base-grad2), var(--nav-base-grad1));
@@ -168,6 +152,7 @@ section h1 {
 }
 
 /* EDUCATION SELECTORS */
+/*
 .education-flex-row {
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -191,38 +176,39 @@ section h1 {
 	text-align: right;
 	margin-left: 15px;
 }
-
-/*
-.degree-flex-row {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: flex;
-	justify-content: space-around;
-}
+*/
 
 #education h1 {
 	margin-bottom: 25px;
 }
 
-.degree-flex-col1 {
-	margin: 0 15px 0 0;
+.education-row {
+	text-align: center;
+}
+
+.education-row:nth-child(2) {
+	margin-bottom: 15px;
+}
+
+.education-item:nth-child(1) {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 15px;
+	padding-right: 15px;
 
 	border: 1px solid transparent;
-	border-image: linear-gradient(rgba(0, 0, 0, 0), var(--main-panel-border), rgba(0, 0, 0, 0));
+	-webkit-border-image: -webkit-linear-gradient(transparent, var(--main-panel-border), transparent);
+	-o-border-image: -o-linear-gradient(transparent, var(--main-panel-border), transparent);
+	border-image: linear-gradient(transparent, var(--main-panel-border), transparent);
 	border-image-slice: 0 1 0 0;
 	border-image-width: 3px;
 }
 
-.degree-flex-col1 img {
-	width: 65px;
-	height: 65px;
-	margin: 25px 15px 0 0;
+.education-item:nth-child(2) {
+	display: inline-block;
+	vertical-align: middle;
+	text-align: left;
 }
-
-#education > div > div > div:nth-child(3) {
-	margin-top: 25px;
-}
-*/
 
 /* SKILLS SELECTORS */
 .skills-flex-row {
@@ -363,22 +349,6 @@ section h1 {
 	margin: auto;
 }
 
-/*
-// Old portfolio section selectors
-#myCarousel {
-	width: 70%;
-	margin: 0 auto;
-	margin-bottom: 20px;
-}
-
-.carousel-inner > .item > img,
-.carousel-inner > .item > a > img {
-	width: 500px;
-	height: 400px;
-	margin: auto;
-}
-*/
-
 /* CONTACT SELECTORS */
 #contact > div > div > div > div.contact-flex-item2 > h3 > a {
 	color: var(--main-panel-border);
@@ -456,6 +426,14 @@ section h1 {
 	anyone using the outdated Windows version of Safari
 	(probably not necessary, but better safe than sorry)
 */
+.education-noflex-row {
+	display: block;
+}
+
+.education-noflex-item {
+	display: inline-block;
+}
+
 .skills-noflex-row {
 	display: block;
 	margin: inherit auto;
@@ -512,4 +490,11 @@ section h1 {
     left: 50%;
     transform: translatex(-50%);
   }
+}
+
+/* Mobile view */
+@media all and (orientation: portrait) {
+	nav {
+		display: none;
+	}
 }

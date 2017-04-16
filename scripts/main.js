@@ -6,6 +6,8 @@
 	var BODY_SELECTOR = '[data-body-attribute="body"]';
 	var NAV_BUTTON_SELECTOR = '[data-nav-button-attribute="nav-button"]';
 	var NAV_LINK_SELECTOR = '[data-nav-link-attribute="nav-link"]';
+	var EDUCATION_ROW_SELECTOR = '[data-education-row-attribute="education-row"]';
+	var EDUCATION_ITEM_SELECTOR = '[data-education-item-attribute="education-item"]';
 	var SKILLS_ROW_SELECTOR = '[data-skills-row-attribute="skills-row"]';
 	var SKILLS_ITEM_SELECTOR = '[data-skills-item-attribute="skills-item"]';
 	var PORTFOLIO_ROW_SELECTOR = '[data-portfolio-row-attribute="portfolio-row"]';
@@ -15,10 +17,6 @@
 	var CONTACT_ITEM2_SELECTOR = '[data-contact-item2-attribute="contact-item2"]';
 	var navHeight = 50;  // Height of the navbar in pixels
 	var navOffset = navHeight + 30;  // Nav height + offset for smooth scrolling
-
-	// Setup the page for the fade in effect
-	var $body = $(BODY_SELECTOR);
-	$body.fadeOut(0);
 
 	function navClickHandler(event) {
 		event.preventDefault();
@@ -165,6 +163,12 @@
 	function checkFlexSupport() {
 		// Either old Flexbox syntax, or `flex-wrap` not supported
 		if (!(Modernizr.flexbox && Modernizr.flexwrap)) {
+			$(EDUCATION_ROW_SELECTOR).addClass('education-noflex-row');
+
+			$(EDUCATION_ITEM_SELECTOR).each(function() {
+				$(this).addClass('education-noflex-item');
+			});
+
 			$(SKILLS_ROW_SELECTOR).addClass('skills-noflex-row');
 
 			$(SKILLS_ITEM_SELECTOR).each(function() {
@@ -185,6 +189,9 @@
 	}
 
 	$(document).ready(function() {
+		// Setup the page for the fade in effect
+		$(BODY_SELECTOR).fadeOut(0);
+
 		// Add nav button click handlers
 		$(NAV_BUTTON_SELECTOR).each(function() {
 			$(this).on('click', navClickHandler);
@@ -201,6 +208,6 @@
 		checkFlexSupport();
 
 		// Make page visible
-		$body.fadeIn(1000);
+		$(BODY_SELECTOR).fadeIn(1000);
 	});
 })(window);

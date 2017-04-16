@@ -9,10 +9,10 @@
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="styles/stylesheet.css">
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+		<script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawCharts);
+
       function drawCharts() {
         var programmingData = google.visualization.arrayToDataTable([
           ['Programming Language', 'Years of Experience'],
@@ -41,15 +41,6 @@
 					tooltip: {
 						text: 'value'
 					},
-					/*
-					legend: {
-						position: 'top',
-						alignment: 'center',
-						textStyle: {
-							color: '#C8C8C8'
-						}
-					},
-					*/
           is3D: true,
 					backgroundColor: 'transparent',
 					chartArea: {
@@ -57,28 +48,28 @@
 						top: '10%',
 						width: '80%',
 						height: '80%'
-					},
-					/*
-					slices: {
-						0: {color: '#D34747'},
-						1: {color: '#38A63F'},
-						2: {color: '#3A518E'},
-						3: {color: '#D3A547'}
 					}
-					*/
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('programming-pie-chart'));
-        chart.draw(programmingData, options);
+        var programmingChart = new google.visualization.PieChart(document.getElementById('programming-pie-chart'));
+				programmingChart.draw(programmingData, options);
+				google.visualization.events.addListener(programmingChart, 'error', errorHandler);
 
-				chart = new google.visualization.PieChart(document.getElementById('web-pie-chart'));
-				chart.draw(webData, options);
+				webChart = new google.visualization.PieChart(document.getElementById('web-pie-chart'));
+				webChart.draw(webData, options);
+				google.visualization.events.addListener(webChart, 'error', errorHandler);
 
-				chart = new google.visualization.PieChart(document.getElementById('database-pie-chart'));
-				chart.draw(databaseData, options);
+				databaseChart = new google.visualization.PieChart(document.getElementById('database-pie-chart'));
+				databaseChart.draw(databaseData, options);
+				google.visualization.events.addListener(databaseChart, 'error', errorHandler);
       }
+
+			function errorHandler(event) {
+				alert(event['message']);
+			}
     </script>
 		<script src="scripts/modernizr-custom.js"></script>
+		<script src="scripts/main.js" charset="utf-8"></script>
 	</head>
 
 	<body data-body-attribute="body" style="display:none;">
@@ -130,70 +121,66 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<h1>Education</h1>
-						<div class="education-flex-row">
-							<div class="education-flex-item">
-								<img src="images/diploma.png">
+						<div class="education-row">
+							<div class="education-item">
+								<img src="images/diploma-resized.png">
 							</div>
-							<div class="education-flex-item">
+							<div class="education-item">
 								<h2>Cape Fear Community College</h2>
 								<h4>Associate in Science</h4>
 								<h6>2010</h6>
 							</div>
-							<div class="education-flex-item">
-								<h2>Concentration</h2>
-								<h4>College Transfer</h4>
-							</div>
 						</div>
 
-						<div class="education-flex-row">
-							<div class="education-flex-item">
-								<img src="images/diploma.png">
+						<div class="education-row">
+							<div class="education-item">
+								<img src="images/diploma-resized.png">
 							</div>
-							<div class="education-flex-item">
+							<div class="education-item">
 								<h2>University of North Carolina at Wilmington</h2>
 								<h4>Bachelor of Science (Computer Science)</h4>
 								<h6>2016</h6>
 							</div>
-							<div class="education-flex-item">
-								<h2>Concentration</h2>
-								<h4>Digital Arts</h4>
-							</div>
 						</div>
-
-						<!--
-						<div class="degree-flex-row">
-							<div class="degree-flex-col1">
-								<img src="images/diploma.png">
-							</div>
-							<div class="degree-flex-col2">
-								<h2>Cape Fear Community College</h2>
-								<h4>Associate in Science</h4>
-								<h6>2010</h6>
-							</div>
-							<div class="degree-flex-col3">
-								<h2>Concentration</h2>
-								<h4>College Transfer</h4>
-							</div>
-						</div>
-
-						<div class="degree-flex-row">
-							<div class="degree-flex-col1">
-								<img src="images/diploma.png">
-							</div>
-							<div class="degree-flex-col2">
-								<h2>University of North Carolina at Wilmington</h2>
-								<h4>Bachelor of Science (Computer Science)</h4>
-								<h6>2016</h6>
-							</div>
-							<div class="degree-flex-col3">
-								<h2>Concentration</h2>
-								<h4>Digital Arts</h4>
-							</div>
-						</div>
-						-->
 					</div>
 				</div>
 			</section>
+
+			<!--
+			<section id="education">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h1>Education</h1>
+						<div class="education-flex-row" data-education-row-attribute="education-row">
+							<div class="education-flex-item" data-education-item-attribute="education-item">
+								<img src="images/diploma.png">
+							</div>
+							<div class="education-flex-item" data-education-item-attribute="education-item">
+								<h2>Cape Fear Community College</h2>
+								<h4>Associate in Science</h4>
+								<h6>2010</h6>
+							</div>
+							<div class="education-flex-item" data-education-item-attribute="education-item">
+								<h2>Concentration</h2>
+								<h4>College Transfer</h4>
+							</div>
+						</div>
+
+						<div class="education-flex-row" data-education-row-attribute="education-row">
+							<div class="education-flex-item" data-education-item-attribute="education-item">
+								<img src="images/diploma.png">
+							</div>
+							<div class="education-flex-item" data-education-item-attribute="education-item">
+								<h2>University of North Carolina at Wilmington</h2>
+								<h4>Bachelor of Science (Computer Science)</h4>
+								<h6>2016</h6>
+							</div>
+							<div class="education-flex-item" data-education-item-attribute="education-item">
+								<h2>Concentration</h2>
+								<h4>Digital Arts</h4>
+							</div>
+						</div>
+					-->
 
 			<!--Skills-->
 			<section id="skills">
@@ -474,29 +461,6 @@
 
 						<div class="project-container hidden" id="personal-website">
 							<h3>Personal Website</h3>
-
-							<!-- Personal Website Carousel
-							<div id="pw-carousel" class="carousel slide" data-ride="carousel">
-								<ol class="carousel-indicators">
-									<li data-target="#pw-carousel" data-slide-to="0" class="active"></li>
-								</ol>
-
-								<div class="carousel-inner" role="listbox">
-									<div class="item active">
-										<img src="images/personal-website.jpg">
-									</div>
-								</div>
-
-								<a class="left carousel-control" href="#pw-carousel" role="button" data-slide="prev">
-									<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      						<span class="sr-only">Previous</span>
-								</a>
-								<a class="right carousel-control" href="#pw-carousel" role="button" data-slide="next">
-      						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      						<span class="sr-only">Next</span>
-    						</a>
-							</div>
-							-->
 							<img src="images/personal-website.jpg">
 							<p>
 								This website was created to offer evidence of my web
@@ -704,8 +668,5 @@
 				</div>
 			</section>
 		</div>
-
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
-		<script src="scripts/main.js" charset="utf-8"></script>
 	</body>
 </html>
