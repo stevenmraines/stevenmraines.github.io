@@ -147,37 +147,11 @@ section h1 {
 }
 
 .about-bottom-container p {
-	padding: 0 20% 0 20%;
+	padding: 0 20%;
 	margin-bottom: 0;
 }
 
 /* EDUCATION SELECTORS */
-/*
-.education-flex-row {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: flex;
-	justify-content: center;
-	-webkit-flex-wrap: wrap;
-	flex-wrap: wrap;
-}
-
-.education-flex-item {
-	white-space: nowrap;
-	overflow: hidden;
-}
-
-.education-flex-item > img {
-	width: 65px;
-	margin: 30px 15px 0 0;
-}
-
-.education-flex-item:nth-child(3) {
-	text-align: right;
-	margin-left: 15px;
-}
-*/
-
 #education h1 {
 	margin-bottom: 25px;
 }
@@ -276,7 +250,7 @@ section h1 {
 
 .project-container ul {
 	padding-left: 20px;
-	margin: 5px 30%;  /* Too narrow on mobile */
+	margin: 5px 30%;
 }
 
 .project-container ul li {
@@ -335,12 +309,13 @@ section h1 {
 /* PORTFOLIO CAROUSEL SELECTORS */
 #si-carousel, #amt-carousel, #gs-carousel, #jkp-carousel,
 #pw-carousel, #as-carousel, #des-carousel {
+	position: relative;
 	width: 70%;
-	margin: 30px auto;
+	margin: 30px auto 35px auto;
 }
 
 .carousel-indicators {
-	bottom: -12%;
+	bottom: -40px;
 }
 
 .carousel-inner > .item > img,
@@ -350,24 +325,31 @@ section h1 {
 }
 
 /* CONTACT SELECTORS */
-#contact > div > div > div > div.contact-flex-item2 > h3 > a {
+#contact a {
 	color: var(--main-panel-border);
 }
 
-#contact > div > div > div > div.contact-flex-item2 > h3 > a:hover {
+#contact a:hover {
 	color: var(--main-button-hover);
 }
 
-.contact-flex-row {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: flex;
-	justify-content: center;
-	margin: 25px 0 25px 0;
+.contact-row {
+	text-align: center;
+	margin-bottom: 15px;
 }
 
-.contact-flex-item1 {
-	margin-right: 25px;
+.contact-item {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.contact-item > img {
+	width: 160px;
+	height: 160px;
+}
+
+.contact-item:nth-child(1) {
+	margin: -30px 25px auto auto;
 	padding-right: 25px;
 
 	border: 1px solid transparent;
@@ -376,10 +358,8 @@ section h1 {
 	border-image-width: 3px;
 }
 
-.contact-flex-item1 img {
-	width: 160px;
-	height: 160px;
-	margin-top: 41px;
+.contact-item:nth-child(2) {
+	text-align: left;
 }
 
 #contact button {
@@ -417,6 +397,7 @@ section h1 {
 }
 
 #contact button > img {
+	width: 28px;
 	height: 20px;
 	padding-right: 5px;
 }
@@ -494,7 +475,25 @@ section h1 {
 
 /* Mobile view */
 @media all and (orientation: portrait) {
-	nav {
+	nav {  /* This doesn't really work, nav still shows when phone is turned sideways */
 		display: none;
+	}
+
+	#about p {
+		padding: 0 10%;
+	}
+
+	#si-carousel, #amt-carousel, #gs-carousel, #jkp-carousel,
+	#pw-carousel, #as-carousel, #des-carousel {
+		width: 90%;
+	}
+
+	.project-container p {
+		margin: 10px 10%;
+	}
+
+	.project-container ul {
+		padding-left: 20px;
+		margin: 5px 15%;
 	}
 }

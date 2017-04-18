@@ -6,15 +6,10 @@
 	var BODY_SELECTOR = '[data-body-attribute="body"]';
 	var NAV_BUTTON_SELECTOR = '[data-nav-button-attribute="nav-button"]';
 	var NAV_LINK_SELECTOR = '[data-nav-link-attribute="nav-link"]';
-	var EDUCATION_ROW_SELECTOR = '[data-education-row-attribute="education-row"]';
-	var EDUCATION_ITEM_SELECTOR = '[data-education-item-attribute="education-item"]';
 	var SKILLS_ROW_SELECTOR = '[data-skills-row-attribute="skills-row"]';
 	var SKILLS_ITEM_SELECTOR = '[data-skills-item-attribute="skills-item"]';
 	var PORTFOLIO_ROW_SELECTOR = '[data-portfolio-row-attribute="portfolio-row"]';
 	var PROJECT_LINK_SELECTOR = '[data-project-link-attribute="project-link"]';
-	var CONTACT_ROW_SELECTOR = '[data-contact-row-attribute="contact-row"]';
-	var CONTACT_ITEM1_SELECTOR = '[data-contact-item1-attribute="contact-item1"]';
-	var CONTACT_ITEM2_SELECTOR = '[data-contact-item2-attribute="contact-item2"]';
 	var navHeight = 50;  // Height of the navbar in pixels
 	var navOffset = navHeight + 30;  // Nav height + offset for smooth scrolling
 
@@ -163,12 +158,6 @@
 	function checkFlexSupport() {
 		// Either old Flexbox syntax, or `flex-wrap` not supported
 		if (!(Modernizr.flexbox && Modernizr.flexwrap)) {
-			$(EDUCATION_ROW_SELECTOR).addClass('education-noflex-row');
-
-			$(EDUCATION_ITEM_SELECTOR).each(function() {
-				$(this).addClass('education-noflex-item');
-			});
-
 			$(SKILLS_ROW_SELECTOR).addClass('skills-noflex-row');
 
 			$(SKILLS_ITEM_SELECTOR).each(function() {
@@ -181,10 +170,6 @@
 				var portfolioItem = $('div', this);
 				$(portfolioItem).addClass('portfolio-noflex-item');
 			});
-
-			$(CONTACT_ROW_SELECTOR).addClass('contact-noflex-row');
-			$(CONTACT_ITEM1_SELECTOR).addClass('contact-noflex-item1');
-			$(CONTACT_ITEM2_SELECTOR).addClass('contact-noflex-item2');
 		}
 	}
 
