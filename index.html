@@ -10,6 +10,9 @@
 		<link rel="stylesheet" href="styles/stylesheet.css">
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 		<script type="text/javascript">
+			var $ = window.jQuery;
+			var IMG_CHART_SELECTOR = '[data-img-chart-attribute="img-chart"]';
+
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawCharts);
 
@@ -52,20 +55,21 @@
         };
 
         var programmingChart = new google.visualization.PieChart(document.getElementById('programming-pie-chart'));
+				google.visualization.events.addListener(programmingChart, 'ready', readyHandler);
 				programmingChart.draw(programmingData, options);
-				google.visualization.events.addListener(programmingChart, 'error', errorHandler);
 
 				webChart = new google.visualization.PieChart(document.getElementById('web-pie-chart'));
+				google.visualization.events.addListener(webChart, 'ready', readyHandler);
 				webChart.draw(webData, options);
-				google.visualization.events.addListener(webChart, 'error', errorHandler);
 
 				databaseChart = new google.visualization.PieChart(document.getElementById('database-pie-chart'));
+				google.visualization.events.addListener(databaseChart, 'ready', readyHandler);
 				databaseChart.draw(databaseData, options);
-				google.visualization.events.addListener(databaseChart, 'error', errorHandler);
       }
 
-			function errorHandler(event) {
-				alert(event['message']);
+			function readyHandler() {
+				// Hide the chart images which are used as a fallback
+				$(IMG_CHART_SELECTOR).css({'display':'none'});
 			}
     </script>
 		<script src="scripts/modernizr-custom.js"></script>
@@ -155,6 +159,7 @@
 							<div class="skills-flex-item" data-skills-item-attribute="skills-item">
 								<h3>Programming Languages</h3>
 								<h6>Years of Experience</h6>
+								<div class="img-chart" data-img-chart-attribute="img-chart"><img src="images/programming-chart.png"></div>
 								<div id="programming-pie-chart"></div>
 								<h4>Related Skills</h4>
 								<ul>
@@ -167,6 +172,7 @@
 							<div class="skills-flex-item" data-skills-item-attribute="skills-item">
 								<h3>Web Development</h3>
 								<h6>Years of Experience</h6>
+								<div class="img-chart" data-img-chart-attribute="img-chart"><img src="images/web-chart.png"></div>
 								<div id="web-pie-chart"></div>
 								<h4>Related Skills</h4>
 								<ul>
@@ -185,6 +191,7 @@
 							<div class="skills-flex-item" data-skills-item-attribute="skills-item">
 								<h3>Databases</h3>
 								<h6>Years of Experience</h6>
+								<div class="img-chart" data-img-chart-attribute="img-chart"><img src="images/database-chart.png"></div>
 								<div id="database-pie-chart"></div>
 								<h4>Related Skills</h4>
 								<ul>

@@ -224,6 +224,10 @@ section h1 {
 	border-image-width: 3px;
 }
 
+.img-chart {
+	margin: 30px auto 40px auto;
+}
+
 /* PORTFOLIO SELECTORS */
 .project-container {
 	text-align: center;  /* Align project image */
