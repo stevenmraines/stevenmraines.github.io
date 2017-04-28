@@ -217,12 +217,12 @@ section h1 {
 	color: var(--main-highlighted-text);
 }
 
-.skills-flex-item:nth-child(2) {
+/*.skills-flex-item:nth-child(2) {
 	border: 1px solid transparent;
 	border-image: linear-gradient(transparent, var(--main-panel-border), transparent);
 	border-image-slice: 0 1 0 1;
 	border-image-width: 3px;
-}
+}*/
 
 .img-chart {
 	margin: 30px auto 40px auto;
