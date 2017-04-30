@@ -312,7 +312,7 @@ section h1 {
 
 /* PORTFOLIO CAROUSEL SELECTORS */
 #si-carousel, #amt-carousel, #gs-carousel, #jkp-carousel,
-#pw-carousel, #as-carousel, #des-carousel {
+#pw-carousel, #as-carousel, #des-carousel, #jwc-carousel {
 	position: relative;
 	width: 70%;
 	margin: 30px auto 35px auto;
