@@ -120,12 +120,11 @@ section h1 {
 
 .profile-photo {
 	position: absolute;
-	width: 160px;
-	height: 160px;
-	top: 140px;
-	margin-left: -80px;
+	width: 200px;
+	height: auto;
+	top: 120px;
 	left: 50%;
-	vertical-align: middle;
+    transform: translate(-50%, 0);
 }
 
 .about-top-container {
@@ -149,6 +148,10 @@ section h1 {
 .about-bottom-container p {
 	padding: 0 20%;
 	margin-bottom: 0;
+}
+
+.personal-statement {
+	font-size: 18px;
 }
 
 /* EDUCATION SELECTORS */
@@ -226,6 +229,12 @@ section h1 {
 
 .img-chart {
 	margin: 30px auto 40px auto;
+}
+
+/* WORK EXPERIENCE SELECTORS */
+.exp-logo {
+	width: 115px;
+	height: auto;
 }
 
 /* PORTFOLIO SELECTORS */
