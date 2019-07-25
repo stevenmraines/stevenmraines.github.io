@@ -5,51 +5,48 @@
 		<title>Steven Raines</title>
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="styles/stylesheet.css">
-		
+
 		<!--[if lt IE 9]>
   		<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 		<![endif]-->
-		
+
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 		<script type="text/javascript">
 			var $ = window.jQuery;
 			var IMG_CHART_SELECTOR = '[data-img-chart-attribute="img-chart"]';
 
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawCharts);
+      		google.charts.load("current", {packages:["corechart"]});
+      		google.charts.setOnLoadCallback(drawCharts);
 
-      function drawCharts() {
-        var programmingData = google.visualization.arrayToDataTable([
-          ['Programming Language', 'Years of Experience'],
-          ['Java', 7],
-          ['Python', 4],
-          ['C', 2],
-          ['C#', 2]
-        ]);
+			function drawCharts() {
+				var backendData = google.visualization.arrayToDataTable([
+					['Back End', 'Years of Experience'],
+					['PHP', 2],
+					['MySQL', 2],
+					['Laravel', 1]
+				]);
 
-				var webData = google.visualization.arrayToDataTable([
-          ['Web Development', 'Years of Experience'],
-          ['HTML5', 2],
-          ['CSS3', 2],
-          ['Javascript', 2],
-          ['PHP', 1]
-        ]);
+				var frontendData = google.visualization.arrayToDataTable([
+					['Front End', 'Years of Experience'],
+					['HTML', 2],
+					['CSS', 2],
+					['Bootstrap', 2],
+					['JS', 2],
+					['jQuery', 2],
+					['Angular', 1],
+					['Vue', 1]
+				]);
 
-				var databaseData = google.visualization.arrayToDataTable([
-          ['Database', 'Years of Experience'],
-          ['MySQL', 2]
-        ]);
-
-        var options = {
+				var options = {
 					pieSliceText: 'label',
 					legend: 'none',
 					tooltip: {
 						text: 'value'
 					},
-          is3D: true,
+					is3D: true,
 					backgroundColor: 'transparent',
 					chartArea: {
 						left: '10%',
@@ -57,26 +54,40 @@
 						width: '80%',
 						height: '80%'
 					}
-        };
+				};
 
-        var programmingChart = new google.visualization.PieChart(document.getElementById('programming-pie-chart'));
-				google.visualization.events.addListener(programmingChart, 'ready', readyHandler);
-				programmingChart.draw(programmingData, options);
+				// Create backend development chart
+				var backendChart = new google.visualization.PieChart(
+					document.getElementById('backend-pie-chart')
+				);
 
-				webChart = new google.visualization.PieChart(document.getElementById('web-pie-chart'));
-				google.visualization.events.addListener(webChart, 'ready', readyHandler);
-				webChart.draw(webData, options);
+				google.visualization.events.addListener(
+					backendChart,
+					'ready',
+					readyHandler
+				);
 
-				databaseChart = new google.visualization.PieChart(document.getElementById('database-pie-chart'));
-				google.visualization.events.addListener(databaseChart, 'ready', readyHandler);
-				databaseChart.draw(databaseData, options);
-      }
+				backendChart.draw(backendData, options);
+
+				// Create frontend development chart
+				frontendChart = new google.visualization.PieChart(
+					document.getElementById('frontend-pie-chart')
+				);
+
+				google.visualization.events.addListener(
+					frontendChart,
+					'ready',
+					readyHandler
+				);
+
+				frontendChart.draw(frontendData, options);
+			}
 
 			function readyHandler() {
 				// Hide the chart images which are used as a fallback
 				$(IMG_CHART_SELECTOR).css({'display':'none'});
 			}
-    </script>
+    	</script>
 		<script src="scripts/modernizr-custom.js"></script>
 		<script src="scripts/main.js" charset="utf-8"></script>
 	</head>
@@ -86,14 +97,73 @@
 			<div class="container-fluid">
 				<ul class="nav navbar-nav">
 					<li><img src="images/email.png"></li>
-					<li><a href="mailto:stevenmraines@gmail.com" class="nav-link">stevenmraines@gmail.com</a></li>
+					<li>
+						<a
+							href="mailto:stevenmraines@gmail.com"
+							class="nav-link"
+						>
+							stevenmraines@gmail.com
+						</a>
+					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-center">
-					<li class="active nav-button" data-nav-button-attribute="nav-button"><a class="nav-link" data-nav-link-attribute="nav-link" href="#about">About</a></li>
-        	<li class="nav-button" data-nav-button-attribute="nav-button"><a class="nav-link" data-nav-link-attribute="nav-link" href="#education">Education</a></li>
-        	<li class="nav-button" data-nav-button-attribute="nav-button"><a class="nav-link" data-nav-link-attribute="nav-link" href="#skills">Skills</a></li>
-					<li class="nav-button" data-nav-button-attribute="nav-button"><a class="nav-link" data-nav-link-attribute="nav-link" href="#portfolio">Portfolio</a></li>
-					<li class="nav-button" data-nav-button-attribute="nav-button"><a class="nav-link" data-nav-link-attribute="nav-link" href="#contact">Contact</a></li>
+					<li
+						class="active nav-button"
+						data-nav-button-attribute="nav-button"
+					>
+						<a
+							class="nav-link"
+							data-nav-link-attribute="nav-link"
+							href="#about"
+						>
+							About
+						</a>
+					</li>
+        			<li class="nav-button" data-nav-button-attribute="nav-button">
+						<a
+							class="nav-link"
+							data-nav-link-attribute="nav-link"
+							href="#education"
+						>
+							Education
+						</a>
+					</li>
+        			<li class="nav-button" data-nav-button-attribute="nav-button">
+						<a
+							class="nav-link"
+							data-nav-link-attribute="nav-link"
+							href="#skills"
+						>
+							Skills
+						</a>
+					</li>
+        			<li class="nav-button" data-nav-button-attribute="nav-button">
+						<a
+							class="nav-link"
+							data-nav-link-attribute="nav-link"
+							href="#experience"
+						>
+							Experience
+						</a>
+					</li>
+					<li class="nav-button" data-nav-button-attribute="nav-button">
+						<a
+							class="nav-link"
+							data-nav-link-attribute="nav-link"
+							href="#portfolio"
+						>
+							Portfolio
+						</a>
+					</li>
+					<li class="nav-button" data-nav-button-attribute="nav-button">
+						<a
+							class="nav-link"
+							data-nav-link-attribute="nav-link"
+							href="#contact"
+						>
+							Contact
+						</a>
+					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><img src="images/phone.png"></li>
@@ -109,17 +179,16 @@
 			</div>
 			<div class="about-middle-container">
 				<h1>Steven Raines</h1>
-				<h3>Prospective Software and Web Developer</h3>
+				<h4>Software Developer</h4>
 			</div>
 			<div class="about-bottom-container">
 				<p class="personal-statement">
-					I’m an accomplished and creative software developer and recent university
-					graduate with a diverse skill set that includes many current technologies. I’ve
+					I’m an accomplished and creative software developer with a
+					diverse skill set that includes many current technologies. I’ve
 					brainstormed and collaborated in many large group projects and I’m well
 					practiced in integrating my own code with complex software systems. I’m
 					most recognized by my peers for my reliability and my succinct, organized,
-					and well-documented coding style. I am currently looking for junior or entry level
-					software developer work in North Carolina.
+					and well-documented coding style.
 				</p>
 			</div>
 		</section>
@@ -160,52 +229,80 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<h1>Skills</h1>
-						<div class="skills-flex-row" data-skills-row-attribute="skills-row">
-							<div class="skills-flex-item" data-skills-item-attribute="skills-item">
-								<h3>Programming Languages</h3>
+						<div
+							class="skills-flex-row"
+							data-skills-row-attribute="skills-row"
+						>
+							<div
+								class="skills-flex-item"
+								data-skills-item-attribute="skills-item"
+							>
+								<h3>Back End Development</h3>
 								<h6>Years of Experience</h6>
-								<div class="img-chart" data-img-chart-attribute="img-chart"><img src="images/programming-chart.png"></div>
-								<div id="programming-pie-chart"></div>
+								<div
+									class="img-chart"
+									data-img-chart-attribute="img-chart"
+								>
+									<img src="images/programming-chart.png">
+								</div>
+								<div id="backend-pie-chart"></div>
 								<h4>Related Skills</h4>
 								<ul>
-									<li>Object Oriented Design</li>
-									<li>Integration of third party libraries</li>
-									<li>Unit testing with <span>JUnit</span></li>
-									<li>Creation of various <span>UML</span> diagrams</li>
-									<li>Use of the version control system <span>Github</span></li>
+									<li>Familiarity with OOP concepts and MVC design</li>
+									<li>Retrieving, storing, and manipulating data in relational databases</li>
+									<li>Implemented features making use of various <span>AWS</span> Services</li>
+									<li>Sending HTTP requests using <span>Guzzle</span></li>
+									<li>Integration of third party packages using <span>Composer</span></li>
+									<li>Navigating <span>Linux</span> systems using the terminal</li>
+									<li>Version control using <span>Git</span> in the command line</li>
+									<li>Debugging code with <span>Xdebug</span></li>
+									<li>Well-versed with ticket management services such as <span>Planio</span></li>
 								</ul>
 							</div>
-							<div class="skills-flex-item" data-skills-item-attribute="skills-item">
-								<h3>Web Development</h3>
+							<div
+								class="skills-flex-item"
+								data-skills-item-attribute="skills-item"
+							>
+								<h3>Front End Development</h3>
 								<h6>Years of Experience</h6>
 								<div class="img-chart" data-img-chart-attribute="img-chart"><img src="images/web-chart.png"></div>
-								<div id="web-pie-chart"></div>
+								<div id="frontend-pie-chart"></div>
 								<h4>Related Skills</h4>
 								<ul>
 									<li>Familiarity with the <span>Google Chrome dev tools</span></li>
-									<li>Form validation with HTML regular expressions</li>
-									<li>Form validation using Javascript <span>Constraint Validation API</span></li>
-									<li>Creating <span>responsive styling</span> with <span>Bootstrap</span></li>
-									<li>Manipulating and creating DOM elements with <span>JQuery</span></li>
-									<li>Integration with the <span>Google Visualization API</span></li>
-									<li>Connecting to a MySQL database</li>
-									<li>Remote server communication using <span>Ajax</span></li>
-									<li>Experience creating <span>RESTful</span> web services</li>
-									<li>Experience using <span>Modernizr</span> to check for feature support</li>
+									<li>Creating responsive layouts using frameworks such as <span>Bootstrap</span></li>
+									<li>Integrating with Javascript libraries and frameworks such as <span>jQuery</span>, <span>Angular</span>, and <span>Vue</span></li>
+									<li>Dependancy management using <span>NPM</span></li>
+									<li>Testing APIs using <span>Postman</span></li>
 								</ul>
 							</div>
-							<div class="skills-flex-item" data-skills-item-attribute="skills-item">
-								<h3>Databases</h3>
-								<h6>Years of Experience</h6>
-								<div class="img-chart" data-img-chart-attribute="img-chart"><img src="images/database-chart.png"></div>
-								<div id="database-pie-chart"></div>
-								<h4>Related Skills</h4>
-								<ul>
-									<li>Design of relational database schema</li>
-									<li>Inserting and deleting database entries</li>
-									<li>Creating queries</li>
-									<li>Writing triggers for automatic updates of tables</li>
-								</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!--Experience-->
+			<section id="experience">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h1>Work Experience</h1>
+						<div class="education-row">
+							<div class="education-item">
+								<a
+									href="https://www.queensboro.com"
+									target="_blank"
+									title="Queensboro Website"
+								>
+									<img
+										class="exp-logo"
+										src="images/queensboro.png"
+									/>
+								</a>
+							</div>
+							<div class="education-item">
+								<h2>Queensboro Shirt Company</h2>
+								<h4>Junior Software Developer</h4>
+								<h6>2017 - Present</h6>
 							</div>
 						</div>
 					</div>
@@ -263,7 +360,7 @@
 							<ul>
 								<li>Helped design site layout</li>
 								<li>Produced technical documentation</li>
-								<li>Participated in front end PHP development</li>
+								<li>Participated in back end PHP development</li>
 								<li>Contributed to MySQL database schema design</li>
 								<li>Populated database with game info and user account data for testing</li>
 								<li>Regularly met with professor to demo incremental deliverables throughout the semester</li>
@@ -335,9 +432,9 @@
 							<h4>Responsibilities</h4>
 							<ul>
 								<li>Laid out basic site structure with HTML</li>
-								<li>Added customized Bootstrap styling to create a responsive layout</li>
-								<li>Wrote Javascript scripts to add functionality</li>
-								<li>Created various page icons in Photoshop CS6</li>
+								<li>Utilized Bootstrap scaffolding to create a responsive layout</li>
+								<li>Added functionality with jQuery</li>
+								<li>Created various page icons using Photoshop CS6</li>
 								<li>Added support for many modern browsers and mobile devices</li>
 								<li>Purchased a custom domain name which redirects to my Github pages host</li>
 							</ul>
@@ -507,8 +604,8 @@
 							<h4>Responsibilities</h4>
 							<ul>
 								<li>Spoke with my friend to determine program requirements</li>
-								<li>Designed GUI</li>
-								<li>Did all Java programming for the application</li>
+								<li>Designed user interface</li>
+								<li>Implemented all Java programming for the application</li>
 							</ul>
 						</div>
 
@@ -558,7 +655,7 @@
 							<h4>Responsibilities</h4>
 							<ul>
 								<li>Created image assets in Photoshop CS6</li>
-								<li>Conceptualized and programmed all skins</li>
+								<li>Conceptualized and created all skins</li>
 								<li>Wrote Perl regular expressions for the RSS feed skin</li>
 							</ul>
 						</div>
@@ -610,7 +707,7 @@
 							<h4>Responsibilities</h4>
 							<ul>
 								<li>Created image assets in Photoshop CS6</li>
-								<li>Conceptualized and programmed all skins</li>
+								<li>Conceptualized and created all skins</li>
 								<li>Wrote Perl regular expressions for the RSS feed skin</li>
 							</ul>
 						</div>
