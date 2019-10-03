@@ -1,804 +1,130 @@
 <!DOCTYPE html>
 <html lang="en-US">
 	<head>
-		<meta charset="utf-8">
-		<title>Steven Raines</title>
+        <title>Steven Raines</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="styles/stylesheet.css">
-
-		<!--[if lt IE 9]>
-  		<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-		<![endif]-->
-
-		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-		<script type="text/javascript">
-			var $ = window.jQuery;
-			var IMG_CHART_SELECTOR = '[data-img-chart-attribute="img-chart"]';
-
-      		google.charts.load("current", {packages:["corechart"]});
-      		google.charts.setOnLoadCallback(drawCharts);
-
-			function drawCharts() {
-				var backendData = google.visualization.arrayToDataTable([
-					['Back End', 'Years of Experience'],
-					['PHP', 2],
-					['MySQL', 2],
-					['Laravel', 1]
-				]);
-
-				var frontendData = google.visualization.arrayToDataTable([
-					['Front End', 'Years of Experience'],
-					['HTML', 2],
-					['CSS', 2],
-					['Bootstrap', 2],
-					['JS', 2],
-					['jQuery', 2],
-					['Angular', 1],
-					['Vue', 1]
-				]);
-
-				var options = {
-					pieSliceText: 'label',
-					legend: 'none',
-					tooltip: {
-						text: 'value'
-					},
-					is3D: true,
-					backgroundColor: 'transparent',
-					chartArea: {
-						left: '10%',
-						top: '10%',
-						width: '80%',
-						height: '80%'
-					}
-				};
-
-				// Create backend development chart
-				var backendChart = new google.visualization.PieChart(
-					document.getElementById('backend-pie-chart')
-				);
-
-				google.visualization.events.addListener(
-					backendChart,
-					'ready',
-					readyHandler
-				);
-
-				backendChart.draw(backendData, options);
-
-				// Create frontend development chart
-				frontendChart = new google.visualization.PieChart(
-					document.getElementById('frontend-pie-chart')
-				);
-
-				google.visualization.events.addListener(
-					frontendChart,
-					'ready',
-					readyHandler
-				);
-
-				frontendChart.draw(frontendData, options);
-			}
-
-			function readyHandler() {
-				// Hide the chart images which are used as a fallback
-				$(IMG_CHART_SELECTOR).css({'display':'none'});
-			}
-    	</script>
-		<script src="scripts/modernizr-custom.js"></script>
-		<script src="scripts/main.js" charset="utf-8"></script>
+        <!-- Bootstrap -->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
 	</head>
 
-	<body data-body-attribute="body" style="display:none;">
-		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-			<div class="container-fluid">
-				<ul class="nav navbar-nav">
-					<li><img src="images/email.png"></li>
-					<li>
-						<a
-							href="mailto:stevenmraines@gmail.com"
-							class="nav-link"
-						>
-							stevenmraines@gmail.com
-						</a>
-					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-center">
-					<li
-						class="active nav-button"
-						data-nav-button-attribute="nav-button"
-					>
-						<a
-							class="nav-link"
-							data-nav-link-attribute="nav-link"
-							href="#about"
-						>
-							About
-						</a>
-					</li>
-        			<li class="nav-button" data-nav-button-attribute="nav-button">
-						<a
-							class="nav-link"
-							data-nav-link-attribute="nav-link"
-							href="#education"
-						>
-							Education
-						</a>
-					</li>
-        			<li class="nav-button" data-nav-button-attribute="nav-button">
-						<a
-							class="nav-link"
-							data-nav-link-attribute="nav-link"
-							href="#skills"
-						>
-							Skills
-						</a>
-					</li>
-        			<li class="nav-button" data-nav-button-attribute="nav-button">
-						<a
-							class="nav-link"
-							data-nav-link-attribute="nav-link"
-							href="#experience"
-						>
-							Experience
-						</a>
-					</li>
-					<li class="nav-button" data-nav-button-attribute="nav-button">
-						<a
-							class="nav-link"
-							data-nav-link-attribute="nav-link"
-							href="#portfolio"
-						>
-							Portfolio
-						</a>
-					</li>
-					<li class="nav-button" data-nav-button-attribute="nav-button">
-						<a
-							class="nav-link"
-							data-nav-link-attribute="nav-link"
-							href="#contact"
-						>
-							Contact
-						</a>
-					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><img src="images/phone.png"></li>
-					<li><a class="nav-link">Cell: 910-409-4383</a></li>
-				</ul>
-			</div>
-		</nav>
+	<body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-light bg-light" role="navigation">
+            <a href="mailto:stevenmraines@gmail.com">
+                <img src="images/email.png" />
+                stevenmraines@gmail.com
+            </a>
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#experience">Experience</a>
+            <a href="#skills">Skills</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#contact">Contact</a>
+            <img src="images/phone.png" />
+            Cell: 910-409-4383
+        </nav>  <!-- End Navbar -->
 
-		<!-- About -->
-		<section id="about">
-			<div class="about-top-container">
-				<img src="images/profile-photo.png" class="profile-photo">
-			</div>
-			<div class="about-middle-container">
-				<h1>Steven Raines</h1>
-				<h4>Software Developer</h4>
-			</div>
-			<div class="about-bottom-container">
-				<p class="personal-statement">
-					I’m an accomplished and creative software developer with a
-					diverse skill set that includes many current technologies. I’ve
-					brainstormed and collaborated in many large group projects and I’m well
-					practiced in integrating my own code with complex software systems. I’m
-					most recognized by my peers for my reliability and my succinct, organized,
-					and well-documented coding style.
-				</p>
-			</div>
-		</section>
+        <div class="container">
+            <!-- About -->
+            <section id="about">
+                <img src="images/profile-photo.png" class="profile-photo">
+                <p class="personal-statement">
+                    I’m an accomplished and creative software developer with a
+                    diverse skill set that includes many current technologies. I’ve
+                    brainstormed and collaborated in many large group projects and I’m well
+                    practiced in integrating my own code with complex software systems. I’m
+                    most recognized by my peers for my reliability and my succinct, organized,
+                    and well-documented coding style.
+                </p>
+            </section>  <!-- End About -->
 
-		<div class="container">
 			<!--Education-->
 			<section id="education">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<h1>Education</h1>
-						<div class="education-row">
-							<div class="education-item">
-								<img src="images/diploma-resized.png">
-							</div>
-							<div class="education-item">
-								<h2>University of North Carolina at Wilmington</h2>
-								<h4>Bachelor of Science (Computer Science)</h4>
-								<h6>2016</h6>
-							</div>
-						</div>
-
-						<div class="education-row">
-							<div class="education-item">
-								<img src="images/diploma-resized.png">
-							</div>
-							<div class="education-item">
-								<h2>Cape Fear Community College</h2>
-								<h4>Associate in Science</h4>
-								<h6>2010</h6>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+                <h2>University of North Carolina at Wilmington</h2>
+                <h4>Bachelor of Science (Computer Science)</h4>
+                <h6>2016</h6>
+                <h2>Cape Fear Community College</h2>
+                <h4>Associate in Science</h4>
+                <h6>2010</h6>
+			</section>  <!-- End Education -->
 
 			<!--Skills-->
 			<section id="skills">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<h1>Skills</h1>
-						<div
-							class="skills-flex-row"
-							data-skills-row-attribute="skills-row"
-						>
-							<div
-								class="skills-flex-item"
-								data-skills-item-attribute="skills-item"
-							>
-								<h3>Back End Development</h3>
-								<h6>Years of Experience</h6>
-								<div
-									class="img-chart"
-									data-img-chart-attribute="img-chart"
-								>
-									<img src="images/programming-chart.png">
-								</div>
-								<div id="backend-pie-chart"></div>
-								<h4>Related Skills</h4>
-								<ul>
-									<li>Familiarity with OOP concepts and MVC design</li>
-									<li>Retrieving, storing, and manipulating data in relational databases</li>
-									<li>Implemented features making use of various <span>AWS</span> Services</li>
-									<li>Sending HTTP requests using <span>Guzzle</span></li>
-									<li>Integration of third party packages using <span>Composer</span></li>
-									<li>Navigating <span>Linux</span> systems using the terminal</li>
-									<li>Version control using <span>Git</span> in the command line</li>
-									<li>Debugging code with <span>Xdebug</span></li>
-									<li>Well-versed with ticket management services such as <span>Planio</span></li>
-								</ul>
-							</div>
-							<div
-								class="skills-flex-item"
-								data-skills-item-attribute="skills-item"
-							>
-								<h3>Front End Development</h3>
-								<h6>Years of Experience</h6>
-								<div class="img-chart" data-img-chart-attribute="img-chart"><img src="images/web-chart.png"></div>
-								<div id="frontend-pie-chart"></div>
-								<h4>Related Skills</h4>
-								<ul>
-									<li>Familiarity with the <span>Google Chrome dev tools</span></li>
-									<li>Creating responsive layouts using frameworks such as <span>Bootstrap</span></li>
-									<li>Integrating with Javascript libraries and frameworks such as <span>jQuery</span>, <span>Angular</span>, and <span>Vue</span></li>
-									<li>Dependancy management using <span>NPM</span></li>
-									<li>Testing APIs using <span>Postman</span></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+                <h3>Back End Development</h3>
+                <ul>
+                    <li>Familiarity with OOP concepts and MVC design</li>
+                    <li>Retrieving, storing, and manipulating data in relational databases</li>
+                    <li>Implemented features making use of various <span>AWS</span> Services</li>
+                    <li>Sending HTTP requests using <span>Guzzle</span></li>
+                    <li>Integration of third party packages using <span>Composer</span></li>
+                    <li>Navigating <span>Linux</span> systems using the terminal</li>
+                    <li>Version control using <span>Git</span> in the command line</li>
+                    <li>Debugging code with <span>Xdebug</span></li>
+                    <li>Well-versed with ticket management services such as <span>Planio</span></li>
+                </ul>
+                <h3>Front End Development</h3>
+                <ul>
+                    <li>Familiarity with the <span>Google Chrome dev tools</span></li>
+                    <li>Creating responsive layouts using frameworks such as <span>Bootstrap</span></li>
+                    <li>Integrating with Javascript libraries and frameworks such as <span>jQuery</span>, <span>Angular</span>, and <span>Vue</span></li>
+                    <li>Dependancy management using <span>NPM</span></li>
+                    <li>Testing APIs using <span>Postman</span></li>
+                </ul>
+			</section>  <!-- End Skills -->
 
 			<!--Experience-->
 			<section id="experience">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<h1>Work Experience</h1>
-						<div class="education-row">
-							<div class="education-item">
-								<a
-									href="https://www.queensboro.com"
-									target="_blank"
-									title="Queensboro Website"
-								>
-									<img
-										class="exp-logo"
-										src="images/queensboro.png"
-									/>
-								</a>
-							</div>
-							<div class="education-item">
-								<h2>Queensboro Shirt Company</h2>
-								<h4>Junior Software Developer</h4>
-								<h6>2017 - Present</h6>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+                <h1>Work Experience</h1>
+                <h2>Queensboro Shirt Company</h2>
+                <h4>Junior Software Developer</h4>
+                <h6>2017 - Present</h6>
+			</section>  <!-- End Experience -->
 
 			<!--Portfolio-->
 			<section id="portfolio">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<h1>Portfolio</h1>
-						<!-- Project being viewed -->
-						<div class="project-container" id="game-start">
-							<h3>GameStart</h3>
-
-							<!-- GameStart Carousel -->
-							<div id="gs-carousel" class="carousel slide" data-ride="carousel">
-								<ol class="carousel-indicators">
-									<li data-target="#gs-carousel" data-slide-to="0" class="active"></li>
-									<li data-target="#gs-carousel" data-slide-to="1"></li>
-									<li data-target="#gs-carousel" data-slide-to="2"></li>
-								</ol>
-
-								<div class="carousel-inner" role="listbox">
-									<div class="item active">
-										<img src="images/game-start1.jpg">
-									</div>
-									<div class="item">
-										<img src="images/game-start2.jpg">
-									</div>
-									<div class="item">
-										<img src="images/game-start3.jpg">
-									</div>
-								</div>
-
-								<a class="left carousel-control" href="#gs-carousel" role="button" data-slide="prev">
-									<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      						<span class="sr-only">Previous</span>
-								</a>
-								<a class="right carousel-control" href="#gs-carousel" role="button" data-slide="next">
-      						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      						<span class="sr-only">Next</span>
-    						</a>
-							</div>
-
-							<p>
-								For the final project in our Database Design and Implementation
-								class, my team and I created a website for a fake company
-								similar to the popular used video game retailer GameStop.<br><br>
-								The three of us took equal responsibility of both the front end
-								and the back end of the site. The site was created using a LAMP
-								stack consisting of Linux, Apache, MySQL, and PHP.
-							</p>
-							<h4>Responsibilities</h4>
-							<ul>
-								<li>Helped design site layout</li>
-								<li>Produced technical documentation</li>
-								<li>Participated in back end PHP development</li>
-								<li>Contributed to MySQL database schema design</li>
-								<li>Populated database with game info and user account data for testing</li>
-								<li>Regularly met with professor to demo incremental deliverables throughout the semester</li>
-							</ul>
-						</div>
-
-						<div class="project-container hidden" id="answer-me-this">
-							<h3>Answer Me This</h3>
-
-							<!-- AMT Carousel -->
-							<div id="amt-carousel" class="carousel slide" data-ride="carousel">
-								<ol class="carousel-indicators">
-									<li data-target="#amt-carousel" data-slide-to="0" class="active"></li>
-									<li data-target="#amt-carousel" data-slide-to="1"></li>
-								</ol>
-
-								<div class="carousel-inner" role="listbox">
-									<div class="item active">
-										<img src="images/answer-me-this1.jpg">
-									</div>
-									<div class="item">
-										<img src="images/answer-me-this2.jpg">
-									</div>
-								</div>
-
-								<a class="left carousel-control" href="#amt-carousel" role="button" data-slide="prev">
-									<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      						<span class="sr-only">Previous</span>
-								</a>
-								<a class="right carousel-control" href="#amt-carousel" role="button" data-slide="next">
-      						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      						<span class="sr-only">Next</span>
-    						</a>
-							</div>
-
-							<p>For our group project in the Software Engineering course at
-								UNCW, my team created a web based teaching assistant called
-								Answer Me This. AMT would allow teachers to create simple
-								quizzes which their students could take by logging into our
-								site.<br><br>Upon completion of the quizzes, teachers would
-								receive a set of statistics which showed student performance.
-								My two teammates were responsible for development of the front
-								end, and I was responsible for development of the back end.</p>
-							<h4>Responsibilities</h4>
-							<ul>
-								<li>Design and implementation of the MySQL database</li>
-								<li>Helped write queries for retrieving information from the database</li>
-								<li>Contributed to technical documentation of the project with various UML diagrams</li>
-							</ul>
-						</div>
-
-						<div class="project-container hidden" id="personal-website">
-							<h3>Personal Website</h3>
-							<img src="images/personal-website.jpg">
-							<p>
-								This website was created to offer evidence of my web
-								development skills. I created this site from scratch using HTML,
-								CSS, and Javascript. CSS styling was done using Bootstrap, and
-								functionality was added with jQuery. The Google Chrome dev tools
-								were used for troubleshooting and debugging. The pie charts in
-								the skills section were added using the Google Visualization
-								API. The site is hosted using Github pages, with a custom domain
-								name purchased from Namecheap.
-								<br><br>The site layout was loosely based off of a
-								pre-existing Bootstrap theme called Sphere. The gray color
-								scheme was inspired by the UI design of the popular PC gaming
-								service, Steam.
-							</p>
-							<h4>Responsibilities</h4>
-							<ul>
-								<li>Laid out basic site structure with HTML</li>
-								<li>Utilized Bootstrap scaffolding to create a responsive layout</li>
-								<li>Added functionality with jQuery</li>
-								<li>Created various page icons using Photoshop CS6</li>
-								<li>Added support for many modern browsers and mobile devices</li>
-								<li>Purchased a custom domain name which redirects to my Github pages host</li>
-							</ul>
-						</div>
-
-						<div class="project-container hidden" id="space-invaders">
-							<h3>Space Invaders</h3>
-
-							<!-- Space Invaders Carousel -->
-							<div id="si-carousel" class="carousel slide" data-ride="carousel">
-								<ol class="carousel-indicators">
-									<li data-target="#si-carousel" data-slide-to="0" class="active"></li>
-									<li data-target="#si-carousel" data-slide-to="1"></li>
-									<li data-target="#si-carousel" data-slide-to="2"></li>
-								</ol>
-
-								<div class="carousel-inner" role="listbox">
-									<div class="item active">
-										<img src="images/space-invaders1.jpg">
-									</div>
-									<div class="item">
-										<img src="images/space-invaders2.jpg">
-									</div>
-									<div class="item">
-										<img src="images/space-invaders3.jpg">
-									</div>
-								</div>
-
-								<a class="left carousel-control" href="#si-carousel" role="button" data-slide="prev">
-									<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      						<span class="sr-only">Previous</span>
-								</a>
-								<a class="right carousel-control" href="#si-carousel" role="button" data-slide="next">
-      						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      						<span class="sr-only">Next</span>
-    						</a>
-							</div>
-
-							<p>
-								As part of the Object Oriented Programming course at UNCW,
-								myself and a group of two other students were required to
-								recreate a classic Atari game in Java.<br><br>
-								Following the professor's instructions, we recreated Space
-								Invaders without the use of any Java game design libraries.
-								Instead, we accomplished all graphical programming by overriding
-								the paintComponent method of the JComponent swing class.
-							</p>
-							<h4>Responsibilities</h4>
-							<ul>
-								<li>Helped design the object oriented hierarchy of classes needed for the various game elements</li>
-								<li>Contributed to various programming responsibilities</li>
-								<li>Created game assets such as pixel art and sound effects</li>
-							</ul>
-						</div>
-
-						<div class="project-container hidden" id="java-key-padder">
-							<h3>Java Key Padder</h3>
-
-							<!-- JKP Carousel -->
-							<div id="jkp-carousel" class="carousel slide" data-ride="carousel">
-								<ol class="carousel-indicators">
-									<li data-target="#jkp-carousel" data-slide-to="0" class="active"></li>
-									<li data-target="#jkp-carousel" data-slide-to="1"></li>
-									<li data-target="#jkp-carousel" data-slide-to="2"></li>
-									<li data-target="#jkp-carousel" data-slide-to="3"></li>
-									<li data-target="#jkp-carousel" data-slide-to="4"></li>
-									<li data-target="#jkp-carousel" data-slide-to="5"></li>
-								</ol>
-
-								<div class="carousel-inner" role="listbox">
-									<div class="item active">
-										<img src="images/java-key-padder1.jpg">
-									</div>
-									<div class="item">
-										<img src="images/java-key-padder2.jpg">
-									</div>
-									<div class="item">
-										<img src="images/java-key-padder3.jpg">
-									</div>
-									<div class="item">
-										<img src="images/java-key-padder4.jpg">
-									</div>
-									<div class="item">
-										<img src="images/java-key-padder5.jpg">
-									</div>
-									<div class="item">
-										<img src="images/java-key-padder6.jpg">
-									</div>
-								</div>
-
-								<a class="left carousel-control" href="#jkp-carousel" role="button" data-slide="prev">
-									<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      						<span class="sr-only">Previous</span>
-								</a>
-								<a class="right carousel-control" href="#jkp-carousel" role="button" data-slide="next">
-      						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      						<span class="sr-only">Next</span>
-    						</a>
-							</div>
-
-							<p>
-								I desired a way to control the mouse and keyboard with an XBOX
-								style USB gamepad on my gaming PC, so that I could seamlessly
-								switch between watching Netflix from my bed and playing a video
-								game, without the need for three separate wireless devices.<br>
-								<br>To achieve this, I wrote a Java program which parses input
-								from a gamepad using the Lightweight Java Game Libraries. This
-								input is recognized and then translated into mouse and keyboard
-								commands using the Java Robot class.<br><br>The application has
-								two different modes: keyboard mode and mouse mode. Mouse mode
-								allows the user to move the mouse cursor with the right analogue
-								stick of the controller. Keyboard mode opens a circular keyboard
-								which allows the user to type with the gamepad.<br><br>Several
-								of the buttons are also mapped with Google Chrome and Mozilla
-								Firefox keyboard shortcuts, making it easy to open or close a
-								tab, switch between tabs, or go forwards or backwards a page.
-							</p>
-							<h4>Responsibilities</h4>
-							<ul>
-								<li>Designed the GUI using Java Swing components</li>
-								<li>Integrated my code with the third party Lightweight Java Game Libraries</li>
-								<li>Designed algorithms to translate analogue stick movement into mouse cursor movement</li>
-								<li>Simulated mouse and keyboard input using the Java Robot package</li>
-							</ul>
-						</div>
-
-						<div class="project-container hidden" id="java-world-clock">
-							<h3>Java World Clock</h3>
-
-							<!-- Java World Clock Carousel -->
-							<div id="jwc-carousel" class="carousel slide" data-ride="carousel">
-								<ol class="carousel-indicators">
-									<li data-target="#jwc-carousel" data-slide-to="0" class="active"></li>
-									<li data-target="#jwc-carousel" data-slide-to="1"></li>
-									<li data-target="#jwc-carousel" data-slide-to="2"></li>
-								</ol>
-
-								<div class="carousel-inner" role="listbox">
-									<div class="item active">
-										<img src="images/java-world-clock1.jpg">
-									</div>
-									<div class="item">
-										<img src="images/java-world-clock2.jpg">
-									</div>
-									<div class="item">
-										<img src="images/java-world-clock3.jpg">
-									</div>
-								</div>
-
-								<a class="left carousel-control" href="#jwc-carousel" role="button" data-slide="prev">
-									<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      						<span class="sr-only">Previous</span>
-								</a>
-								<a class="right carousel-control" href="#jwc-carousel" role="button" data-slide="next">
-      						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      						<span class="sr-only">Next</span>
-    						</a>
-							</div>
-
-							<p>
-								One of my friends works in online customer support for a large
-								company, often dealing with customers from all over the world.<br><br>
-								To help with his work, he asked if I could make a simple program
-								which would display eight different 24-hour clocks whose time
-								zones could be individually set.
-							</p>
-							<h4>Responsibilities</h4>
-							<ul>
-								<li>Spoke with my friend to determine program requirements</li>
-								<li>Designed user interface</li>
-								<li>Implemented all Java programming for the application</li>
-							</ul>
-						</div>
-
-						<div class="project-container hidden" id="animus-skinpack">
-							<h3>Animus Skin Pack for Rainmeter</h3>
-
-							<!-- Animus Carousel -->
-							<div id="as-carousel" class="carousel slide" data-ride="carousel">
-								<ol class="carousel-indicators">
-									<li data-target="#as-carousel" data-slide-to="0" class="active"></li>
-									<li data-target="#as-carousel" data-slide-to="1"></li>
-									<li data-target="#as-carousel" data-slide-to="2"></li>
-								</ol>
-
-								<div class="carousel-inner" role="listbox">
-									<div class="item active">
-										<img style="width: 74%;" src="images/animus-skinpack0.jpg">
-									</div>
-									<div class="item">
-										<img src="images/animus-skinpack2.jpg">
-									</div>
-									<div class="item">
-										<img src="images/animus-skinpack3.jpg">
-									</div>
-								</div>
-
-								<a class="left carousel-control" href="#as-carousel" role="button" data-slide="prev">
-									<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      						<span class="sr-only">Previous</span>
-								</a>
-								<a class="right carousel-control" href="#as-carousel" role="button" data-slide="next">
-      						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      						<span class="sr-only">Next</span>
-    						</a>
-							</div>
-
-							<p>
-								As part of a personal project, I created a pack of Rainmeter
-								skins based off of the UI design of the video game Assassin's
-								Creed 2.<br><br>Rainmeter is a desktop customization tool which
-								allows you to install or create widgets (referred to as "skins")
-								which can relay system info such as CPU temperature, RAM usage,
-								or battery status.<br><br>Rainmeter skins are created by writing
-								config files using a syntax which resembles a combination of
-								HTML and CSS.
-							</p>
-							<h4>Responsibilities</h4>
-							<ul>
-								<li>Created image assets in Photoshop CS6</li>
-								<li>Conceptualized and created all skins</li>
-								<li>Wrote Perl regular expressions for the RSS feed skin</li>
-							</ul>
-						</div>
-
-						<div class="project-container hidden" id="deus-ex-skinpack">
-							<h3>Deus Ex Skin Pack for Rainmeter</h3>
-
-							<!-- Deus Ex Carousel -->
-							<div id="des-carousel" class="carousel slide" data-ride="carousel">
-								<ol class="carousel-indicators">
-									<li data-target="#des-carousel" data-slide-to="0" class="active"></li>
-									<li data-target="#des-carousel" data-slide-to="1"></li>
-									<li data-target="#des-carousel" data-slide-to="2"></li>
-								</ol>
-
-								<div class="carousel-inner" role="listbox">
-									<div class="item active">
-										<img style="width: 74%;" src="images/deus-ex-skinpack0.jpg">
-									</div>
-									<div class="item">
-										<img src="images/deus-ex-skinpack2.jpg">
-									</div>
-									<div class="item">
-										<img src="images/deus-ex-skinpack3.jpg">
-									</div>
-								</div>
-
-								<a class="left carousel-control" href="#des-carousel" role="button" data-slide="prev">
-									<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      						<span class="sr-only">Previous</span>
-								</a>
-								<a class="right carousel-control" href="#des-carousel" role="button" data-slide="next">
-      						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      						<span class="sr-only">Next</span>
-    						</a>
-							</div>
-
-							<p>
-								This Rainmeter skin pack was designed with an aesthetic meant to
-								resemble the style of the UI found in the video game Deus Ex:
-								Human Revolution.
-								<br><br>Rainmeter is a desktop customization tool which
-								allows you to install or create widgets (referred to as "skins")
-								which can relay system info such as CPU temperature, RAM usage,
-								or battery status.<br><br>Rainmeter skins are created by writing
-								config files using a syntax which resembles a combination of
-								HTML and CSS.
-							</p>
-							<h4>Responsibilities</h4>
-							<ul>
-								<li>Created image assets in Photoshop CS6</li>
-								<li>Conceptualized and created all skins</li>
-								<li>Wrote Perl regular expressions for the RSS feed skin</li>
-							</ul>
-						</div>
-
-						<!-- List of projects -->
-						<div class="portfolio-flex-row" data-portfolio-row-attribute="portfolio-row">
-							<a href="#game-start" data-project-link-attribute="project-link">
-								<div class="portfolio-flex-item">
-									<p>GameStart</p>
-									<img src="images/game-start1.jpg">
-								</div>
-							</a>
-
-							<a href="#answer-me-this" data-project-link-attribute="project-link">
-								<div class="portfolio-flex-item">
-									<p>Answer Me This</p>
-									<img src="images/answer-me-this1.jpg">
-								</div>
-							</a>
-
-							<a href="#personal-website" data-project-link-attribute="project-link">
-								<div class="portfolio-flex-item">
-									<p>Personal Website</p>
-									<img src="images/personal-website.jpg">
-								</div>
-							</a>
-
-							<a href="#space-invaders" data-project-link-attribute="project-link">
-								<div class="portfolio-flex-item">
-									<p>Space Invaders</p>
-									<img src="images/space-invaders1.jpg">
-								</div>
-							</a>
-
-							<a href="#java-key-padder" data-project-link-attribute="project-link">
-								<div class="portfolio-flex-item">
-									<p>Java Key Padder</p>
-									<img src="images/java-key-padder1.jpg">
-								</div>
-							</a>
-
-							<a href="#java-world-clock" data-project-link-attribute="project-link">
-								<div class="portfolio-flex-item">
-									<p>Java World Clock</p>
-									<img src="images/java-world-clock1.jpg">
-								</div>
-							</a>
-
-							<a href="#animus-skinpack" data-project-link-attribute="project-link">
-								<div class="portfolio-flex-item">
-									<p>Animus Skin Pack</p>
-									<img src="images/animus-skinpack1.jpg">
-								</div>
-							</a>
-
-							<a href="#deus-ex-skinpack" data-project-link-attribute="project-link">
-								<div class="portfolio-flex-item">
-									<p>Deus Ex Skin Pack</p>
-									<img src="images/deus-ex-skinpack1.jpg">
-								</div>
-							</a>
-						</div>
-					</div>
-				</div>
-			</section>
+                <h1>Portfolio</h1>
+			</section>  <!-- End Portfolio -->
 
 			<!--Contact-->
 			<section id="contact">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<h1>Contact</h1>
-						<div class="contact-row">
-							<div class="contact-item">
-								<img src="images/profile-photo.png">
-							</div>
-							<div class="contact-item">
-								<h2>Get in touch!</h2>
-								<h3>Email: <a href="mailto:stevenmraines@gmail.com">stevenmraines@gmail.com</a></h3>
-								<h3>Cell: 910-409-4383</h3>
-								<h3>Download my resume:</h3>
-								<form method="get" action="files/stevenmraines-resume.docx">
-									<button type="submit">
-										<img src="images/download.png">
-										DOWNLOAD
-									</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+                <h2>Get in touch!</h2>
+                <h3>Email: <a href="mailto:stevenmraines@gmail.com">stevenmraines@gmail.com</a></h3>
+                <h3>Cell: 910-409-4383</h3>
+                <h3>Download my resume:</h3>
+                <form method="get" action="files/stevenmraines-resume.docx">
+                    <button type="submit">
+                        <img src="images/download.png">
+                        DOWNLOAD
+                    </button>
+                </form>
+			</section>  <!-- End Contact -->
 		</div>
+
+        <!-- Bootstrap JS dependencies -->
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"
+        ></script>
 	</body>
 </html>
