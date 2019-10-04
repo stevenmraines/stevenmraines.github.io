@@ -16,27 +16,13 @@
 	</head>
 
 	<body>
-        <!-- Navbar -->
-        <nav class="navbar navbar-light bg-light" role="navigation">
-            <a href="mailto:stevenmraines@gmail.com">
-                <img src="images/email.png" />
-                stevenmraines@gmail.com
-            </a>
-            <a href="#about">About</a>
-            <a href="#education">Education</a>
-            <a href="#experience">Experience</a>
-            <a href="#skills">Skills</a>
-            <a href="#portfolio">Portfolio</a>
-            <a href="#contact">Contact</a>
-            <img src="images/phone.png" />
-            Cell: 910-409-4383
-        </nav>  <!-- End Navbar -->
-
         <div class="container">
             <!-- About -->
-            <section id="about">
-                <img src="images/profile-photo.png" class="profile-photo">
-                <p class="personal-statement">
+            <section id="about" class="text-center">
+                <!--                <img src="images/profile-photo.png" class="profile-photo">-->
+                <h1>Steven Raines</h1>
+                <h4>Software Developer</h4>
+                <p class="mx-2 mx-lg-0">
                     I’m an accomplished and creative software developer with a
                     diverse skill set that includes many current technologies. I’ve
                     brainstormed and collaborated in many large group projects and I’m well
@@ -45,7 +31,36 @@
                     and well-documented coding style.
                 </p>
             </section>  <!-- End About -->
+        </div>
 
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-light sticky-top" role="navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navbar-list" class="collapse navbar-collapse d-lg-flex justify-content-between">
+                <span class="navbar-nav">
+                    <a href="mailto:stevenmraines@gmail.com" class="nav-link">
+                        <img src="images/email.png" />
+                        stevenmraines@gmail.com
+                    </a>
+                </span>
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link mx-3" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link mx-3" href="#education">Education</a></li>
+                    <li class="nav-item"><a class="nav-link mx-3" href="#experience">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link mx-3" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link mx-3" href="#portfolio">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link mx-3" href="#contact">Contact</a></li>
+                </ul>
+                <span>
+                    <img src="images/phone.png" />
+                    Cell: 910-409-4383
+                </span>
+            </div>
+        </nav>  <!-- End Navbar -->
+
+        <div class="container">
 			<!--Education-->
 			<section id="education">
                 <h2>University of North Carolina at Wilmington</h2>
