@@ -3,24 +3,268 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  
   <title>Steven Raines</title>
   
-  <!--Import Google Icon Font-->
+  <!-- Material CSS -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-  <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <link rel="stylesheet" href="css/main.css">
+  
+  <!-- Let browser know this page is optimized for mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-  <div class="row">
-      <div class="col s12">
-          <span class="flow-text green darken-1">
-              Steven Raines
-          </span>
+  <div class="container">
+    <!-- Intro -->
+    <section class="section">
+      <div>
+        <img src="images/profile-photo.png" class="responsive-img" />
       </div>
+      <h4 class="center-align">
+        Steven Raines
+      </h4>
+      <h6 class="center-align">
+        PHP Developer
+      </h6>
+      <!-- TODO Make this code animated so it types itself out when page is loaded -->
+      <pre>
+        <code>
+if($company.needsDeveloper())
+{
+    $company.contact($steve);
+}
+        </code>
+      </pre>
+    </section>
+
+    <!-- Skills -->
+    <section class="section">
+      <h4 class="center-align">Skills</h4>
+      
+      <!-- PHP -->
+      <div class="progress-container">
+        <div class="progress progress-3y progress-php">
+          <span class="progress-l">
+            <span class="progress-bar"></span>
+          </span>
+          <span class="progress-r">
+            <span class="progress-bar"></span>
+          </span>
+          <div class="progress-value">3 years</div>
+        </div>
+        <p class="center-align">$ PHP $</p>
+      </div>
+
+      <!-- MySQL -->
+      <div class="progress-container">
+        <div class="progress progress-3y progress-sql">
+          <span class="progress-l">
+            <span class="progress-bar"></span>
+          </span>
+          <span class="progress-r">
+            <span class="progress-bar"></span>
+          </span>
+          <div class="progress-value">3 years</div>
+        </div>
+        <p class="center-align"># MySQL #</p>
+      </div>
+
+      <!-- Material Design -->
+      <div class="progress-container">
+        <div class="progress progress-1y progress-mat">
+          <span class="progress-l">
+            <span class="progress-bar"></span>
+          </span>
+          <span class="progress-r">
+            <span class="progress-bar"></span>
+          </span>
+          <div class="progress-value">1 year</div>
+        </div>
+        <p class="center-align">. Material Design .</p>
+      </div>
+
+      <!-- Laravel -->
+      <div class="progress-container">
+        <div class="progress progress-2y progress-lrv">
+          <span class="progress-l">
+            <span class="progress-bar"></span>
+          </span>
+          <span class="progress-r">
+            <span class="progress-bar"></span>
+          </span>
+          <div class="progress-value">2 years</div>
+        </div>
+        <p class="center-align">{ Laravel }</p>
+      </div>
+
+      <!-- HTML, CSS, JS -->
+      <div class="progress-container">
+        <div class="progress progress-3y progress-html">
+          <span class="progress-l">
+            <span class="progress-bar"></span>
+          </span>
+          <span class="progress-r">
+            <span class="progress-bar"></span>
+          </span>
+          <div class="progress-value">3 years</div>
+        </div>
+        <p class="center-align">< HTML, CSS, JavaScript /></p>
+      </div>
+
+      <!-- jQuery -->
+      <div class="progress-container">
+        <div class="progress progress-3y progress-jqy">
+          <span class="progress-l">
+            <span class="progress-bar"></span>
+          </span>
+          <span class="progress-r">
+            <span class="progress-bar"></span>
+          </span>
+          <div class="progress-value">3 years</div>
+        </div>
+        <p class="center-align">" jQuery "</p>
+      </div>
+
+      <!-- Vue -->
+      <div class="progress-container">
+        <div class="progress progress-3y progress-vue">
+          <span class="progress-l">
+            <span class="progress-bar"></span>
+          </span>
+          <span class="progress-r">
+            <span class="progress-bar"></span>
+          </span>
+          <div class="progress-value">2 years</div>
+        </div>
+        <p class="center-align">/* Vue */</p>
+      </div>
+
+      <!-- Bootstrap -->
+      <div class="progress-container">
+        <div class="progress progress-3y progress-btp">
+          <span class="progress-l">
+            <span class="progress-bar"></span>
+          </span>
+          <span class="progress-r">
+            <span class="progress-bar"></span>
+          </span>
+          <div class="progress-value">3 years</div>
+        </div>
+        <p class="center-align">[ Bootstrap ]</p>
+      </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section class="section">
+      <h4 class="center-align">Projects</h4>
+      <div class="row">
+        <div class="col s4">
+          <div class="card">
+            <div class="card-image">
+              <img src="images/java-world-clock1.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title">Java World Clock</span>
+              <p class="truncate">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+            <div class="card-action">
+              <a href="#">View on Github</a>
+            </div>
+          </div>
+        </div>
+        <div class="col s4">
+          <div class="card">
+            <div class="card-image">
+              <img src="images/java-key-padder1.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title">Java KeyPadder</span>
+              <p class="truncate">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+            <div class="card-action">
+              <a href="#">View on Github</a>
+            </div>
+          </div>
+        </div>
+        <div class="col s4">
+          <div class="card">
+            <div class="card-image">
+              <img src="images/game-start1.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title">GameStart</span>
+              <p class="truncate">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+            <div class="card-action">
+              <a href="#">View on Github</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work Experience -->
+    <section class="section">
+      <h4 class="center-align">Experience</h4>
+      <div class="row">
+        <div class="col s12 m2">
+          <img src="images/queensboro.png" style="width:100px;height:auto;">
+        </div>
+        <div class="col s12 m10">
+          <h5>Queensboro Shirt Company</h5>
+          <h6>Junior Web Developer</h6>
+          <h6>2017 - 2020</h6>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section">
+      <h4 class="center-align">Contact</h4>
+      <div class="row">
+        <div class="col s2">
+          <img src="images/phone.png">
+        </div>
+        <div class="col s10">
+          <h6>(910) 409-4383</h6>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s2">
+          <img src="images/email.png">
+        </div>
+        <div class="col s10">
+          <h6>stevenmraines@gmail.com</h6>
+        </div>
+      </div>
+    </section>
   </div>
 
   <!-- Compiled and minified JavaScript -->
