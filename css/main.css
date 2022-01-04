@@ -1,11 +1,20 @@
 /*
-*  SKILLS PROGRESS BARS
+*  MISC
 */
-.progress-container {
-    display: inline-block;
-    margin: 20px;
+.display-flex {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
 }
 
+.hidden {
+    display: none;
+}
+
+/*
+*  SKILLS PROGRESS BARS
+*/
 .progress {
     background: none;
     margin: 0 auto;
@@ -113,7 +122,7 @@
 }
 
 .progress-1y .progress-r .progress-bar {
-    animation: loading-120 2s linear forwards;
+    animation: loading-120 1.5s ease-out forwards;
 }
 
 .progress-2y .progress-r .progress-bar {
@@ -121,15 +130,15 @@
 }
 
 .progress-2y .progress-l .progress-bar {
-    animation: loading-60 1s linear forwards 1s;
+    animation: loading-60 0.5s ease-out forwards 1s;
 }
 
 .progress-3y .progress-r .progress-bar {
-    animation: loading-180 1s linear forwards;
+    animation: loading-180 0.75s linear forwards;
 }
 
 .progress-3y .progress-l .progress-bar {
-    animation: loading-180 1s linear forwards 1s;
+    animation: loading-180 0.75s ease-out forwards 0.75s;
 }
 
 @keyframes loading-60 {
@@ -166,4 +175,41 @@
         -webkit-transform: rotate(180deg);
         transform: rotate(180deg);
     }
+}
+
+/*
+ *  PORTFOLIO
+ */
+.project-card:hover {
+    cursor: pointer;
+}
+
+.img-fill-container {
+    padding-top: 100%;
+    position: relative;
+    background-color: #777;
+}
+
+.img-fill-container img {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%);
+}
+
+.portfolio-preview {
+    width: 150px;
+    height: auto;
+    border: 2px solid lightgray;
+    border-radius: 7px;
+    padding: 7px;
+    opacity: 50%;
+    margin: 10px;
+}
+
+.portfolio-preview:hover,
+.portfolio-preview.active {
+    width: 175px;
+    opacity: 100%;
+    transition: 0.15s linear;
+    cursor: pointer;
 }

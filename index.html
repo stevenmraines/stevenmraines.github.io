@@ -44,8 +44,9 @@ if($company.needsDeveloper())
     <section class="section">
       <h4 class="center-align">Skills</h4>
       
-      <!-- PHP -->
-      <div class="progress-container">
+      <div class="display-flex">
+        <!-- PHP -->
+      <div>
         <div class="progress progress-3y progress-php">
           <span class="progress-l">
             <span class="progress-bar"></span>
@@ -59,7 +60,7 @@ if($company.needsDeveloper())
       </div>
 
       <!-- MySQL -->
-      <div class="progress-container">
+      <div>
         <div class="progress progress-3y progress-sql">
           <span class="progress-l">
             <span class="progress-bar"></span>
@@ -73,7 +74,7 @@ if($company.needsDeveloper())
       </div>
 
       <!-- Material Design -->
-      <div class="progress-container">
+      <div>
         <div class="progress progress-1y progress-mat">
           <span class="progress-l">
             <span class="progress-bar"></span>
@@ -87,7 +88,7 @@ if($company.needsDeveloper())
       </div>
 
       <!-- Laravel -->
-      <div class="progress-container">
+      <div>
         <div class="progress progress-2y progress-lrv">
           <span class="progress-l">
             <span class="progress-bar"></span>
@@ -101,7 +102,7 @@ if($company.needsDeveloper())
       </div>
 
       <!-- HTML, CSS, JS -->
-      <div class="progress-container">
+      <div>
         <div class="progress progress-3y progress-html">
           <span class="progress-l">
             <span class="progress-bar"></span>
@@ -115,7 +116,7 @@ if($company.needsDeveloper())
       </div>
 
       <!-- jQuery -->
-      <div class="progress-container">
+      <div>
         <div class="progress progress-3y progress-jqy">
           <span class="progress-l">
             <span class="progress-bar"></span>
@@ -129,8 +130,8 @@ if($company.needsDeveloper())
       </div>
 
       <!-- Vue -->
-      <div class="progress-container">
-        <div class="progress progress-3y progress-vue">
+      <div>
+        <div class="progress progress-2y progress-vue">
           <span class="progress-l">
             <span class="progress-bar"></span>
           </span>
@@ -143,7 +144,7 @@ if($company.needsDeveloper())
       </div>
 
       <!-- Bootstrap -->
-      <div class="progress-container">
+      <div>
         <div class="progress progress-3y progress-btp">
           <span class="progress-l">
             <span class="progress-bar"></span>
@@ -155,36 +156,78 @@ if($company.needsDeveloper())
         </div>
         <p class="center-align">[ Bootstrap ]</p>
       </div>
+      </div>
     </section>
 
     <!-- Portfolio -->
     <section class="section">
-      <h4 class="center-align">Projects</h4>
-      <div class="row">
-        <div class="col s4">
-          <div class="card">
-            <div class="card-image">
-              <img src="images/java-world-clock1.jpg">
-            </div>
-            <div class="card-content">
-              <span class="card-title">Java World Clock</span>
-              <p class="truncate">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-            </div>
-            <div class="card-action">
-              <a href="#">View on Github</a>
+      <h4 class="center-align">Portfolio</h4>
+
+      <!-- Pi Theater content -->
+      <div class="project hidden" id="pi-theater-content">
+        <div class="row">
+          <div class="col s12">
+            <h5 class="center-align">Pi Theater</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <img src="images/pitheater-jumbotron.png" class="responsive-img" id="active-portfolio-img">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <div class="display-flex">
+              <img src="images/pitheater-jumbotron.png" class="portfolio-preview active" onclick="previewClick(this)">
+              <img src="images/pitheater-genres-and-collections.png" class="portfolio-preview" onclick="previewClick(this)">
+              <img src="images/pitheater-poster-overlay.png" class="portfolio-preview" onclick="previewClick(this)">
+              <img src="images/pitheater-movie-modal.png" class="portfolio-preview" onclick="previewClick(this)">
+              <img src="images/pitheater-show-modal.png" class="portfolio-preview" onclick="previewClick(this)">
+              <img src="images/pitheater-search.png" class="portfolio-preview" onclick="previewClick(this)">
+              <img src="images/pitheater-upload.png" class="portfolio-preview" onclick="previewClick(this)">
+              <img src="images/pitheater-show1.png" class="portfolio-preview" onclick="previewClick(this)">
+              <img src="images/pitheater-show2.png" class="portfolio-preview" onclick="previewClick(this)">
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col s8 offset-s2">
+            <p class="center-align">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Pi Theater card -->
         <div class="col s4">
-          <div class="card">
+          <div class="card project-card" onclick="cardClick('pi-theater-content')">
+            <div class="card-image img-fill-container">
+              <img src="images/pitheater-jumbotron.png" class="responsive-img">
+            </div>
+            <div class="card-content">
+              <span class="card-title">Pi Theater</span>
+              <p class="">
+                A Netflix-style streaming site made for personal use which
+                features movies and TV shows ripped from my bluray and DVD collection.
+              </p>
+            </div>
+            <div class="card-action">
+              <a href="https://github.com/stevenmraines/pi_theater_2" target="_blank">View on Github</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mech Strategy Game card -->
+        <div class="col s4">
+          <div class="card project-card">
             <div class="card-image">
               <img src="images/java-key-padder1.jpg">
             </div>
@@ -205,8 +248,10 @@ if($company.needsDeveloper())
             </div>
           </div>
         </div>
+
+        <!-- QB API stuff card -->
         <div class="col s4">
-          <div class="card">
+          <div class="card project-card">
             <div class="card-image">
               <img src="images/game-start1.jpg">
             </div>
@@ -269,5 +314,6 @@ if($company.needsDeveloper())
 
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
