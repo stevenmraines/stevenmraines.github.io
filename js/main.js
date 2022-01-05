@@ -13,17 +13,29 @@ function removeClass(element, classStr) {
 }
 
 function previewClick(img) {
-	var classStr = 'active';
+	var activeClass = 'active';
+	var hiddenClass = 'hidden';
+	var src = img.src.replace('.png', '.gif');
+	var project = img.dataset.project;
+	var descriptions = document.querySelectorAll('p[data-project="' + project + '"]');
+	var feature = img.dataset.projectFeature;
+	var featureDescription = document.querySelector('p[data-project-feature="' + feature + '"]');
 
-	document.getElementById('active-portfolio-img').src = img.src;
+	for(var i = 0; i < descriptions.length; i++) {
+		addClass(descriptions[i], hiddenClass);
+	}
+
+	removeClass(featureDescription, hiddenClass);
+
+	document.getElementById('active-portfolio-img').src = src;
 	
 	var activeImages = document.querySelectorAll('.portfolio-preview.active');
 
 	for(var i = 0; i < activeImages.length; i++) {
-		removeClass(activeImages[i], classStr);
+		removeClass(activeImages[i], activeClass);
 	}
 
-	addClass(img, classStr);
+	addClass(img, activeClass);
 }
 
 function cardClick(idSelector) {
