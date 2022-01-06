@@ -1,6 +1,6 @@
 /*
-*  MISC
-*/
+ * MISC
+ */
 .display-flex {
     display: flex;
     flex-wrap: wrap;
@@ -13,8 +13,142 @@
 }
 
 /*
-*  SKILLS PROGRESS BARS
-*/
+ * INTRO
+ */
+:root {
+    --console-var-color: rgb(88, 227, 252);
+    --console-func-color: #fdc426;
+}
+
+.console {
+    background-color: #333;
+    color: white;
+    padding: 7px;
+    border: 3px solid gray;
+    font-size: 20px;
+}
+
+.console-text-line1,
+.console-text-line2,
+.console-text-line3,
+.console-text-line4 {
+    position: relative;
+}
+
+.console-text-line1::after,
+.console-text-line2::after,
+.console-text-line3::after,
+.console-text-line4::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    background: #333;
+    top: 2%;
+}
+
+.console-text-line1::after {
+    border-left: 1px solid white;
+    animation: type-line1 2s steps(29) forwards;
+}
+
+.console-text-line2::after {
+    animation: type-line24 0.2s steps(1) forwards 2s;
+}
+
+.console-text-line3::after {
+    animation: type-line3 2s steps(25) forwards 2.3s;
+}
+
+.console-text-line4::after {
+    animation: type-line24 0.2s steps(1) forwards 4.4s;
+}
+
+.console-text-line4 {
+    animation: type-line4-blink 1s step-end infinite 4.6s;
+}
+
+.var1 {
+    animation: var-color-change 0.1s linear forwards 1s;
+}
+
+.func1 {
+    animation: func-color-change 0.1s linear forwards 2.1s;
+}
+
+.var2 {
+    animation: var-color-change 0.1s linear forwards 3.1s;
+}
+
+.func2 {
+    animation: func-color-change 0.1s linear forwards 3.7s;
+}
+
+.var3 {
+    animation: var-color-change 0.1s linear forwards 4.3s;
+}
+
+@keyframes type-line1 {
+    99% {
+        width: 1%;
+        margin-left: 99%;
+    }
+    100% {
+        visibility: hidden;
+    }
+}
+
+@keyframes type-line24 {
+    0% {
+        border-left: 1px solid white;
+    }
+    50% {
+        width: 1%;
+        margin-left: 99%;
+    }
+    100% {
+        visibility: hidden;
+    }
+}
+
+@keyframes type-line3 {
+    0% {
+        border-left: 1px solid white;
+    }
+    99% {
+        width: 1%;
+        margin-left: 99%;
+    }
+    100% {
+        visibility: hidden;
+    }
+}
+
+@keyframes type-line4-blink {
+    0% {
+        border-right: 1px solid white;
+    }
+    50% {
+        border: none;
+    }
+}
+
+@keyframes var-color-change {
+    100% {
+        color: var(--console-var-color);
+    }
+}
+
+@keyframes func-color-change {
+    100% {
+        color: var(--console-func-color);
+    }
+}
+
+/*
+ * SKILLS PROGRESS BARS
+ */
 .progress {
     background: none;
     margin: 0 auto;
