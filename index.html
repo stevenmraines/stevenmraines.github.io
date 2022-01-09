@@ -236,8 +236,8 @@
           <div class="col s8 offset-s2 l4 offset-l0">
             <p data-project-feature="login-and-movie" data-project="pitheater">
               This Netflix-inspired streaming site runs on a Raspberry Pi and serves videos from a connected
-              external hard drive. The front end runs on <strong class="green-text">Vue</strong> and <strong class="purple-text">Bootstrap</strong>,
-              while the back end utilizes the <strong class="orange-text">Laravel</strong> framework for <strong class="purple-text">PHP</strong> which offers an easy to
+              external hard drive. The front end runs on <b class="green-text">Vue</b> and <b class="purple-text">Bootstrap</b>,
+              while the back end utilizes the <b class="orange-text">Laravel</b> framework for <b class="purple-text">PHP</b> which offers an easy to
               set up login and registration system. The playback progress of any watched movies or TV shows is
               maintained for logged-in users. Users logged in to their account can also add or remove titles
               to and from their watchlist.
@@ -251,10 +251,10 @@
               Logged-in users who are marked as "admin" can access the Upload Content page. This is where new video
               files that have just been transferred to the attached hard drive can have their associated attributes set in
               the Pi Theater database, such as the title, summary, and genres. When typing in the title field, a request
-              is sent to an <strong>IMDb API</strong> to get the search results matching the given title. When one of those results is
+              is sent to an <b>IMDb API</b> to get the search results matching the given title. When one of those results is
               selected from the IMDb Search dropdown field, the rest of the fields such as the summary, year released and
               genres are automatically set. A poster image can either be uploaded from the user's computer, or automatically
-              set via URL from the IMDb search result. <strong>ImageMagick</strong> automatically resizes images to the correct dimensions.
+              set via URL from the IMDb search result. <b>ImageMagick</b> automatically resizes images to the correct dimensions.
             </p>
           </div>
         </div>
@@ -263,7 +263,7 @@
       <div class="row">
         <!-- Pi Theater card -->
         <div class="col s8 offset-s2 m6 l4">
-          <div class="card hoverable project-card" onclick="cardClick('pi-theater-content')">
+          <div class="card hoverable" onclick="cardClick('pi-theater-content')">
             <div class="card-image img-fill-container">
               <img src="images/pitheater-login-and-movie.png" class="responsive-img">
             </div>
@@ -282,7 +282,7 @@
   
         <!-- Mech Strategy Game card -->
         <div class="col s8 offset-s2 m6 l4">
-          <div class="card hoverable project-card">
+          <div class="card hoverable">
             <div class="card-image">
               <img src="images/java-key-padder1.jpg">
             </div>
@@ -306,7 +306,7 @@
   
         <!-- QB API stuff card -->
         <div class="col s8 offset-s2 m6 l4">
-          <div class="card hoverable project-card">
+          <div class="card hoverable">
             <div class="card-image">
               <img src="images/game-start1.jpg">
             </div>
@@ -337,13 +337,18 @@
       <h4 class="center-align">Experience</h4>
       <div class="divider"></div>
       <div class="row">
-        <div class="col s4 offset-s4 m3">
+        <!-- <div class="col s4 offset-s4 m3">
           <img src="images/queensboro.png" class="responsive-img">
         </div>
-        <div class="col s12 m9">
+        <div class="col s12 m9 qb-wrapper pos-rel">
           <h3 class="mt-0">Queensboro Shirt Company</h3>
           <h4>Junior Web Developer</h4>
           <h5 class="mb-0">2017 - 2020</h5>
+        </div> -->
+        <div class="col s12 center-align qb-wrapper pos-rel">
+          <b><h2 class="mt-0">Queensboro Shirt Company</h2></b>
+          <b><h3>Junior Web Developer</h3></b>
+          <b><h4 class="mb-0">2017 - 2020</h4></b>
         </div>
       </div>
       <div class="row">

@@ -27,6 +27,10 @@
     display: none;
 }
 
+.hoverable:hover {
+    cursor: pointer !important;
+}
+
 .mt-0 {
     margin-top: 0;
 }
@@ -388,10 +392,6 @@ nav ul a,
     margin-bottom: 4rem;
 }
 
-.project-card:hover {
-    cursor: pointer;
-}
-
 .img-fill-container {
     padding-top: 100%;
     position: relative;
@@ -420,6 +420,35 @@ nav ul a,
     opacity: 100%;
     transition: 0.15s linear;
     cursor: pointer;
+}
+
+/*
+ * WORK EXPERIENCE
+ */
+.qb-wrapper {
+    padding: 2rem !important;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    overflow-x: clip;
+}
+
+.qb-wrapper::after {
+    position: absolute;
+    width: 300%;
+    height: 300%;
+    top: -100%;
+    left: -100%;
+    background-image: url('../images/queensboro-repeating.png');
+    background-repeat: repeat;
+    transform: rotate(30deg);
+    background-position-x: 16%;
+    background-position-y: 141%;
+    opacity: 25%;
+    color: transparent;
+    content: "fdsa";
+}
+
+.qb-wrapper b {
+    color: black;
 }
 
 /*
