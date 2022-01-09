@@ -17,32 +17,71 @@
 </head>
 
 <body>
-  <div class="container">
-    <!-- Intro -->
-    <section class="section">
+  <!-- Navbar -->
+  <div class="navbar-fixed">
+    <nav class="nav-center">
+      <div class="nav-wrapper">
+        <a href="#" data-target="mobile-nav" class="sidenav-trigger">
+          <i class="material-icons">menu</i>
+        </a>
+        <ul class="center nav-link-list hide-on-med-and-down">
+          <li onclick="navClick(this)"><a href="#intro">Intro</a></li>
+          <li onclick="navClick(this)"><a href="#skills">Skills</a></li>
+          <li onclick="navClick(this)"><a href="#portfolio">Portfolio</a></li>
+          <li onclick="navClick(this)"><a href="#work">Work Experience</a></li>
+          <li onclick="navClick(this)"><a href="#education">Education</a></li>
+          <li onclick="navClick(this)"><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <ul class="nav-link-list sidenav" id="mobile-nav">
+    <li onclick="navClick(this)"><a href="#intro">Intro</a></li>
+    <li onclick="navClick(this)"><a href="#skills">Skills</a></li>
+    <li onclick="navClick(this)"><a href="#portfolio">Portfolio</a></li>
+    <li onclick="navClick(this)"><a href="#work">Work Experience</a></li>
+    <li onclick="navClick(this)"><a href="#education">Education</a></li>
+    <li onclick="navClick(this)"><a href="#contact">Contact</a></li>
+  </ul>
+
+  <!-- Intro -->
+  <div class="section" id="intro">
+    <div class="container">
       <div class="row">
-        <div class="col s12 m3 l4">
-          <img src="images/profile-photo.png" class="responsive-img" />
+        <div class="col s8 offset-s2 m6 offset-m3 l5 pos-rel">
+          <img src="images/profile-photo.png" class="circle responsive-img pos-rel">
         </div>
-        <div class="col s12 m9 l8">
-          <h4 class="center-align">
-            Steven Raines
-          </h4>
-          <h6 class="center-align">
+        <div class="col s12 l7">
+          <h1 class="center-align hide-on-large-only">
+            Steven Raines,
+          </h1>
+          <h4 class="center-align hide-on-large-only">
             PHP Developer
-          </h6>
-          <pre class="console"><span class="console-text-line1">if(<span class="var1">$company</span>.<span class="func1">needsDeveloper</span>())</span>
+          </h4>
+          <h1 class="show-on-large hide-on-med-and-down mt-0">
+            Steven Raines,
+          </h1>
+          <h4 class="show-on-large hide-on-med-and-down">
+            PHP Developer
+          </h4>
+          <!-- TODO trigger this animation only when it's visible on the page -->
+          <pre class="console mb-0"><span class="console-text-line1">if(<span class="var1">$company</span>.<span class="func1">needsDeveloper</span>())</span>
 <span class="console-text-line2">{</span>
-    <span class="console-text-line3"><span class="var2">$company</span>.<span class="func2">contact</span>(<span class="var3">$steve</span>);</span>
+  <span class="console-text-line3"><span class="var2">$company</span>.<span class="func2">contact</span>(<span class="var3">$steve</span>);</span>
 <span class="console-text-line4">}</span></pre>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- Skills -->
-    <section class="section">
+  <!-- Skills -->
+  <div class="section" id="skills">
+    <div class="container">
       <h4 class="center-align">Skills</h4>
+      <div class="divider"></div>
       
+      <!-- TODO Trigger these animations when this section is scrolled to -->
       <div class="display-flex">
         <!-- PHP -->
       <div>
@@ -57,7 +96,7 @@
         </div>
         <p class="center-align">$ PHP $</p>
       </div>
-
+  
       <!-- MySQL -->
       <div>
         <div class="progress progress-3y progress-sql">
@@ -71,7 +110,7 @@
         </div>
         <p class="center-align"># MySQL #</p>
       </div>
-
+  
       <!-- Material Design -->
       <div>
         <div class="progress progress-1y progress-mat">
@@ -85,7 +124,7 @@
         </div>
         <p class="center-align">. Material Design .</p>
       </div>
-
+  
       <!-- Laravel -->
       <div>
         <div class="progress progress-2y progress-lrv">
@@ -99,7 +138,7 @@
         </div>
         <p class="center-align">{ Laravel }</p>
       </div>
-
+  
       <!-- HTML, CSS, JS -->
       <div>
         <div class="progress progress-3y progress-html">
@@ -113,7 +152,7 @@
         </div>
         <p class="center-align">< HTML, CSS, JavaScript /></p>
       </div>
-
+  
       <!-- jQuery -->
       <div>
         <div class="progress progress-3y progress-jqy">
@@ -127,7 +166,7 @@
         </div>
         <p class="center-align">" jQuery "</p>
       </div>
-
+  
       <!-- Vue -->
       <div>
         <div class="progress progress-2y progress-vue">
@@ -141,7 +180,7 @@
         </div>
         <p class="center-align">/* Vue */</p>
       </div>
-
+  
       <!-- Bootstrap -->
       <div>
         <div class="progress progress-3y progress-btp">
@@ -156,12 +195,15 @@
         <p class="center-align">[ Bootstrap ]</p>
       </div>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- Portfolio -->
-    <section class="section">
+  <!-- Portfolio -->
+  <div class="section" id="portfolio">
+    <div class="container">
       <h4 class="center-align">Portfolio</h4>
-
+      <div class="divider"></div>
+  
       <!-- Pi Theater content -->
       <div class="project hidden" id="pi-theater-content">
         <div class="row">
@@ -169,25 +211,25 @@
             <h5 class="center-align">Pi Theater</h5>
           </div>
         </div>
-        <div class="row">
+        <div class="row project-row">
           <div class="col s12 l8">
             <img src="images/pitheater-login-and-movie.gif" class="responsive-img" id="active-portfolio-img">
             <div class="display-flex">
               <img src="images/pitheater-login-and-movie.png"
-                   class="portfolio-preview active"
-                   data-project-feature="login-and-movie"
-                   data-project="pitheater"
-                   onclick="previewClick(this)">
+                    class="portfolio-preview active"
+                    data-project-feature="login-and-movie"
+                    data-project="pitheater"
+                    onclick="previewClick(this)">
               <img src="images/pitheater-algolia-search.png"
-                   class="portfolio-preview"
-                   data-project-feature="algolia-search"
-                   data-project="pitheater"
-                   onclick="previewClick(this)">
+                    class="portfolio-preview"
+                    data-project-feature="algolia-search"
+                    data-project="pitheater"
+                    onclick="previewClick(this)">
               <img src="images/pitheater-upload.png"
-                   class="portfolio-preview"
-                   data-project-feature="upload"
-                   data-project="pitheater"
-                   onclick="previewClick(this)">
+                    class="portfolio-preview"
+                    data-project-feature="upload"
+                    data-project="pitheater"
+                    onclick="previewClick(this)">
             </div>
           </div>
           
@@ -217,10 +259,10 @@
           </div>
         </div>
       </div>
-
+  
       <div class="row">
         <!-- Pi Theater card -->
-        <div class="col s4">
+        <div class="col s8 offset-s2 m6 l4">
           <div class="card hoverable project-card" onclick="cardClick('pi-theater-content')">
             <div class="card-image img-fill-container">
               <img src="images/pitheater-login-and-movie.png" class="responsive-img">
@@ -237,9 +279,9 @@
             </div>
           </div>
         </div>
-
+  
         <!-- Mech Strategy Game card -->
-        <div class="col s4">
+        <div class="col s8 offset-s2 m6 l4">
           <div class="card hoverable project-card">
             <div class="card-image">
               <img src="images/java-key-padder1.jpg">
@@ -261,9 +303,9 @@
             </div>
           </div>
         </div>
-
+  
         <!-- QB API stuff card -->
-        <div class="col s4">
+        <div class="col s8 offset-s2 m6 l4">
           <div class="card hoverable project-card">
             <div class="card-image">
               <img src="images/game-start1.jpg">
@@ -286,26 +328,84 @@
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- Work Experience -->
-    <section class="section">
+  <!-- Work Experience -->
+  <div class="section" id="work">
+    <div class="container">
       <h4 class="center-align">Experience</h4>
+      <div class="divider"></div>
       <div class="row">
-        <div class="col s12 m2">
-          <img src="images/queensboro.png" style="width:100px;height:auto;">
+        <div class="col s4 offset-s4 m3">
+          <img src="images/queensboro.png" class="responsive-img">
         </div>
-        <div class="col s12 m10">
-          <h5>Queensboro Shirt Company</h5>
-          <h6>Junior Web Developer</h6>
-          <h6>2017 - 2020</h6>
+        <div class="col s12 m9">
+          <h3 class="mt-0">Queensboro Shirt Company</h3>
+          <h4>Junior Web Developer</h4>
+          <h5 class="mb-0">2017 - 2020</h5>
         </div>
       </div>
-    </section>
+      <div class="row">
+        <div class="col s12 m6">
+          <h5 class="center-align">Front-End Responsibilities</h5>
+          <ul class="browser-default">
+            <li>Styling with Bootstrap</li>
+            <li>JavaScript coding with jQuery</li>
+            <li>Modifying HTML templates, layouts, and forms to accomodate new features or fix bugs</li>
+          </ul>
+        </div>
+        <div class="col s12 m6">
+          <h5 class="center-align">Back-End Responsibilities</h5>
+          <ul class="browser-default">
+            <li>Server-side scripting with PHP</li>
+            <li>Database manipulation with MySQL</li>
+            <li>Integrating with third-party systems such as FedEx and USPS shipping rate APIs</li>
+            <li>Utilizing AWS services such as SQS and S3</li>
+            <li>Creating automated scripts to handle daily tasks such as emailing customers about their orders</li>
+            <li>Integrating newer Laravel codebases with two legacy codebases running on custom frameworks</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Contact -->
-    <section class="section">
+  <!-- Education -->
+  <div class="section" id="education">
+    <div class="container">
+      <h4 class="center-align">Education</h4>
+      <div class="divider"></div>
+      <div class="row">
+        <div class="col s4 offset-s4 m3 pos-rel">
+          <img src="images/cfcc.png" class="responsive-img">
+          <img src="images/diploma.png">
+        </div>
+        <div class="col s12 m9">
+          <h4 class="mt-0">Cape Fear Community College</h4>
+          <h5>Associate in Science</h5>
+          <h6 class="mb-0">2010</h6>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s4 offset-s4 m3 pos-rel">
+          <img src="images/uncw.png" class="responsive-img">
+          <img src="images/diploma.png">
+        </div>
+        <div class="col s12 m9">
+          <h4 class="mt-0">University of North Carolina at Wilmington</h4>
+          <h5>Bachelor of Science (Computer Science)</h5>
+          <h6 class="mb-0">2016</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="section" id="contact">
+    <div class="container">
       <h4 class="center-align">Contact</h4>
+      <div class="divider"></div>
       <div class="row">
         <div class="col s2">
           <img src="images/phone.png">
@@ -322,7 +422,7 @@
           <h6>stevenmraines@gmail.com</h6>
         </div>
       </div>
-    </section>
+    </div>
   </div>
 
   <!-- Compiled and minified JavaScript -->

@@ -1,6 +1,13 @@
 /*
  * MISC
  */
+:root {
+    --materialize-nav-bg-color: #ee6e73;
+    --odd-section-bg-color: #f3f3f3;
+    --console-var-color: rgb(88, 227, 252);
+    --console-func-color: #fdc426;
+}
+
 .display-flex {
     display: flex;
     flex-wrap: wrap;
@@ -8,16 +15,79 @@
     justify-content: space-around;
 }
 
+.divider {
+    margin-bottom: 3rem;
+}
+
+.divider:nth-of-type(n) {
+    background-color: #bdbdbd;
+}
+
 .hidden {
     display: none;
+}
+
+.mt-0 {
+    margin-top: 0;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.pos-rel {
+    position: relative;
+}
+
+.section:nth-of-type(2n) {
+    background-color: var(--odd-section-bg-color);
 }
 
 /*
  * INTRO
  */
-:root {
-    --console-var-color: rgb(88, 227, 252);
-    --console-func-color: #fdc426;
+nav.nav-center ul {
+    text-align: center;
+}
+
+nav.nav-center ul li {
+    display: inline;
+    float: none;
+}
+
+nav.nav-center ul li a {
+    display: inline-block;
+}
+
+/* nav {
+    background-color: white;
+}
+
+nav ul a,
+.sidenav-trigger {
+    color: black;
+} */
+
+#intro {
+    padding: 5rem 0 3rem;
+}
+
+#intro div.pos-rel img {
+    border: 12px solid var(--odd-section-bg-color);
+    z-index: 1;
+}
+
+#intro div.pos-rel::after {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 5%;
+    left: -10%;
+    background-color: blue;
+    background: linear-gradient(135deg, #D783B6 0%, #CF8145 100%);
+    border-radius: 50%;
+    content: "fdsa";
+    color: transparent;
 }
 
 .console {
@@ -314,6 +384,10 @@
 /*
  *  PORTFOLIO
  */
+.project-row {
+    margin-bottom: 4rem;
+}
+
 .project-card:hover {
     cursor: pointer;
 }
@@ -346,4 +420,15 @@
     opacity: 100%;
     transition: 0.15s linear;
     cursor: pointer;
+}
+
+/*
+ * EDUCATION
+ */
+#education .pos-rel img:last-of-type {
+    position: absolute;
+    width: 60%;
+    height: auto;
+    top: 30%;
+    left: 0;
 }

@@ -1,3 +1,23 @@
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, {});
+});
+
+function navClick(element) {
+	var classStr = 'active';
+	var target = element.children[0].attributes.href.value;
+	var navLinks = document.querySelectorAll("ul.nav-link-list li");
+	var clickedLinks = document.querySelectorAll("ul.nav-link-list li a[href='" + target + "']");
+
+	for(var i = 0; i < navLinks.length; i++) {
+		removeClass(navLinks[i], classStr);
+	}
+	
+	for(var i = 0; i < clickedLinks.length; i++) {
+		addClass(clickedLinks[i].parentElement, classStr);
+	}
+}
+
 function addClass(element, classStr) {
 	// If class is already added, do nothing
 	if((' ' + element.className + ' ').indexOf(' ' + classStr + ' ') >= 0) {
