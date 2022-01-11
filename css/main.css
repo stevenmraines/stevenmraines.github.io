@@ -78,7 +78,7 @@ html, body {
 /*
  * ROYAL VIRIDIAN COLOR SCHEME
  */
-html, body {
+/* html, body {
     color: var(--rv-white-darken-2);
     background-color: var(--rv-black-darken-1);
 }
@@ -166,7 +166,7 @@ a.link {
 
 a.link:hover {
     color: var(--rv-viridian-lighten-2);
-}
+} */
 
 /*
  * INTRO
