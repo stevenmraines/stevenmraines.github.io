@@ -2,36 +2,6 @@
  * MISC
  */
 :root {
-    /* Royal Viridian palette */
-    /* --rv-black: hsl(256,61%,15%); */
-    --rv-black: hsl(256,9%,15%);
-    --rv-black-darken-1: hsl(256,10%,10%);
-    --rv-black-darken-2: hsl(256,10%,5%);
-    --rv-black-darken-3: hsl(256,10%,0%);
-    --rv-black-lighten-1: hsl(256,8%,20%);
-    --rv-black-lighten-2: hsl(256,8%,25%);
-    --rv-black-lighten-3: hsl(256,8%,30%);
-    --rv-white: hsl(42,4%,100%);
-    --rv-white-darken-1: hsl(42,4%,95%);
-    --rv-white-darken-2: hsl(42,4%,90%);
-    --rv-white-darken-3: hsl(42,4%,85%);
-    --rv-white-lighten-1: hsl(0,0%,100%);
-    /* --rv-viridian: hsl(178,78%,70%); */
-    --rv-viridian: hsl(178,60%,50%);
-    --rv-viridian-darken-1: hsl(178,60%,45%);
-    --rv-viridian-darken-2: hsl(178,60%,40%);
-    --rv-viridian-darken-3: hsl(178,60%,35%);
-    --rv-viridian-lighten-1: hsl(178,60%,55%);
-    --rv-viridian-lighten-2: hsl(178,60%,60%);
-    --rv-viridian-lighten-3: hsl(178,60%,65%);
-    --rv-indigo: hsl(271,86%,40%);
-    --rv-indigo-darken-1: hsl(271,86%,35%);
-    --rv-indigo-darken-2: hsl(271,86%,30%);
-    --rv-indigo-darken-3: hsl(271,86%,25%);
-    --rv-indigo-lighten-1: hsl(271,86%,45%);
-    --rv-indigo-lighten-2: hsl(271,86%,50%);
-    --rv-indigo-lighten-3: hsl(271,86%,55%);
-
     --console-var-color: rgb(88, 227, 252);
     --console-func-color: #fdc426;
 }
@@ -71,103 +41,6 @@ html, body {
     position: relative;
 }
 
-.section:nth-of-type(7) {
-    margin-bottom: 3rem;
-}
-
-/*
- * ROYAL VIRIDIAN COLOR SCHEME
- */
-/* html, body {
-    color: var(--rv-white-darken-2);
-    background-color: var(--rv-black-darken-1);
-}
-
-.section:nth-of-type(even) {
-    background-color: var(--rv-black);
-}
-
-nav ul a,
-.sidenav-trigger {
-    color: var(--rv-white);
-}
-
-nav {
-    background-color: var(--rv-viridian-darken-2);
-}
-
-nav ul a:hover,
-nav ul li.active a {
-    background-color: var(--rv-viridian-darken-3);
-}
-
-#intro {
-    background: var(--rv-black-lighten-3);
-}
-
-#intro > div:nth-child(1) {
-    background: var(--rv-black);
-}
-
-#intro > div:nth-child(2) {
-    background: var(--rv-black-darken-3);
-}
-
-#intro > div:nth-child(1),
-#intro > div:nth-child(2) {
-    opacity: 50%;
-    transition-property: transform;
-    transition-delay: 0.2s;
-    transition-duration: 2s;
-    transition-timing-function: ease-out;
-}
-
-.card {
-    background-color: var(--rv-black-darken-1);
-}
-
-.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
-    color: var(--rv-viridian-darken-1);
-}
-
-.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
-    color: var(--rv-viridian-lighten-2);
-}
-
-.btn,
-.btn-large,
-.btn-small {
-    color: var(--rv-white);
-    background-color: var(--rv-viridian-darken-1);
-}
-
-.btn:hover,
-.btn-large:hover,
-.btn-small:hover {
-    background-color: var(--rv-viridian-darken-2);
-}
-
-.btn:focus,
-.btn-large:focus,
-.btn-small:focus,
-.btn-floating:focus {
-    background-color: var(--rv-viridian-darken-3);
-}
-
-.contact-icon {
-    color: var(--rv-white-darken-2);
-}
-
-a.link {
-    color: var(--rv-viridian-darken-1);
-    transition: color .3s ease;
-    text-transform: uppercase;
-}
-
-a.link:hover {
-    color: var(--rv-viridian-lighten-2);
-} */
-
 /*
  * INTRO
  */
@@ -176,16 +49,8 @@ nav.nav-center ul {
 }
 
 nav.nav-center ul li {
-    display: inline;
-    float: none;
-}
-
-nav.nav-center ul li a {
     display: inline-block;
-}
-
-nav ul li.active {
-    background-color: transparent;
+    float: none;
 }
 
 #intro {
@@ -210,6 +75,15 @@ nav ul li.active {
 
 #intro > div:nth-child(2) {
     transform-origin: left bottom;
+}
+
+#intro > div:nth-child(1),
+#intro > div:nth-child(2) {
+    opacity: 50%;
+    transition-property: transform;
+    transition-delay: 0.2s;
+    transition-duration: 2s;
+    transition-timing-function: ease-out;
 }
 
 /* #intro div.pos-rel img {
@@ -567,9 +441,18 @@ nav ul li.active {
     margin-bottom: 4rem;
 }
 
+.card.hoverable:hover {
+	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.8);
+}
+
 .img-fill-container {
     padding-top: 100%;
-    background-color: rgba(255,255,255,0.15);
+    background-color: rgba(0,0,0,.3);
+    transition: background-color .3s linear;
+}
+
+.card.hoverable:hover .img-fill-container {
+    background-color: rgba(0,0,0,0.7);
 }
 
 .img-fill-container img {
@@ -592,7 +475,7 @@ nav ul li.active {
 .portfolio-preview.active {
     width: 175px;
     opacity: 100%;
-    transition: 0.15s linear;
+    transition: 0.2s linear;
     cursor: pointer;
 }
 
@@ -614,11 +497,19 @@ nav ul li.active {
     background-image: url('../images/queensboro-repeating.png');
     background-repeat: repeat;
     transform: rotate(30deg);
-    background-position-x: 16%;
-    background-position-y: 141%;
-    opacity: 25%;
+    opacity: 30%;
     content: "";
     z-index: 1;
+    animation: qb-logo-scroll 45s ease-in-out 0s infinite alternate;
+}
+
+@keyframes qb-logo-scroll {
+    0% {
+        background-position: 0, 0;
+    }
+    100% {
+        background-position: 16%, 141%;
+    }
 }
 
 .qb-wrapper > h2,
@@ -636,6 +527,36 @@ nav ul li.active {
     height: auto;
     top: 30%;
     left: 0;
+}
+
+.college-wrapper {
+    padding: 3rem 0;
+    margin-bottom: 3rem;
+}
+
+.college-wrapper::after {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 35%;
+    background-image: url('../images/cfcc-building.jpg');
+    background-size: 100% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    content: "";
+    z-index: 1;
+}
+
+.college-wrapper h3,
+.college-wrapper h4,
+.college-wrapper h5 {
+    z-index: 2;
+}
+
+.college-wrapper + .college-wrapper::after {
+    background-image: url('../images/uncw-clock-tower.jpg');
 }
 
 /*
@@ -665,4 +586,8 @@ nav ul li.active {
 
 #contact form button img {
     vertical-align: middle;
+}
+
+#contact {
+    padding-bottom: 3rem;
 }

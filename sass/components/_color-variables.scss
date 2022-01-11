@@ -1,39 +1,47 @@
 // Google Color Palette defined: http://www.google.com/design/spec/style/color.html
 
 /*
- * ROYAL VIRIDIAN COLOR PALETTE
+ * CUSTOM COLOR PALETTE
  */
-$xiketic: (
-  "base":       #0b0911ff,
-  "lighten-1":  #25232aff,
-  "lighten-2":  #4a4653ff
+$alabaster: (
+  "base":       $alabaster
 );
- 
-// $raisin-black: #25232aff;
-// $dark-liver: #4a4653ff;
 
 $cultured: (
-  "base":				#f7f5f3ff,
-  "darken-1":   #edeae3ff
+  "base":       $cultured
+);
+
+$dark-liver: (
+  "base":       $dark-liver
 );
   
-// $alabaster: #edeae3ff;
+$deep-indigo: (
+  "base":				$deep-indigo
+);
 
 $medium-turquoise: (
-  "base":				#37c8c3ff,
-  "darken-1":   #19aea9ff,
-  "lighten-1":  #70dbd8ff
+  "base":				$medium-turquoise
 );
 
-// $light-sea-green: #19aea9ff;
-// $medium-turquoise-2: #70dbd8ff;
-
-$royal-indigo: (
-  "base":				#690ebeff,
-  "darken-1":   #510b93ff
+$raisin-black: (
+  "base":       $raisin-black
 );
-  
-// $indigo: #510b93ff;
+
+$rajah: (
+  "base":       $rajah
+);
+
+$royal-purple: (
+  "base":       $royal-purple
+);
+
+$xiketic: (
+  "base":       $xiketic
+);
+/*
+ * END CUSTOM COLOR PALETTE
+ */
+
 
 $materialize-red: (
   "base":       #e51c23,
@@ -366,10 +374,15 @@ $shades: (
 );
 
 $colors: (
-  "xiketic": $xiketic,
+  "alabaster": $alabaster,
   "cultured": $cultured,
+  "dark-liver": $dark-liver,
+  "deep-indigo": $deep-indigo,
   "medium-turquoise": $medium-turquoise,
-  "royal-indigo": $royal-indigo,
+  "raisin-black": $raisin-black,
+  "rajah": $rajah,
+  "royal-purple": $royal-purple,
+  "xiketic": $xiketic,
   "materialize-red": $materialize-red,
   "red": $red,
   "pink": $pink,

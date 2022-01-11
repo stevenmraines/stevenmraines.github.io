@@ -1,72 +1,32 @@
-/* Coolors Exported Palette - https://coolors.co/0b0911-25232a-4a4653-edeae3-f7f5f3-19aea9-37c8c3-70dbd8-510b93-690ebe */
-
-/* CSS HEX */
-// --xiketic: #0b0911ff;
-// --raisin-black: #25232aff;
-// --dark-liver: #4a4653ff;
-// --alabaster: #edeae3ff;
-// --cultured: #f7f5f3ff;
-// --light-sea-green: #19aea9ff;
-// --medium-turquoise: #37c8c3ff;
-// --medium-turquoise-2: #70dbd8ff;
-// --indigo: #510b93ff;
-// --purple: #690ebeff;
-
-/* CSS HSL */
-// --xiketic: hsla(255, 31%, 5%, 1);
-// --raisin-black: hsla(257, 9%, 15%, 1);
-// --dark-liver: hsla(258, 8%, 30%, 1);
-// --alabaster: hsla(42, 22%, 91%, 1);
-// --cultured: hsla(30, 20%, 96%, 1);
-// --light-sea-green: hsla(178, 75%, 39%, 1);
-// --medium-turquoise: hsla(178, 57%, 50%, 1);
-// --medium-turquoise-2: hsla(178, 60%, 65%, 1);
-// --indigo: hsla(271, 86%, 31%, 1);
-// --purple: hsla(271, 86%, 40%, 1);
-
 /* SCSS HEX */
-$xiketic: #0b0911ff;
-$raisin-black: #25232aff;
-$dark-liver: #4a4653ff;
 $alabaster: #edeae3ff;
-$cultured: #f7f5f3ff;
-$light-sea-green: #19aea9ff;
-$medium-turquoise: #37c8c3ff;
-$medium-turquoise-2: #70dbd8ff;
-$indigo: #510b93ff;
-$purple: #690ebeff;
+$cultured: #f6f6f3ff;
+$dark-liver: #4a4653ff;
+$deep-indigo: #3c0891ff;
+$medium-turquoise: #24dbd5ff;
+$raisin-black: #25232aff;
+$rajah: #ffa852ff;
+$royal-purple: #690ebeff;
+$xiketic: #0f0d17ff;
 
 /* SCSS HSL */
-$xiketic: hsla(255, 31%, 5%, 1);
-$raisin-black: hsla(257, 9%, 15%, 1);
-$dark-liver: hsla(258, 8%, 30%, 1);
 $alabaster: hsla(42, 22%, 91%, 1);
-$cultured: hsla(30, 20%, 96%, 1);
-$light-sea-green: hsla(178, 75%, 39%, 1);
-$medium-turquoise: hsla(178, 57%, 50%, 1);
-$medium-turquoise-2: hsla(178, 60%, 65%, 1);
-$indigo: hsla(271, 86%, 31%, 1);
-$purple: hsla(271, 86%, 40%, 1);
+$cultured: hsla(60, 14%, 96%, 1);
+$dark-liver: hsla(258, 8%, 30%, 1);
+$deep-indigo: hsla(263, 90%, 30%, 1);
+$medium-turquoise: hsla(178, 72%, 50%, 1);
+$raisin-black: hsla(257, 9%, 15%, 1);
+$rajah: hsla(30, 100%, 66%, 1);
+$royal-purple: hsla(271, 86%, 40%, 1);
+$xiketic: hsla(252, 28%, 7%, 1);
 
 /* SCSS RGB */
-$xiketic: rgba(11, 9, 17, 1);
-$raisin-black: rgba(37, 35, 42, 1);
-$dark-liver: rgba(74, 70, 83, 1);
 $alabaster: rgba(237, 234, 227, 1);
-$cultured: rgba(247, 245, 243, 1);
-$light-sea-green: rgba(25, 174, 169, 1);
-$medium-turquoise: rgba(55, 200, 195, 1);
-$medium-turquoise-2: rgba(112, 219, 216, 1);
-$indigo: rgba(81, 11, 147, 1);
-$purple: rgba(105, 14, 190, 1);
-
-/* SCSS Gradient */
-$gradient-top: linear-gradient(0deg, #0b0911ff, #25232aff, #4a4653ff, #edeae3ff, #f7f5f3ff, #19aea9ff, #37c8c3ff, #70dbd8ff, #510b93ff, #690ebeff);
-$gradient-right: linear-gradient(90deg, #0b0911ff, #25232aff, #4a4653ff, #edeae3ff, #f7f5f3ff, #19aea9ff, #37c8c3ff, #70dbd8ff, #510b93ff, #690ebeff);
-$gradient-bottom: linear-gradient(180deg, #0b0911ff, #25232aff, #4a4653ff, #edeae3ff, #f7f5f3ff, #19aea9ff, #37c8c3ff, #70dbd8ff, #510b93ff, #690ebeff);
-$gradient-left: linear-gradient(270deg, #0b0911ff, #25232aff, #4a4653ff, #edeae3ff, #f7f5f3ff, #19aea9ff, #37c8c3ff, #70dbd8ff, #510b93ff, #690ebeff);
-$gradient-top-right: linear-gradient(45deg, #0b0911ff, #25232aff, #4a4653ff, #edeae3ff, #f7f5f3ff, #19aea9ff, #37c8c3ff, #70dbd8ff, #510b93ff, #690ebeff);
-$gradient-bottom-right: linear-gradient(135deg, #0b0911ff, #25232aff, #4a4653ff, #edeae3ff, #f7f5f3ff, #19aea9ff, #37c8c3ff, #70dbd8ff, #510b93ff, #690ebeff);
-$gradient-top-left: linear-gradient(225deg, #0b0911ff, #25232aff, #4a4653ff, #edeae3ff, #f7f5f3ff, #19aea9ff, #37c8c3ff, #70dbd8ff, #510b93ff, #690ebeff);
-$gradient-bottom-left: linear-gradient(315deg, #0b0911ff, #25232aff, #4a4653ff, #edeae3ff, #f7f5f3ff, #19aea9ff, #37c8c3ff, #70dbd8ff, #510b93ff, #690ebeff);
-$gradient-radial: radial-gradient(#0b0911ff, #25232aff, #4a4653ff, #edeae3ff, #f7f5f3ff, #19aea9ff, #37c8c3ff, #70dbd8ff, #510b93ff, #690ebeff);
+$cultured: rgba(246, 246, 243, 1);
+$dark-liver: rgba(74, 70, 83, 1);
+$deep-indigo: rgba(60, 8, 145, 1);
+$medium-turquoise: rgba(36, 219, 213, 1);
+$raisin-black: rgba(37, 35, 42, 1);
+$rajah: rgba(255, 168, 82, 1);
+$royal-purple: rgba(105, 14, 190, 1);
+$xiketic: rgba(15, 13, 23, 1);
