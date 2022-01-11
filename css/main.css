@@ -2,10 +2,42 @@
  * MISC
  */
 :root {
-    --materialize-nav-bg-color: #ee6e73;
-    --odd-section-bg-color: #f3f3f3;
+    /* Royal Viridian palette */
+    /* --rv-black: hsl(256,61%,15%); */
+    --rv-black: hsl(256,9%,15%);
+    --rv-black-darken-1: hsl(256,10%,10%);
+    --rv-black-darken-2: hsl(256,10%,5%);
+    --rv-black-darken-3: hsl(256,10%,0%);
+    --rv-black-lighten-1: hsl(256,8%,20%);
+    --rv-black-lighten-2: hsl(256,8%,25%);
+    --rv-black-lighten-3: hsl(256,8%,30%);
+    --rv-white: hsl(42,4%,100%);
+    --rv-white-darken-1: hsl(42,4%,95%);
+    --rv-white-darken-2: hsl(42,4%,90%);
+    --rv-white-darken-3: hsl(42,4%,85%);
+    --rv-white-lighten-1: hsl(0,0%,100%);
+    /* --rv-viridian: hsl(178,78%,70%); */
+    --rv-viridian: hsl(178,60%,50%);
+    --rv-viridian-darken-1: hsl(178,60%,45%);
+    --rv-viridian-darken-2: hsl(178,60%,40%);
+    --rv-viridian-darken-3: hsl(178,60%,35%);
+    --rv-viridian-lighten-1: hsl(178,60%,55%);
+    --rv-viridian-lighten-2: hsl(178,60%,60%);
+    --rv-viridian-lighten-3: hsl(178,60%,65%);
+    --rv-indigo: hsl(271,86%,40%);
+    --rv-indigo-darken-1: hsl(271,86%,35%);
+    --rv-indigo-darken-2: hsl(271,86%,30%);
+    --rv-indigo-darken-3: hsl(271,86%,25%);
+    --rv-indigo-lighten-1: hsl(271,86%,45%);
+    --rv-indigo-lighten-2: hsl(271,86%,50%);
+    --rv-indigo-lighten-3: hsl(271,86%,55%);
+
     --console-var-color: rgb(88, 227, 252);
     --console-func-color: #fdc426;
+}
+
+html, body {
+    height: 100%;
 }
 
 .display-flex {
@@ -16,11 +48,7 @@
 }
 
 .divider {
-    margin-bottom: 3rem;
-}
-
-.divider:nth-of-type(n) {
-    background-color: #bdbdbd;
+    margin-bottom: 2rem;
 }
 
 .hidden {
@@ -43,8 +71,101 @@
     position: relative;
 }
 
-.section:nth-of-type(2n) {
-    background-color: var(--odd-section-bg-color);
+.section:nth-of-type(7) {
+    margin-bottom: 3rem;
+}
+
+/*
+ * ROYAL VIRIDIAN COLOR SCHEME
+ */
+html, body {
+    color: var(--rv-white-darken-2);
+    background-color: var(--rv-black-darken-1);
+}
+
+.section:nth-of-type(even) {
+    background-color: var(--rv-black);
+}
+
+nav ul a,
+.sidenav-trigger {
+    color: var(--rv-white);
+}
+
+nav {
+    background-color: var(--rv-viridian-darken-2);
+}
+
+nav ul a:hover,
+nav ul li.active a {
+    background-color: var(--rv-viridian-darken-3);
+}
+
+#intro {
+    background: var(--rv-black-lighten-3);
+}
+
+#intro > div:nth-child(1) {
+    background: var(--rv-black);
+}
+
+#intro > div:nth-child(2) {
+    background: var(--rv-black-darken-3);
+}
+
+#intro > div:nth-child(1),
+#intro > div:nth-child(2) {
+    opacity: 50%;
+    transition-property: transform;
+    transition-delay: 0.2s;
+    transition-duration: 2s;
+    transition-timing-function: ease-out;
+}
+
+.card {
+    background-color: var(--rv-black-darken-1);
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+    color: var(--rv-viridian-darken-1);
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
+    color: var(--rv-viridian-lighten-2);
+}
+
+.btn,
+.btn-large,
+.btn-small {
+    color: var(--rv-white);
+    background-color: var(--rv-viridian-darken-1);
+}
+
+.btn:hover,
+.btn-large:hover,
+.btn-small:hover {
+    background-color: var(--rv-viridian-darken-2);
+}
+
+.btn:focus,
+.btn-large:focus,
+.btn-small:focus,
+.btn-floating:focus {
+    background-color: var(--rv-viridian-darken-3);
+}
+
+.contact-icon {
+    color: var(--rv-white-darken-2);
+}
+
+a.link {
+    color: var(--rv-viridian-darken-1);
+    transition: color .3s ease;
+    text-transform: uppercase;
+}
+
+a.link:hover {
+    color: var(--rv-viridian-lighten-2);
 }
 
 /*
@@ -63,21 +184,36 @@ nav.nav-center ul li a {
     display: inline-block;
 }
 
-/* nav {
-    background-color: white;
+nav ul li.active {
+    background-color: transparent;
 }
-
-nav ul a,
-.sidenav-trigger {
-    color: black;
-} */
 
 #intro {
-    padding: 5rem 0 3rem;
+    min-height: 100%;
+    padding-top: 5rem;
+    overflow: hidden;
 }
 
-#intro div.pos-rel img {
-    border: 12px solid var(--odd-section-bg-color);
+#intro > div:nth-child(1),
+#intro > div:nth-child(2) {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#intro > div:nth-child(1) {
+    transform-origin: left top;
+}
+
+#intro > div:nth-child(2) {
+    transform-origin: left bottom;
+}
+
+/* #intro div.pos-rel img {
+    border: 12px solid var(--even-section-bg-color);
     z-index: 1;
 }
 
@@ -90,77 +226,103 @@ nav ul a,
     background-color: blue;
     background: linear-gradient(135deg, #D783B6 0%, #CF8145 100%);
     border-radius: 50%;
-    content: "fdsa";
-    color: transparent;
-}
+    content: "";
+} */
 
 .console {
-    background-color: #333;
-    color: white;
+    background-color: #234;
     padding: 7px;
     border: 3px solid gray;
+    overflow: auto;
+}
+
+.console b,
+.console span {
+    font-family: monospace;
     font-size: 20px;
+    font-weight: normal !important;
+    line-height: 1.5;
 }
 
-.console-text-line1,
-.console-text-line2,
-.console-text-line3,
-.console-text-line4 {
+/*
+    This is for simulating an indent in the code, because
+    trying to hone in on exact pixel/rem values to exactly
+    match a 4 character indent seemed too hacky and unreliable.
+ */
+.console b {
+    visibility: hidden;
+}
+
+.console .line-numbers {
+    float: left;
+    background-color: #333;
+    color: gray;
+    border-right: 1px solid gray;
+}
+
+.console .line-numbers > span {
+    padding: 0 0.7rem 0 1.7rem;
+}
+
+.console .editor {
+    position: absolute;
+    margin-left: 0.7rem;
+}
+
+.console-text {
     position: relative;
+    color: white;
 }
 
-.console-text-line1::after,
-.console-text-line2::after,
-.console-text-line3::after,
-.console-text-line4::after {
+.console-text::after {
     content: "";
     position: absolute;
     width: 100%;
     height: 100%;
     left: 0;
-    background: #333;
+    background: #234;
     top: 2%;
 }
 
-.console-text-line1::after {
+.console-text:nth-of-type(1)::after {
     border-left: 1px solid white;
-    animation: type-line1 2s steps(29) forwards;
+    animation: type-line1 2s steps(29) forwards 1s;
 }
 
-.console-text-line2::after {
-    animation: type-line24 0.2s steps(1) forwards 2s;
+.console-text:nth-of-type(2)::after {
+    animation: type-line24 0.2s steps(1) forwards 3s;
 }
 
-.console-text-line3::after {
-    animation: type-line3 2s steps(25) forwards 2.3s;
+.console-text:nth-of-type(3)::after {
+    animation: type-line3 2s steps(25) forwards 3.3s;
 }
 
-.console-text-line4::after {
-    animation: type-line24 0.2s steps(1) forwards 4.4s;
+.console-text:nth-of-type(4)::after {
+    animation: type-line24 0.2s steps(1) forwards 5.4s;
 }
 
-.console-text-line4 {
-    animation: type-line4-blink 1s step-end infinite 4.6s;
+.console-text:nth-of-type(4) {
+    animation: type-line4-blink 1s step-end infinite 5.6s;
 }
 
 .var1 {
-    animation: var-color-change 0.1s linear forwards 1s;
+    animation: var-color-change 0.1s linear forwards 2s;
 }
 
 .func1 {
-    animation: func-color-change 0.1s linear forwards 2.1s;
+    animation: func-color-change 0.1s linear forwards 3.1s;
 }
 
 .var2 {
-    animation: var-color-change 0.1s linear forwards 3.1s;
+    animation: var-color-change 0.1s linear forwards 4.1s;
 }
 
 .func2 {
-    animation: func-color-change 0.1s linear forwards 3.7s;
+    animation: func-color-change 0.1s linear forwards 4.7s;
 }
 
 .var3 {
-    animation: var-color-change 0.1s linear forwards 4.3s;
+    animation: var-color-change 0.1s linear forwards 5.3s;
 }
 
 @keyframes type-line1 {
@@ -217,6 +379,19 @@ nav ul a,
 @keyframes func-color-change {
     100% {
         color: var(--console-func-color);
+    }
+}
+
+@media screen and (max-width: 510px) {
+    .console {
+        display: none;
+    }
+}
+
+/* TODO Figure out this shit */
+@media screen and (min-width: 601px) and (max-width: 800px) {
+    .console {
+        display: none;
     }
 }
 
@@ -394,8 +569,7 @@ nav ul a,
 
 .img-fill-container {
     padding-top: 100%;
-    position: relative;
-    background-color: #777;
+    background-color: rgba(255,255,255,0.15);
 }
 
 .img-fill-container img {
@@ -428,7 +602,7 @@ nav ul a,
 .qb-wrapper {
     padding: 2rem !important;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    overflow-x: clip;
+    overflow: hidden;
 }
 
 .qb-wrapper::after {
@@ -443,12 +617,14 @@ nav ul a,
     background-position-x: 16%;
     background-position-y: 141%;
     opacity: 25%;
-    color: transparent;
-    content: "fdsa";
+    content: "";
+    z-index: 1;
 }
 
-.qb-wrapper b {
-    color: black;
+.qb-wrapper > h2,
+.qb-wrapper > h3,
+.qb-wrapper > h4 {
+    z-index: 2;
 }
 
 /*
@@ -460,4 +636,33 @@ nav ul a,
     height: auto;
     top: 30%;
     left: 0;
+}
+
+/*
+ * CONTACT
+ */
+#contact h5,
+#contact .container > div:nth-of-type(3),
+#contact .container > div:nth-of-type(4) {
+    margin: 2rem 0;
+}
+
+#contact .container > div:nth-of-type(3) > img {
+    vertical-align: top;
+}
+
+#contact .container > div > img {
+    vertical-align: bottom;
+}
+
+#contact .container > div > img + h5 {
+    display: inline;
+}
+
+#contact .container > div {
+    text-align: center;
+}
+
+#contact form button img {
+    vertical-align: middle;
 }

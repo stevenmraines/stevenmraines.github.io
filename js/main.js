@@ -1,7 +1,39 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.sidenav');
+    // Initialize Materialize mobile nav
+	var elems = document.querySelectorAll('.sidenav');
     var instances = M.Sidenav.init(elems, {});
+	
+	// Attach window resize event
+	var isIE = window.attachEvent;  // Support for Internet Explorer v9 and below
+
+	if(isIE) {
+		window.attachEvent('onresize', windowResize);
+	}
+	
+	if(!isIE) {
+		window.addEventListener('resize', windowResize, true);
+	}
+
+	// Initialize window resize on page load
+	windowResize();
 });
+
+function windowResize() {
+	var adjacent = window.innerWidth;
+	var opposite = document.querySelector('#intro').clientHeight;
+
+	// Set new angle of rotation
+	var angle = Math.atan(opposite / adjacent) * (180 / Math.PI);
+	var div1 = document.querySelector('#intro > div:nth-child(1)');
+	var div2 = document.querySelector('#intro > div:nth-child(2)');
+	div1.style.transform = "rotate(" + angle + "deg)";
+	div2.style.transform = "rotate(-" + angle + "deg)";
+
+	// Set new width
+	var hypotenuse = Math.round(Math.sqrt(Math.pow(adjacent, 2) + Math.pow(opposite, 2)));
+	div1.style.width = hypotenuse + "px";
+	div2.style.width = hypotenuse + "px";
+}
 
 function navClick(element) {
 	var classStr = 'active';

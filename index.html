@@ -46,13 +46,18 @@
   </ul>
 
   <!-- Intro -->
-  <div class="section" id="intro">
-    <div class="container">
+  <div class="section pos-rel" id="intro">
+    <div></div>
+    <div></div>
+    <div class="container pos-rel">
       <div class="row">
-        <div class="col s8 offset-s2 m6 offset-m3 l5 pos-rel">
+        <!-- <div class="col s8 offset-s2 m6 offset-m3 l5 pos-rel">
           <img src="images/profile-photo.png" class="circle responsive-img pos-rel">
+        </div> -->
+        <div class="col s8 offset-s2 m6 offset-m3 l4">
+          <img src="images/profile-photo.png" class="circle responsive-img">
         </div>
-        <div class="col s12 l7">
+        <div class="col s12 m8 offset-m2 l8">
           <h1 class="center-align hide-on-large-only">
             Steven Raines,
           </h1>
@@ -65,11 +70,42 @@
           <h4 class="show-on-large hide-on-med-and-down">
             PHP Developer
           </h4>
-          <!-- TODO trigger this animation only when it's visible on the page -->
-          <pre class="console mb-0"><span class="console-text-line1">if(<span class="var1">$company</span>.<span class="func1">needsDeveloper</span>())</span>
-<span class="console-text-line2">{</span>
-  <span class="console-text-line3"><span class="var2">$company</span>.<span class="func2">contact</span>(<span class="var3">$steve</span>);</span>
-<span class="console-text-line4">}</span></pre>
+          <!-- <div class="row console">
+            <div class="col s2 line-numbers">
+              <span>1</span>
+              <br><span>2</span>
+              <br><span>3</span>
+              <br><span>4</span>
+            </div>
+            <div class="col s10">
+              <span class="console-text">if(<span class="var1">$company</span>.<span class="func1">needsDeveloper</span>())</span>
+              <br><span class="console-text">{</span>
+              <br><b class="console-tab">tabs</b><span class="console-text"><span class="var2">$company</span>.<span class="func2">contact</span>(<span class="var3">$steve</span>);</span>
+              <br><span class="console-text">}</span>
+            </div>
+          </div> -->
+
+          <div class="console">
+            <div class="line-numbers">
+              <span>1</span>
+              <br><span>2</span>
+              <br><span>3</span>
+              <br><span>4</span>
+            </div>
+            <span class="editor">
+              <span class="console-text">if(<span class="var1">$company</span>.<span class="func1">needsDeveloper</span>())</span>
+              <br><span class="console-text">{</span>
+              <br><b class="console-tab">tabs</b><span class="console-text"><span class="var2">$company</span>.<span class="func2">contact</span>(<span class="var3">$steve</span>);</span>
+              <br><span class="console-text">}</span>
+            </span>
+          </div>
+
+          <!-- <div class="console">
+            <span class="line-numbers">1234</span><pre class="mb-0"><span class="console-text">if(<span class="var1">$company</span>.<span class="func1">needsDeveloper</span>())</span>
+<span class="console-text">{</span>
+  <span class="console-text"><span class="var2">$company</span>.<span class="func2">contact</span>(<span class="var3">$steve</span>);</span>
+<span class="console-text">}</span></pre>
+          </div> -->
         </div>
       </div>
     </div>
@@ -334,7 +370,7 @@
   <!-- Work Experience -->
   <div class="section" id="work">
     <div class="container">
-      <h4 class="center-align">Experience</h4>
+      <h4 class="center-align">Work Experience</h4>
       <div class="divider"></div>
       <div class="row">
         <!-- <div class="col s4 offset-s4 m3">
@@ -346,25 +382,25 @@
           <h5 class="mb-0">2017 - 2020</h5>
         </div> -->
         <div class="col s12 center-align qb-wrapper pos-rel">
-          <b><h2 class="mt-0">Queensboro Shirt Company</h2></b>
-          <b><h3>Junior Web Developer</h3></b>
-          <b><h4 class="mb-0">2017 - 2020</h4></b>
+          <h2 class="mt-0 pos-rel">Queensboro Shirt Company</h2>
+          <h3 class="pos-rel">Junior Web Developer</h3>
+          <h4 class="mb-0 pos-rel">2017 - 2020</h4>
         </div>
       </div>
       <div class="row">
         <div class="col s12 m6">
           <h5 class="center-align">Front-End Responsibilities</h5>
           <ul class="browser-default">
-            <li>Styling with Bootstrap</li>
-            <li>JavaScript coding with jQuery</li>
+            <li>Styling intricate customer-facing templates with Bootstrap</li>
+            <li>Navigating and modifying complex JavaScript systems with jQuery</li>
+            <li>Troubleshooting end-user issues on different browsers and devices</li>
             <li>Modifying HTML templates, layouts, and forms to accomodate new features or fix bugs</li>
           </ul>
         </div>
         <div class="col s12 m6">
           <h5 class="center-align">Back-End Responsibilities</h5>
           <ul class="browser-default">
-            <li>Server-side scripting with PHP</li>
-            <li>Database manipulation with MySQL</li>
+            <li>Server-side scripting and database manipulation with PHP and MySQL</li>
             <li>Integrating with third-party systems such as FedEx and USPS shipping rate APIs</li>
             <li>Utilizing AWS services such as SQS and S3</li>
             <li>Creating automated scripts to handle daily tasks such as emailing customers about their orders</li>
@@ -411,21 +447,25 @@
     <div class="container">
       <h4 class="center-align">Contact</h4>
       <div class="divider"></div>
-      <div class="row">
-        <div class="col s2">
-          <img src="images/phone.png">
-        </div>
-        <div class="col s10">
-          <h6>(910) 409-4383</h6>
-        </div>
+      <div>
+        <h4>Get in touch!</h4>
       </div>
-      <div class="row">
-        <div class="col s2">
-          <img src="images/email.png">
-        </div>
-        <div class="col s10">
-          <h6>stevenmraines@gmail.com</h6>
-        </div>
+      <div>
+        <img src="images/phone.png">
+        <h5>(910) 409-4383</h5>
+      </div>
+      <div>
+        <img src="images/email.png">
+        <h5><a href="mailto:stevenmraines@gmail.com" class="link">stevenmraines@gmail.com</a></h5>
+      </div>
+      <div>
+        <h5>Download my resume:</h5>
+        <form method="get" action="files/stevenmraines-resume.docx">
+          <button type="submit" class="btn-large waves-effect">
+            <img src="images/download.png">
+            DOWNLOAD
+          </button>
+        </form>
       </div>
     </div>
   </div>
