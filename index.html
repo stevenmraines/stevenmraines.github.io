@@ -8,6 +8,7 @@
   
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="css/materialize.css">
+  <link rel="stylesheet" href="css/devicon.min.css">
   <link rel="stylesheet" href="css/main.css">
   
   <!-- Let browser know this page is optimized for mobile -->
@@ -53,7 +54,10 @@
           <img src="images/profile-photo.png" class="circle responsive-img pos-rel">
         </div> -->
         <div class="col s8 offset-s2 m6 offset-m3 l4">
-          <img src="images/profile-photo.png" class="circle responsive-img">
+          <i class="devicon-php-plain royal-purple-text"
+              style="font-size: 100px; display: inline-block; transform: rotate(37deg); opacity: 50%;"></i>
+          
+          <!-- <img src="images/profile-photo.png" class="circle responsive-img"> -->
         </div>
         <div class="col s12 m8 offset-m2 l8">
           <h1 class="center-align hide-on-large-only">
@@ -64,46 +68,15 @@
           </h4>
           <h1 class="show-on-large hide-on-med-and-down mt-0">
             <span class="rajah-text">S</span>teven <span class="medium-turquoise-text">R</span>aines,
+            <i class="devicon-vuejs-plain medium-turquoise-text"
+              style="font-size: 150px; display: inline-block; transform: rotate(37deg); opacity: 50%;"></i>
+          
           </h1>
           <h4 class="show-on-large hide-on-med-and-down">
             PHP Developer
           </h4>
-          <!-- <div class="row console">
-            <div class="col s2 line-numbers">
-              <span>1</span>
-              <br><span>2</span>
-              <br><span>3</span>
-              <br><span>4</span>
-            </div>
-            <div class="col s10">
-              <span class="console-text">if(<span class="var1">$company</span>.<span class="func1">needsDeveloper</span>())</span>
-              <br><span class="console-text">{</span>
-              <br><b class="console-tab">tabs</b><span class="console-text"><span class="var2">$company</span>.<span class="func2">contact</span>(<span class="var3">$steve</span>);</span>
-              <br><span class="console-text">}</span>
-            </div>
-          </div> -->
-
-          <div class="console">
-            <div class="line-numbers">
-              <span>1</span>
-              <br><span>2</span>
-              <br><span>3</span>
-              <br><span>4</span>
-            </div>
-            <span class="editor">
-              <span class="console-text">if(<span class="var1">$company</span>.<span class="func1">needsDeveloper</span>())</span>
-              <br><span class="console-text">{</span>
-              <br><b class="console-tab">tabs</b><span class="console-text"><span class="var2">$company</span>.<span class="func2">contact</span>(<span class="var3">$steve</span>);</span>
-              <br><span class="console-text">}</span>
-            </span>
-          </div>
-
-          <!-- <div class="console">
-            <span class="line-numbers">1234</span><pre class="mb-0"><span class="console-text">if(<span class="var1">$company</span>.<span class="func1">needsDeveloper</span>())</span>
-<span class="console-text">{</span>
-  <span class="console-text"><span class="var2">$company</span>.<span class="func2">contact</span>(<span class="var3">$steve</span>);</span>
-<span class="console-text">}</span></pre>
-          </div> -->
+          <i class="devicon-laravel-plain rajah-text"
+              style="font-size: 120px; display: inline-block; transform: rotate(37deg); opacity: 50%;"></i>
         </div>
       </div>
     </div>
@@ -240,11 +213,7 @@
   
       <!-- Pi Theater content -->
       <div class="project hidden" id="pi-theater-content">
-        <div class="row">
-          <div class="col s12">
-            <h5 class="center-align">Pi Theater</h5>
-          </div>
-        </div>
+        <h5 class="center-align">Pi Theater</h5>
         <div class="row project-row">
           <div class="col s12 l8">
             <img src="images/pitheater-login-and-movie.gif" class="responsive-img" id="active-portfolio-img">
@@ -267,7 +236,7 @@
             </div>
           </div>
           
-          <div class="col s8 offset-s2 l4 offset-l0">
+          <div class="col s10 offset-s1 l4 offset-l0">
             <p data-project-feature="login-and-movie" data-project="pitheater">
               This Netflix-inspired streaming site runs on a Raspberry Pi and serves videos from a connected
               external hard drive. The front end runs on <b class="green-text">Vue</b> and <b class="purple-text">Bootstrap</b>,
@@ -296,7 +265,7 @@
   
       <div class="row">
         <!-- Pi Theater card -->
-        <div class="col s8 offset-s2 m6 l4">
+        <div class="col s10 offset-s1 m6 l4">
           <div class="card hoverable" onclick="cardClick('pi-theater-content')">
             <div class="card-image img-fill-container">
               <img src="images/pitheater-login-and-movie.png" class="responsive-img">
@@ -315,7 +284,7 @@
         </div>
   
         <!-- Mech Strategy Game card -->
-        <div class="col s8 offset-s2 m6 l4">
+        <div class="col s10 offset-s1 m6 l4">
           <div class="card hoverable">
             <div class="card-image">
               <img src="images/java-key-padder1.jpg">
@@ -339,7 +308,7 @@
         </div>
   
         <!-- QB API stuff card -->
-        <div class="col s8 offset-s2 m6 l4">
+        <div class="col s10 offset-s1 m6 l4">
           <div class="card hoverable">
             <div class="card-image">
               <img src="images/game-start1.jpg">
@@ -406,29 +375,6 @@
     <div class="container">
       <h4 class="center-align">Education</h4>
       <div class="divider"></div>
-      <!-- <div class="row">
-        <div class="col s4 offset-s4 m3 pos-rel">
-          <img src="images/cfcc.png" class="responsive-img">
-          <img src="images/diploma.png">
-        </div>
-        <div class="col s12 m9">
-          <h4 class="mt-0">Cape Fear Community College</h4>
-          <h5>Associate in Science</h5>
-          <h6 class="mb-0">2010</h6>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s4 offset-s4 m3 pos-rel">
-          <img src="images/uncw.png" class="responsive-img">
-          <img src="images/diploma.png">
-        </div>
-        <div class="col s12 m9">
-          <h4 class="mt-0">University of North Carolina at Wilmington</h4>
-          <h5>Bachelor of Science (Computer Science)</h5>
-          <h6 class="mb-0">2016</h6>
-        </div>
-      </div> -->
-
       <div class="college-wrapper center-align pos-rel">
         <h3 class="mt-0 pos-rel">Cape Fear Community College</h3>
         <h4 class="pos-rel">Associate in Science</h4>
@@ -447,25 +393,37 @@
     <div class="container">
       <h4 class="center-align">Contact</h4>
       <div class="divider"></div>
-      <div>
-        <h4>Get in touch!</h4>
-      </div>
-      <div>
-        <img src="images/phone.png">
-        <h5>(910) 409-4383</h5>
-      </div>
-      <div>
-        <img src="images/email.png">
-        <h5><a href="mailto:stevenmraines@gmail.com" class="link">stevenmraines@gmail.com</a></h5>
-      </div>
-      <div>
-        <h5>Download my resume:</h5>
-        <form method="get" action="files/stevenmraines-resume.docx">
-          <button type="submit" class="btn-large waves-effect">
-            <img src="images/download.png">
-            DOWNLOAD
-          </button>
-        </form>
+      <div class="console">
+        <span class="tab center-align">
+          untitled document.php
+          <i class="material-icons circle">close</i>
+        </span>
+
+        <div class="window">
+          <div class="line-numbers">
+            <span>1</span>
+            <br><span>2</span>
+            <br><span>3</span>
+            <br><span>4</span>
+            <br><span>5</span>
+            <br><span>6</span>
+            <br><span>7</span>
+            <br><span>8</span>
+            <br><span>9</span>
+          </div>
+  
+          <div class="editor">
+            <span class="line">if(<span class="var">$company</span>.<span class="func">needsDeveloper</span>())</span>
+            <br><span class="line">{</span>
+            <br><span class="line"><span class="indent">1234</span><span class="var">$company</span>.<span class="func">contact</span>(<span class="var">$steve</span>);</span>
+            <br><span class="line">}</span>
+            <br>
+            <br><span class="line comment">// Get in touch!</span>
+            <br>
+            <br><span class="line"><span class="var">$phone</span> = <span class="str">"(910) 409-4383"</span>;</span>
+            <br><span class="line"><span class="var">$email</span> = <span class="str">"</span><a href="mailto:stevenmraines@gmail.com">stevenmraines@gmail.com</a><span class="str">"</span>;</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
