@@ -4,6 +4,7 @@
 :root {
     --console-text: white;
     --console-text-muted: #777;
+    --console-text-selected: rgba(12, 125, 217, 0.57);
     --console-bg: #2d2d2d;
     --console-bg-dark: #1d1d22;
     --console-border: var(--console-text-muted);
@@ -427,6 +428,7 @@ nav.nav-center ul li {
   .console .tab,
   .console .line-numbers {
     background-color: var(--console-bg);
+    user-select: none;
   }
   
   .console .tab {
@@ -491,9 +493,13 @@ nav.nav-center ul li {
     margin-left: .7rem;
     color: var(--console-text);
   }
+
+  .console .editor ::selection {
+    background-color: var(--console-text-selected);
+  }
   
   .console .indent {
-    visibility: hidden;
+    color: transparent;
   }
   
   .console .editor .line {
