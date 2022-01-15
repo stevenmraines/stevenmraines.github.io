@@ -1,0 +1,33 @@
+{
+  "name": "stevenmraines.github.io",
+  "version": "1.0.0",
+  "description": "My personal web portfolio.",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass src/sass:public/css",
+    "wsass": "npm run sass && sass --watch src/sass:public/css",
+    "build": "webpack --config webpack.config.js",
+    "serve": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevenmraines/stevenmraines.github.io.git"
+  },
+  "author": "Steven M Raines",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stevenmraines/stevenmraines.github.io/issues"
+  },
+  "homepage": "https://github.com/stevenmraines/stevenmraines.github.io#readme",
+  "devDependencies": {
+    "webpack": "^5.66.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.3"
+  },
+  "dependencies": {
+    "chroma-js": "^2.1.2",
+    "devicon": "^2.14.0",
+    "materialize-css": "^1.0.0-rc.2"
+  }
+}
