@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize Materialize mobile nav
 	var elems = document.querySelectorAll('.sidenav');
     var instances = M.Sidenav.init(elems, {});
-	
+
 	// Attach window resize event
 	var isIE = window.attachEvent;  // Support for Internet Explorer v9 and below
 

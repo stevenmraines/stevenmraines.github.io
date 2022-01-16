@@ -4149,7 +4149,7 @@ table span.badge {
 }
 
 nav {
-  color: #fff;
+  color: #f7f6f3;
   background-color: #690ebe;
   width: 100%;
   height: 56px;
@@ -4167,7 +4167,7 @@ nav.nav-extended .nav-content {
   line-height: normal;
 }
 nav a {
-  color: #fff;
+  color: #f7f6f3;
 }
 nav i,
 nav [class^=mdi-], nav [class*=mdi-],
@@ -4199,7 +4199,7 @@ nav .sidenav-trigger i {
 }
 nav .brand-logo {
   position: absolute;
-  color: #fff;
+  color: #f7f6f3;
   display: inline-block;
   font-size: 2.1rem;
   padding: 0;
@@ -4254,7 +4254,7 @@ nav ul li.active {
 nav ul a {
   transition: background-color 0.3s;
   font-size: 1rem;
-  color: #fff;
+  color: #f7f6f3;
   display: block;
   padding: 0 15px;
   cursor: pointer;
@@ -4300,7 +4300,7 @@ nav .input-field label i {
   transition: color 0.3s;
 }
 nav .input-field label.active i {
-  color: #fff;
+  color: #f7f6f3;
 }
 
 .navbar-fixed {
@@ -6890,7 +6890,7 @@ input[type=range]::-ms-thumb {
   height: calc(100% + 60px);
   height: -moz-calc(100%);
   padding-bottom: 60px;
-  background-color: #fff;
+  background-color: #690ebe;
   z-index: 999;
   overflow-y: auto;
   will-change: transform;
@@ -6914,7 +6914,7 @@ input[type=range]::-ms-thumb {
   background-color: rgba(0, 0, 0, 0.05);
 }
 .sidenav li > a {
-  color: rgba(0, 0, 0, 0.87);
+  color: #f7f6f3;
   display: block;
   font-size: 14px;
   font-weight: 500;
@@ -7045,7 +7045,7 @@ input[type=range]::-ms-thumb {
 }
 .sidenav .collapsible-body > ul:not(.collapsible) > li.active a,
 .sidenav.sidenav-fixed .collapsible-body > ul:not(.collapsible) > li.active a {
-  color: #fff;
+  color: #690ebe;
 }
 
 .sidenav .collapsible-body {
@@ -10874,6 +10874,10 @@ html, body {
 /*
  * INTRO
  */
+nav ul li.active {
+  background-color: #0f0d17;
+}
+
 nav.nav-center ul {
   text-align: center;
 }
