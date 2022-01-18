@@ -28,8 +28,8 @@ $navbar-font-color: $off-black;
 $sidenav-font-color: $navbar-font-color;
 $sidenav-bg-color: $primary-color;
 
-@use '../../node_modules/materialize-css/sass/components/color-variables';
-@use '../../node_modules/materialize-css/sass/materialize.scss' with (
+@use '../../../node_modules/materialize-css/sass/components/color-variables';
+@use '../../../node_modules/materialize-css/sass/materialize.scss' with (
   $colors: map.merge(color-variables.$colors, $customColors),
   $primary-color: $primary-color,
   $secondary-color: $secondary-color,
@@ -43,7 +43,7 @@ $sidenav-bg-color: $primary-color;
   $sidenav-bg-color: $sidenav-bg-color
 );
 
-@use '../../node_modules/devicon/devicon.min.css';
+@use '../../../node_modules/devicon/devicon.min.css';
 
 /*
  * MISC
@@ -140,193 +140,18 @@ nav.nav-center ul li {
 
 #intro > div:nth-child(1),
 #intro > div:nth-child(2) {
-    opacity: 50%;
+    opacity: .5;
     transition-property: transform;
     transition-delay: 0.2s;
     transition-duration: 2s;
     transition-timing-function: ease-out;
 }
 
-/* #intro div.pos-rel img {
-    border: 12px solid var(--even-section-bg-color);
-    z-index: 1;
-}
-
-#intro div.pos-rel::after {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 5%;
-    left: -10%;
-    background-color: blue;
-    background: linear-gradient(135deg, #D783B6 0%, #CF8145 100%);
-    border-radius: 50%;
-    content: "";
-} */
-
 /*
  * SKILLS PROGRESS BARS
  */
-.progress {
-    background: none;
-    margin: 0 auto;
-    box-shadow: none;
-    width: 150px;
-    height: 150px;
-    line-height: 150px;
-    position: relative;
-}
-
-.progress:after {
-    content: "";
-    border-radius: 50%;
-    border: 15px solid #f2f5f5;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-}
-
-.progress > span {
-    position: absolute;
-    top: 0;
-    z-index: 1;
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.progress .progress-l {
-    left: 0;
-}
-
-.progress .progress-bar {
-    border-width: 15px;
-    border-style: solid;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: none;
-    top: 0;
-}
-
-.progress .progress-l .progress-bar {
-    left: 100%;
-    border-top-right-radius: 80px;
-    border-bottom-right-radius: 80px;
-    border-left: 0;
-    -webkit-transform-origin: center left;
-    transform-origin: center left;
-}
-
-.progress .progress-r {
-    right: 0;
-}
-
-.progress .progress-r .progress-bar {
-    left: -100%;
-    -webkit-transform-origin: center right;
-    transform-origin: center right;
-    border-top-left-radius: 80px;
-    border-bottom-left-radius: 80px;
-    border-right: 0;
-}
-
-.progress .progress-value {
-    font-size: 24px;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-}
-
-.progress-php .progress-bar {
-    border-color: #9b80ff;
-}
-
-.progress-sql .progress-bar {
-    border-color: rgb(88, 227, 252);
-}
-
-.progress-mat .progress-bar {
-    border-color: #fdc426;
-}
-
-.progress-lrv .progress-bar {
-    border-color: #f80;
-}
-
-.progress-html .progress-bar {
-    border-color: #f40;
-}
-
-.progress-jqy .progress-bar {
-    border-color: #26abfd;
-}
-
-.progress-vue .progress-bar {
-    border-color: #4f8;
-}
-
-.progress-btp .progress-bar {
-    border-color: rgb(253, 89, 218);
-}
-
-.progress-1y .progress-r .progress-bar {
-    animation: loading-120 1.5s ease-out forwards;
-}
-
-.progress-2y .progress-r .progress-bar {
-    animation: loading-180 1s linear forwards;
-}
-
-.progress-2y .progress-l .progress-bar {
-    animation: loading-60 0.5s ease-out forwards 1s;
-}
-
-.progress-3y .progress-r .progress-bar {
-    animation: loading-180 0.75s linear forwards;
-}
-
-.progress-3y .progress-l .progress-bar {
-    animation: loading-180 0.75s ease-out forwards 0.75s;
-}
-
-@keyframes loading-60 {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-
-    100% {
-        -webkit-transform: rotate(60deg);
-        transform: rotate(60deg);
-    }
-}
-
-@keyframes loading-120 {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-
-    100% {
-        -webkit-transform: rotate(120deg);
-        transform: rotate(120deg);
-    }
-}
-
-@keyframes loading-180 {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-
-    100% {
-        -webkit-transform: rotate(180deg);
-        transform: rotate(180deg);
-    }
+#skills .container .canvas-container {
+  // max-height: 75vh;
 }
 
 /*
@@ -362,14 +187,14 @@ nav.nav-center ul li {
     border: 2px solid lightgray;
     border-radius: 7px;
     padding: 7px;
-    opacity: 50%;
+    opacity: .5;
     margin: 10px;
 }
 
 .portfolio-preview:hover,
 .portfolio-preview.active {
     width: 175px;
-    opacity: 100%;
+    opacity: 1.0;
     transition: 0.2s linear;
     cursor: pointer;
 }
@@ -389,10 +214,10 @@ nav.nav-center ul li {
     height: 300%;
     top: -100%;
     left: -100%;
-    background-image: url('../images/queensboro-repeating.png');
+    background-image: url('../img/queensboro-repeating.png');
     background-repeat: repeat;
     transform: rotate(30deg);
-    opacity: 30%;
+    opacity: .3;
     content: "";
     z-index: 1;
     animation: qb-logo-scroll 45s ease-in-out 0s infinite alternate;
@@ -435,8 +260,8 @@ nav.nav-center ul li {
     height: 100%;
     top: 0;
     left: 0;
-    opacity: 35%;
-    background-image: url('../images/cfcc-building.jpg');
+    opacity: .35;
+    background-image: url('../img/cfcc-building.jpg');
     background-size: 100% auto;
     background-position: center;
     background-repeat: no-repeat;
@@ -451,7 +276,7 @@ nav.nav-center ul li {
 }
 
 .college-wrapper + .college-wrapper::after {
-    background-image: url('../images/uncw-clock-tower.jpg');
+    background-image: url('../img/uncw-clock-tower.jpg');
 }
 
 @media screen and (max-width: 600px) {

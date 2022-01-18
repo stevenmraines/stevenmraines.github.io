@@ -7,13 +7,27 @@
   <title>Steven Raines</title>
   
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="css/index.min.css" type="text/css">
   
   <!-- Let browser know this page is optimized for mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body class="raisin-black">
+  <!--
+    Just trying to pass these color palette values to
+    my JS so they're not defined in multiple places.
+  -->
+  <input type="hidden" class="alabaster" />
+  <input type="hidden" class="cultured" />
+  <input type="hidden" class="dark-liver" />
+  <input type="hidden" class="deep-indigo" />
+  <input type="hidden" class="medium-turquoise" />
+  <input type="hidden" class="raisin-black" />
+  <input type="hidden" class="rajah" />
+  <input type="hidden" class="royal-purple" />
+  <input type="hidden" class="xiketic" />
+
   <!-- Navbar -->
   <div class="navbar-fixed">
     <nav class="nav-center">
@@ -48,14 +62,9 @@
     <div class="raisin-black"></div>
     <div class="container pos-rel">
       <div class="row">
-        <!-- <div class="col s8 offset-s2 m6 offset-m3 l5 pos-rel">
-          <img src="images/profile-photo.png" class="circle responsive-img pos-rel">
-        </div> -->
         <div class="col s8 offset-s2 m6 offset-m3 l4">
           <i class="devicon-php-plain royal-purple-text"
               style="font-size: 100px; display: inline-block; transform: rotate(37deg); opacity: 50%;"></i>
-          
-          <!-- <img src="images/profile-photo.png" class="circle responsive-img"> -->
         </div>
         <div class="col s12 m8 offset-m2 l8">
           <h1 class="center-align hide-on-large-only">
@@ -85,7 +94,9 @@
     <div class="container">
       <h4 class="center-align">Skills</h4>
       <div class="divider"></div>
-      <canvas id="skillsChart" width="400" height="400"></canvas>
+      <div class="canvas-container pos-rel">
+        <canvas id="skillsChart" width="400" height="400"></canvas>
+      </div>
     </div>
   </div>
 
@@ -100,19 +111,19 @@
         <h5 class="center-align">Pi Theater</h5>
         <div class="row project-row">
           <div class="col s12 l8">
-            <img src="images/pitheater-login-and-movie.gif" class="responsive-img" id="active-portfolio-img">
+            <img src="img/pitheater-login-and-movie.gif" class="responsive-img" id="active-portfolio-img">
             <div class="display-flex">
-              <img src="images/pitheater-login-and-movie.png"
+              <img src="img/pitheater-login-and-movie.png"
                     class="portfolio-preview active"
                     data-project-feature="login-and-movie"
                     data-project="pitheater"
                     onclick="previewClick(this)">
-              <img src="images/pitheater-algolia-search.png"
+              <img src="img/pitheater-algolia-search.png"
                     class="portfolio-preview"
                     data-project-feature="algolia-search"
                     data-project="pitheater"
                     onclick="previewClick(this)">
-              <img src="images/pitheater-upload.png"
+              <img src="img/pitheater-upload.png"
                     class="portfolio-preview"
                     data-project-feature="upload"
                     data-project="pitheater"
@@ -141,7 +152,7 @@
               is sent to an <b>IMDb API</b> to get the search results matching the given title. When one of those results is
               selected from the IMDb Search dropdown field, the rest of the fields such as the summary, year released and
               genres are automatically set. A poster image can either be uploaded from the user's computer, or automatically
-              set via URL from the IMDb search result. <b>ImageMagick</b> automatically resizes images to the correct dimensions.
+              set via URL from the IMDb search result. <b>ImageMagick</b> automatically resizes img to the correct dimensions.
             </p>
           </div>
         </div>
@@ -152,7 +163,7 @@
         <div class="col s10 offset-s1 m6 l4">
           <div class="card hoverable" onclick="cardClick('pi-theater-content')">
             <div class="card-image img-fill-container">
-              <img src="images/pitheater-login-and-movie.png" class="responsive-img">
+              <img src="img/pitheater-login-and-movie.png" class="responsive-img">
             </div>
             <div class="card-content">
               <span class="card-title">Pi Theater</span>
@@ -171,7 +182,7 @@
         <div class="col s10 offset-s1 m6 l4">
           <div class="card hoverable">
             <div class="card-image">
-              <img src="images/java-key-padder1.jpg">
+              <img src="img/java-key-padder1.jpg">
             </div>
             <div class="card-content">
               <span class="card-title">Java KeyPadder</span>
@@ -195,7 +206,7 @@
         <div class="col s10 offset-s1 m6 l4">
           <div class="card hoverable">
             <div class="card-image">
-              <img src="images/game-start1.jpg">
+              <img src="img/game-start1.jpg">
             </div>
             <div class="card-content">
               <span class="card-title">GameStart</span>
@@ -312,21 +323,6 @@
     </div>
   </div>
 
-  <!--
-    Just trying to pass these color palette values to
-    my JS so they're not defined in multiple places.
-  -->
-  <div data-color="alabaster" class="alabaster"></div>
-  <div data-color="cultured" class="cultured"></div>
-  <div data-color="dark-liver" class="dark-liver"></div>
-  <div data-color="deep-indigo" class="deep-indigo"></div>
-  <div data-color="medium-turquoise" class="medium-turquoise"></div>
-  <div data-color="raisin-black" class="raisin-black"></div>
-  <div data-color="rajah" class="rajah"></div>
-  <div data-color="royal-purple" class="royal-purple"></div>
-  <div data-color="xiketic" class="xiketic"></div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-  <script src="js/index.js" type="module"></script>
+  <script src="js/index.min.js" type="module"></script>
 </body>
 </html>
