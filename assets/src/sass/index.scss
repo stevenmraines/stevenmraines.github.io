@@ -1,18 +1,20 @@
-// Override default Materialize theme with custom color palette values
+/*
+ * MATERIALIZE
+ */
 @use 'sass:map';
 @use './palette';
 @use './palette-maps';
 
 $customColors: (
-  "alabaster": palette-maps.$alabaster,
-  "cultured": palette-maps.$cultured,
-  "dark-liver": palette-maps.$dark-liver,
-  "deep-indigo": palette-maps.$deep-indigo,
-  "medium-turquoise": palette-maps.$medium-turquoise,
-  "raisin-black": palette-maps.$raisin-black,
-  "rajah": palette-maps.$rajah,
-  "royal-purple": palette-maps.$royal-purple,
-  "xiketic": palette-maps.$xiketic
+    "alabaster": palette-maps.$alabaster,
+    "cultured": palette-maps.$cultured,
+    "dark-liver": palette-maps.$dark-liver,
+    "deep-indigo": palette-maps.$deep-indigo,
+    "medium-turquoise": palette-maps.$medium-turquoise,
+    "raisin-black": palette-maps.$raisin-black,
+    "rajah": palette-maps.$rajah,
+    "royal-purple": palette-maps.$royal-purple,
+    "xiketic": palette-maps.$xiketic
 );
 
 $primary-color: map.get(palette-maps.$royal-purple, "base");
@@ -30,17 +32,17 @@ $sidenav-bg-color: $primary-color;
 
 @use '../../../node_modules/materialize-css/sass/components/color-variables';
 @use '../../../node_modules/materialize-css/sass/materialize.scss' with (
-  $colors: map.merge(color-variables.$colors, $customColors),
-  $primary-color: $primary-color,
-  $secondary-color: $secondary-color,
-  $link-color: $link-color,
-  $off-black: $off-black,
-  $card-bg-color: $card-bg-color,
-  $card-link-color: $card-link-color,
-  $card-link-color-light: $card-link-color-light,
-  $navbar-font-color: $navbar-font-color,
-  $sidenav-font-color: $sidenav-font-color,
-  $sidenav-bg-color: $sidenav-bg-color
+    $colors: map.merge(color-variables.$colors, $customColors),
+    $primary-color: $primary-color,
+    $secondary-color: $secondary-color,
+    $link-color: $link-color,
+    $off-black: $off-black,
+    $card-bg-color: $card-bg-color,
+    $card-link-color: $card-link-color,
+    $card-link-color-light: $card-link-color-light,
+    $navbar-font-color: $navbar-font-color,
+    $sidenav-font-color: $sidenav-font-color,
+    $sidenav-bg-color: $sidenav-bg-color
 );
 
 @use '../../../node_modules/devicon/devicon.min.css';
@@ -101,8 +103,9 @@ html, body {
 /*
  * INTRO
  */
-nav ul li.active {
-  background-color: palette.$xiketic-value;
+nav ul li.active,
+.sidenav li.active {
+    background-color: palette.$xiketic-value;
 }
 
 nav.nav-center ul {
@@ -148,21 +151,21 @@ nav.nav-center ul li {
 }
 
 /*
- * SKILLS PROGRESS BARS
+ * SKILLS
  */
 #skills .container .canvas-container {
-  // max-height: 75vh;
+    max-height: 95vh;
 }
 
 /*
- *  PORTFOLIO
+ * PORTFOLIO
  */
 .project-row {
     margin-bottom: 4rem;
 }
 
 .card.hoverable:hover {
-	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.8);
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.8);
 }
 
 .img-fill-container {
@@ -227,6 +230,7 @@ nav.nav-center ul li {
     0% {
         background-position: 0, 0;
     }
+
     100% {
         background-position: 16%, 141%;
     }
@@ -293,100 +297,100 @@ nav.nav-center ul li {
     padding-bottom: 5rem;
 }
 
- .console {
+.console {
     font-family: monospace;
     font-size: 20px;
     font-weight: normal !important;
     line-height: 1.5;
     color: var(--console-text-muted);
-  }
-  
-  .console .tab,
-  .console .line-numbers {
+}
+
+.console .tab,
+.console .line-numbers {
     background-color: var(--console-bg);
     user-select: none;
-  }
-  
-  .console .tab {
+}
+
+.console .tab {
     float: left;
     padding: .5rem 1rem;
     text-align: center;
     font-size: 14px;
     line-height: 1.6;
     border-radius: 6px 6px 0 0;
-  }
-  
-  .console .tab i {
+}
+
+.console .tab i {
     float: right;
     margin-left: .7rem;
     cursor: pointer;
     background-color: transparent;
     transition: .3s ease;
-  }
+}
 
-  .console .tab i:hover {
+.console .tab i:hover {
     color: var(--console-close-icon-hover);
     background-color: var(--console-close-icon-bg);
 }
-  
-  .console .window {
+
+.console .window {
     clear: left;
     white-space: nowrap;
     background-color: var(--console-bg-dark);
     border: 1px solid var(--console-border);
-  }
-  
-  /* Clearfix */
-  .console .window:after {
+}
+
+/* Clearfix */
+.console .window:after {
     content: ".";
     display: block;
     height: 0;
     clear: both;
     visibility: hidden;
-  }
-  
-  .console .window,
-  .console .window:after {
+}
+
+.console .window,
+.console .window:after {
     overflow: auto;
-  }
-  
-  .console .line-numbers {
+}
+
+.console .line-numbers {
     float: left;
     border-right: 1px solid var(--console-border);
-  }
-  
-  .console .line-numbers span {
+}
+
+.console .line-numbers span {
     padding: 0 0.7rem 0 1.7rem;
-  }
-  
-  .console .line-numbers,
-  .console .editor {
+}
+
+.console .line-numbers,
+.console .editor {
     padding: 7px 0;
-  }
-  
-  .console .editor {
+}
+
+.console .editor {
     float: left;
     margin-left: .7rem;
     color: var(--console-text);
-  }
+}
 
-  .console .editor ::selection {
+.console .editor ::selection {
     background-color: var(--console-text-selected);
-  }
-  
-  .console .indent {
-    color: transparent;
-  }
-  
-  .console .editor .line {
-    position: relative;
-  }
+}
 
-  .console .editor .line a {
+.console .indent {
+    color: transparent;
+}
+
+.console .editor .line {
+    position: relative;
+}
+
+.console .editor .line a {
     text-decoration: underline;
 }
 
-  .console .editor .line::after {
+.console .editor .line::after {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -394,198 +398,203 @@ nav.nav-center ul li {
     left: 0;
     background-color: var(--console-bg-dark);
     content: "";
-  }
+}
 
-  /*
-   * For calculating the animation duration:
-   *
-   * Characters / second = 20
-   * X = Number of characters to be typed
-   * Duration = 0.05 * X
-   *
-   * Rounding some values for simplicity.
-   */
-  .console .editor .line:nth-of-type(1)::after {
+/*
+ * For calculating the animation duration:
+ *
+ * Characters / second = 20
+ * X = Number of characters to be typed
+ * Duration = 0.05 * X
+ *
+ * Rounding some values for simplicity.
+ */
+.console .editor .line:nth-of-type(1)::after {
     animation-name: show-cursor, type-line, hide-cursor;
     animation-duration: 1ms, 1.5s, 1ms;
     animation-timing-function: linear, steps(29), linear;
     animation-fill-mode: forwards;
     animation-delay: 0s, 1s, 2.5s;
-  }
+}
 
-  .console .editor .line:nth-of-type(1) .var {
+.console .editor .line:nth-of-type(1) .var {
     animation: var-color-change .3s ease forwards 1.75s;
-  }
-  
-  .console .editor .line:nth-of-type(1) .func {
-    animation: func-color-change .3s ease forwards 2.5s;
-  }
+}
 
-  .console .editor .line:nth-of-type(2)::after {
+.console .editor .line:nth-of-type(1) .func {
+    animation: func-color-change .3s ease forwards 2.5s;
+}
+
+.console .editor .line:nth-of-type(2)::after {
     animation-name: show-cursor, type-curly-line, hide-cursor;
     animation-duration: 1ms, .2s, 1ms;
     animation-timing-function: linear, steps(1), linear;
     animation-fill-mode: forwards;
     animation-delay: 2.5s, 2.5s, 2.7s;
-  }
-  
-  .console .editor .line:nth-of-type(3)::after {
+}
+
+.console .editor .line:nth-of-type(3)::after {
     animation-name: show-cursor, type-line, hide-cursor;
     animation-duration: 1ms, 1.5s, 1ms;
     animation-timing-function: linear, steps(29), linear;
     animation-fill-mode: forwards;
     animation-delay: 2.7s, 2.7s, 4.2s;
-  }
+}
 
-  .console .editor .line:nth-of-type(3) .var:nth-of-type(2) {
+.console .editor .line:nth-of-type(3) .var:nth-of-type(2) {
     animation: var-color-change .3s ease forwards 3.5s;
-  }
-  
-  .console .editor .line:nth-of-type(3) .func {
+}
+
+.console .editor .line:nth-of-type(3) .func {
     animation: func-color-change .3s ease forwards 4s;
-  }
-  
-  .console .editor .line:nth-of-type(3) .var:nth-of-type(4) {
+}
+
+.console .editor .line:nth-of-type(3) .var:nth-of-type(4) {
     animation: var-color-change .3s ease forwards 4.2s;
-  }
-  
-  .console .editor .line:nth-of-type(4)::after {
+}
+
+.console .editor .line:nth-of-type(4)::after {
     animation-name: show-cursor, type-curly-line, hide-cursor;
     animation-duration: 1ms, .2s, 1ms;
     animation-timing-function: linear, steps(1), linear;
     animation-fill-mode: forwards;
     animation-delay: 4.2s, 4.2s, 4.4s;
-  }
+}
 
-  .console .editor .line:nth-of-type(5)::after {
+.console .editor .line:nth-of-type(5)::after {
     animation-name: show-cursor, type-line, hide-cursor;
     animation-duration: 1ms, .7s, 1ms;
     animation-timing-function: linear, steps(16), linear;
     animation-fill-mode: forwards;
     animation-delay: 4.4s, 4.4s, 5.1s;
-  }
-  
-  .console .editor .line.comment:nth-of-type(5) {
-    animation: comment-color-change .3s ease forwards 4.6s;
-  }
+}
 
-  .console .editor .line:nth-of-type(6)::after {
+.console .editor .line.comment:nth-of-type(5) {
+    animation: comment-color-change .3s ease forwards 4.6s;
+}
+
+.console .editor .line:nth-of-type(6)::after {
     animation-name: show-cursor, type-line, hide-cursor;
     animation-duration: 1ms, 1.3s, 1ms;
     animation-timing-function: linear, steps(26), linear;
     animation-fill-mode: forwards;
     animation-delay: 5.1s, 5.1s, 6.4s;
-  }
+}
 
-  .console .editor .line:nth-of-type(6) .var {
+.console .editor .line:nth-of-type(6) .var {
     animation: var-color-change .3s ease forwards 5.3s;
-  }
-  
-  .console .editor .line:nth-of-type(6) .str {
-    animation: str-color-change .3s ease forwards 5.8s;
-  }
+}
 
-  .console .editor .line:nth-of-type(7)::after {
+.console .editor .line:nth-of-type(6) .str {
+    animation: str-color-change .3s ease forwards 5.8s;
+}
+
+.console .editor .line:nth-of-type(7)::after {
     animation-name: show-cursor, type-line, cursor-blink;
     animation-duration: 1ms, 1.8s, 1s;
     animation-timing-function: linear, steps(35), step-end;
     animation-iteration-count: 1, 1, infinite;
     animation-fill-mode: forwards;
     animation-delay: 6.4s, 6.4s, 8.2s;
-  }
+}
 
-  .console .editor .line:nth-of-type(7) .var {
+.console .editor .line:nth-of-type(7) .var {
     animation: var-color-change .3s ease forwards 6.6s;
-  }
-  
-  .console .editor .line:nth-of-type(7) .str {
+}
+
+.console .editor .line:nth-of-type(7) .str {
     animation: str-color-change .3s ease forwards 7.1s;
-  }
-  
-  @keyframes show-cursor {
-    to {
-      border-left: 1px solid white;
-    }
-  }
-  
-  @keyframes hide-cursor {
-    to {
-      border: none;
-    }
-  }
-  
-  @keyframes type-line {
-    to {
-      width: 0;
-      margin-left: 100%;
-    }
-  }
+}
 
-  @keyframes type-curly-line {
-    50% {
-      width: 1%;
-      margin-left: 99%;
-    }
+@keyframes show-cursor {
     to {
-      width: 0;
-      margin-left: 100%;
+        border-left: 1px solid white;
     }
-  }
-  
-  @keyframes cursor-blink {
+}
+
+@keyframes hide-cursor {
+    to {
+        border: none;
+    }
+}
+
+@keyframes type-line {
+    to {
+        width: 0;
+        margin-left: 100%;
+    }
+}
+
+@keyframes type-curly-line {
+    50% {
+        width: 1%;
+        margin-left: 99%;
+    }
+
+    to {
+        width: 0;
+        margin-left: 100%;
+    }
+}
+
+@keyframes cursor-blink {
     from {
-      border-right: 1px solid white;
+        border-right: 1px solid white;
     }
-    50% {
-      border: none;
-    }
-  }
-  
-  @keyframes comment-color-change {
-    to {
-      color: var(--console-comment);
-    }
-  }
-  
-  @keyframes str-color-change {
-    to {
-      color: var(--console-str);
-    }
-  }
-  
-  @keyframes var-color-change {
-    to {
-      color: var(--console-var);
-    }
-  }
-  
-  @keyframes func-color-change {
-    to {
-      color: var(--console-func);
-    }
-  }
 
-  /*
-   * Hide line numbers and shrink font on narrower screens
-   * or else the editor will be pushed down on its own line.
-   */
-   @media screen and (max-width: 460px) {
+    50% {
+        border: none;
+    }
+}
+
+@keyframes comment-color-change {
+    to {
+        color: var(--console-comment);
+    }
+}
+
+@keyframes str-color-change {
+    to {
+        color: var(--console-str);
+    }
+}
+
+@keyframes var-color-change {
+    to {
+        color: var(--console-var);
+    }
+}
+
+@keyframes func-color-change {
+    to {
+        color: var(--console-func);
+    }
+}
+
+/*
+ * Hide line numbers and shrink font on narrower screens
+ * or else the editor will be pushed down on its own line.
+ */
+@media screen and (max-width: 460px) {
     .console {
         font-size: 14px;
     }
+
     .console .tab {
-      font-size: 12px;
+        font-size: 12px;
     }
-  .console .line-numbers {
-    display: none;
-  }
+
+    .console .line-numbers {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 1200px) {
-  .console {
-      font-size: 16px;
-  }
-  .console .tab {
-    font-size: 14px;
-  }
+    .console {
+        font-size: 16px;
+    }
+
+    .console .tab {
+        font-size: 14px;
+    }
 }

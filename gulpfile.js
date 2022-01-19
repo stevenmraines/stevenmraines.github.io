@@ -18,6 +18,9 @@ const rename = require('gulp-rename');
 // Compile SASS into regular CSS
 const sass = require('gulp-sass')(require('sass'));
 
+// Needed to make sourcemap file with Browserify
+const sourcemaps = require('gulp-sourcemaps');
+
 // Minify JS
 const uglify = require('gulp-uglify');
 
@@ -112,7 +115,7 @@ function img() {
 function js() {
     let options = {
         entries: paths.js.src,  // Entry point of the app (must be a single file, AFAIK)
-        debug: true,
+        debug: true,  // Debug == make sourcemaps
     };
 
     /*
@@ -121,11 +124,13 @@ function js() {
      */
     return browserify(options)
         .bundle()
-        .pipe(srcVinyl('bundle.js'), { sourcemaps: true })
+        .pipe(srcVinyl('bundle.js'))
         .pipe(buffer())
+        .pipe(sourcemaps.init({ loadMaps: true }))
         .pipe(uglify())
         .pipe(rename({ basename: 'index', suffix: '.min' }))
-        .pipe(gulp.dest(paths.js.dest, { sourcemaps: '.' }))
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest(paths.js.dest))
         .pipe(connect.reload());
 }
 

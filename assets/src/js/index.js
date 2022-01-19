@@ -32,13 +32,21 @@ let whiteTrans3 = chroma(white).alpha(0.3).css('rgba');
 let whiteTrans2 = chroma(white).alpha(0.2).css('rgba');
 let whiteTrans1 = chroma(white).alpha(0.1).css('rgba');
 
+let navLinks;
 let skillsChart;
 let skillsChartContext;
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize Materialize mobile nav
 	let elems = document.querySelectorAll('.sidenav');
-    let instances = M.Sidenav.init(elems, {});
+	let instances = M.Sidenav.init(elems, {});
+
+	// Attach nav onclick event
+	navLinks = document.querySelectorAll('ul.nav-link-list li a');
+
+	for(let i = 0; i < navLinks.length; i++) {
+		navLinks[i].addEventListener('click', navClick);
+    }
 
 	// Attach window resize event
 	let isIE = window.attachEvent;  // Support for Internet Explorer v9 and below
@@ -97,7 +105,7 @@ function getColors() {
 }
 
 function initSkillsChart() {
-	skillsChartContext = document.getElementById('skillsChart').getContext('2d');
+	skillsChartContext = document.getElementById('skills-chart').getContext('2d');
 
 	const config = {
 		type: 'radar',
@@ -124,8 +132,9 @@ function initSkillsChart() {
 			],
 		},
 		options: {
-			responsive: true,
 			color: white,
+			maintainAspectRatio: false,
+			responsive: true,
 			plugins: {
 				title: {
 					color: white,
@@ -213,17 +222,19 @@ function windowResize() {
 		return;
 	}
 
-	setSkillsChartGradient();
+	//setSkillsChartGradient();
 }
 
-function navClick(element) {
+function navClick(event) {
 	let classStr = 'active';
-	let target = element.children[0].attributes.href.value;
-	let navLinks = document.querySelectorAll("ul.nav-link-list li");
-	let clickedLinks = document.querySelectorAll("ul.nav-link-list li a[href='" + target + "']");
+	let element = event.target;
+	let href = element.attributes.href.value;
+	let selector = "ul.nav-link-list li a[href='" + href + "']";
+	let clickedLinks = document.querySelectorAll(selector);
 
+	// Active class goes not on the anchor tag, but the parent li element
 	for(let i = 0; i < navLinks.length; i++) {
-		removeClass(navLinks[i], classStr);
+		removeClass(navLinks[i].parentElement, classStr);
 	}
 	
 	for(let i = 0; i < clickedLinks.length; i++) {
