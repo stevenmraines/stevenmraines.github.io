@@ -154,6 +154,7 @@ function watch() {
 let buildTask = gulp.series(clean, gulp.parallel([css, fonts, html, img, js]));
 let serveTask = gulp.series(buildTask, serve);
 let watchTask = gulp.series(serveTask, watch);
+let watchNoBuildTask = gulp.series(serve, watch);
 let cleanTask = gulp.series(clean);
 let cssTask = gulp.series(cleanCss, css, serve, watch);
 let jsTask = gulp.series(cleanJs, js, serve, watch);
@@ -161,6 +162,7 @@ let jsTask = gulp.series(cleanJs, js, serve, watch);
 exports.build = buildTask;
 exports.serve = serveTask;
 exports.watch = watchTask;
+exports.watchnob = watchNoBuildTask;
 exports.css = cssTask;
 exports.js = jsTask;
 exports.clean = cleanTask;
