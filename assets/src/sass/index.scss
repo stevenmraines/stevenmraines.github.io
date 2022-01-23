@@ -104,8 +104,8 @@ html, body {
  * INTRO
  */
 nav ul li.active,
-.sidenav li.active {
-    background-color: palette.$xiketic-value;
+ul.sidenav li.active {
+    background-color: rgba(0,0,0,0.3);
 }
 
 nav.nav-center ul {

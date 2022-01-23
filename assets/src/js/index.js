@@ -30,9 +30,10 @@ var navMap;
 var portfolioCards;
 var skillsChart;
 var skillsChartContext;
-var windowHeight = -1;
-var screenTopY = -1;
-var screenBottomY = -1;
+var navHeight = 0;
+var windowHeight = 0;
+var screenTopY = 0;
+var screenBottomY = 0;
 
 /*
  * Initializes all necessary page content.
@@ -142,8 +143,11 @@ function buildNavMap() {
 		}
 	}
 
-	// Grabbing this for use later in onscroll handler
+	// Grabbing these for use later in nav link click and document scroll handler
 	desktopNav = document.querySelector('nav');
+
+	// clientHeight = height + padding - height of horizontal scrollbar (if present)
+	navHeight = desktopNav.clientHeight;
 }
 
 /*
@@ -163,14 +167,33 @@ function isDesktopNavLink(navLink) {
 }
 
 /*
+ * Scrolls to the target section and adds the
+ * active class to the clicked nav link element.
+ */
+function navClick(event) {
+	event.preventDefault();
+
+	const element = event.srcElement;
+	const href = element.attributes.href.value.toLowerCase();
+	const offsetTop = navMap[href].section.offsetTop;
+	let navOffset = -navHeight;
+
+	if(href.localeCompare('#contact') == 0) {
+		navOffset = 0;
+	}
+
+	window.scrollTo({
+		top: offsetTop + navOffset,
+		behavior: 'smooth',
+	});
+}
+
+/*
  * Detects which nav link should be given the 'active' class
  * so that the nav is updated as the user scrolls the page.
  */
 function scrollHandler(event) {
 	event.preventDefault();
-
-	// clientHeight = height + padding - height of horizontal scrollbar (if present)
-	let navHeight = desktopNav.clientHeight;
 
 	// innerHeight = interior height, including the height of the horizontal scroll bar (if present)
 	windowHeight = window.innerHeight - navHeight;
@@ -222,7 +245,7 @@ function getSectionVisibleHeight(sectionId) {
 	}
 
 	// If the top half of the section is visible
-	if(sectionTopY > screenTopY && screenBottomY > sectionTopY) {
+	if(sectionTopY >= screenTopY && screenBottomY > sectionTopY) {
 		return windowHeight - (sectionTopY - screenTopY);
 	}
 
@@ -391,26 +414,6 @@ function windowResize() {
 
 	// Update skills chart background color gradient
 	setSkillsChartGradient();
-}
-
-/*
- * Scrolls to the target section and adds the
- * active class to the clicked nav link element.
- */
-function navClick(event) {
-	const element = event.srcElement;
-	const href = element.attributes.href.value;
-	const selector = "ul.nav-link-list li a[href='" + href + "']";
-	const clickedLinks = document.querySelectorAll(selector);
-
-	// Active class goes not on the anchor tag, but the parent li element
-	for(let i = 0; i < navLinks.length; i++) {
-		removeClass(navLinks[i].parentElement, activeClass);
-	}
-	
-	for(let i = 0; i < clickedLinks.length; i++) {
-		addClass(clickedLinks[i].parentElement, activeClass);
-	}
 }
 
 /*
