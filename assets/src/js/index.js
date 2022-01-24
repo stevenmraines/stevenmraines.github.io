@@ -85,11 +85,25 @@ function addEventListeners() {
 		portfolioCards[i].addEventListener('click', cardClick);
 	}
 
+	// Add portfolio preview image on click event
+	const previews = document.querySelectorAll('#portfolio .portfolio-preview');
+
+	for(let i = 0; i < previews.length; i++) {
+		previews[i].addEventListener('click', previewClick);
+    }
+
 	// Attach window resize event
 	window.addEventListener('resize', windowResize, true);
 
 	// Add scroll event handler
 	document.addEventListener('scroll', scrollHandler);
+
+	// Add load event listener for detecting when portfolio images are loaded
+	const projectImages = document.querySelectorAll('#active-portfolio-img');
+
+	for(let i = 0; i < projectImages.length; i++) {
+		projectImages[i].addEventListener('load', projectImgLoad);
+    }
 }
 
 /*
@@ -462,30 +476,87 @@ function removeClass(element, classStr) {
 /*
  * Updates the active image for the current portfolio project.
  */
-function previewClick(img) {
-	const src = img.src.replace('.png', '.gif');
-	const project = img.dataset.project;
-	let selector = 'p[data-project="' + project + '"]';
-	const descriptions = document.querySelectorAll(selector);
-	const feature = img.dataset.projectFeature;
-	selector = 'p[data-project-feature="' + feature + '"]';
-	const featureDescription = document.querySelector(selector);
+function previewClick(event) {
+	if(hasClass(this, activeClass)) {
+		return;
+    }
+
+	const projectName = this.dataset.project;
+	const project = document.getElementById(projectName + '-content');
+
+	// Hide the main image and show the preloader spinner
+	const mainImg = project.querySelector('#active-portfolio-img');
+	togglePortfolioImgPreloader(project, mainImg);
+
+	// Set the main image from the clicked preview image's src
+	const src = this.src.replace('.png', '.gif');
+	mainImg.src = src;
+
+	// Set the preloader height from the height of the image that is currently loading
+	let poll = setInterval(function() {
+		if(mainImg.naturalHeight) {
+			clearInterval(poll);
+			const width = mainImg.naturalWidth;
+			const height = mainImg.naturalHeight;
+			let parentWidth = getComputedStyle(mainImg.parentElement).width;
+			parentWidth = parentWidth.replace(new RegExp('px', 'i'), '');
+			const adjustedHeight = height * (parentWidth / width) + 'px';
+			project.querySelector('.preloader-outer-wrapper').style.height = adjustedHeight;
+		}
+	}, 10);
+
+	// Hide all the feature descriptions
+	let selector = 'p[data-project="' + projectName + '"]';
+	const descriptions = project.querySelectorAll(selector);
 
 	for(let i = 0; i < descriptions.length; i++) {
 		addClass(descriptions[i], hiddenClass);
 	}
 
+	// Show the description for the clicked preview image
+	const projectFeature = this.dataset.projectFeature;
+	selector = 'p[data-project-feature="' + projectFeature + '"]';
+	const featureDescription = project.querySelector(selector);
 	removeClass(featureDescription, hiddenClass);
 
-	document.getElementById('active-portfolio-img').src = src;
-	
-	const activeImages = document.querySelectorAll('.portfolio-preview.active');
+	// Add the active class to the clicked preview image
+	const activeImages = project.querySelectorAll('.portfolio-preview.active');
 
 	for(let i = 0; i < activeImages.length; i++) {
 		removeClass(activeImages[i], activeClass);
 	}
 
-	addClass(img, activeClass);
+	addClass(this, activeClass);
+}
+
+/*
+ * If a portfolio project image is loaded, hide its preloader spinner.
+ */
+function projectImgLoad(event) {
+	if(this.complete) {
+		const projectName = this.dataset.project;
+		const project = document.getElementById(projectName + '-content');
+		togglePortfolioImgPreloader(project, this);
+    }
+}
+
+/*
+ * Takes the main image for some portfolio project and
+ * toggles it and its associated preloader spinner.
+ */
+function togglePortfolioImgPreloader(project, image) {
+	const preloader = project.querySelector('.preloader-outer-wrapper');
+
+	// Show the preloader
+	if(hasClass(preloader, hiddenClass)) {
+		removeClass(preloader, hiddenClass);
+		addClass(image, hiddenClass);
+		return;
+    }
+
+	// Hide the preloader
+	removeClass(image, hiddenClass);
+	addClass(preloader, hiddenClass);
 }
 
 /*
@@ -496,7 +567,7 @@ function cardClick(event) {
 	const id = target.attributes['data-project-content-id'].value;
 	const projects = document.querySelectorAll('.project');
 
-	for(let i = 0; i < projects; i++) {
+	for(let i = 0; i < projects.length; i++) {
 		addClass(projects[i], hiddenClass);
 	}
 

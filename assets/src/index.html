@@ -111,28 +111,40 @@
                 <h5 class="center-align">Pi Theater</h5>
                 <div class="row project-row">
                     <div class="col s12 l8">
-                        <img src="img/pitheater-login-and-movie.gif" class="responsive-img" id="active-portfolio-img">
+                        <img src="#" class="responsive-img" id="active-portfolio-img" data-project="pi-theater">
+                        <div class="preloader-outer-wrapper center-align hidden">
+                            <div class="preloader-wrapper big active">
+                                <div class="spinner-layer">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="display-flex">
-                            <img src="img/pitheater-login-and-movie.png"
+                            <img src="img/pi-theater-login-and-movie.png"
                                  class="portfolio-preview active"
                                  data-project-feature="login-and-movie"
-                                 data-project="pitheater"
-                                 onclick="previewClick(this)">
-                            <img src="img/pitheater-algolia-search.png"
+                                 data-project="pi-theater">
+                            <img src="img/pi-theater-algolia-search.png"
                                  class="portfolio-preview"
                                  data-project-feature="algolia-search"
-                                 data-project="pitheater"
-                                 onclick="previewClick(this)">
-                            <img src="img/pitheater-upload.png"
+                                 data-project="pi-theater">
+                            <img src="img/pi-theater-upload.png"
                                  class="portfolio-preview"
                                  data-project-feature="upload"
-                                 data-project="pitheater"
-                                 onclick="previewClick(this)">
+                                 data-project="pi-theater">
                         </div>
                     </div>
 
                     <div class="col s10 offset-s1 l4 offset-l0">
-                        <p data-project-feature="login-and-movie" data-project="pitheater">
+                        <p data-project-feature="login-and-movie" data-project="pi-theater">
                             This Netflix-inspired streaming site runs on a Raspberry Pi and serves videos from a connected
                             external hard drive. The front end runs on <b class="green-text">Vue</b> and <b class="purple-text">Bootstrap</b>,
                             while the back end utilizes the <b class="orange-text">Laravel</b> framework for <b class="purple-text">PHP</b> which offers an easy to
@@ -140,12 +152,12 @@
                             maintained for logged-in users. Users logged in to their account can also add or remove titles
                             to and from their watchlist.
                         </p>
-                        <p data-project-feature="algolia-search" data-project="pitheater" class="hidden">
+                        <p data-project-feature="algolia-search" data-project="pi-theater" class="hidden">
                             The search functionality leverages the lightning fast speed of Algolia using their Instant Search
                             components for Vue. As demonstrated in this example search, Algolia even features built-in fuzzy
                             search capabilities to return relevant results even with typos present in the search query.
                         </p>
-                        <p data-project-feature="upload" data-project="pitheater" class="hidden">
+                        <p data-project-feature="upload" data-project="pi-theater" class="hidden">
                             Logged-in users who are marked as "admin" can access the Upload Content page. This is where new video
                             files that have just been transferred to the attached hard drive can have their associated attributes set in
                             the Pi Theater database, such as the title, summary, and genres. When typing in the title field, a request
@@ -158,16 +170,60 @@
                 </div>
             </div>
 
+            <!-- Mech Game content -->
+            <div class="project hidden" id="mech-game-content">
+                <h5 class="center-align">Mech Strategy Game</h5>
+                <div class="row project-row">
+                    <div class="col s12 l8">
+                        <img src="#" class="responsive-img" id="active-portfolio-img" data-project="mech-game">
+                        <div class="preloader-outer-wrapper center-align hidden">
+                            <div class="preloader-wrapper big active">
+                                <div class="spinner-layer">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="display-flex">
+                            <img src="img/mech-game.png"
+                                 class="portfolio-preview active"
+                                 data-project-feature="mech-game"
+                                 data-project="mech-game">
+                        </div>
+                    </div>
+
+                    <div class="col s10 offset-s1 l4 offset-l0">
+                        <p data-project-feature="mech-game" data-project="mech-game">
+                            I began developing this strategy game, tentatively titled "Mech Monger," using the Unity
+                            game engine in early 2021. However, this was a game idea that I originally had some 10 years
+                            ago while I was attending UNCW. In broad terms, the gameplay combines elements of two of
+                            my favorite games: FTL, and XCOM: Enemy Unknown. Gameplay elements taken from FTL include
+                            text-based story prompts, power management, units with individually destructible components,
+                            different classes of weapons (i.e. energy weapons vs ballistic weapons), and a Rogue-like
+                            story mode. These elements are combined with features of XCOM such as turn-based squad
+                            tactical combat, base management, and 3D graphics.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <!-- Pi Theater card -->
                 <div class="col s10 offset-s1 m6 l4">
                     <div class="card hoverable" data-project-content-id="pi-theater-content">
                         <div class="card-image img-fill-container">
-                            <img src="img/pitheater-login-and-movie.png" class="responsive-img">
+                            <img src="img/pi-theater-login-and-movie.png" class="responsive-img">
                         </div>
                         <div class="card-content">
                             <span class="card-title">Pi Theater</span>
-                            <p class="">
+                            <p>
                                 A Netflix-style streaming site made for personal use which
                                 features movies and TV shows ripped from my bluray and DVD collection.
                             </p>
@@ -180,48 +236,19 @@
 
                 <!-- Mech Strategy Game card -->
                 <div class="col s10 offset-s1 m6 l4">
-                    <div class="card hoverable">
-                        <div class="card-image">
-                            <img src="img/java-key-padder1.jpg">
+                    <div class="card hoverable" data-project-content-id="mech-game-content">
+                        <div class="card-image img-fill-container">
+                            <img src="img/mech-game.png" class="responsive-img">
                         </div>
                         <div class="card-content">
-                            <span class="card-title">Java KeyPadder</span>
-                            <p class="truncate">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                Excepteur sint occaecat cupidatat non proident,
-                                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            <span class="card-title">Mech Strategy Game</span>
+                            <p>
+                                A Rogue-like strategy game inspired by elements of FTL and
+                                XCOM: Enemy Unknown developed with the Unity game engine.
                             </p>
                         </div>
                         <div class="card-action">
-                            <a href="#">View on Github</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- QB API stuff card -->
-                <div class="col s10 offset-s1 m6 l4">
-                    <div class="card hoverable">
-                        <div class="card-image">
-                            <img src="img/game-start1.jpg">
-                        </div>
-                        <div class="card-content">
-                            <span class="card-title">GameStart</span>
-                            <p class="truncate">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                Excepteur sint occaecat cupidatat non proident,
-                                sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                        </div>
-                        <div class="card-action">
-                            <a href="#">View on Github</a>
+                            <a href="https://github.com/stevenmraines/mech-game" target="_blank">View on Github</a>
                         </div>
                     </div>
                 </div>

@@ -21,6 +21,7 @@ $primary-color: map.get(palette-maps.$royal-purple, "base");
 $secondary-color: palette.$medium-turquoise-value;
 $link-color: palette.$rajah-value;
 $off-black: lighten(palette.$alabaster-value, 5%);
+$spinner-default-color: map.get(palette-maps.$medium-turquoise, "base");
 
 $card-bg-color: palette.$dark-liver-value;
 $card-link-color: palette.$rajah-value;
@@ -37,6 +38,7 @@ $sidenav-bg-color: $primary-color;
     $secondary-color: $secondary-color,
     $link-color: $link-color,
     $off-black: $off-black,
+    $spinner-default-color: $spinner-default-color,
     $card-bg-color: $card-bg-color,
     $card-link-color: $card-link-color,
     $card-link-color-light: $card-link-color-light,
@@ -164,6 +166,10 @@ nav.nav-center ul li {
     margin-bottom: 4rem;
 }
 
+.project .preloader-outer-wrapper {
+    animation: preloader-bg ease 1.5s infinite;
+}
+
 .card.hoverable:hover {
     box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.8);
 }
@@ -200,6 +206,18 @@ nav.nav-center ul li {
     opacity: 1.0;
     transition: 0.2s linear;
     cursor: pointer;
+}
+
+@keyframes preloader-bg {
+    from {
+        background-color: rgba(255,255,255,.1);
+    }
+    50% {
+        background-color: rgba(255,255,255,.2);
+    }
+    to {
+        background-color: rgba(255,255,255,.1);
+    }
 }
 
 /*
