@@ -409,7 +409,7 @@ nav.nav-center ul li {
  *
  * Rounding some values for simplicity.
  */
-.console .editor .line:nth-of-type(1)::after {
+.console.animate .editor .line:nth-of-type(1)::after {
     animation-name: show-cursor, type-line, hide-cursor;
     animation-duration: 1ms, 1.5s, 1ms;
     animation-timing-function: linear, steps(29), linear;
@@ -417,15 +417,15 @@ nav.nav-center ul li {
     animation-delay: 0s, 1s, 2.5s;
 }
 
-.console .editor .line:nth-of-type(1) .var {
+.console.animate .editor .line:nth-of-type(1) .var {
     animation: var-color-change .3s ease forwards 1.75s;
 }
 
-.console .editor .line:nth-of-type(1) .func {
+.console.animate .editor .line:nth-of-type(1) .func {
     animation: func-color-change .3s ease forwards 2.5s;
 }
 
-.console .editor .line:nth-of-type(2)::after {
+.console.animate .editor .line:nth-of-type(2)::after {
     animation-name: show-cursor, type-curly-line, hide-cursor;
     animation-duration: 1ms, .2s, 1ms;
     animation-timing-function: linear, steps(1), linear;
@@ -433,7 +433,7 @@ nav.nav-center ul li {
     animation-delay: 2.5s, 2.5s, 2.7s;
 }
 
-.console .editor .line:nth-of-type(3)::after {
+.console.animate .editor .line:nth-of-type(3)::after {
     animation-name: show-cursor, type-line, hide-cursor;
     animation-duration: 1ms, 1.5s, 1ms;
     animation-timing-function: linear, steps(29), linear;
@@ -441,19 +441,19 @@ nav.nav-center ul li {
     animation-delay: 2.7s, 2.7s, 4.2s;
 }
 
-.console .editor .line:nth-of-type(3) .var:nth-of-type(2) {
+.console.animate .editor .line:nth-of-type(3) .var:nth-of-type(2) {
     animation: var-color-change .3s ease forwards 3.5s;
 }
 
-.console .editor .line:nth-of-type(3) .func {
+.console.animate .editor .line:nth-of-type(3) .func {
     animation: func-color-change .3s ease forwards 4s;
 }
 
-.console .editor .line:nth-of-type(3) .var:nth-of-type(4) {
+.console.animate .editor .line:nth-of-type(3) .var:nth-of-type(4) {
     animation: var-color-change .3s ease forwards 4.2s;
 }
 
-.console .editor .line:nth-of-type(4)::after {
+.console.animate .editor .line:nth-of-type(4)::after {
     animation-name: show-cursor, type-curly-line, hide-cursor;
     animation-duration: 1ms, .2s, 1ms;
     animation-timing-function: linear, steps(1), linear;
@@ -461,7 +461,7 @@ nav.nav-center ul li {
     animation-delay: 4.2s, 4.2s, 4.4s;
 }
 
-.console .editor .line:nth-of-type(5)::after {
+.console.animate .editor .line:nth-of-type(5)::after {
     animation-name: show-cursor, type-line, hide-cursor;
     animation-duration: 1ms, .7s, 1ms;
     animation-timing-function: linear, steps(16), linear;
@@ -469,11 +469,11 @@ nav.nav-center ul li {
     animation-delay: 4.4s, 4.4s, 5.1s;
 }
 
-.console .editor .line.comment:nth-of-type(5) {
+.console.animate .editor .line.comment:nth-of-type(5) {
     animation: comment-color-change .3s ease forwards 4.6s;
 }
 
-.console .editor .line:nth-of-type(6)::after {
+.console.animate .editor .line:nth-of-type(6)::after {
     animation-name: show-cursor, type-line, hide-cursor;
     animation-duration: 1ms, 1.3s, 1ms;
     animation-timing-function: linear, steps(26), linear;
@@ -481,15 +481,15 @@ nav.nav-center ul li {
     animation-delay: 5.1s, 5.1s, 6.4s;
 }
 
-.console .editor .line:nth-of-type(6) .var {
+.console.animate .editor .line:nth-of-type(6) .var {
     animation: var-color-change .3s ease forwards 5.3s;
 }
 
-.console .editor .line:nth-of-type(6) .str {
+.console.animate .editor .line:nth-of-type(6) .str {
     animation: str-color-change .3s ease forwards 5.8s;
 }
 
-.console .editor .line:nth-of-type(7)::after {
+.console.animate .editor .line:nth-of-type(7)::after {
     animation-name: show-cursor, type-line, cursor-blink;
     animation-duration: 1ms, 1.8s, 1s;
     animation-timing-function: linear, steps(35), step-end;
@@ -498,11 +498,11 @@ nav.nav-center ul li {
     animation-delay: 6.4s, 6.4s, 8.2s;
 }
 
-.console .editor .line:nth-of-type(7) .var {
+.console.animate .editor .line:nth-of-type(7) .var {
     animation: var-color-change .3s ease forwards 6.6s;
 }
 
-.console .editor .line:nth-of-type(7) .str {
+.console.animate .editor .line:nth-of-type(7) .str {
     animation: str-color-change .3s ease forwards 7.1s;
 }
 

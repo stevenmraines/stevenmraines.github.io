@@ -5,35 +5,37 @@ const M = require('materialize-css');
 // Some constants
 const activeClass = 'active';
 const hiddenClass = 'hidden';
+const consoleAnimationClass = 'animate';
 const white = '#fff';
 const whiteTrans3 = chroma(white).alpha(0.3).css('rgba');
 const whiteTrans2 = chroma(white).alpha(0.2).css('rgba');
 const whiteTrans1 = chroma(white).alpha(0.1).css('rgba');
 
 // Materialize color theme vars
-var alabaster;
-var cultured;
-var darkLiver;
-var deepIndigo;
-var mediumTurquoise;
-var mediumTurquoiseTrans3;
-var raisinBlack;
-var rajah;
-var rajahTrans3;
-var royalPurple;
-var xiketic;
+let alabaster;
+let cultured;
+let darkLiver;
+let deepIndigo;
+let mediumTurquoise;
+let mediumTurquoiseTrans3;
+let raisinBlack;
+let rajah;
+let rajahTrans3;
+let royalPurple;
+let xiketic;
 
 // Some other global vars
-var desktopNav;
-var navLinks;
-var navMap;
-var portfolioCards;
-var skillsChart;
-var skillsChartContext;
-var navHeight = 0;
-var windowHeight = 0;
-var screenTopY = 0;
-var screenBottomY = 0;
+let desktopNav;
+let navLinks;
+let navMap;
+let portfolioCards;
+let skillsChart;
+let skillsChartContext;
+let navHeight = 0;
+let windowHeight = 0;
+let screenTopY = 0;
+let screenBottomY = 0;
+let consoleAnimTriggered = false;
 
 /*
  * Initializes all necessary page content.
@@ -238,19 +240,32 @@ function getSectionVisibleHeight(sectionId) {
 	const sectionHeight = section.clientHeight;
 	const sectionTopY = section.offsetTop;
 	const sectionBottomY = sectionHeight + sectionTopY;
+	let visibleHeight = 0;
 
 	// If the bottom half of the section is visible
 	if(sectionTopY < screenTopY && sectionBottomY > screenTopY) {
-		return sectionHeight - (screenTopY - sectionTopY);
+		visibleHeight = sectionHeight - (screenTopY - sectionTopY);
 	}
 
 	// If the top half of the section is visible
 	if(sectionTopY >= screenTopY && screenBottomY > sectionTopY) {
-		return windowHeight - (sectionTopY - screenTopY);
+		visibleHeight = windowHeight - (sectionTopY - screenTopY);
 	}
 
-	// If the section is completely above or below the top or bottom of the window
-	return 0;
+	// Check if we need to trigger the #contact section animation
+	triggerContactSectionAnim(section, sectionId, visibleHeight / sectionHeight);
+
+	return visibleHeight;
+}
+
+function triggerContactSectionAnim(section, sectionId, visibleHeightPercentage) {
+	if(consoleAnimTriggered || sectionId.toLowerCase().localeCompare('#contact') != 0
+		|| visibleHeightPercentage < .5) {
+		return;
+	}
+
+	addClass(section.querySelector('.console'), consoleAnimationClass);
+	consoleAnimTriggered = true;
 }
 
 /*
