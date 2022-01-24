@@ -59,7 +59,7 @@ let paths = {
         dest: 'public/css/fonts',
     },
     html: {
-        src: 'assets/index.html',
+        src: 'assets/src/index.html',
         dest: 'public',
     },
     img: {
