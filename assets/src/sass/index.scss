@@ -170,6 +170,15 @@ nav.nav-center ul li {
     animation: preloader-bg ease 1.5s infinite;
 }
 
+.project .preloader-outer-wrapper .preloader-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
 .card.hoverable:hover {
     box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.8);
 }
@@ -210,13 +219,13 @@ nav.nav-center ul li {
 
 @keyframes preloader-bg {
     from {
-        background-color: rgba(255,255,255,.1);
+        background-color: rgba(255,255,255,.05);
     }
     50% {
-        background-color: rgba(255,255,255,.2);
+        background-color: rgba(255,255,255,.15);
     }
     to {
-        background-color: rgba(255,255,255,.1);
+        background-color: rgba(255,255,255,.05);
     }
 }
 

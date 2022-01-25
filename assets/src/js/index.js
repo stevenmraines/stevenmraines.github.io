@@ -567,9 +567,24 @@ function cardClick(event) {
 	const id = target.attributes['data-project-content-id'].value;
 	const projects = document.querySelectorAll('.project');
 
+	// Hide all projects
 	for(let i = 0; i < projects.length; i++) {
 		addClass(projects[i], hiddenClass);
 	}
 
-	removeClass(document.getElementById(id), hiddenClass);
+	const project = document.getElementById(id);
+
+	// Need to trigger a click on the first project preview image
+	project.querySelector('.portfolio-preview:first-of-type').click();
+
+	// Show the project
+	removeClass(project, hiddenClass);
+
+	// Scroll to top of portfolio section
+	const portfolioSection = document.querySelector('#portfolio');
+
+	window.scrollTo({
+		top: portfolioSection.offsetTop - navHeight,
+		behavior: 'smooth',
+	});
 }
