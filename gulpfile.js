@@ -48,7 +48,7 @@ const buffer = require('vinyl-buffer');
 
 // main();
 
-let paths = {
+const paths = {
     root: 'public',
     css: {
         src: 'assets/src/sass/*.scss',
@@ -113,7 +113,7 @@ function img() {
 }
 
 function js() {
-    let options = {
+    const options = {
         entries: paths.js.src,  // Entry point of the app (must be a single file, AFAIK)
         debug: true,  // Debug == make sourcemaps
     };
@@ -151,13 +151,13 @@ function watch() {
     gulp.watch(paths.js.src, js);
 }
 
-let buildTask = gulp.series(clean, gulp.parallel([css, fonts, html, img, js]));
-let serveTask = gulp.series(buildTask, serve);
-let watchTask = gulp.series(serveTask, watch);
-let watchNoBuildTask = gulp.series(serve, watch);
-let cleanTask = gulp.series(clean);
-let cssTask = gulp.series(cleanCss, css, serve, watch);
-let jsTask = gulp.series(cleanJs, js, serve, watch);
+const buildTask = gulp.series(clean, gulp.parallel([css, fonts, html, img, js]));
+const serveTask = gulp.series(buildTask, serve);
+const watchTask = gulp.series(serveTask, watch);
+const watchNoBuildTask = gulp.series(serve, watch);
+const cleanTask = gulp.series(clean);
+const cssTask = gulp.series(cleanCss, css, serve, watch);
+const jsTask = gulp.series(cleanJs, js, serve, watch);
 
 exports.build = buildTask;
 exports.serve = serveTask;

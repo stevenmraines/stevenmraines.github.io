@@ -6,6 +6,7 @@ const M = require('materialize-css');
 const activeClass = 'active';
 const hiddenClass = 'hidden';
 const consoleAnimationClass = 'animate';
+const black = '#000';
 const white = '#fff';
 const whiteTrans3 = chroma(white).alpha(0.3).css('rgba');
 const whiteTrans2 = chroma(white).alpha(0.2).css('rgba');
@@ -25,6 +26,8 @@ let royalPurple;
 let xiketic;
 
 // Some other global vars
+let skillsChartData;
+let skillsChartConfig;
 let desktopNav;
 let navLinks;
 let navMap;
@@ -326,27 +329,55 @@ function getColors() {
 function initSkillsChart() {
 	skillsChartContext = document.getElementById('skills-chart').getContext('2d');
 
-	const config = {
+	skillsChartData = {
+		ids: [
+			'skill-html',
+			'skill-bootstrap',
+			'skill-jquery',
+			'skill-vue',
+			'skill-php',
+			'skill-laravel',
+			'skill-sql',
+			'skill-aws',
+		],
+		labels: [
+			'HTML/CSS/JS',
+			'Bootstrap',
+			'jQuery',
+			'Vue',
+			'PHP',
+			'Laravel',
+			'MySQL',
+			'AWS',
+		],
+		sets: [
+			[3,3,3,1,0,0,0,0],  // Front end
+			[0,0,0,0,3,2,3,1]  // Back end
+		]
+	};
+
+	skillsChartConfig = {
 		type: 'radar',
 		data: {
-			labels: ['HTML/CSS/JS', 'Bootstrap', 'jQuery',
-				'Vue', 'PHP', 'Laravel', 'MySQL', 'AWS'],
+			labels: skillsChartData.labels,
 			datasets: [
 				{
 					label: 'Front End',
-					data: [3,3,3,1,0,0,0,0],
-					borderWidth: 2,
+					data: skillsChartData.sets[0],
 					borderColor: mediumTurquoise,
 					backgroundColor: mediumTurquoiseTrans3,
 					pointBackgroundColor: mediumTurquoiseTrans3,
+					pointHoverBorderColor: mediumTurquoise,
+					pointHoverBackgroundColor: mediumTurquoiseTrans3,
 				},
 				{
 					label: 'Back End',
-					data: [0,0,0,0,3,2,3,1],
-					borderWidth: 2,
+					data: skillsChartData.sets[1],
 					borderColor: rajah,
 					backgroundColor: rajahTrans3,
 					pointBackgroundColor: rajahTrans3,
+					pointHoverBorderColor: rajah,
+					pointHoverBackgroundColor: rajahTrans3,
 				}
 			],
 		},
@@ -354,6 +385,7 @@ function initSkillsChart() {
 			color: white,
 			maintainAspectRatio: false,
 			responsive: true,
+			onClick: chartClick,
 			plugins: {
 				title: {
 					color: white,
@@ -363,7 +395,10 @@ function initSkillsChart() {
 			},
 			elements: {
 				point: {
+					borderWidth: 2,
+					pointHoverBorderWidth: 3,
 					radius: 5,
+					hoverRadius: 8,
 				},
 			},
 			scales: {
@@ -379,9 +414,8 @@ function initSkillsChart() {
 						color: white,
 					},
 					ticks: {
-						// color: white,
 						backdropPadding: 3,
-						color: 'black',
+						color: black,
 						count: 4,
 						stepSize: 1,
 						z: 1,
@@ -391,7 +425,7 @@ function initSkillsChart() {
 		},
 	};
 
-	skillsChart = new Chart(skillsChartContext, config);
+	skillsChart = new Chart(skillsChartContext, skillsChartConfig);
 	
 	setSkillsChartGradient();
 }
@@ -419,6 +453,43 @@ function setSkillsChartGradient() {
 
 	skillsChart.config.options.scales.r.backgroundColor = gradient;
 	skillsChart.update();
+}
+
+/*
+ * Responds to chart point click event by showing the appropriate skills card.
+ */
+function chartClick(event) {
+	const element = skillsChart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, false);
+
+	if(element.length <= 0) {
+		return;
+	}
+
+	const datasetIndex = element[0].datasetIndex;
+	const index = element[0].index;
+
+	if(skillsChartData.sets[datasetIndex][index] == 0) {
+		return;
+	}
+
+	showSkillsCard(skillsChartData.ids[index]);
+}
+
+/*
+ * Hides all skill cards then shows the one matching the given ID.
+ */
+function showSkillsCard(id) {
+	const section = document.getElementById('skills');
+	const cards = section.querySelectorAll('.card');
+
+	for(let i = 0; i < cards.length; i++) {
+		if(cards[i].attributes.id.value.toLowerCase().localeCompare(id) == 0) {
+			removeClass(cards[i], hiddenClass);
+			continue;
+        }
+
+		addClass(cards[i], hiddenClass);
+	}
 }
 
 /*
