@@ -1,41 +1,140 @@
 @use './palette';
 
 $alabaster: (
-    "base": palette.$alabaster-value
+    "base": palette.$alabaster-value,
+    "darken-1": darken(palette.$alabaster-value, 5%),
+    "darken-2": darken(palette.$alabaster-value, 10%),
+    "darken-3": darken(palette.$alabaster-value, 15%),
+    "darken-4": darken(palette.$alabaster-value, 20%),
+    "darken-5": darken(palette.$alabaster-value, 25%)
 );
 
 $cultured: (
-    "base": palette.$cultured-value
+    "base": palette.$cultured-value,
+    "darken-1": darken(palette.$cultured-value, 5%),
+    "darken-2": darken(palette.$cultured-value, 10%),
+    "darken-3": darken(palette.$cultured-value, 15%),
+    "darken-4": darken(palette.$cultured-value, 20%),
+    "darken-5": darken(palette.$cultured-value, 25%)
 );
 
 $dark-liver: (
-    "base": palette.$dark-liver-value
+    "base": palette.$dark-liver-value,
+    "darken-1": darken(palette.$dark-liver-value, 5%),
+    "darken-2": darken(palette.$dark-liver-value, 10%),
+    "darken-3": darken(palette.$dark-liver-value, 15%),
+    "darken-4": darken(palette.$dark-liver-value, 20%),
+    "darken-5": darken(palette.$dark-liver-value, 25%),
+    "lighten-1": lighten(palette.$dark-liver-value, 5%),
+    "lighten-2": lighten(palette.$dark-liver-value, 10%),
+    "lighten-3": lighten(palette.$dark-liver-value, 15%),
+    "lighten-4": lighten(palette.$dark-liver-value, 20%),
+    "lighten-5": lighten(palette.$dark-liver-value, 25%)
 );
 
 $deep-indigo: (
-    "base": palette.$deep-indigo-value
+    "base": palette.$deep-indigo-value,
+    "darken-1": darken(palette.$deep-indigo-value, 5%),
+    "darken-2": darken(palette.$deep-indigo-value, 10%),
+    "darken-3": darken(palette.$deep-indigo-value, 15%),
+    "darken-4": darken(palette.$deep-indigo-value, 20%),
+    "darken-5": darken(palette.$deep-indigo-value, 25%),
+    "lighten-1": lighten(palette.$deep-indigo-value, 5%),
+    "lighten-2": lighten(palette.$deep-indigo-value, 10%),
+    "lighten-3": lighten(palette.$deep-indigo-value, 15%),
+    "lighten-4": lighten(palette.$deep-indigo-value, 20%),
+    "lighten-5": lighten(palette.$deep-indigo-value, 25%)
 );
 
 $medium-turquoise: (
-    "base": palette.$medium-turquoise-value
+    "base": palette.$medium-turquoise-value,
+    "darken-1": darken(palette.$medium-turquoise-value, 5%),
+    "darken-2": darken(palette.$medium-turquoise-value, 10%),
+    "darken-3": darken(palette.$medium-turquoise-value, 15%),
+    "darken-4": darken(palette.$medium-turquoise-value, 20%),
+    "darken-5": darken(palette.$medium-turquoise-value, 25%),
+    "lighten-1": lighten(palette.$medium-turquoise-value, 5%),
+    "lighten-2": lighten(palette.$medium-turquoise-value, 10%),
+    "lighten-3": lighten(palette.$medium-turquoise-value, 15%),
+    "lighten-4": lighten(palette.$medium-turquoise-value, 20%),
+    "lighten-5": lighten(palette.$medium-turquoise-value, 25%)
+);
+
+$mint-green: (
+    "base": palette.$mint-green-value,
+    "darken-1": darken(palette.$mint-green-value, 5%),
+    "darken-2": darken(palette.$mint-green-value, 10%),
+    "darken-3": darken(palette.$mint-green-value, 15%),
+    "darken-4": darken(palette.$mint-green-value, 20%),
+    "darken-5": darken(palette.$mint-green-value, 25%),
+    "lighten-1": lighten(palette.$mint-green-value, 5%),
+    "lighten-2": lighten(palette.$mint-green-value, 10%),
+    "lighten-3": lighten(palette.$mint-green-value, 15%),
+    "lighten-4": lighten(palette.$mint-green-value, 20%),
+    "lighten-5": lighten(palette.$mint-green-value, 25%)
 );
 
 $pale-lavender: (
-    "base": palette.$pale-lavender-value
+    "base": palette.$pale-lavender-value,
+    "darken-1": darken(palette.$pale-lavender-value, 5%),
+    "darken-2": darken(palette.$pale-lavender-value, 10%),
+    "darken-3": darken(palette.$pale-lavender-value, 15%),
+    "darken-4": darken(palette.$pale-lavender-value, 20%),
+    "darken-5": darken(palette.$pale-lavender-value, 25%),
+    "lighten-1": lighten(palette.$pale-lavender-value, 5%),
+    "lighten-2": lighten(palette.$pale-lavender-value, 10%),
+    "lighten-3": lighten(palette.$pale-lavender-value, 15%),
+    "lighten-4": lighten(palette.$pale-lavender-value, 20%),
+    "lighten-5": lighten(palette.$pale-lavender-value, 25%)
 );
 
 $raisin-black: (
-    "base": palette.$raisin-black-value
+    "base": palette.$raisin-black-value,
+    "darken-1": darken(palette.$raisin-black-value, 5%),
+    "darken-2": darken(palette.$raisin-black-value, 10%),
+    "darken-3": darken(palette.$raisin-black-value, 15%),
+    "darken-4": darken(palette.$raisin-black-value, 20%),
+    "darken-5": darken(palette.$raisin-black-value, 25%),
+    "lighten-1": lighten(palette.$raisin-black-value, 5%),
+    "lighten-2": lighten(palette.$raisin-black-value, 10%),
+    "lighten-3": lighten(palette.$raisin-black-value, 15%),
+    "lighten-4": lighten(palette.$raisin-black-value, 20%),
+    "lighten-5": lighten(palette.$raisin-black-value, 25%)
 );
 
 $rajah: (
-    "base": palette.$rajah-value
+    "base": palette.$rajah-value,
+    "darken-1": darken(palette.$rajah-value, 5%),
+    "darken-2": darken(palette.$rajah-value, 10%),
+    "darken-3": darken(palette.$rajah-value, 15%),
+    "darken-4": darken(palette.$rajah-value, 20%),
+    "darken-5": darken(palette.$rajah-value, 25%),
+    "lighten-1": lighten(palette.$rajah-value, 5%),
+    "lighten-2": lighten(palette.$rajah-value, 10%),
+    "lighten-3": lighten(palette.$rajah-value, 15%),
+    "lighten-4": lighten(palette.$rajah-value, 20%),
+    "lighten-5": lighten(palette.$rajah-value, 25%)
 );
 
 $royal-purple: (
-    "base": palette.$royal-purple-value
+    "base": palette.$royal-purple-value,
+    "darken-1": darken(palette.$royal-purple-value, 5%),
+    "darken-2": darken(palette.$royal-purple-value, 10%),
+    "darken-3": darken(palette.$royal-purple-value, 15%),
+    "darken-4": darken(palette.$royal-purple-value, 20%),
+    "darken-5": darken(palette.$royal-purple-value, 25%),
+    "lighten-1": lighten(palette.$royal-purple-value, 5%),
+    "lighten-2": lighten(palette.$royal-purple-value, 10%),
+    "lighten-3": lighten(palette.$royal-purple-value, 15%),
+    "lighten-4": lighten(palette.$royal-purple-value, 20%),
+    "lighten-5": lighten(palette.$royal-purple-value, 25%)
 );
 
 $xiketic: (
-    "base": palette.$xiketic-value
+    "base": palette.$xiketic-value,
+    "lighten-1": lighten(palette.$xiketic-value, 5%),
+    "lighten-2": lighten(palette.$xiketic-value, 10%),
+    "lighten-3": lighten(palette.$xiketic-value, 15%),
+    "lighten-4": lighten(palette.$xiketic-value, 20%),
+    "lighten-5": lighten(palette.$xiketic-value, 25%)
 );
