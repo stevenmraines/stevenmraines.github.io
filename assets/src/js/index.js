@@ -28,6 +28,7 @@ let xiketic;
 // Some other global vars
 let skillsChartData;
 let skillsChartConfig;
+let skillsChartActivePoint = 'skill-html';
 let desktopNav;
 let navLinks;
 let navMap;
@@ -60,7 +61,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// Initialize skills radar chart
 	initSkillsChart();
+
+	// Does a little animation on the intro section background divs
+	rotateIntroBackground();
 });
+
+/*
+ * Adds some classes to the background divs of the intro section to make them rotate.
+ */
+function rotateIntroBackground() {
+	addClass(document.querySelector('#background1'), 'rotate-cw');
+	addClass(document.querySelector('#background2'), 'rotate-ccw');
+}
 
 /*
  * Initializes the Materialize mobile nav.
@@ -356,6 +368,8 @@ function initSkillsChart() {
 		]
 	};
 
+	setSkillsChartCardContent();
+
 	skillsChartConfig = {
 		type: 'radar',
 		data: {
@@ -386,6 +400,8 @@ function initSkillsChart() {
 			maintainAspectRatio: false,
 			responsive: true,
 			onClick: chartClick,
+			onHover: chartHover,
+			onLeave: chartLeave,
 			plugins: {
 				title: {
 					color: white,
@@ -428,6 +444,30 @@ function initSkillsChart() {
 	skillsChart = new Chart(skillsChartContext, skillsChartConfig);
 	
 	setSkillsChartGradient();
+}
+
+function setSkillsChartCardContent() {
+	setSkillsChartCardContentHelper(skillsChartData.sets[0]);
+	setSkillsChartCardContentHelper(skillsChartData.sets[1]);
+}
+
+function setSkillsChartCardContentHelper(dataSet) {
+	for(let i = 0; i < dataSet.length; i++) {
+		let yearsXp = dataSet[i];
+
+		if(yearsXp == 0) {
+			continue;
+		}
+
+		let id = '#' + skillsChartData.ids[i];
+		let text = yearsXp + ' year experience';
+
+		if(yearsXp > 1) {
+			text = yearsXp + ' years experience';
+		}
+
+		document.querySelector(id + ' .card-content p').textContent = text;
+	}
 }
 
 /*
@@ -476,6 +516,20 @@ function chartClick(event) {
 }
 
 /*
+ * 
+ */
+function chartHover(event) {
+	
+}
+
+/*
+ * 
+ */
+function chartLeave(event) {
+	
+}
+
+/*
  * Hides all skill cards then shows the one matching the given ID.
  */
 function showSkillsCard(id) {
@@ -484,6 +538,7 @@ function showSkillsCard(id) {
 
 	for(let i = 0; i < cards.length; i++) {
 		if(cards[i].attributes.id.value.toLowerCase().localeCompare(id) == 0) {
+			skillsChartActivePoint = id;
 			removeClass(cards[i], hiddenClass);
 			continue;
         }
@@ -497,7 +552,7 @@ function showSkillsCard(id) {
  * and updates the skills chart background gradient.
  */
 function windowResize() {
-	const adjacent = window.innerWidth;
+	/*const adjacent = window.innerWidth;
 	const opposite = document.querySelector('#intro').clientHeight;
 
 	// Set new angle of rotation
@@ -510,7 +565,7 @@ function windowResize() {
 	// Set new width
 	const hypotenuse = Math.round(Math.sqrt(Math.pow(adjacent, 2) + Math.pow(opposite, 2)));
 	div1.style.width = hypotenuse + "px";
-	div2.style.width = hypotenuse + "px";
+	div2.style.width = hypotenuse + "px";*/
 
 	// Update skills chart background color gradient
 	setSkillsChartGradient();
