@@ -548,26 +548,9 @@ function showSkillsCard(id) {
 }
 
 /*
- * Readjusts the intro section background on page resize
- * and updates the skills chart background gradient.
+ * Updates the skills chart background gradient.
  */
 function windowResize() {
-	/*const adjacent = window.innerWidth;
-	const opposite = document.querySelector('#intro').clientHeight;
-
-	// Set new angle of rotation
-	const angle = Math.atan(opposite / adjacent) * (180 / Math.PI);
-	const div1 = document.querySelector('#intro > div:nth-child(1)');
-	const div2 = document.querySelector('#intro > div:nth-child(2)');
-	div1.style.transform = "rotate(" + angle + "deg)";
-	div2.style.transform = "rotate(-" + angle + "deg)";
-
-	// Set new width
-	const hypotenuse = Math.round(Math.sqrt(Math.pow(adjacent, 2) + Math.pow(opposite, 2)));
-	div1.style.width = hypotenuse + "px";
-	div2.style.width = hypotenuse + "px";*/
-
-	// Update skills chart background color gradient
 	setSkillsChartGradient();
 }
 
@@ -632,7 +615,7 @@ function previewClick(event) {
 	}, 10);
 
 	// Hide all the feature descriptions
-	let selector = 'p[data-project="' + projectName + '"]';
+	let selector = 'ul[data-project="' + projectName + '"]';
 	const descriptions = project.querySelectorAll(selector);
 
 	for(let i = 0; i < descriptions.length; i++) {
@@ -641,7 +624,7 @@ function previewClick(event) {
 
 	// Show the description for the clicked preview image
 	const projectFeature = this.dataset.projectFeature;
-	selector = 'p[data-project-feature="' + projectFeature + '"]';
+	selector = 'ul[data-project-feature="' + projectFeature + '"]';
 	const featureDescription = project.querySelector(selector);
 	removeClass(featureDescription, hiddenClass);
 
@@ -689,6 +672,10 @@ function togglePortfolioImgPreloader(project, image) {
  * Sets the active portfolio project.
  */
 function cardClick(event) {
+	if(event.target.tagName.toLowerCase().localeCompare('a') == 0) {
+		return;
+    }
+
 	const target = event.currentTarget;
 	const id = target.attributes['data-project-content-id'].value;
 	const projects = document.querySelectorAll('.project');
