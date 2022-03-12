@@ -35,6 +35,7 @@ let navMap;
 let portfolioCards;
 let skillsChart;
 let skillsChartContext;
+let lastClickedSkillId = 'skill-html';
 let navHeight = 0;
 let windowHeight = 0;
 let screenTopY = 0;
@@ -401,7 +402,6 @@ function initSkillsChart() {
 			responsive: true,
 			onClick: chartClick,
 			onHover: chartHover,
-			onLeave: chartLeave,
 			plugins: {
 				title: {
 					color: white,
@@ -446,11 +446,17 @@ function initSkillsChart() {
 	setSkillsChartGradient();
 }
 
+/*
+ * Sets the skills chart card text.
+ */
 function setSkillsChartCardContent() {
 	setSkillsChartCardContentHelper(skillsChartData.sets[0]);
 	setSkillsChartCardContentHelper(skillsChartData.sets[1]);
 }
 
+/*
+ * Sets the skills chart card text based on the given years of experience.
+ */
 function setSkillsChartCardContentHelper(dataSet) {
 	for(let i = 0; i < dataSet.length; i++) {
 		let yearsXp = dataSet[i];
@@ -499,11 +505,50 @@ function setSkillsChartGradient() {
  * Responds to chart point click event by showing the appropriate skills card.
  */
 function chartClick(event) {
-	const element = skillsChart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, false);
+	const id = getSkillsChartEventId(event);
+
+	if(!id) {
+		return;
+	}
+
+	lastClickedSkillId = id;
+}
+
+/*
+ * Shows the appropriate skill card on chart point
+ * hover and reverts to the last clicked card on exit.
+ */
+function chartHover(event) {
+	const id = getSkillsChartEventId(event);
+
+	// Akin to a skill point mouseLeave event, so show the last clicked skill card
+	if(!id) {
+		showSkillsCard(lastClickedSkillId);
+		return;
+    }
+
+	// If a skill other than the one last clicked is being hovered, show that card
+	if(lastClickedSkillId.localeCompare(id) != 0) {
+		showSkillsCard(id);
+	}
+}
+
+/*
+ * Returns the element of the chart that was interacted with by the given event.
+ */
+function getSkillsChartEventElement(event) {
+	return skillsChart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, false);
+}
+
+/*
+ * Returns the ID string of the chart element interacted with by the given event.
+ */
+function getSkillsChartEventId(event) {
+	const element = getSkillsChartEventElement(event);
 
 	if(element.length <= 0) {
 		return;
-	}
+    }
 
 	const datasetIndex = element[0].datasetIndex;
 	const index = element[0].index;
@@ -512,21 +557,7 @@ function chartClick(event) {
 		return;
 	}
 
-	showSkillsCard(skillsChartData.ids[index]);
-}
-
-/*
- * 
- */
-function chartHover(event) {
-	
-}
-
-/*
- * 
- */
-function chartLeave(event) {
-	
+	return skillsChartData.ids[index];
 }
 
 /*
