@@ -232,39 +232,13 @@ nav.nav-center ul li {
 /*
  * SKILLS
  */
-#skills .card .card-title {
-    padding-bottom: 24px;
+#skills .card .card-image {
+    padding-top: 24px;
 }
 
 #skills .card i {
     display: inline-block;
-    font-size: 120px;
-}
-
-#skills #skill-html .card-image {
-    padding-bottom: 30px;
-}
-
-#skills #skill-html i {
-    font-size: 90px;
-    position: relative;
-}
-
-#skills #skill-html i:nth-child(1) {
-    z-index: 3;
-    transform: translate(40px, 0);
-}
-
-#skills #skill-html i:nth-child(2) {
-    z-index: 2;
-    transform: translate(0, 15px);
-    //opacity: .66;
-}
-
-#skills #skill-html i:nth-child(3) {
-    z-index: 1;
-    transform: translate(-40px, 30px);
-    //opacity: .33;
+    font-size: 140px;
 }
 
 #skills .container .canvas-container {
