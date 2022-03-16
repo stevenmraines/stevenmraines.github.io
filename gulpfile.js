@@ -100,7 +100,7 @@ function html() {
 
 function img() {
     return gulp.src(paths.img.src)
-        //.pipe(imagemin())
+        .pipe(imagemin())
         .pipe(gulp.dest(paths.img.dest));
 }
 
