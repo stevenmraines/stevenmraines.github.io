@@ -111,6 +111,16 @@ html, body {
 /*
  * INTRO
  */
+@font-face {
+    font-family: "Code-Bold";
+    src: url("/css/fonts/CODE Bold.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "Code-Light";
+    src: url("/css/fonts/CODE Light.otf") format("opentype");
+}
+
 nav ul li.active,
 ul.sidenav li.active {
     background-color: rgba(0,0,0,0.3);
@@ -165,6 +175,15 @@ nav.nav-center ul li {
     justify-content: center;
     align-items: center;
     z-index: 3;
+}
+
+#intro h1,
+#intro h4 {
+    font-family: Code-Light, sans-serif;
+}
+
+#intro h4 {
+    font-style: italic;
 }
 
 #intro div.pos-rel div:first-child img {

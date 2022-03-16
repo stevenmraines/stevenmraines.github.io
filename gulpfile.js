@@ -43,7 +43,7 @@ const paths = {
         dest: 'public/css',
     },
     fonts: {
-        src: 'node_modules/devicon/fonts/*',
+        src: 'assets/fonts/*',
         dest: 'public/css/fonts',
     },
     html: {
@@ -58,6 +58,10 @@ const paths = {
         // src = the "entry point" of the app, for browserify
         src: 'assets/src/js/index.js',
         dest: 'public/js',
+    },
+    nodeFonts: {
+        src: 'node_modules/devicon/fonts/*',
+        dest: 'public/css/fonts',
     },
     videos: {
         src: 'assets/videos/*.mp4',
@@ -126,6 +130,11 @@ function js() {
         .pipe(connect.reload());
 }
 
+function nodeFonts() {
+    return gulp.src(paths.nodeFonts.src)
+        .pipe(gulp.dest(paths.nodeFonts.dest));
+}
+
 function serve(callback) {
     connect.server({
         name: 'Dev App',
@@ -148,7 +157,7 @@ function watch() {
     gulp.watch(paths.js.src, js);
 }
 
-const buildTask = gulp.series(clean, gulp.parallel([css, fonts, videos, html, img, js]));
+const buildTask = gulp.series(clean, gulp.parallel([fonts, nodeFonts, img, videos, html, css, js]));
 const serveTask = gulp.series(buildTask, serve);
 const watchTask = gulp.series(serveTask, watch);
 const watchNoBuildTask = gulp.series(serve, watch);
