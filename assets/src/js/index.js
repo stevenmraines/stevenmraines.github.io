@@ -54,26 +54,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Build a map of the mobile and desktop nav links and their target divs
 	buildNavMap();
 
-	// Initialize intro background by manually calling window resize handler
-	windowResize();
-
 	// Get colors from the sass defined color palette as JS vars
 	getColors();
 
-	// Initialize skills radar chart
+	// This needs to happen after getColors because it uses some of those vars
 	initSkillsChart();
-
-	// Does a little animation on the intro section background divs
-	rotateIntroBackground();
 });
-
-/*
- * Adds some classes to the background divs of the intro section to make them rotate.
- */
-function rotateIntroBackground() {
-	addClass(document.querySelector('#background1'), 'rotate-cw');
-	addClass(document.querySelector('#background2'), 'rotate-ccw');
-}
 
 /*
  * Initializes the Materialize mobile nav.
@@ -627,8 +613,9 @@ function previewClick(event) {
 
 	// Show the preloader for at least 0.5 second until the feature is loaded
 	let deltaTime = 0;
+	let minTime = 500;
 	let poll = setInterval(function() {
-		if(featureIsLoaded(featureElement) && deltaTime >= 500) {
+		if(featureIsLoaded(featureElement) && deltaTime >= minTime) {
 			clearInterval(poll);
 			hideFeaturePreloader(project, featureElement);
 
