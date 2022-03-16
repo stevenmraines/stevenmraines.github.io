@@ -113,13 +113,6 @@ function addEventListeners() {
 
 	// Add scroll event handler
 	document.addEventListener('scroll', scrollHandler);
-
-	// Add load event listener for detecting when portfolio images are loaded
-	const projectImages = document.querySelectorAll('#active-portfolio-img');
-
-	for(let i = 0; i < projectImages.length; i++) {
-		projectImages[i].addEventListener('load', projectImgLoad);
-    }
 }
 
 /*
@@ -597,7 +590,6 @@ function hasClass(element, classStr) {
  * Adds the given CSS class to the given element.
  */
 function addClass(element, classStr) {
-	// If class is already added, do nothing
 	if(hasClass(element, classStr)) {
 		return;
 	}
@@ -619,83 +611,168 @@ function removeClass(element, classStr) {
 function previewClick(event) {
 	if(hasClass(this, activeClass)) {
 		return;
-    }
+	}
 
-	const projectName = this.dataset.project;
+	const projectName = this.dataset.project.toLowerCase();
 	const project = document.getElementById(projectName + '-content');
+	const featureName = this.dataset.projectFeature.toLowerCase();
+	const selector = '.project-feature[data-project-feature="' + featureName + '"]';
+	const featureElement = project.querySelector(selector);
 
-	// Hide the main image and show the preloader spinner
-	const mainImg = project.querySelector('#active-portfolio-img');
-	togglePortfolioImgPreloader(project, mainImg);
+	deactivatePreviewImages(project, this);
 
-	// Set the main image from the clicked preview image's src
-	const src = this.src.replace('.png', '.gif');
-	mainImg.src = src;
+	hideProjectFeatures(project, projectName, featureName);
 
-	// Set the preloader height from the height of the image that is currently loading
+	showFeaturePreloader(project, featureElement);
+
+	// Show the preloader for at least 0.5 second until the feature is loaded
+	let deltaTime = 0;
 	let poll = setInterval(function() {
-		if(mainImg.naturalHeight) {
+		if(featureIsLoaded(featureElement) && deltaTime >= 500) {
 			clearInterval(poll);
-			const width = mainImg.naturalWidth;
-			const height = mainImg.naturalHeight;
-			let parentWidth = getComputedStyle(mainImg.parentElement).width;
+			hideFeaturePreloader(project, featureElement);
+
+			if(isVideo(featureElement)) {
+				featureElement.currentTime = 0;
+            }
+		}
+
+		deltaTime += 10;
+    }, 10);
+}
+
+/*
+ * Returns a boolean indicating whether or not the given element has loaded.
+ */
+function featureIsLoaded(featureElement) {
+	const isImg = isImage(featureElement);
+	const isVid = isVideo(featureElement);
+	return (isImg && featureElement.complete) || (isVid && featureElement.readyState >= 2);
+}
+
+/*
+ * Removes the active class from all preview images for the
+ * given project, and adds it to the one that was clicked.
+ */
+function deactivatePreviewImages(project, clickedPreview) {
+	const previewImages = project.querySelectorAll('.portfolio-preview');
+
+	for(let i = 0; i < previewImages.length; i++) {
+		removeClass(previewImages[i], activeClass);
+	}
+
+	addClass(clickedPreview, activeClass);
+}
+
+/*
+ * Adds the hidden class to all feature elements of
+ * the given project (except for the preview images),
+ * and removes the hidden class from the feature description.
+ */
+function hideProjectFeatures(project, projectName, featureName) {
+	let selector = ':not(img.portfolio-preview)[data-project="' + projectName + '"]';
+	const elements = project.querySelectorAll(selector);
+
+	for(let i = 0; i < elements.length; i++) {
+		addClass(elements[i], hiddenClass);
+	}
+
+	// Show the description matching the clicked preview image
+	selector = 'ul[data-project-feature="' + featureName + '"]';
+	removeClass(project.querySelector(selector), hiddenClass);
+}
+
+/*
+ * Returns a boolean indicating whether or not the given element is an img tag.
+ */
+function isImage(element) {
+	return element.tagName.toLowerCase().localeCompare('img') == 0;
+}
+
+/*
+ * Returns a boolean indicating whether or not the given element is a video tag.
+ */
+function isVideo(element) {
+	return element.tagName.toLowerCase().localeCompare('video') == 0;
+}
+
+/*
+ * Returns the height of the given element, or 0 if it's not an img or video.
+ */
+function getFeatureHeight(element) {
+	if(isImage(element)) {
+		return element.naturalHeight;
+	}
+
+	if(isVideo(element)) {
+		return element.videoHeight;
+	}
+
+	return 0;
+}
+
+/*
+ * Returns the width of the given element, or 0 if it's not an img or video.
+ */
+function getFeatureWidth(element) {
+	if(isImage(element)) {
+		return element.naturalWidth;
+	}
+
+	if(isVideo(element)) {
+		return element.videoWidth;
+	}
+
+	return 0;
+}
+
+/*
+ * Gets the width and height of the given element and
+ * applies them to the preloader spinner dimensions.
+ */
+function setPreloaderDimensions(project, featureElement) {
+	const isImg = isImage(featureElement);
+	const isVid = isVideo(featureElement);
+	const isReady = (isImg && featureElement.naturalHeight)
+		|| (isVid && featureElement.videoHeight);
+
+	let poll = setInterval(function() {
+		if(isReady) {
+			clearInterval(poll);
+			const width = getFeatureWidth(featureElement);
+			const height = getFeatureHeight(featureElement);
+			let parentWidth = getComputedStyle(featureElement.parentElement).width;
 			parentWidth = parentWidth.replace(new RegExp('px', 'i'), '');
 			const adjustedHeight = height * (parentWidth / width) + 'px';
+
+			/*
+			 * Set the height on the preloader and also the div containing the preloader and
+			 * the feature element so that the containing div doesn't briefly collapse
+			 * when toggling the visibility of the preloader and the feature element.
+			 */
 			project.querySelector('.preloader-outer-wrapper').style.height = adjustedHeight;
+			project.querySelector('.project-feature-container').style.height = adjustedHeight;
 		}
 	}, 10);
-
-	// Hide all the feature descriptions
-	let selector = 'ul[data-project="' + projectName + '"]';
-	const descriptions = project.querySelectorAll(selector);
-
-	for(let i = 0; i < descriptions.length; i++) {
-		addClass(descriptions[i], hiddenClass);
-	}
-
-	// Show the description for the clicked preview image
-	const projectFeature = this.dataset.projectFeature;
-	selector = 'ul[data-project-feature="' + projectFeature + '"]';
-	const featureDescription = project.querySelector(selector);
-	removeClass(featureDescription, hiddenClass);
-
-	// Add the active class to the clicked preview image
-	const activeImages = project.querySelectorAll('.portfolio-preview.active');
-
-	for(let i = 0; i < activeImages.length; i++) {
-		removeClass(activeImages[i], activeClass);
-	}
-
-	addClass(this, activeClass);
 }
 
 /*
- * If a portfolio project image is loaded, hide its preloader spinner.
+ * Shows the preloader for the given project and
+ * sets its dimensions while hiding the given feature.
  */
-function projectImgLoad(event) {
-	if(this.complete) {
-		const projectName = this.dataset.project;
-		const project = document.getElementById(projectName + '-content');
-		togglePortfolioImgPreloader(project, this);
-    }
-}
-
-/*
- * Takes the main image for some portfolio project and
- * toggles it and its associated preloader spinner.
- */
-function togglePortfolioImgPreloader(project, image) {
+function showFeaturePreloader(project, featureElement) {
 	const preloader = project.querySelector('.preloader-outer-wrapper');
+	removeClass(preloader, hiddenClass);
+	addClass(featureElement, hiddenClass);
+	setPreloaderDimensions(project, featureElement);
+}
 
-	// Show the preloader
-	if(hasClass(preloader, hiddenClass)) {
-		removeClass(preloader, hiddenClass);
-		addClass(image, hiddenClass);
-		return;
-    }
-
-	// Hide the preloader
-	removeClass(image, hiddenClass);
+/*
+ * Hides the preloader for the given project and shows the given feature.
+ */
+function hideFeaturePreloader(project, featureElement) {
+	const preloader = project.querySelector('.preloader-outer-wrapper');
+	removeClass(featureElement, hiddenClass);
 	addClass(preloader, hiddenClass);
 }
 
@@ -708,7 +785,7 @@ function cardClick(event) {
     }
 
 	const target = event.currentTarget;
-	const id = target.attributes['data-project-content-id'].value;
+	const id = target.attributes['data-project-content-id'].value.toLowerCase();
 	const projects = document.querySelectorAll('.project');
 
 	// Hide all projects
@@ -718,11 +795,11 @@ function cardClick(event) {
 
 	const project = document.getElementById(id);
 
-	// Need to trigger a click on the first project preview image
-	project.querySelector('.portfolio-preview:first-of-type').click();
-
 	// Show the project
 	removeClass(project, hiddenClass);
+
+	// Need to trigger a click on the first project preview image
+	project.querySelector('.portfolio-preview:first-of-type').click();
 
 	// Scroll to top of portfolio section
 	const portfolioSection = document.querySelector('#portfolio');

@@ -10,7 +10,7 @@ const connect = require('gulp-connect');
 const cssnano = require('gulp-cssnano');
 
 // Compress images
-// const imagemin = require('gulp-imagemin');
+const imagemin = require('gulp-imagemin');
 
 // Rename files and their extensions
 const rename = require('gulp-rename');
@@ -36,18 +36,6 @@ const srcVinyl = require('vinyl-source-stream');
 // Some gulp plugins don't support streaming vinyl objects, so a buffered vinyl object is needed
 const buffer = require('vinyl-buffer');
 
-// const imageminJpegtran = require('imagemin-jpegtran');
-
-// async function main() {
-//     const imagemin = (await import('imagemin')).default;
-//     const files = await imagemin(['images/*.{jpg,png}'], {
-//         destination: 'build/images',
-//         plugins: [imageminJpegtran()]
-//     });
-// }
-
-// main();
-
 const paths = {
     root: 'public',
     css: {
@@ -70,6 +58,10 @@ const paths = {
         // src = the "entry point" of the app, for browserify
         src: 'assets/src/js/index.js',
         dest: 'public/js',
+    },
+    videos: {
+        src: 'assets/videos/*.mp4',
+        dest: 'public/videos',
     },
 };
 
@@ -108,7 +100,7 @@ function html() {
 
 function img() {
     return gulp.src(paths.img.src)
-        // .pipe(imagemin())
+        //.pipe(imagemin())
         .pipe(gulp.dest(paths.img.dest));
 }
 
@@ -145,13 +137,18 @@ function serve(callback) {
     callback();
 }
 
+function videos() {
+    return gulp.src(paths.videos.src)
+        .pipe(gulp.dest(paths.videos.dest));
+}
+
 function watch() {
     gulp.watch(paths.css.src, css);
     gulp.watch(paths.html.src, html);
     gulp.watch(paths.js.src, js);
 }
 
-const buildTask = gulp.series(clean, gulp.parallel([css, fonts, html, img, js]));
+const buildTask = gulp.series(clean, gulp.parallel([css, fonts, videos, html, img, js]));
 const serveTask = gulp.series(buildTask, serve);
 const watchTask = gulp.series(serveTask, watch);
 const watchNoBuildTask = gulp.series(serve, watch);
