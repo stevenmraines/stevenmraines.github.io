@@ -42,6 +42,10 @@ const paths = {
         src: 'assets/src/sass/*.scss',
         dest: 'public/css',
     },
+    files: {
+        src: 'assets/files/*',
+        dest: 'public/files',
+    },
     fonts: {
         src: 'assets/fonts/*',
         dest: 'public/css/fonts',
@@ -89,6 +93,11 @@ function css() {
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest(paths.css.dest, { sourcemaps: '.' }))
         .pipe(connect.reload());
+}
+
+function files() {
+    return gulp.src(paths.files.src)
+        .pipe(gulp.dest(paths.files.dest));
 }
 
 function fonts() {
@@ -157,7 +166,7 @@ function watch() {
     gulp.watch(paths.js.src, js);
 }
 
-const buildTask = gulp.series(clean, gulp.parallel([fonts, nodeFonts, img, videos, html, css, js]));
+const buildTask = gulp.series(clean, gulp.parallel([files, fonts, nodeFonts, img, videos, html, css, js]));
 const serveTask = gulp.series(buildTask, serve);
 const watchTask = gulp.series(serveTask, watch);
 const watchNoBuildTask = gulp.series(serve, watch);

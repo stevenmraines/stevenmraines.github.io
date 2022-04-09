@@ -108,6 +108,25 @@ html, body {
     position: relative;
 }
 
+#landscape-resume-button > a.btn-floating {
+    transition: border-radius ease 0.2s;
+}
+
+#landscape-resume-button:hover > a.btn-floating {
+    padding: 0 7px;
+    width: auto;
+    border-radius: 2px;
+
+    > span {
+        display: inline;
+    }
+}
+
+#landscape-resume-button > a.btn-floating > span {
+    display: none;
+    line-height: 56px;
+}
+
 /*
  * INTRO
  */

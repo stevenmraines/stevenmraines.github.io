@@ -46,7 +46,7 @@ let consoleAnimTriggered = false;
  * Initializes all necessary page content.
  */
 document.addEventListener('DOMContentLoaded', function() {
-	// Materialize's mobile nav needs to be initialized
+	// Materialize's mobile nav and floating action buttons need to be initialized
 	initMobileNav();
 
 	addEventListeners();
@@ -78,7 +78,7 @@ function addEventListeners() {
 
 	for(let i = 0; i < navLinks.length; i++) {
 		navLinks[i].addEventListener('click', navClick);
-    }
+	}
 
 	// Attach portfolio project card click event
 	portfolioCards = document.querySelectorAll('#portfolio .card.hoverable');
