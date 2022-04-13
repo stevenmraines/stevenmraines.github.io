@@ -65,6 +65,8 @@ $sidenav-bg-color: $primary-color;
     --console-str: #cf6713;
     --console-var: #58e3fc;
     --console-func: #fdc426;
+    --console-php: #777;
+    --console-keyword: #dc6dbc;
     --console-close-icon-hover: #aaa;
     --console-close-icon-bg: rgba(128, 128, 128, .3);
 }
@@ -559,102 +561,116 @@ nav.nav-center ul li {
  * Duration = 0.05 * X
  *
  * Rounding some values for simplicity.
+ *
+ * Delay of .4s on syntax highlighting/color change looks best.
  */
 .console.animate .editor .line:nth-of-type(1)::after {
     animation-name: show-cursor, type-line, hide-cursor;
-    animation-duration: 1ms, 1.5s, 1ms;
-    animation-timing-function: linear, steps(30), linear;
+    animation-duration: 1ms, .3s, 1ms;
+    animation-timing-function: linear, steps(5), linear;
     animation-fill-mode: forwards;
-    animation-delay: 0s, 1s, 2.5s;
+    animation-delay: 0s, 1s, 1.3s;
 }
 
-.console.animate .editor .line:nth-of-type(1) .var {
-    animation: var-color-change .3s ease forwards 1.75s;
-}
-
-.console.animate .editor .line:nth-of-type(1) .func {
-    animation: func-color-change .3s ease forwards 2.5s;
+.console.animate .editor .line:nth-of-type(1) .php {
+    animation: php-color-change .3s ease forwards 1.4s;
 }
 
 .console.animate .editor .line:nth-of-type(2)::after {
-    animation-name: show-cursor, type-curly-line, hide-cursor;
-    animation-duration: 1ms, .2s, 1ms;
-    animation-timing-function: linear, steps(1), linear;
+    animation-name: show-cursor, type-line, hide-cursor;
+    animation-duration: 1ms, 0.8s, 1ms;
+    animation-timing-function: linear, steps(16), linear;
     animation-fill-mode: forwards;
-    animation-delay: 2.5s, 2.5s, 2.7s;
+    animation-delay: 1.3s, 1.3s, 2.1s;
+}
+
+.console.animate .editor .line:nth-of-type(2) .comment {
+    animation: comment-color-change .3s ease forwards 1.7s;
 }
 
 .console.animate .editor .line:nth-of-type(3)::after {
     animation-name: show-cursor, type-line, hide-cursor;
-    animation-duration: 1ms, 1.5s, 1ms;
-    animation-timing-function: linear, steps(30), linear;
+    animation-duration: 1ms, 1.8s, 1ms;
+    animation-timing-function: linear, steps(35), linear;
     animation-fill-mode: forwards;
-    animation-delay: 2.7s, 2.7s, 4.2s;
+    animation-delay: 2.1s, 2.1s, 3.9s;
 }
 
-.console.animate .editor .line:nth-of-type(3) .var:nth-of-type(2) {
-    animation: var-color-change .3s ease forwards 3.5s;
+.console.animate .editor .line:nth-of-type(3) .var {
+    animation: var-color-change .3s ease forwards 2.5s;
 }
 
-.console.animate .editor .line:nth-of-type(3) .func {
-    animation: func-color-change .3s ease forwards 4s;
-}
-
-.console.animate .editor .line:nth-of-type(3) .var:nth-of-type(4) {
-    animation: var-color-change .3s ease forwards 4.2s;
+.console.animate .editor .line:nth-of-type(3) .str {
+    animation: str-color-change .3s ease forwards 2.8s;
 }
 
 .console.animate .editor .line:nth-of-type(4)::after {
-    animation-name: show-cursor, type-curly-line, hide-cursor;
-    animation-duration: 1ms, .2s, 1ms;
-    animation-timing-function: linear, steps(1), linear;
+    animation-name: show-cursor, type-line, hide-cursor;
+    animation-duration: 1ms, 1.5s, 1ms;
+    animation-timing-function: linear, steps(29), linear;
     animation-fill-mode: forwards;
-    animation-delay: 4.2s, 4.2s, 4.4s;
+    animation-delay: 3.9s, 3.9s, 5.4s;
+}
+
+.console.animate .editor .line:nth-of-type(4) .var {
+    animation: var-color-change .3s ease forwards 4.3s;
+}
+
+.console.animate .editor .line:nth-of-type(4) .keyword {
+    animation: keyword-color-change .3s ease forwards 4.6s;
 }
 
 .console.animate .editor .line:nth-of-type(5)::after {
     animation-name: show-cursor, type-line, hide-cursor;
-    animation-duration: 1ms, .7s, 1ms;
-    animation-timing-function: linear, steps(16), linear;
+    animation-duration: 1ms, 1.5s, 1ms;
+    animation-timing-function: linear, steps(30), linear;
     animation-fill-mode: forwards;
-    animation-delay: 4.4s, 4.4s, 5.1s;
+    animation-delay: 5.4s, 5.4s, 6.9s;
 }
 
-.console.animate .editor .line.comment:nth-of-type(5) {
-    animation: comment-color-change .3s ease forwards 4.6s;
+.console.animate .editor .line:nth-of-type(5) .var {
+    animation: var-color-change .3s ease forwards 5.8s;
+}
+
+.console.animate .editor .line:nth-of-type(5) .func {
+    //animation: func-color-change .3s ease forwards 6.5s;
 }
 
 .console.animate .editor .line:nth-of-type(6)::after {
-    animation-name: show-cursor, type-line, hide-cursor;
-    animation-duration: 1ms, 1.3s, 1ms;
-    animation-timing-function: linear, steps(26), linear;
+    animation-name: show-cursor, type-curly-line, hide-cursor;
+    animation-duration: 1ms, .2s, 1ms;
+    animation-timing-function: linear, steps(1), linear;
     animation-fill-mode: forwards;
-    animation-delay: 5.1s, 5.1s, 6.4s;
-}
-
-.console.animate .editor .line:nth-of-type(6) .var {
-    animation: var-color-change .3s ease forwards 5.3s;
-}
-
-.console.animate .editor .line:nth-of-type(6) .str {
-    animation: str-color-change .3s ease forwards 5.8s;
+    animation-delay: 6.9s, 6.9s, 7.1s;
 }
 
 .console.animate .editor .line:nth-of-type(7)::after {
-    animation-name: show-cursor, type-line, cursor-blink;
-    animation-duration: 1ms, 1.8s, 1s;
-    animation-timing-function: linear, steps(35), step-end;
+    animation-name: show-cursor, type-line, hide-cursor;
+    animation-duration: 1ms, 1.5s, 1ms;
+    animation-timing-function: linear, steps(30), linear;
+    animation-fill-mode: forwards;
+    animation-delay: 7.1s, 7.1s, 8.6s;
+}
+
+.console.animate .editor .line:nth-of-type(7) .var:nth-of-type(1) {
+    animation: var-color-change .3s ease forwards 7.7s;
+}
+
+.console.animate .editor .line:nth-of-type(7) .func {
+    //animation: func-color-change .3s ease forwards 7.7s;
+}
+
+.console.animate .editor .line:nth-of-type(7) .var:nth-of-type(3) {
+    animation: var-color-change .3s ease forwards 8.6s;
+}
+
+.console.animate .editor .line:nth-of-type(8)::after {
+    animation-name: show-cursor, type-curly-line, cursor-blink;
+    animation-duration: 1ms, .2s, 1s;
+    animation-timing-function: linear, steps(1), step-end;
     animation-iteration-count: 1, 1, infinite;
     animation-fill-mode: forwards;
-    animation-delay: 6.4s, 6.4s, 8.2s;
-}
-
-.console.animate .editor .line:nth-of-type(7) .var {
-    animation: var-color-change .3s ease forwards 6.6s;
-}
-
-.console.animate .editor .line:nth-of-type(7) .str {
-    animation: str-color-change .3s ease forwards 7.1s;
+    animation-delay: 8.6s, 8.6s, 8.8s;
 }
 
 @keyframes show-cursor {
@@ -719,6 +735,18 @@ nav.nav-center ul li {
 @keyframes func-color-change {
     to {
         color: var(--console-func);
+    }
+}
+
+@keyframes php-color-change {
+    to {
+        color: var(--console-php);
+    }
+}
+
+@keyframes keyword-color-change {
+    to {
+        color: var(--console-keyword);
     }
 }
 
