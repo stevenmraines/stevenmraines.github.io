@@ -443,3 +443,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# JetBrains IDEs (PhpStorm, etc.)
+.idea/
