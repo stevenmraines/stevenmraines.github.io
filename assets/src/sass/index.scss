@@ -358,19 +358,18 @@ nav.nav-center ul li {
 /*
  * WORK EXPERIENCE
  */
-.qb-wrapper {
+.work-experience-wrapper {
     padding: 2rem !important;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     overflow: hidden;
 }
 
-.qb-wrapper::after {
+.work-experience-wrapper::after {
     position: absolute;
     width: 300%;
     height: 300%;
     top: -100%;
     left: -100%;
-    background-image: url('../img/queensboro-repeating.png');
     background-repeat: repeat;
     transform: rotate(30deg);
     opacity: .3;
@@ -389,10 +388,18 @@ nav.nav-center ul li {
     }
 }
 
-.qb-wrapper > h2,
-.qb-wrapper > h3,
-.qb-wrapper > h4 {
+.work-experience-wrapper > h2,
+.work-experience-wrapper > h3,
+.work-experience-wrapper > h4 {
     z-index: 2;
+}
+
+.qb-wrapper::after {
+    background-image: url('../img/queensboro-repeating.png');
+}
+
+.ps-wrapper::after {
+    background-image: url('../img/piestar-white-repeating.png');
 }
 
 /*
