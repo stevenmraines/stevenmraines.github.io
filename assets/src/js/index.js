@@ -51,6 +51,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	addEventListeners();
 
+	initPhotoStack();
+
 	// Build a map of the mobile and desktop nav links and their target divs
 	buildNavMap();
 
@@ -60,6 +62,30 @@ document.addEventListener('DOMContentLoaded', function() {
 	// This needs to happen after getColors because it uses some of those vars
 	initSkillsChart();
 });
+
+/*
+ * Cycles through the photo stack on click, sliding the top image
+ * out to the side and moving it to the back of the stack.
+ */
+function initPhotoStack() {
+	const stack = document.querySelector('.photo-stack');
+	let animating = false;
+
+	stack.addEventListener('click', function() {
+		if(animating) return;
+		animating = true;
+
+		const top = stack.querySelector('img:first-child');
+		const next = stack.querySelector('img:nth-child(2)');
+		addClass(next, 'is-entering');
+
+		next.addEventListener('animationend', function() {
+			removeClass(next, 'is-entering');
+			stack.appendChild(top);
+			animating = false;
+		}, { once: true });
+	});
+}
 
 /*
  * Initializes the Materialize mobile nav.
