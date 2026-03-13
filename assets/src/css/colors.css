@@ -1,0 +1,32 @@
+/* https://lospec.com/palette-list/cc-29 */
+@theme {
+    --color-parchment: #f2f0e5;
+    --color-silver: #b8b5b9;
+    --color-ash: #868188;
+    --color-slate: #646365;
+    --color-charcoal: #45444f;
+    --color-navy: #3a3858;
+    --color-jet: #212123;
+    --color-eggplant: #352b42;
+    --color-slate-blue: #43436a;
+    --color-cornflower: #4b80ca;
+    --color-turquoise: #68c2d3;
+    --color-seafoam: #a2dcc7;
+    --color-straw: #ede19e;
+    --color-tan: #d3a068;
+    --color-rust: #b45252;
+    --color-mauve: #6a536e;
+    --color-plum: #4b4158;
+    --color-sienna: #80493a;
+    --color-umber: #a77b5b;
+    --color-linen: #e5ceb4;
+    --color-lime: #c2d368;
+    --color-fern: #8ab060;
+    --color-teal: #567b79;
+    --color-forest: #4e584a;
+    --color-olive: #7b7243;
+    --color-khaki: #b2b47e;
+    --color-blush: #edc8c4;
+    --color-lavender: #cf8acb;
+    --color-dusk: #5f556a;
+}

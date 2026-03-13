@@ -1,22 +1,15 @@
 const gulp = require('gulp');
 
-// Add CSS vendor prefixes
-const autoprefixer = require('gulp-autoprefixer');
+const postcss = require('gulp-postcss');
 
 // Used to spin up a dev server
 const connect = require('gulp-connect');
-
-// Minify CSS
-const cssnano = require('gulp-cssnano');
 
 // Compress images
 const imagemin = require('gulp-imagemin');
 
 // Rename files and their extensions
 const rename = require('gulp-rename');
-
-// Compile SASS into regular CSS
-const sass = require('gulp-sass')(require('sass'));
 
 // Needed to make sourcemap file with Browserify
 const sourcemaps = require('gulp-sourcemaps');
@@ -39,7 +32,7 @@ const buffer = require('vinyl-buffer');
 const paths = {
     root: 'public',
     css: {
-        src: 'assets/src/sass/*.scss',
+        src: 'assets/src/css/index.css',
         dest: 'public/css',
     },
     files: {
@@ -77,22 +70,18 @@ function clean() {
     return del([paths.root]);
 }
 
-function cleanCss() {
-    return del([paths.css.dest + '/*.css', paths.css.dest + '/*.map']);
+function css() {
+    return gulp.src(paths.css.src, { sourcemaps: true })
+        .pipe(postcss([
+            require('@tailwindcss/postcss')(),
+        ]))
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(gulp.dest(paths.css.dest, { sourcemaps: '.' }))
+        .pipe(connect.reload());
 }
 
 function cleanJs() {
     return del([paths.js.dest]);
-}
-
-function css() {
-    return gulp.src(paths.css.src, { sourcemaps: true })
-        .pipe(sass())
-        .pipe(autoprefixer())
-        .pipe(cssnano())
-        .pipe(rename({ suffix: '.min' }))
-        .pipe(gulp.dest(paths.css.dest, { sourcemaps: '.' }))
-        .pipe(connect.reload());
 }
 
 function files() {
@@ -162,7 +151,7 @@ function videos() {
 
 function watch() {
     gulp.watch(paths.css.src, css);
-    gulp.watch(paths.html.src, html);
+    gulp.watch(paths.html.src, gulp.parallel(html, css));
     gulp.watch(paths.js.src, js);
 }
 
@@ -171,14 +160,12 @@ const serveTask = gulp.series(buildTask, serve);
 const watchTask = gulp.series(serveTask, watch);
 const watchNoBuildTask = gulp.series(serve, watch);
 const cleanTask = gulp.series(clean);
-const cssTask = gulp.series(cleanCss, css, serve, watch);
 const jsTask = gulp.series(cleanJs, js, serve, watch);
 
 exports.build = buildTask;
 exports.serve = serveTask;
 exports.watch = watchTask;
 exports.watchnob = watchNoBuildTask;
-exports.css = cssTask;
 exports.js = jsTask;
 exports.clean = cleanTask;
 exports.default = watchTask;

@@ -1,0 +1,116 @@
+@import "tailwindcss";
+@import "./colors.css";
+
+/*
+ ***********************************************************************************************************************
+ * FONTS
+ ***********************************************************************************************************************
+ */
+@font-face {
+    font-family: "PixelifySans-Bold";
+    src: url("/css/fonts/PixelifySans-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "PixelifySans-Medium";
+    src: url("/css/fonts/PixelifySans-Medium.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "PixelifySans-Regular";
+    src: url("/css/fonts/PixelifySans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "PixelifySans-SemiBold";
+    src: url("/css/fonts/PixelifySans-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "SFPixelate";
+    src: url("/css/fonts/SFPixelate.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "SFPixelate-Bold";
+    src: url("/css/fonts/SFPixelate-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "SFPixelate-BoldOblique";
+    src: url("/css/fonts/SFPixelate-BoldOblique.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "SFPixelate-Oblique";
+    src: url("/css/fonts/SFPixelate-Oblique.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "SFPixelateShaded";
+    src: url("/css/fonts/SFPixelateShaded.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "SFPixelateShaded-Bold";
+    src: url("/css/fonts/SFPixelateShaded-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "SFPixelateShaded-BoldOblique";
+    src: url("/css/fonts/SFPixelateShaded-BoldOblique.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "SFPixelateShaded-Oblique";
+    src: url("/css/fonts/SFPixelateShaded-Oblique.ttf") format("truetype");
+}
+
+/*
+ ***********************************************************************************************************************
+ * TAILWIND OVERRIDES
+ ***********************************************************************************************************************
+ */
+@theme {
+    --font-sans: SFPixelate, sans-serif;
+    --font-outline: SFPixelateShaded, sans-serif;
+}
+
+/*
+ ***********************************************************************************************************************
+ * MISC
+ ***********************************************************************************************************************
+ */
+html, body {
+    height: 100%;
+}
+
+/*
+ ***********************************************************************************************************************
+ * INTRO SECTION
+ ***********************************************************************************************************************
+ */
+nav ul li.active,
+ul.sidenav li.active {
+    background-color: rgba(0,0,0,0.3);
+}
+
+nav.nav-center ul {
+    text-align: center;
+}
+
+nav.nav-center ul li {
+    display: inline-block;
+    float: none;
+}
+
+/*
+ ***********************************************************************************************************************
+ * XL SCREEN SIZE
+ ***********************************************************************************************************************
+ */
+/*@media #{mat-vars.$extra-large-and-up} {*/
+/*    h2 {*/
+/*        color: red;*/
+/*    }*/
+/*}*/
