@@ -22,7 +22,11 @@ document.addEventListener('DOMContentLoaded', function() {
  * Adds the various event listeners to the page.
  */
 function addEventListeners() {
-	// TODO
+	document.getElementById('mobile-nav-toggle').addEventListener('click', onMobileNavToggleClick);
+}
+
+function onMobileNavToggleClick(event) {
+	document.getElementById('mobile-nav').classList.toggle('hidden');
 }
 
 /*

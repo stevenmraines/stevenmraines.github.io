@@ -7,57 +7,89 @@
   <title>Steven Raines</title>
 
   <link rel="stylesheet" href="css/index.min.css" type="text/css">
-  
+
   <!-- Let the browser know this page is optimized for mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body class="bg-tan text-jet">
-    <!-- INTRO SECTION -->
-    <section id="intro">
-        <div>
-            <img src="img/profile-photo.png" alt="an image of the page author, Steven Raines" />
+<body class="bg-parchment text-jet">
+    <div class="relative h-full overflow-y-hidden">
+        <!-- NAVBAR -->
+        <div id="mobile-nav-toggle" class="absolute top-2 left-2 cursor-pointer z-2">
+            X
         </div>
-        <div>
-            <h1>
-                Hi, I'm <span class="tan-text text-darken-2">Steven Raines</span>
-            </h1>
-            <h2 class="text-cornflower font-outline">
-                Full-Stack Web Developer
-            </h2>
-            <h5>
-                (Amateur Game Developer)
-            </h5>
-            <h3>
-                You can call me Steve
-            </h3>
+        <div id="mobile-nav" class="bg-tan absolute inset-y-0 left-0 p-7 pb-0 z-1 hidden">
+            <ul>
+                <li>
+                    <a href="#intro">Intro</a>
+                </li>
+                <li>
+                    <a href="#portfolio">Portfolio</a>
+                </li>
+                <li>
+                    <a href="#work">Work XP</a>
+                </li>
+                <li>
+                    <a href="#education">Education</a>
+                </li>
+                <li>
+                    <a href="#skills">Skills</a>
+                </li>
+                <li>
+                    <a href="#contact">Contact</a>
+                </li>
+            </ul>
         </div>
-    </section>
 
-    <!-- PORTFOLIO SECTION -->
-    <section id="portfolio">
-        <h2>Portfolio</h2>
-    </section>
+        <!-- MAIN CONTENT WRAPPER -->
+        <div class="absolute inset-0 z-0">
+            <!-- INTRO SECTION -->
+            <div id="intro" class="flex justify-between items-center lg:flex-row flex-col">
+                <div class="lg:order-last">
+                    <img class="w-96" src="img/profile-photo.png" alt="an image of the page author, Steven Raines" />
+                </div>
+                <div>
+                    <h1>
+                        Hi, I'm <span class="text-tan">Steven Raines</span>
+                    </h1>
+                    <h2 class="text-cornflower font-outline">
+                        Full-Stack Web Developer
+                    </h2>
+                    <h5>
+                        (Amateur Game Developer)
+                    </h5>
+                    <h3>
+                        You can call me Steve
+                    </h3>
+                </div>
+            </div>
 
-    <!-- WORK EXPERIENCE SECTION -->
-    <section id="work">
-        <h2>Work Experience</h2>
-    </section>
+            <!-- PORTFOLIO SECTION -->
+            <div id="portfolio" class="hidden">
+                <h2>Portfolio</h2>
+            </div>
 
-    <!-- EDUCATION SECTION -->
-    <section id="education">
-        <h2>Education</h2>
-    </section>
+            <!-- WORK EXPERIENCE SECTION -->
+            <div id="work" class="hidden">
+                <h2>Work Experience</h2>
+            </div>
 
-    <!-- SKILLS SECTION -->
-    <section id="skills">
-        <h2>Skills</h2>
-    </section>
+            <!-- EDUCATION SECTION -->
+            <div id="education" class="hidden">
+                <h2>Education</h2>
+            </div>
 
-    <!-- CONTACT SECTION -->
-    <section id="contact">
-        <h2>Contact</h2>
-    </section>
+            <!-- SKILLS SECTION -->
+            <div id="skills" class="hidden">
+                <h2>Skills</h2>
+            </div>
+
+            <!-- CONTACT SECTION -->
+            <div id="contact" class="hidden">
+                <h2>Contact</h2>
+            </div>
+        </div>
+    </div>
 
     <script src="js/index.min.js" type="module"></script>
 </body>
