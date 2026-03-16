@@ -1,0 +1,42 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Scroll body (rolled parchment) -->
+    <!-- Main scroll tube body -->
+    <rect x="38" y="68" width="124" height="72" rx="6" fill="#F5E6C0" stroke="#C8A85A" stroke-width="2"/>
+    <!-- Parchment texture lines -->
+    <line x1="55" y1="80" x2="145" y2="80" stroke="#D4B86A" stroke-width="0.8" opacity="0.5"/>
+    <line x1="55" y1="90" x2="145" y2="90" stroke="#D4B86A" stroke-width="0.8" opacity="0.5"/>
+    <line x1="55" y1="100" x2="145" y2="100" stroke="#D4B86A" stroke-width="0.8" opacity="0.5"/>
+    <line x1="55" y1="110" x2="145" y2="110" stroke="#D4B86A" stroke-width="0.8" opacity="0.5"/>
+    <line x1="55" y1="120" x2="145" y2="120" stroke="#D4B86A" stroke-width="0.8" opacity="0.5"/>
+    <!-- Left rolled end cap -->
+    <ellipse cx="38" cy="104" rx="12" ry="36" fill="#E8CFA0" stroke="#C8A85A" stroke-width="2"/>
+    <ellipse cx="38" cy="104" rx="7" ry="31" fill="#D4B070" opacity="0.5"/>
+    <!-- Right rolled end cap -->
+    <ellipse cx="162" cy="104" rx="12" ry="36" fill="#E8CFA0" stroke="#C8A85A" stroke-width="2"/>
+    <ellipse cx="162" cy="104" rx="7" ry="31" fill="#D4B070" opacity="0.5"/>
+    <!-- Overlap edge lines to give depth -->
+    <line x1="38" y1="68" x2="162" y2="68" stroke="#C8A85A" stroke-width="1.5"/>
+    <line x1="38" y1="140" x2="162" y2="140" stroke="#C8A85A" stroke-width="1.5"/>
+
+    <!-- Red ribbon band across middle -->
+    <rect x="26" y="93" width="148" height="22" rx="2" fill="#CC2222" opacity="0.92"/>
+    <!-- Ribbon highlight -->
+    <rect x="26" y="93" width="148" height="7" rx="2" fill="#E04040" opacity="0.5"/>
+
+    <!-- Bow knot center circle -->
+    <ellipse cx="100" cy="104" rx="9" ry="9" fill="#AA1111" stroke="#881111" stroke-width="1.5"/>
+    <ellipse cx="100" cy="104" rx="5" ry="5" fill="#CC2222"/>
+
+    <!-- Left bow loop -->
+    <path d="M91 104 Q74 88 68 96 Q64 102 72 108 Q80 113 91 104Z" fill="#CC2222" stroke="#881111" stroke-width="1.2"/>
+    <path d="M91 104 Q76 94 70 99 Q67 103 74 107 Q81 110 91 104Z" fill="#E03030" opacity="0.45"/>
+
+    <!-- Right bow loop -->
+    <path d="M109 104 Q126 88 132 96 Q136 102 128 108 Q120 113 109 104Z" fill="#CC2222" stroke="#881111" stroke-width="1.2"/>
+    <path d="M109 104 Q124 94 130 99 Q133 103 126 107 Q119 110 109 104Z" fill="#E03030" opacity="0.45"/>
+
+    <!-- Left ribbon tail -->
+    <path d="M68 96 Q56 105 60 118 Q63 126 70 122 Q72 108 72 108Z" fill="#CC2222" stroke="#881111" stroke-width="1.2"/>
+    <!-- Right ribbon tail -->
+    <path d="M132 96 Q144 105 140 118 Q137 126 130 122 Q128 108 128 108Z" fill="#CC2222" stroke="#881111" stroke-width="1.2"/>
+</svg>
