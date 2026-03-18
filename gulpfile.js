@@ -5,9 +5,6 @@ const postcss = require('gulp-postcss');
 // Used to spin up a dev server
 const connect = require('gulp-connect');
 
-// Compress images
-const imagemin = require('gulp-imagemin');
-
 // Rename files and their extensions
 const rename = require('gulp-rename');
 
@@ -102,7 +99,6 @@ function html() {
 
 function img() {
     return gulp.src(paths.img.src)
-        .pipe(imagemin())
         .pipe(gulp.dest(paths.img.dest));
 }
 

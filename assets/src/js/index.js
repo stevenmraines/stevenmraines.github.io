@@ -16,6 +16,7 @@ let screenBottomY = 0;
  */
 document.addEventListener('DOMContentLoaded', function() {
 	addEventListeners();
+	initSkillsCloud();
 });
 
 /**
@@ -23,10 +24,82 @@ document.addEventListener('DOMContentLoaded', function() {
  */
 function addEventListeners() {
 	document.getElementById('mobile-nav-toggle').addEventListener('click', onMobileNavToggleClick);
+	document.addEventListener('scroll', onDocumentScroll);
 }
 
 function onMobileNavToggleClick(event) {
 	document.getElementById('mobile-nav').classList.toggle('hidden');
+}
+
+function onDocumentScroll(event) {
+	console.log('scrolling');
+	windowHeight = window.innerHeight;
+	screenTopY = window.scrollY;
+	screenBottomY = screenTopY + windowHeight;
+}
+
+function initSkillsCloud() {
+	const skillsContainer = document.getElementById('skills-container');
+	const skills = Array.from(skillsContainer.children);
+	const maxSkillSize = 150;
+
+	// Skill level -> pixel size
+	const sizeMap = {
+		1: maxSkillSize * 0.25,
+		2: maxSkillSize * 0.3,
+		3: maxSkillSize * 0.45,
+		4: maxSkillSize * 0.6,
+		5: maxSkillSize * 0.75,
+		6: maxSkillSize * 0.9,
+		7: maxSkillSize,
+	};
+
+	// Resize skills
+	for (const skill of skills) {
+		const size = sizeMap[parseInt(skill.dataset.skillLvl)] || 40;
+		skill.style.width = size + 'px';
+		skill.style.height = size + 'px';
+		skill.style.position = 'absolute';
+	}
+
+	// Highest level skills go closest to center
+	skills.sort((a, b) => parseInt(b.dataset.skillLvl) - parseInt(a.dataset.skillLvl));
+
+	skillsContainer.style.position = 'relative';
+	const w = skillsContainer.offsetWidth;
+	skillsContainer.style.height = w + 'px';
+
+	const cx = w / 2;
+	const cy = w / 2;
+	const pad = 4;
+	const placed = [];
+
+	function rectsOverlap(x1, y1, s1, x2, y2, s2) {
+		return x1 < x2 + s2 + pad && x1 + s1 + pad > x2 && y1 < y2 + s2 + pad && y1 + s1 + pad > y2;
+	}
+
+	for (const skill of skills) {
+		const size = sizeMap[parseInt(skill.dataset.skillLvl)] || 40;
+		let angle = 0;
+		let x, y;
+
+		// Archimedean spiral outward from center until a valid position is found
+		for (let i = 0; i < 10000; i++) {
+			const r = 8 * angle;
+			x = cx + r * Math.cos(angle) - size / 2;
+			y = cy + r * Math.sin(angle) - size / 2;
+
+			const inBounds = x >= 0 && y >= 0 && x + size <= w && y + size <= w;
+			const free = !placed.some(p => rectsOverlap(x, y, size, p.x, p.y, p.size));
+
+			if (inBounds && free) break;
+			angle += 0.1;
+		}
+
+		skill.style.left = x + 'px';
+		skill.style.top = y + 'px';
+		placed.push({x, y, size});
+	}
 }
 
 /*
