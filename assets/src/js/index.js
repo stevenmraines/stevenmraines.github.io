@@ -23,12 +23,28 @@ document.addEventListener('DOMContentLoaded', function() {
  * Adds the various event listeners to the page.
  */
 function addEventListeners() {
+	window.addEventListener('resize', onWindowResize);
 	document.getElementById('mobile-nav-toggle').addEventListener('click', onMobileNavToggleClick);
+	document.body.addEventListener('click', onBodyClick);
 	document.addEventListener('scroll', onDocumentScroll);
+}
+
+function onWindowResize(event) {
+	initSkillsCloud();
 }
 
 function onMobileNavToggleClick(event) {
 	document.getElementById('mobile-nav').classList.toggle('hidden');
+}
+
+function onBodyClick(event) {
+	if (event.target.closest('#mobile-nav-toggle')) {
+		return;
+	}
+	const mobileNav = document.getElementById('mobile-nav');
+	if (!mobileNav.classList.contains('hidden')) {
+		mobileNav.classList.add('hidden');
+	}
 }
 
 function onDocumentScroll(event) {
@@ -38,10 +54,16 @@ function onDocumentScroll(event) {
 	screenBottomY = screenTopY + windowHeight;
 }
 
+/**
+ * Initializes the skills cloud by placing and sizing each image according to its level of skill.
+ */
 function initSkillsCloud() {
 	const skillsContainer = document.getElementById('skills-container');
 	const skills = Array.from(skillsContainer.children);
-	const maxSkillSize = 150;
+	const maxSkillSizeMobile = 90;
+	const maxSkillSizeDesktop = 150;
+	const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+	const maxSkillSize = isDesktop ? maxSkillSizeDesktop : maxSkillSizeMobile;
 
 	// Skill level -> pixel size
 	const sizeMap = {
