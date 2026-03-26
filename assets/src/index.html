@@ -15,31 +15,35 @@
 <body class="bg-parchment text-jet">
     <div class="grid grid-cols-[4rem_1fr] grid-rows-[4rem_1fr_4rem] h-screen gap-0">
         <!-- TOP LEFT -->
-        <div class="border border-jet"></div>
+        <div class="border border-jet relative">
+            <a class="cursor-pointer">
+                <img class="w-8 pixelated absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2" src="img/arrow.png" alt="an arrow pointing up" />
+            </a>
+        </div>
         <!-- TOP RIGHT -->
-        <div class="border border-jet"></div>
+        <div class="border border-jet">
+            <a href="#contact" class="bg-fern text-parchment text-3xl rounded-md p-1 cursor-pointer float-right mr-5 mt-2 border-2 border-jet">
+                Contact
+            </a>
+        </div>
         <!-- MIDDLE LEFT -->
         <div class="border border-jet"></div>
         <!-- MIDDLE RIGHT (MAIN CONTENT) -->
         <div class="row-span-2 grid grid-cols-[3fr_1fr] grid-rows-[1fr_7rem]">
             <!-- MAIN CONTENT LEFT -->
             <div class="row-span-2 border border-jet relative">
-                <img class="w-96 absolute top-1/2 -translate-y-2/3 -right-1/5" src="img/profile-photo.png" alt="an image of the page author, Steven Raines" />
-                <!-- TODO THIS DOESN'T NEED TO BE FLEX ANYMORE -->
-                <div id="intro" class="flex justify-between items-center lg:flex-row flex-col">
+                <img class="border-2 border-jet w-96 absolute top-1/2 -translate-y-2/3 -right-1/16" src="img/profile-photo.png" alt="an image of the page author, Steven Raines" />
+                <div id="intro">
                     <div class="text-center">
-                        <h1 class="text-4xl">
-                            Hi, I'm <span class="text-lavender text-5xl">Steven Raines</span>
+                        <h1 class="text-4xl absolute top-1/4 left-1/14">
+                            Hi, I'm <span class="text-rust text-7xl font-bold">Steven Raines</span>
                         </h1>
-                        <h1 class="text-cornflower text-6xl font-outline">
-                            Full-Stack Web Developer
+                        <h1 class="text-cornflower text-8xl font-outline absolute top-80 left-1/6 text-nowrap">
+                            Full-Stack<br />Web Developer
                         </h1>
-                        <h1 class="text-3xl">
+                        <h1 class="text-4xl absolute top-2/3 left-1/6">
                             (Amateur Game Developer)
                         </h1>
-                        <a href="#contact" class="bg-fern text-parchment text-4xl rounded-md p-3 cursor-pointer">
-                            Contact
-                        </a>
                     </div>
                 </div>
             </div>
@@ -49,7 +53,11 @@
             <div class="border border-jet"></div>
         </div>
         <!-- BOTTOM LEFT -->
-        <div class="border border-jet"></div>
+        <div class="border border-jet relative">
+            <a class="cursor-pointer">
+                <img class="w-8 pixelated absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 rotate-180" src="img/arrow.png" alt="an arrow pointing up" />
+            </a>
+        </div>
     </div>
 <!--        <div class="row-span-1">-->
 <!--            &lt;!&ndash; NAVBAR &ndash;&gt;-->

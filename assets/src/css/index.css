@@ -74,6 +74,7 @@
 @theme {
     --font-sans: SFPixelate, sans-serif;
     --font-outline: SFPixelateShaded, sans-serif;
+    --font-bold: SFPixelate-Bold, sans-serif;
 }
 
 /*
