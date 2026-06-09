@@ -32,6 +32,9 @@ const paths = {
         src: 'assets/src/css/index.css',
         dest: 'public/css',
     },
+    colors: {
+        src: 'assets/src/css/colors.css',
+    },
     files: {
         src: 'assets/files/*',
         dest: 'public/files',
@@ -147,6 +150,7 @@ function videos() {
 
 function watch() {
     gulp.watch(paths.css.src, css);
+    gulp.watch(paths.colors.src, css);
     gulp.watch(paths.html.src, gulp.parallel(html, css));
     gulp.watch(paths.js.src, js);
 }
