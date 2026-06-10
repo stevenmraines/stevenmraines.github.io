@@ -84,20 +84,22 @@
  */
 @layer base {
     html, body {
-        @apply h-full bg-dark-gray text-white;
+        @apply h-full bg-black text-white;
     }
     nav {
-        @apply bg-viridian2 flex justify-around items-center underline border-b-2 border-black;
+        @apply bg-dark-gray flex justify-around items-center border-b-2 border-viridian2;
         & > ul {
             @apply flex gap-12;
             & > li {
                 /* bg-viridian2 might seem redundant here because the nav has it too,
                    but it's needed so that filter: brightness has something to brighten. */
-                @apply bg-viridian2 px-2 py-4;
-                @apply transition-[filter];
-                @apply duration-150;
+                @apply bg-dark-gray px-2 py-4;
+                @apply transition-[filter,color];
+                /* TODO See if there's a way to add a tailwind var for this to be reused for things like the button transition duration */
+                @apply duration-300;
                 &:hover {
-                    filter: brightness(1.25);
+                    @apply text-viridian2 underline;
+                    filter: brightness(1.5);
                 }
             }
         }
@@ -131,12 +133,12 @@
     .btn {
         @apply rounded-xs px-1.5 py-0.5 cursor-pointer;
         @apply transition-[filter];
-        @apply duration-150;
+        @apply duration-300;
         &:hover {
-            filter: brightness(1.25);
+            filter: brightness(1.35);
         }
         &:active {
-            filter: brightness(0.75);
+            filter: brightness(0.6);
         }
     }
 }
