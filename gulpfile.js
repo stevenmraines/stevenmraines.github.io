@@ -26,6 +26,9 @@ const srcVinyl = require('vinyl-source-stream');
 // Some gulp plugins don't support streaming vinyl objects, so a buffered vinyl object is needed
 const buffer = require('vinyl-buffer');
 
+// Allow including partials in HTML files
+const fileInclude = require('gulp-file-include');
+
 const paths = {
     root: 'public',
     css: {
@@ -44,8 +47,14 @@ const paths = {
         dest: 'public/css/fonts',
     },
     html: {
-        src: 'assets/src/index.html',
-        dest: 'public',
+        index: {
+            src: 'assets/src/index.html',
+            dest: 'public',
+        },
+        about: {
+            src: 'assets/src/about.html',
+            dest: 'public',
+        },
     },
     img: {
         src: 'assets/img/*',
@@ -95,8 +104,9 @@ function fonts() {
 }
 
 function html() {
-    return gulp.src(paths.html.src)
-        .pipe(gulp.dest(paths.html.dest))
+    return gulp.src('assets/src/**/*.html')
+        .pipe(fileInclude({ prefix: '@@', basepath: '@file' }))
+        .pipe(gulp.dest('public'))
         .pipe(connect.reload());
 }
 
@@ -151,7 +161,7 @@ function videos() {
 function watch() {
     gulp.watch(paths.css.src, css);
     gulp.watch(paths.colors.src, css);
-    gulp.watch(paths.html.src, gulp.parallel(html, css));
+    gulp.watch('assets/src/**/*.html', gulp.parallel(html, css));
     gulp.watch(paths.js.src, js);
 }
 
