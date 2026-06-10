@@ -87,19 +87,19 @@
         @apply h-full bg-black text-white;
     }
     nav {
-        @apply bg-dark-gray flex justify-around items-center border-b-2 border-viridian2;
+        @apply bg-dark-gray text-viridian2 flex justify-around items-center;
         & > ul {
             @apply flex gap-12;
             & > li {
-                /* bg-viridian2 might seem redundant here because the nav has it too,
+                /* bg-dark-gray might seem redundant here because the nav has it too,
                    but it's needed so that filter: brightness has something to brighten. */
                 @apply bg-dark-gray px-2 py-4;
                 @apply transition-[filter,color];
                 /* TODO See if there's a way to add a tailwind var for this to be reused for things like the button transition duration */
                 @apply duration-300;
                 &:hover {
-                    @apply text-viridian2 underline;
-                    filter: brightness(1.5);
+                    @apply text-orange2 underline;
+                    filter: brightness(1.4);
                 }
             }
         }
