@@ -86,24 +86,17 @@
     html, body {
         @apply h-full bg-black text-white;
     }
+
     nav {
-        @apply bg-dark-gray text-viridian2 flex justify-around items-center;
+        @apply bg-dark-gray flex justify-around items-center;
         & > ul {
             @apply flex gap-12;
             & > li {
-                /* bg-dark-gray might seem redundant here because the nav has it too,
-                   but it's needed so that filter: brightness has something to brighten. */
-                @apply bg-dark-gray px-2 py-4;
-                @apply transition-[filter,color];
-                /* TODO See if there's a way to add a tailwind var for this to be reused for things like the button transition duration */
-                @apply duration-300;
-                &:hover {
-                    @apply text-orange2 underline;
-                    filter: brightness(1.4);
-                }
+                @apply px-2 py-4;
             }
         }
     }
+
     h1 {
         font-size: var(--text-6xl);
     }
@@ -122,6 +115,16 @@
     h6 {
         font-size: var(--text-xl);
     }
+
+    a {
+        @apply text-viridian2;
+        @apply transition-[filter,color];
+        @apply duration-300;
+        &:hover {
+            @apply text-orange2 underline;
+            filter: brightness(1.4);
+        }
+    }
 }
 
 /*
@@ -139,6 +142,33 @@
         }
         &:active {
             filter: brightness(0.6);
+        }
+    }
+
+    .card {
+        @apply bg-dark-gray inline-block w-[300px] rounded-sm;
+
+        & > .content {
+            @apply flex flex-col h-full justify-between;
+
+            & > img {
+                @apply w-[300px] h-[250px] rounded-t-sm;
+            }
+            & > h4, & > h5, & > h6 {
+                @apply px-3 pt-3;
+            }
+            & > p {
+                @apply text-sm;
+            }
+            & > p, & > a {
+                @apply p-3;
+            }
+            & > hr {
+                /*border-color: var(--color-light-gray);*/
+            }
+            & > a {
+                @apply block border-t border-light-gray w-full text-right;
+            }
         }
     }
 }
