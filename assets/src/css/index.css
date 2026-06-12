@@ -167,6 +167,7 @@
                 /*border-color: var(--color-light-gray);*/
             }
             & > a {
+                /* FIXME Hovering the anchor tag also brightens this border */
                 @apply block border-t border-light-gray w-full text-right;
             }
         }
