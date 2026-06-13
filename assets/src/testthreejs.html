@@ -89,47 +89,64 @@
         <label>
             Fill Color
             <input type="color" value="#2c2a30" id="fill-color-input">
+            <span id="fill-color-value">#2c2a30</span>
         </label>
         <label>
             Edge Color
             <input type="color" value="#29b1a5" id="edge-color-input">
+            <span id="edge-color-value">#29b1a5</span>
         </label>
         <label>
             Highlight Color
             <input type="color" value="#ec8000" id="highlight-color-input">
+            <span id="highlight-color-value">#ec8000</span>
+        </label>
+        <label>
+            Fill Color Variation
+            <input type="range" min="0" max="1" step=".01" value=".35" id="fill-color-variation-slider">
+            <span id="fill-color-variation-value">0.35</span>
         </label>
         <label>
             X Segments
             <input type="range" min="1" max="100" step="1" value="26" id="x-segments-slider">
+            <span id="x-segments-value">26</span>
         </label>
         <label>
             Y Segments
             <input type="range" min="1" max="100" step="1" value="16" id="y-segments-slider">
+            <span id="y-segments-value">16</span>
         </label>
         <label>
             Jitter Amount
             <input type="range" min="0" max="1" step="0.05" value="0.85" id="jitter-amount-slider">
+            <span id="jitter-amount-value">0.85</span>
         </label>
         <label>
             Base Relief
             <input type="range" min="0" max="10" step="0.05" value="0.45" id="base-relief-slider">
+            <span id="base-relief-value">0.45</span>
         </label>
         <label>
             Mouse Deform Radius
             <input type="range" min="0" max="10" step="0.05" value="3" id="mouse-deform-radius-slider">
+            <span id="mouse-deform-radius-value">3</span>
         </label>
         <label>
             Mouse Deform Strength
             <input type="range" min="-10" max="10" step="0.05" value="1.5" id="mouse-deform-strength-slider">
+            <span id="mouse-deform-strength-value">1.5</span>
         </label>
         <label>
             Mouse Edge Radius
             <input type="range" min="0" max="10" step="0.05" value="4" id="mouse-edge-radius-slider">
+            <span id="mouse-edge-radius-value">4</span>
         </label>
         <label>
             Camera Distance
             <input type="range" min="0" max="100" step="0.5" value="10" id="camera-distance-slider">
+            <span id="camera-distance-value">10</span>
         </label>
+        <button id="reset" style="align-self: center; margin-top: 10px;">Reset</button>
     </div>
 </div>
 
@@ -161,66 +178,131 @@
 
         document.getElementById('fill-color-input').addEventListener("change", function (e) {
             CONFIG.fillColor = e.target.value;
+            document.getElementById('fill-color-value').textContent = CONFIG.fillColor;
             buildMesh();
         });
 
         document.getElementById('edge-color-input').addEventListener("change", function (e) {
             CONFIG.edgeColor = e.target.value;
             edgeUniforms.uEdgeColor.value.set(new THREE.Color(CONFIG.edgeColor));
+            document.getElementById('edge-color-value').textContent = CONFIG.edgeColor;
             buildMesh();
         });
 
         document.getElementById('highlight-color-input').addEventListener("change", function (e) {
             CONFIG.highlightColor = e.target.value;
             edgeUniforms.uHighlightColor.value.set(new THREE.Color(CONFIG.highlightColor));
+            document.getElementById('highlight-color-value').textContent = CONFIG.highlightColor;
+            buildMesh();
+        });
+
+        document.getElementById('fill-color-variation-slider').addEventListener("change", function (e) {
+            CONFIG.fillColorVariation = e.target.value;
+            document.getElementById('fill-color-variation-value').textContent = CONFIG.fillColorVariation;
             buildMesh();
         });
 
         document.getElementById('jitter-amount-slider').addEventListener("change", function (e) {
             CONFIG.jitterAmount = e.target.value;
+            document.getElementById('jitter-amount-value').textContent = CONFIG.jitterAmount;
             buildMesh();
         });
 
         document.getElementById('x-segments-slider').addEventListener("change", function (e) {
             CONFIG.segmentsX = e.target.value;
+            document.getElementById('x-segments-value').textContent = CONFIG.segmentsX;
             buildMesh();
         });
 
         document.getElementById('y-segments-slider').addEventListener("change", function (e) {
             CONFIG.segmentsY = e.target.value;
+            document.getElementById('y-segments-value').textContent = CONFIG.segmentsY;
             buildMesh();
         });
 
         document.getElementById('base-relief-slider').addEventListener("change", function (e) {
             CONFIG.baseRelief = e.target.value;
+            document.getElementById('base-relief-value').textContent = CONFIG.baseRelief;
             buildMesh();
         });
 
         document.getElementById('mouse-deform-radius-slider').addEventListener("change", function (e) {
             CONFIG.mouseDeformRadius = e.target.value;
+            document.getElementById('mouse-deform-radius-value').textContent = CONFIG.mouseDeformRadius;
             buildMesh();
         });
 
         document.getElementById('mouse-deform-strength-slider').addEventListener("change", function (e) {
             CONFIG.mouseDeformStrength = e.target.value;
+            document.getElementById('mouse-deform-strength-value').textContent = CONFIG.mouseDeformStrength;
             buildMesh();
         });
 
         document.getElementById('mouse-edge-radius-slider').addEventListener("change", function (e) {
             CONFIG.mouseEdgeRadius = e.target.value;
             edgeUniforms.uRadius.value = CONFIG.mouseEdgeRadius;
+            document.getElementById('mouse-edge-radius-value').textContent = CONFIG.mouseEdgeRadius;
             buildMesh();
         });
 
         document.getElementById('camera-distance-slider').addEventListener("change", function (e) {
             CONFIG.cameraDistance = e.target.value;
+            document.getElementById('camera-distance-value').textContent = CONFIG.cameraDistance;
             buildMesh();
         });
+
+        document.getElementById('reset').addEventListener("click", function (e) {
+            CONFIG.fillColor = '#2c2a30';
+            CONFIG.edgeColor = '#29b1a5';
+            edgeUniforms.uEdgeColor.value.set(new THREE.Color(CONFIG.edgeColor));
+            CONFIG.highlightColor = '#ec8000';
+            edgeUniforms.uHighlightColor.value.set(new THREE.Color(CONFIG.highlightColor));
+            CONFIG.fillColorVariation = 0.35;
+            CONFIG.segmentsX = 26;
+            CONFIG.segmentsY = 16;
+            CONFIG.jitterAmount = 0.85;
+            CONFIG.baseRelief = 0.45;
+            CONFIG.mouseDeformRadius = 3.0;
+            CONFIG.mouseDeformStrength = 1.6;
+            CONFIG.mouseEdgeRadius = 4.0;
+            edgeUniforms.uRadius.value = CONFIG.mouseEdgeRadius;
+            CONFIG.cameraDistance = 10;
+
+            document.getElementById('fill-color-input').value = CONFIG.fillColor;
+            document.getElementById('edge-color-input').value = CONFIG.edgeColor;
+            document.getElementById('highlight-color-input').value = CONFIG.highlightColor;
+            document.getElementById('fill-color-variation-slider').value = CONFIG.fillColorVariation;
+            document.getElementById('jitter-amount-slider').value = CONFIG.jitterAmount;
+            document.getElementById('x-segments-slider').value = CONFIG.segmentsX;
+            document.getElementById('y-segments-slider').value = CONFIG.segmentsY;
+            document.getElementById('base-relief-slider').value = CONFIG.baseRelief;
+            document.getElementById('mouse-deform-radius-slider').value = CONFIG.mouseDeformRadius;
+            document.getElementById('mouse-deform-strength-slider').value = CONFIG.mouseDeformStrength;
+            document.getElementById('mouse-edge-radius-slider').value = CONFIG.mouseEdgeRadius;
+            document.getElementById('camera-distance-slider').value = CONFIG.cameraDistance;
+
+            document.getElementById('fill-color-value').textContent = CONFIG.fillColor;
+            document.getElementById('edge-color-value').textContent = CONFIG.edgeColor;
+            document.getElementById('highlight-color-value').textContent = CONFIG.highlightColor;
+            document.getElementById('fill-color-variation-value').textContent = CONFIG.fillColorVariation;
+            document.getElementById('jitter-amount-value').textContent = CONFIG.jitterAmount;
+            document.getElementById('x-segments-value').textContent = CONFIG.segmentsX;
+            document.getElementById('y-segments-value').textContent = CONFIG.segmentsY;
+            document.getElementById('base-relief-value').textContent = CONFIG.baseRelief;
+            document.getElementById('mouse-deform-radius-value').textContent = CONFIG.mouseDeformRadius;
+            document.getElementById('mouse-deform-strength-value').textContent = CONFIG.mouseDeformStrength;
+            document.getElementById('mouse-edge-radius-value').textContent = CONFIG.mouseEdgeRadius;
+            document.getElementById('camera-distance-value').textContent = CONFIG.cameraDistance;
+
+            buildMesh();
+        })
 
         const CONFIG = {
             fillColor: 0x2c2a30,
             edgeColor: 0x29b1a5,
             highlightColor: 0xec8000,
+
+            fillColorVariation: 0.35,
 
             pixelSize: 2,
 
@@ -318,7 +400,7 @@
             const colors = new Float32Array(geo.attributes.position.count * 3);
             const triCount = geo.attributes.position.count / 3;
             for (let t = 0; t < triCount; t++) {
-                const variation = (Math.random() - 0.5) * 0.35; // +/- ~17% lightness
+                const variation = (Math.random() - 0.5) * CONFIG.fillColorVariation; // +/- ~17% lightness
                 const c = baseColor.clone();
                 c.r = THREE.MathUtils.clamp(c.r + variation, 0, 1);
                 c.g = THREE.MathUtils.clamp(c.g + variation, 0, 1);
