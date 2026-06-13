@@ -20,11 +20,10 @@
             height: 100vh;
             display: block;
             /*z-index: -1;*/
-            /* FIXME looks like z-index was the reason I wasn't seeing anything */
-            z-index: 9999;
-            image-rendering: pixelated;
-            image-rendering: -moz-crisp-edges;
-            image-rendering: crisp-edges;
+            z-index: 0;
+            /*image-rendering: pixelated;*/
+            /*image-rendering: -moz-crisp-edges;*/
+            /*image-rendering: crisp-edges;*/
         }
         .content {
             position: relative;
@@ -37,7 +36,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            pointer-events: none;
+            /*pointer-events: none;*/
         }
         .content h1 {
             font-size: 2.5rem;
@@ -86,6 +85,52 @@
 <div class="content">
     <h1>Move your mouse around</h1>
     <p>Pixel-art tessellated background, powered by three.js</p>
+    <div style="margin-top: 1rem; display: flex; flex-direction: column;">
+        <label>
+            Fill Color
+            <input type="color" value="#2c2a30" id="fill-color-input">
+        </label>
+        <label>
+            Edge Color
+            <input type="color" value="#29b1a5" id="edge-color-input">
+        </label>
+        <label>
+            Highlight Color
+            <input type="color" value="#ec8000" id="highlight-color-input">
+        </label>
+        <label>
+            X Segments
+            <input type="range" min="1" max="100" step="1" value="26" id="x-segments-slider">
+        </label>
+        <label>
+            Y Segments
+            <input type="range" min="1" max="100" step="1" value="16" id="y-segments-slider">
+        </label>
+        <label>
+            Jitter Amount
+            <input type="range" min="0" max="1" step="0.05" value="0.85" id="jitter-amount-slider">
+        </label>
+        <label>
+            Base Relief
+            <input type="range" min="0" max="10" step="0.05" value="0.45" id="base-relief-slider">
+        </label>
+        <label>
+            Mouse Deform Radius
+            <input type="range" min="0" max="10" step="0.05" value="3" id="mouse-deform-radius-slider">
+        </label>
+        <label>
+            Mouse Deform Strength
+            <input type="range" min="-10" max="10" step="0.05" value="1.5" id="mouse-deform-strength-slider">
+        </label>
+        <label>
+            Mouse Edge Radius
+            <input type="range" min="0" max="10" step="0.05" value="4" id="mouse-edge-radius-slider">
+        </label>
+        <label>
+            Camera Distance
+            <input type="range" min="0" max="100" step="0.5" value="10" id="camera-distance-slider">
+        </label>
+    </div>
 </div>
 
 <div class="panel">
@@ -114,12 +159,70 @@
 
         const THREE = await import("three");
 
+        document.getElementById('fill-color-input').addEventListener("change", function (e) {
+            CONFIG.fillColor = e.target.value;
+            buildMesh();
+        });
+
+        document.getElementById('edge-color-input').addEventListener("change", function (e) {
+            CONFIG.edgeColor = e.target.value;
+            edgeUniforms.uEdgeColor.value.set(new THREE.Color(CONFIG.edgeColor));
+            buildMesh();
+        });
+
+        document.getElementById('highlight-color-input').addEventListener("change", function (e) {
+            CONFIG.highlightColor = e.target.value;
+            edgeUniforms.uHighlightColor.value.set(new THREE.Color(CONFIG.highlightColor));
+            buildMesh();
+        });
+
+        document.getElementById('jitter-amount-slider').addEventListener("change", function (e) {
+            CONFIG.jitterAmount = e.target.value;
+            buildMesh();
+        });
+
+        document.getElementById('x-segments-slider').addEventListener("change", function (e) {
+            CONFIG.segmentsX = e.target.value;
+            buildMesh();
+        });
+
+        document.getElementById('y-segments-slider').addEventListener("change", function (e) {
+            CONFIG.segmentsY = e.target.value;
+            buildMesh();
+        });
+
+        document.getElementById('base-relief-slider').addEventListener("change", function (e) {
+            CONFIG.baseRelief = e.target.value;
+            buildMesh();
+        });
+
+        document.getElementById('mouse-deform-radius-slider').addEventListener("change", function (e) {
+            CONFIG.mouseDeformRadius = e.target.value;
+            buildMesh();
+        });
+
+        document.getElementById('mouse-deform-strength-slider').addEventListener("change", function (e) {
+            CONFIG.mouseDeformStrength = e.target.value;
+            buildMesh();
+        });
+
+        document.getElementById('mouse-edge-radius-slider').addEventListener("change", function (e) {
+            CONFIG.mouseEdgeRadius = e.target.value;
+            edgeUniforms.uRadius.value = CONFIG.mouseEdgeRadius;
+            buildMesh();
+        });
+
+        document.getElementById('camera-distance-slider').addEventListener("change", function (e) {
+            CONFIG.cameraDistance = e.target.value;
+            buildMesh();
+        });
+
         const CONFIG = {
             fillColor: 0x2c2a30,
             edgeColor: 0x29b1a5,
             highlightColor: 0xec8000,
 
-            pixelSize: 4,
+            pixelSize: 2,
 
             segmentsX: 26,
             segmentsY: 16,
@@ -129,13 +232,13 @@
 
             mouseDeformRadius: 3.0,
             mouseDeformStrength: 1.6,
-            mouseEdgeRadius: 2.4,
+            mouseEdgeRadius: 4.0,
 
             cameraDistance: 10,
         };
 
         const canvas = document.getElementById("bg-canvas");
-        const renderer = new THREE.WebGLRenderer({ canvas, antialias: false });
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(CONFIG.fillColor);
