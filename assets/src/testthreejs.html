@@ -107,6 +107,11 @@
             <span id="fill-color-variation-value">0.35</span>
         </label>
         <label>
+            Pixel Size
+            <input type="range" min="0" max="5" step=".05" value="1" id="pixel-size-slider">
+            <span id="pixel-size-value">2</span>
+        </label>
+        <label>
             X Segments
             <input type="range" min="1" max="100" step="1" value="26" id="x-segments-slider">
             <span id="x-segments-value">26</span>
@@ -202,6 +207,13 @@
             buildMesh();
         });
 
+        document.getElementById('pixel-size-slider').addEventListener("change", function (e) {
+            CONFIG.pixelSize = e.target.value;
+            document.getElementById('pixel-size-value').textContent = CONFIG.pixelSize;
+            buildMesh();
+            onResize();
+        });
+
         document.getElementById('jitter-amount-slider').addEventListener("change", function (e) {
             CONFIG.jitterAmount = e.target.value;
             document.getElementById('jitter-amount-value').textContent = CONFIG.jitterAmount;
@@ -258,6 +270,7 @@
             CONFIG.highlightColor = '#ec8000';
             edgeUniforms.uHighlightColor.value.set(new THREE.Color(CONFIG.highlightColor));
             CONFIG.fillColorVariation = 0.35;
+            CONFIG.pixelSize = 1;
             CONFIG.segmentsX = 26;
             CONFIG.segmentsY = 16;
             CONFIG.jitterAmount = 0.85;
@@ -272,6 +285,7 @@
             document.getElementById('edge-color-input').value = CONFIG.edgeColor;
             document.getElementById('highlight-color-input').value = CONFIG.highlightColor;
             document.getElementById('fill-color-variation-slider').value = CONFIG.fillColorVariation;
+            document.getElementById('pixel-size-slider').value = CONFIG.pixelSize;
             document.getElementById('jitter-amount-slider').value = CONFIG.jitterAmount;
             document.getElementById('x-segments-slider').value = CONFIG.segmentsX;
             document.getElementById('y-segments-slider').value = CONFIG.segmentsY;
@@ -285,6 +299,7 @@
             document.getElementById('edge-color-value').textContent = CONFIG.edgeColor;
             document.getElementById('highlight-color-value').textContent = CONFIG.highlightColor;
             document.getElementById('fill-color-variation-value').textContent = CONFIG.fillColorVariation;
+            document.getElementById('pixel-size-value').textContent = CONFIG.pixelSize;
             document.getElementById('jitter-amount-value').textContent = CONFIG.jitterAmount;
             document.getElementById('x-segments-value').textContent = CONFIG.segmentsX;
             document.getElementById('y-segments-value').textContent = CONFIG.segmentsY;
@@ -295,6 +310,7 @@
             document.getElementById('camera-distance-value').textContent = CONFIG.cameraDistance;
 
             buildMesh();
+            onResize();
         })
 
         const CONFIG = {
