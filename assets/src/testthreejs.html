@@ -103,12 +103,12 @@
         </label>
         <label>
             Fill Color Variation
-            <input type="range" min="0" max="1" step=".01" value=".35" id="fill-color-variation-slider">
+            <input type="range" min="0" max="1" step=".01" value=".08" id="fill-color-variation-slider">
             <span id="fill-color-variation-value">0.35</span>
         </label>
         <label>
-            Pixel Size
-            <input type="range" min="0" max="5" step=".05" value="1" id="pixel-size-slider">
+            Edge Thickness
+            <input type="range" min="0" max="5" step=".05" value=".75" id="pixel-size-slider">
             <span id="pixel-size-value">2</span>
         </label>
         <label>
@@ -133,12 +133,12 @@
         </label>
         <label>
             Mouse Deform Radius
-            <input type="range" min="0" max="10" step="0.05" value="3" id="mouse-deform-radius-slider">
+            <input type="range" min="0" max="10" step="0.05" value="3.75" id="mouse-deform-radius-slider">
             <span id="mouse-deform-radius-value">3</span>
         </label>
         <label>
             Mouse Deform Strength
-            <input type="range" min="-10" max="10" step="0.05" value="1.5" id="mouse-deform-strength-slider">
+            <input type="range" min="-10" max="10" step="0.05" value="0.95" id="mouse-deform-strength-slider">
             <span id="mouse-deform-strength-value">1.5</span>
         </label>
         <label>
@@ -150,6 +150,26 @@
             Camera Distance
             <input type="range" min="0" max="100" step="0.5" value="10" id="camera-distance-slider">
             <span id="camera-distance-value">10</span>
+        </label>
+        <label>
+            Ambient Light Color
+            <input type="color" value="#ffffff" id="ambient-light-color-input">
+            <span id="ambient-light-color-value">#ffffff</span>
+        </label>
+        <label>
+            Directional Light Color
+            <input type="color" value="#ffffff" id="directional-light-color-input">
+            <span id="directional-light-color-value">#ffffff</span>
+        </label>
+        <label>
+            Ambient Light Strength
+            <input type="range" min="0" max="10" step="0.05" value="0.65" id="ambient-light-strength-slider">
+            <span id="ambient-light-strength-value">10</span>
+        </label>
+        <label>
+            Directional Light Strength
+            <input type="range" min="0" max="10" step="0.05" value="0.8" id="directional-light-strength-slider">
+            <span id="directional-light-strength-value">10</span>
         </label>
         <button id="reset" style="align-self: center; margin-top: 10px;">Reset</button>
     </div>
@@ -263,23 +283,53 @@
             buildMesh();
         });
 
+        document.getElementById('ambient-light-color-input').addEventListener("change", function (e) {
+            CONFIG.ambientLightColor = e.target.value;
+            document.getElementById('ambient-light-color-value').textContent = CONFIG.ambientLightColor;
+            updateAmbientLight();
+        });
+
+        document.getElementById('ambient-light-strength-slider').addEventListener("change", function (e) {
+            CONFIG.ambientLightStrength = e.target.value;
+            document.getElementById('ambient-light-strength-value').textContent = CONFIG.ambientLightStrength;
+            buildMesh();
+            updateAmbientLight();
+        });
+
+        document.getElementById('directional-light-color-input').addEventListener("change", function (e) {
+            CONFIG.directionalLightColor = e.target.value;
+            document.getElementById('directional-light-color-value').textContent = CONFIG.directionalLightColor;
+            updateAmbientLight();
+        });
+
+        document.getElementById('directional-light-strength-slider').addEventListener("change", function (e) {
+            CONFIG.directionalLightStrength = e.target.value;
+            document.getElementById('directional-light-strength-value').textContent = CONFIG.directionalLightStrength;
+            buildMesh();
+            updateAmbientLight();
+        });
+
         document.getElementById('reset').addEventListener("click", function (e) {
             CONFIG.fillColor = '#2c2a30';
             CONFIG.edgeColor = '#29b1a5';
             edgeUniforms.uEdgeColor.value.set(new THREE.Color(CONFIG.edgeColor));
             CONFIG.highlightColor = '#ec8000';
             edgeUniforms.uHighlightColor.value.set(new THREE.Color(CONFIG.highlightColor));
-            CONFIG.fillColorVariation = 0.35;
-            CONFIG.pixelSize = 1;
+            CONFIG.fillColorVariation = 0.08;
+            CONFIG.pixelSize = 0.75;
             CONFIG.segmentsX = 26;
             CONFIG.segmentsY = 16;
             CONFIG.jitterAmount = 0.85;
             CONFIG.baseRelief = 0.45;
-            CONFIG.mouseDeformRadius = 3.0;
-            CONFIG.mouseDeformStrength = 1.6;
+            CONFIG.mouseDeformRadius = 3.75;
+            CONFIG.mouseDeformStrength = 0.95;
             CONFIG.mouseEdgeRadius = 4.0;
             edgeUniforms.uRadius.value = CONFIG.mouseEdgeRadius;
             CONFIG.cameraDistance = 10;
+            CONFIG.ambientLightColor = '#ffffff';
+            CONFIG.ambientLightStrength = 0.65;
+            CONFIG.directionalLightColor = '#ffffff';
+            CONFIG.directionalLightStrength = 0.8;
 
             document.getElementById('fill-color-input').value = CONFIG.fillColor;
             document.getElementById('edge-color-input').value = CONFIG.edgeColor;
@@ -294,6 +344,10 @@
             document.getElementById('mouse-deform-strength-slider').value = CONFIG.mouseDeformStrength;
             document.getElementById('mouse-edge-radius-slider').value = CONFIG.mouseEdgeRadius;
             document.getElementById('camera-distance-slider').value = CONFIG.cameraDistance;
+            document.getElementById('ambient-light-color-input').value = CONFIG.ambientLightColor;
+            document.getElementById('ambient-light-strength-slider').value = CONFIG.ambientLightStrength;
+            document.getElementById('directional-light-color-input').value = CONFIG.directionalLightColor;
+            document.getElementById('directional-light-strength-slider').value = CONFIG.directionalLightStrength;
 
             document.getElementById('fill-color-value').textContent = CONFIG.fillColor;
             document.getElementById('edge-color-value').textContent = CONFIG.edgeColor;
@@ -308,9 +362,14 @@
             document.getElementById('mouse-deform-strength-value').textContent = CONFIG.mouseDeformStrength;
             document.getElementById('mouse-edge-radius-value').textContent = CONFIG.mouseEdgeRadius;
             document.getElementById('camera-distance-value').textContent = CONFIG.cameraDistance;
+            document.getElementById('ambient-light-color-value').textContent = CONFIG.ambientLightColor;
+            document.getElementById('ambient-light-strength-value').textContent = CONFIG.ambientLightStrength;
+            document.getElementById('directional-light-color-value').textContent = CONFIG.directionalLightColor;
+            document.getElementById('directional-light-strength-value').textContent = CONFIG.directionalLightStrength;
 
             buildMesh();
             onResize();
+            updateAmbientLight();
         })
 
         const CONFIG = {
@@ -318,9 +377,9 @@
             edgeColor: 0x29b1a5,
             highlightColor: 0xec8000,
 
-            fillColorVariation: 0.35,
+            fillColorVariation: 0.08,
 
-            pixelSize: 2,
+            pixelSize: 0.75,
 
             segmentsX: 26,
             segmentsY: 16,
@@ -328,11 +387,16 @@
             jitterAmount: 0.85,
             baseRelief: 0.45,
 
-            mouseDeformRadius: 3.0,
-            mouseDeformStrength: 1.6,
+            mouseDeformRadius: 3.75,
+            mouseDeformStrength: 0.95,
             mouseEdgeRadius: 4.0,
 
             cameraDistance: 10,
+
+            ambientLightColor: 0xffffff,
+            ambientLightStrength: 0.65,
+            directionalLightColor: 0xffffff,
+            directionalLightStrength: 0.8,
         };
 
         const canvas = document.getElementById("bg-canvas");
@@ -344,6 +408,9 @@
         const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
         camera.position.set(0, 0, CONFIG.cameraDistance);
         camera.lookAt(0, 0, 0);
+
+        const ambient = new THREE.AmbientLight(CONFIG.ambientLightColor, CONFIG.ambientLightStrength);
+        const directional = new THREE.DirectionalLight(CONFIG.directionalLightColor, CONFIG.directionalLightStrength);
 
         function getPlaneSize() {
             const aspect = window.innerWidth / window.innerHeight;
@@ -408,15 +475,15 @@
             geo = geo.toNonIndexed();
             geo.computeVertexNormals();
 
-            // Give each triangle a slight random tint around the base fill color so
-            // facets are visually distinguishable, like the faceted look in the
-            // reference image. Without this, flat shading on such a dark base color
-            // produces almost no visible contrast between facets.
+            /*
+             * Give each triangle a slight random tint around the base fill
+             * color so that the facets are visually distinguishable.
+             */
             const baseColor = new THREE.Color(CONFIG.fillColor);
             const colors = new Float32Array(geo.attributes.position.count * 3);
             const triCount = geo.attributes.position.count / 3;
             for (let t = 0; t < triCount; t++) {
-                const variation = (Math.random() - 0.5) * CONFIG.fillColorVariation; // +/- ~17% lightness
+                const variation = (Math.random() - 0.5) * CONFIG.fillColorVariation;
                 const c = baseColor.clone();
                 c.r = THREE.MathUtils.clamp(c.r + variation, 0, 1);
                 c.g = THREE.MathUtils.clamp(c.g + variation, 0, 1);
@@ -449,26 +516,26 @@
                 uniforms: edgeUniforms,
                 wireframe: true,
                 vertexShader: `
-      varying vec3 vWorldPos;
-      void main() {
-        vec4 worldPos = modelMatrix * vec4(position, 1.0);
-        vWorldPos = worldPos.xyz;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-      }
-    `,
+                  varying vec3 vWorldPos;
+                  void main() {
+                    vec4 worldPos = modelMatrix * vec4(position, 1.0);
+                    vWorldPos = worldPos.xyz;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                  }
+                `,
                 fragmentShader: `
-      uniform vec3 uEdgeColor;
-      uniform vec3 uHighlightColor;
-      uniform vec3 uMouse;
-      uniform float uRadius;
-      varying vec3 vWorldPos;
-      void main() {
-        float d = distance(vWorldPos, uMouse);
-        float t = 1.0 - smoothstep(0.0, uRadius, d);
-        vec3 color = mix(uEdgeColor, uHighlightColor, t);
-        gl_FragColor = vec4(color, 1.0);
-      }
-    `,
+                  uniform vec3 uEdgeColor;
+                  uniform vec3 uHighlightColor;
+                  uniform vec3 uMouse;
+                  uniform float uRadius;
+                  varying vec3 vWorldPos;
+                  void main() {
+                    float d = distance(vWorldPos, uMouse);
+                    float t = 1.0 - smoothstep(0.0, uRadius, d);
+                    vec3 color = mix(uEdgeColor, uHighlightColor, t);
+                    gl_FragColor = vec4(color, 1.0);
+                  }
+                `,
             });
             edgeMesh = new THREE.Mesh(planeGeo, edgeMat);
             scene.add(edgeMesh);
@@ -476,11 +543,19 @@
 
         buildMesh();
 
-        const ambient = new THREE.AmbientLight(0xffffff, 0.65);
-        scene.add(ambient);
-        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-        dirLight.position.set(3, 5, 6);
-        scene.add(dirLight);
+        function updateAmbientLight() {
+            scene.remove(ambient);
+            ambient.color.set(CONFIG.ambientLightColor);
+            ambient.intensity = CONFIG.ambientLightStrength;
+            scene.add(ambient);
+            directional.position.set(3, 5, 6);
+            scene.remove(directional);
+            directional.color.set(CONFIG.directionalLightColor);
+            directional.intensity = CONFIG.directionalLightStrength;
+            scene.add(directional);
+        }
+
+        updateAmbientLight();
 
         function onResize() {
             const w = window.innerWidth;
@@ -496,6 +571,7 @@
 
             buildMesh();
         }
+
         window.addEventListener("resize", onResize);
         onResize();
 
