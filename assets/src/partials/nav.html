@@ -1,15 +1,22 @@
 <header>
   <nav>
     <a id="bg-settings-toggle" class="absolute left-6 top-1/2 -translate-y-1/2 cursor-pointer">
-<!--          <i class="fas fa-bars"></i>-->
       Settings
+      <div id="settings-message" class="absolute top-4/10 left-9/10 w-30">
+          <img src="/img/arrow.png" alt="arrow" class="w-full h-auto -rotate-45 pixelated" />
+          <span class="text-white">Try playing with the settings</span>
+      </div>
     </a>
     <ul>
       <li>
         <a href="/">Home</a>
       </li>
-      <li>
+      <li class="relative">
         <a href="/projects.html">Projects</a>
+        <div id="projects-message" class="absolute top-4/10 left-0 w-30">
+          <img src="/img/arrow.png" alt="arrow" class="w-full h-auto pixelated" />
+          <span class="text-white">Or checking out some of my projects</span>
+        </div>
       </li>
       <li>
         <a href="/articles.html">Blog</a>

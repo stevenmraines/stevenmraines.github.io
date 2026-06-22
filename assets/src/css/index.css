@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./colors.css";
+@source "../js/index.js";
 
 /*
  ***********************************************************************************************************************
@@ -202,6 +203,28 @@ html, body {
     z-index: 0;
 }
 
+#bg-settings {
+    @apply transition-transform;
+    @apply duration-300;
+    @apply ease-out;
+}
+
+/* TODO Separate css for other pages into their own files (same with js) so that we're not showing this stuff on every page */
+#welcome-message {
+    opacity: 0;
+    animation: fade-in 1s 1s ease-out forwards;
+}
+
+#settings-message {
+    opacity: 0;
+    animation: fade-in 1s 3s ease-out forwards;
+}
+
+#projects-message {
+    opacity: 0;
+    animation: fade-in 1s 5s ease-out forwards;
+}
+
 #error-box {
     position: fixed;
     top: 1rem;
@@ -216,4 +239,18 @@ html, body {
     white-space: pre-wrap;
     display: none;
     border-radius: 4px;
+}
+
+/*
+ ***********************************************************************************************************************
+ * ANIMATIONS
+ ***********************************************************************************************************************
+ */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

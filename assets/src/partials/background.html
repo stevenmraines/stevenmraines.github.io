@@ -1,8 +1,7 @@
 <div id="error-box"></div>
 <canvas id="bg-canvas"></canvas>
 
-<!-- TODO background color seems lighter since I incorporated it with the rest of the page -->
-<div id="bg-settings" class="hidden absolute left-0 top-0 h-full px-4 pt-18 z-2 text-left bg-dark-gray border-r-2 border-black">
+<div id="bg-settings" class="absolute left-0 top-0 -translate-x-1/1 h-full px-4 pt-18 z-2 text-left bg-dark-gray border-r-2 border-black">
     <button id="bg-settings-close" class="btn bg-viridian2 float-right">X</button>
     <div class="flex flex-col">
         <label>
@@ -23,12 +22,12 @@
         <label>
             Fill Color Variation
             <input type="range" min="0" max="1" step=".01" value=".08" id="fill-color-variation-slider">
-            <span id="fill-color-variation-value">0.35</span>
+            <span id="fill-color-variation-value">0.08</span>
         </label>
         <label>
             Edge Thickness
             <input type="range" min="0" max="5" step=".05" value=".75" id="pixel-size-slider">
-            <span id="pixel-size-value">2</span>
+            <span id="pixel-size-value">0.75</span>
         </label>
         <label>
             X Segments
@@ -53,12 +52,12 @@
         <label>
             Mouse Deform Radius
             <input type="range" min="0" max="10" step="0.05" value="3.75" id="mouse-deform-radius-slider">
-            <span id="mouse-deform-radius-value">3</span>
+            <span id="mouse-deform-radius-value">3.75</span>
         </label>
         <label>
             Mouse Deform Strength
             <input type="range" min="-10" max="10" step="0.05" value="0.95" id="mouse-deform-strength-slider">
-            <span id="mouse-deform-strength-value">1.5</span>
+            <span id="mouse-deform-strength-value">0.95</span>
         </label>
         <label>
             Mouse Edge Radius
@@ -82,13 +81,13 @@
         </label>
         <label>
             Ambient Light Strength
-            <input type="range" min="0" max="10" step="0.05" value="0.65" id="ambient-light-strength-slider">
-            <span id="ambient-light-strength-value">10</span>
+            <input type="range" min="0" max="10" step="0.05" value="0.3" id="ambient-light-strength-slider">
+            <span id="ambient-light-strength-value">0.3</span>
         </label>
         <label>
             Directional Light Strength
             <input type="range" min="0" max="10" step="0.05" value="0.8" id="directional-light-strength-slider">
-            <span id="directional-light-strength-value">10</span>
+            <span id="directional-light-strength-value">0.8</span>
         </label>
         <button id="reset" class="btn bg-viridian2" style="align-self: center; margin-top: 10px;">Reset</button>
     </div>

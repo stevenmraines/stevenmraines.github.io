@@ -45,13 +45,13 @@ function onDocumentScroll(event) {
 }
 
 function onBgSettingsToggleClick(event) {
-	const settings = document.getElementById('bg-settings');
-	const display = settings.style.display;
-	settings.style.display = ! display || display === 'none' ? 'block' : 'none';
+	document.getElementById('settings-message').classList.add('hidden');
+	document.getElementById('projects-message').classList.add('hidden');
+	document.getElementById('bg-settings').classList.toggle('-translate-x-1/1');
 }
 
 function onBgSettingsCloseClick() {
-	document.getElementById('bg-settings').style.display = 'none';
+	document.getElementById('bg-settings').classList.add('-translate-x-1/1');
 }
 
 /*
@@ -195,7 +195,7 @@ try {
 		edgeUniforms.uRadius.value = CONFIG.mouseEdgeRadius;
 		CONFIG.cameraDistance = 10;
 		CONFIG.ambientLightColor = '#ffffff';
-		CONFIG.ambientLightStrength = 0.65;
+		CONFIG.ambientLightStrength = 0.3;
 		CONFIG.directionalLightColor = '#ffffff';
 		CONFIG.directionalLightStrength = 0.8;
 
@@ -262,7 +262,7 @@ try {
 		cameraDistance: 10,
 
 		ambientLightColor: 0xffffff,
-		ambientLightStrength: 0.65,
+		ambientLightStrength: 0.3,
 		directionalLightColor: 0xffffff,
 		directionalLightStrength: 0.8,
 	};
@@ -546,32 +546,6 @@ function getSectionVisibleHeight(section) {
 	}
 
 	return visibleHeight;
-}
-
-/**
- * Returns a boolean representing whether the given element has the given CSS class.
- */
-function hasClass(element, classStr) {
-	return (' ' + element.className + ' ').indexOf(' ' + classStr + ' ') >= 0;
-}
-
-/**
- * Adds the given CSS class to the given element.
- */
-function addClass(element, classStr) {
-	if(hasClass(element, classStr)) {
-		return;
-	}
-
-	element.className = (element.className + ' ' + classStr).trim();
-}
-
-/**
- * Removes the given CSS class from the given element.
- */
-function removeClass(element, classStr) {
-	const regex = new RegExp('(^| )' + classStr + '($| )', 'g');
-	element.className = element.className.replace(regex, ' ').trim();
 }
 
 /**
