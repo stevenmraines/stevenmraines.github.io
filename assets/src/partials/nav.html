@@ -2,8 +2,9 @@
   <nav>
     <a id="bg-settings-toggle" class="absolute left-6 top-1/2 -translate-y-1/2 cursor-pointer">
       Settings
-      <div id="settings-message" class="absolute top-4/10 left-9/10 w-30">
-          <img src="/img/arrow.png" alt="arrow" class="w-full h-auto -rotate-45 pixelated" />
+<!-- TODO Having this as a child of the anchor tag makes it so that hovering this hovers the link, should make this and the anchor siblings of the same div instead -->
+      <div id="settings-message" class="opacity-0 absolute top-2/10 left-5/10 w-30">
+          <img src="/img/arrow.png" alt="arrow" class="w-full h-auto pixelated" />
           <span class="text-white">Try playing with the settings</span>
       </div>
     </a>
@@ -13,8 +14,8 @@
       </li>
       <li class="relative">
         <a href="/projects.html">Projects</a>
-        <div id="projects-message" class="absolute top-4/10 left-0 w-30">
-          <img src="/img/arrow.png" alt="arrow" class="w-full h-auto pixelated" />
+        <div id="projects-message" class="opacity-0 absolute top-4/10 -left-3/10 w-30">
+          <img src="/img/arrow.png" alt="arrow" class="w-full h-auto pixelated -rotate-30 -scale-x-100" />
           <span class="text-white">Or checking out some of my projects</span>
         </div>
       </li>

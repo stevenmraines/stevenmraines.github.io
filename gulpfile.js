@@ -32,7 +32,7 @@ const fileInclude = require('gulp-file-include');
 const paths = {
     root: 'public',
     css: {
-        src: 'assets/src/css/index.css',
+        src: 'assets/src/css/*.css',
         dest: 'public/css',
     },
     colors: {
@@ -47,22 +47,18 @@ const paths = {
         dest: 'public/css/fonts',
     },
     html: {
-        index: {
-            src: 'assets/src/index.html',
-            dest: 'public',
-        },
-        about: {
-            src: 'assets/src/about.html',
-            dest: 'public',
-        },
+        src: 'assets/src/**/*.html',
+        dest: 'public',
     },
     img: {
         src: 'assets/img/*',
         dest: 'public/img',
     },
     js: {
-        // src = the "entry point" of the app, for browserify
-        src: 'assets/src/js/index.js',
+        src: [
+            'assets/src/js/index.js',
+            'assets/src/js/background.js'
+        ],
         dest: 'public/js',
     },
     nodeFonts: {
@@ -104,9 +100,9 @@ function fonts() {
 }
 
 function html() {
-    return gulp.src('assets/src/**/*.html')
+    return gulp.src(paths.html.src)
         .pipe(fileInclude({ prefix: '@@', basepath: '@file' }))
-        .pipe(gulp.dest('public'))
+        .pipe(gulp.dest(paths.html.dest))
         .pipe(connect.reload());
 }
 
@@ -117,7 +113,6 @@ function img() {
 
 function js() {
     const options = {
-        entries: paths.js.src,  // Entry point of the app (must be a single file, AFAIK)
         debug: true,  // Debug == make sourcemaps
     };
 
@@ -125,13 +120,13 @@ function js() {
      * The srcVinyl arg 'bundle.js' doesn't actually exist, .bundle() prints to stdout,
      * bundle.js is just a 'pretend' filename other streams in the pipeline may use.
      */
-    return browserify(options)
+    return browserify(paths.js.src, options)
         .bundle()
         .pipe(srcVinyl('bundle.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init({ loadMaps: true }))
         .pipe(uglify())
-        .pipe(rename({ basename: 'index', suffix: '.min' }))
+        .pipe(rename({ basename: 'main', suffix: '.min' }))  // Bundle everything into js/main.min.js
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(paths.js.dest))
         .pipe(connect.reload());
@@ -161,7 +156,7 @@ function videos() {
 function watch() {
     gulp.watch(paths.css.src, css);
     gulp.watch(paths.colors.src, css);
-    gulp.watch('assets/src/**/*.html', gulp.parallel(html, css));
+    gulp.watch(paths.html.src, gulp.parallel(html, css));
     gulp.watch(paths.js.src, js);
 }
 

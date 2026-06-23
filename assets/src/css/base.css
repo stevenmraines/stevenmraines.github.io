@@ -1,0 +1,209 @@
+@import "tailwindcss";
+@import "./colors.css";
+
+/*
+ ***********************************************************************************************************************
+ * FONTS
+ ***********************************************************************************************************************
+ */
+@font-face {
+    font-family: "PixelifySans-Bold";
+    src: url("/css/fonts/PixelifySans-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "PixelifySans-Medium";
+    src: url("/css/fonts/PixelifySans-Medium.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "PixelifySans-Regular";
+    src: url("/css/fonts/PixelifySans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "PixelifySans-SemiBold";
+    src: url("/css/fonts/PixelifySans-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "SFPixelate";
+    src: url("/css/fonts/SFPixelate.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "SFPixelate-Bold";
+    src: url("/css/fonts/SFPixelate-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "SFPixelate-BoldOblique";
+    src: url("/css/fonts/SFPixelate-BoldOblique.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "SFPixelate-Oblique";
+    src: url("/css/fonts/SFPixelate-Oblique.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "SFPixelateShaded";
+    src: url("/css/fonts/SFPixelateShaded.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "SFPixelateShaded-Bold";
+    src: url("/css/fonts/SFPixelateShaded-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "SFPixelateShaded-BoldOblique";
+    src: url("/css/fonts/SFPixelateShaded-BoldOblique.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "SFPixelateShaded-Oblique";
+    src: url("/css/fonts/SFPixelateShaded-Oblique.ttf") format("truetype");
+}
+
+/*
+ ***********************************************************************************************************************
+ * TAILWIND OVERRIDES
+ ***********************************************************************************************************************
+ */
+@theme {
+    --font-sans: SFPixelate, sans-serif;
+    --font-outline: SFPixelateShaded, sans-serif;
+    --font-bold: SFPixelate-Bold, sans-serif;
+}
+
+/*
+ ***********************************************************************************************************************
+ * BASE STYLES
+ ***********************************************************************************************************************
+ */
+@layer base {
+    html, body {
+        @apply h-full bg-black text-white;
+    }
+
+    nav {
+        @apply bg-dark-gray z-3 relative border-b-2 border-black px-2 py-4;
+        & > ul {
+            @apply flex justify-center gap-12;
+        }
+    }
+
+    h1 {
+        font-size: var(--text-8xl);
+    }
+    h2 {
+        font-size: var(--text-6xl);
+    }
+    h3 {
+        font-size: var(--text-4xl);
+    }
+    h4 {
+        font-size: var(--text-3xl);
+    }
+    h5 {
+        font-size: var(--text-2xl);
+    }
+    h6 {
+        font-size: var(--text-xl);
+    }
+
+    a {
+        @apply text-viridian2;
+        @apply transition-[filter,color];
+        @apply duration-300;
+        &:hover {
+            @apply text-orange2 underline;
+            filter: brightness(1.4);
+        }
+    }
+}
+
+/*
+ ***********************************************************************************************************************
+ * COMPONENTS
+ ***********************************************************************************************************************
+ */
+@layer components {
+    .content {
+        /* TODO How to handle clearing the navbar? */
+        @apply relative z-1;
+    }
+
+    .btn {
+        @apply rounded-xs px-1.5 py-0.5 cursor-pointer;
+        @apply transition-[filter];
+        @apply duration-300;
+        &:hover {
+            filter: brightness(1.35);
+        }
+        &:active {
+            filter: brightness(0.6);
+        }
+    }
+
+    .card {
+        @apply bg-dark-gray inline-block w-[300px] rounded-sm;
+
+        & > .content {
+            @apply flex flex-col h-full justify-between;
+
+            & > img {
+                @apply w-[300px] h-[250px] rounded-t-sm;
+            }
+            & > h4, & > h5, & > h6 {
+                @apply px-3 pt-3;
+            }
+            & > p {
+                @apply text-sm;
+            }
+            & > p, & > a {
+                @apply p-3;
+            }
+            & > hr {
+                /*border-color: var(--color-light-gray);*/
+            }
+            & > a {
+                /* FIXME Hovering the anchor tag also brightens this border */
+                @apply block border-t border-light-gray w-full text-right;
+            }
+        }
+    }
+}
+
+/*
+ ***********************************************************************************************************************
+ * MISC
+ ***********************************************************************************************************************
+ */
+.pixelated {
+    image-rendering: pixelated;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: #2c2a30;
+}
+
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    /*z-index: -1;*/
+    z-index: 0;
+}
+
+#bg-settings {
+    @apply transition-transform;
+    @apply duration-300;
+    @apply ease-out;
+}
