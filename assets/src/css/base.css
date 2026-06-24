@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./colors.css";
+@source "../js/base.js";
 
 /*
  ***********************************************************************************************************************
@@ -89,8 +90,32 @@
 
     nav {
         @apply bg-dark-gray z-3 relative border-b-2 border-black px-2 py-4;
-        & > ul {
+        & > ul#main-menu {
             @apply flex justify-center gap-12;
+            & .sub-menu-parent::after {
+                @apply inline-block w-2 h-2 ml-2 content-[''] border-r-2 border-b-2 border-viridian2 rotate-45 align-middle;
+                @apply transition-[filter,border-color];
+                @apply duration-300;
+            }
+            & .sub-menu-parent:hover {
+                &::after {
+                    /*TODO underline isn't working, and brightness seems like it's getting applied twice or something*/
+                    @apply border-orange2 underline;
+                    /*filter: brightness(1.4);*/
+                }
+            }
+            & ul.sub-menu {
+                @apply absolute top-full left-0 w-50 bg-dark-gray border-2 border-black text-nowrap opacity-0 transition-opacity duration-300;
+                & > li {
+                    @apply border-b-2 border-black;
+                    & > a {
+                        @apply block pl-1 py-2;
+                        &:hover {
+                            @apply bg-med-gray;
+                        }
+                    }
+                }
+            }
         }
     }
 

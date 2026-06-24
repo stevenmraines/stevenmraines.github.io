@@ -1,0 +1,9 @@
+@reference "./base.css";
+
+.timeline-item {
+    @apply w-10 h-10 border-2 border-white rounded-full transition-all;
+
+    &:hover {
+        @apply w-12 h-12 border-3 border-viridian2;
+    }
+}

@@ -56,7 +56,7 @@ const paths = {
     },
     js: {
         src: [
-            'assets/src/js/index.js',
+            'assets/src/js/base.js',
             'assets/src/js/background.js'
         ],
         dest: 'public/js',

@@ -12,12 +12,32 @@
         </div>
       </div>
     </div>
-    <ul>
+    <ul id="main-menu">
       <li>
         <a href="/">Home</a>
       </li>
       <li class="relative">
-        <a href="/projects.html">Projects</a>
+        <a href="#" class="sub-menu-parent">Projects</a>
+        <ul class="sub-menu">
+          <li>
+            <a href="/projects.html">All</a>
+          </li>
+          <li>
+            <a href="#">Web Dev</a>
+          </li>
+          <li>
+            <a href="#">Game Dev</a>
+          </li>
+          <li>
+            <a href="#">Pixel Art</a>
+          </li>
+          <li>
+            <a href="#">3D Modeling</a>
+          </li>
+          <li>
+            <a href="#">Gaussian Splatting</a>
+          </li>
+        </ul>
         <div id="projects-message" class="opacity-0 absolute top-4/10 -left-3/10 w-30 pointer-events-none">
           <img src="/img/arrow.png" alt="arrow" class="w-full h-auto pixelated -rotate-30 -scale-x-100" />
           <span class="text-white">Or checking out some of my projects</span>

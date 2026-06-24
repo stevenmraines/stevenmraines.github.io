@@ -1,4 +1,4 @@
-@source "../js/index.js";
+@reference "./base.css";
 
 #welcome-message {
     animation: fade-in 1s 1s ease-out forwards;

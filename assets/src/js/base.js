@@ -1,11 +1,14 @@
-/*
- ***********************************************************************************************************************
- * GLOBAL VARS
- ***********************************************************************************************************************
- */
 let windowHeight = 0;
 let screenTopY = 0;
 let screenBottomY = 0;
+
+const BG_SETTINGS_TOGGLE_ID = 'bg-settings-toggle';
+const BG_SETTINGS_CLOSE_ID = 'bg-settings-close';
+const BG_SETTINGS_ID = 'bg-settings';
+const SETTINGS_MESSAGE_ID = 'settings-message';
+const PROJECTS_MESSAGE_ID = 'projects-message';
+const MAIN_MENU_ID = 'main-menu';
+const SUB_MENU_CLASS = 'sub-menu';
 
 /*
  ***********************************************************************************************************************
@@ -23,11 +26,35 @@ function addEventListeners() {
 	window.addEventListener('resize', onWindowResize);
 	document.addEventListener('scroll', onDocumentScroll);
 
-	const bgToggle = document.getElementById('bg-settings-toggle');
+	const bgToggle = document.getElementById(BG_SETTINGS_TOGGLE_ID);
 
 	if (bgToggle) {
 		bgToggle.addEventListener('click', onBgSettingsToggleClick);
-		document.getElementById('bg-settings-close').addEventListener('click', onBgSettingsCloseClick);
+		document.getElementById(BG_SETTINGS_CLOSE_ID).addEventListener('click', onBgSettingsCloseClick);
+	}
+
+	const mainMenu = document.getElementById(MAIN_MENU_ID);
+
+	for (let i = 0; i < mainMenu.children.length; i++) {
+		const li = mainMenu.children[i];
+		const a = li.querySelector('a');
+		const subMenu = li.querySelector('ul.' + SUB_MENU_CLASS);
+
+		if (! subMenu) {
+			continue;
+		}
+
+		a.addEventListener('mouseenter', function(event) {
+			document.getElementById(SETTINGS_MESSAGE_ID).classList.add('hidden');
+			document.getElementById(PROJECTS_MESSAGE_ID).classList.add('hidden');
+			subMenu.style.pointerEvents = 'auto';
+			subMenu.style.opacity = 1;
+		});
+
+		li.addEventListener('mouseleave', function(event) {
+			subMenu.style.pointerEvents = 'none';
+			subMenu.style.opacity = 0;
+		});
 	}
 }
 
@@ -43,13 +70,13 @@ function onDocumentScroll(event) {
 }
 
 function onBgSettingsToggleClick(event) {
-	document.getElementById('settings-message').classList.add('hidden');
-	document.getElementById('projects-message').classList.add('hidden');
-	document.getElementById('bg-settings').classList.toggle('-translate-x-1/1');
+	document.getElementById(SETTINGS_MESSAGE_ID).classList.add('hidden');
+	document.getElementById(PROJECTS_MESSAGE_ID).classList.add('hidden');
+	document.getElementById(BG_SETTINGS_ID).classList.toggle('-translate-x-1/1');
 }
 
-function onBgSettingsCloseClick() {
-	document.getElementById('bg-settings').classList.add('-translate-x-1/1');
+function onBgSettingsCloseClick(event) {
+	document.getElementById(BG_SETTINGS_ID).classList.add('-translate-x-1/1');
 }
 
 /*
