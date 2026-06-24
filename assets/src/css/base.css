@@ -148,9 +148,13 @@
     }
 
     .card {
-        @apply bg-dark-gray inline-block w-[300px] rounded-sm;
+        @apply bg-dark-gray inline-block w-[300px] rounded-sm border-2 border-black;
 
-        & > .content {
+        &:hover {
+            @apply border-light-gray;
+        }
+
+        & > .card-content {
             @apply flex flex-col h-full justify-between;
 
             & > img {

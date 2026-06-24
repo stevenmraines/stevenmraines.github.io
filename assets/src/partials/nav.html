@@ -1,20 +1,24 @@
 <header>
-  <nav>
+  <nav class="relative">
     <a id="bg-settings-toggle" class="absolute left-6 top-1/2 -translate-y-1/2 cursor-pointer">
       Settings
-<!-- TODO Having this as a child of the anchor tag makes it so that hovering this hovers the link, should make this and the anchor siblings of the same div instead -->
-      <div id="settings-message" class="opacity-0 absolute top-2/10 left-5/10 w-30">
+    </a>
+    <!-- This needs to have the same positioning as bg-settings-toggle -->
+    <div class="absolute left-6 top-1/2 -translate-y-1/2 pointer-events-none">
+      <div class="relative">
+        <div id="settings-message" class="opacity-0 absolute -top-2 -right-43 w-30">
           <img src="/img/arrow.png" alt="arrow" class="w-full h-auto pixelated" />
           <span class="text-white">Try playing with the settings</span>
+        </div>
       </div>
-    </a>
+    </div>
     <ul>
       <li>
         <a href="/">Home</a>
       </li>
       <li class="relative">
         <a href="/projects.html">Projects</a>
-        <div id="projects-message" class="opacity-0 absolute top-4/10 -left-3/10 w-30">
+        <div id="projects-message" class="opacity-0 absolute top-4/10 -left-3/10 w-30 pointer-events-none">
           <img src="/img/arrow.png" alt="arrow" class="w-full h-auto pixelated -rotate-30 -scale-x-100" />
           <span class="text-white">Or checking out some of my projects</span>
         </div>
