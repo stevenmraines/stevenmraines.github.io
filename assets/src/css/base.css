@@ -183,13 +183,13 @@
             @apply flex flex-col h-full justify-between;
 
             & > img {
-                @apply w-[300px] h-[250px] rounded-t-sm;
+                @apply w-[300px] h-[250px] rounded-t-sm border-b border-light-gray;
             }
             & > h4, & > h5, & > h6 {
                 @apply px-3 pt-3;
             }
             & > p {
-                @apply text-sm;
+                @apply text-sm min-h-[85px];
             }
             & > p, & > a {
                 @apply p-3;
@@ -235,4 +235,8 @@ html, body {
     @apply transition-transform;
     @apply duration-300;
     @apply ease-out;
+}
+
+#github-link img {
+    @apply bg-viridian2 mask-contain mask-no-repeat mask-center mask-[url('/img/github-logo-pixelated.png')];
 }
