@@ -237,6 +237,25 @@ html, body {
     @apply ease-out;
 }
 
+#github-link, #linkedin-link {
+    @apply inline-block w-3/10 h-full cursor-pointer;
+    &:hover {
+        & img {
+            @apply bg-orange2;
+        }
+    }
+}
+
+#github-link img, #linkedin-link img {
+    @apply inline-block w-full h-full bg-viridian2 mask-contain mask-no-repeat mask-center indent-[100%] whitespace-nowrap overflow-hidden;
+    @apply transition-[background-color];
+    @apply duration-300;
+}
+
 #github-link img {
-    @apply bg-viridian2 mask-contain mask-no-repeat mask-center mask-[url('/img/github-logo-pixelated.png')];
+    @apply mask-[url('/img/github-logo-pixelated-no-text.png')];
+}
+
+#linkedin-link img {
+    @apply w-8/10 h-8/10 mask-[url('/img/linkedin-logo-pixelated.png')];
 }
