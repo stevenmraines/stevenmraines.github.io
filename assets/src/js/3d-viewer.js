@@ -5,7 +5,8 @@ const CONFIG = {
 
     materialColor: 0xff0000,
 
-    cameraDistance: 5,
+    cameraDistance: 10,
+    cameraSpeed: 0.05,
 
     ambientLightColor: 0xffffff,
     ambientLightStrength: 0.3,
@@ -13,7 +14,7 @@ const CONFIG = {
     directionalLightStrength: 0.8,
 };
 
-(async () => {
+async function draw(filepath, filename) {
 
     try {
 
@@ -53,13 +54,14 @@ const CONFIG = {
                         continue;
                     }
                     if (line.startsWith('v ')) {
+                        // TODO Each vertex needs to appear once per triangle
                         let [x, y, z] = line.split(' ').slice(1).map(parseFloat);
                         data.push(x);
                         data.push(y);
                         data.push(z);
+                        console.log(x, y, z);
                     }
                 }
-                console.log(data);
                 verts = new Float32Array(data);
             };
             reader.onerror = () => {
@@ -68,7 +70,7 @@ const CONFIG = {
             reader.readAsText(file);
         }
 
-        const file = await createFile('/models/test.obj', 'test.obj', 'model/obj');
+        const file = await createFile(filepath, filename, 'model/obj');
         readObjFile(file);
 
         function buildMesh() {
@@ -91,6 +93,28 @@ const CONFIG = {
             scene.add( line );
         }
 
+        let lastMouseX = 0;
+        let lastMouseY = 0;
+
+        canvas.addEventListener("mousemove", (e) => {
+            if (e.buttons === 0) {
+                return;
+            }
+            const directionX = e.clientX < lastMouseX ? -1 : 1;
+            const directionY = e.clientY < lastMouseY ? 1 : -1;
+            camera.position.x += CONFIG.cameraSpeed * directionX;
+            camera.position.y += CONFIG.cameraSpeed * directionY;
+            lastMouseX = e.clientX;
+            lastMouseY = e.clientY;
+            // camera.lookAt(0, 0, 0);
+        });
+
+        canvas.addEventListener("wheel", (e) => {
+            // Forward appears to be z -1
+            camera.position.z += CONFIG.cameraSpeed * e.deltaY;
+            // camera.lookAt(0, 0, 0);
+        });
+
         function animate() {
             requestAnimationFrame(animate);
             buildMesh();
@@ -103,4 +127,14 @@ const CONFIG = {
         console.log(error);
     }
 
-})();
+}
+
+draw('/models/cube.obj', 'cube.obj');
+
+document.getElementById('icosphere-button').addEventListener("click", function () {
+    draw('/models/test.obj', 'icosphere.obj');
+});
+
+document.getElementById('cube-button').addEventListener("click", function () {
+    draw('/models/cube.obj', 'cube.obj');
+});
