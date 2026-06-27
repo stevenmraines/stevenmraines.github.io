@@ -6,13 +6,26 @@ const CONFIG = {
     materialColor: 0xff0000,
 
     cameraDistance: 10,
-    cameraSpeed: 0.05,
+    cameraSpeed: 0.01,
 
     ambientLightColor: 0xffffff,
     ambientLightStrength: 0.3,
     directionalLightColor: 0xffffff,
     directionalLightStrength: 0.8,
 };
+
+const icosphereButton = document.getElementById('icosphere-button');
+const cubeButton = document.getElementById('cube-button');
+
+if (icosphereButton && cubeButton) {
+    icosphereButton.addEventListener("click", function () {
+        draw('/models/test.obj', 'icosphere.obj');
+    });
+
+    cubeButton.addEventListener("click", function () {
+        draw('/models/cube.obj', 'cube.obj');
+    });
+}
 
 async function draw(filepath, filename) {
 
@@ -43,30 +56,46 @@ async function draw(filepath, filename) {
             return new File([data], filename, { type });
         }
 
-        let verts;
+        let vert_data = [];
+        let face_data = [];
 
         function readObjFile(file) {
             const reader = new FileReader();
+
             reader.onload = () => {
-                let data = [];
-                for (let line of reader.result.split('\n')) {
+                let vert_index = 0;
+                let face_index = 0;
+                const lines = reader.result.split('\n');
+
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i].trim();
+
                     if (! line) {
                         continue;
                     }
+
                     if (line.startsWith('v ')) {
+                        vert_index++;
                         // TODO Each vertex needs to appear once per triangle
                         let [x, y, z] = line.split(' ').slice(1).map(parseFloat);
-                        data.push(x);
-                        data.push(y);
-                        data.push(z);
-                        console.log(x, y, z);
+                        vert_data[vert_index] = [x,y,z];
+                    }
+
+                    if (line.startsWith('f ')) {
+                        face_index++;
+                        face_data[face_index] = line.split(' ')
+                            .slice(1)
+                            .map((value) => {
+                                return value.split('/').slice(0,1).map(parseFloat)[0];
+                            });
                     }
                 }
-                verts = new Float32Array(data);
             };
+
             reader.onerror = () => {
                 console.log("Error reading obj file");
             };
+
             reader.readAsText(file);
         }
 
@@ -79,8 +108,22 @@ async function draw(filepath, filename) {
                 solidMesh.material.dispose();
             }
 
+            let verts_arr = [];
+
+            for (let i in face_data) {
+                const face_vertex_indices = face_data[i];
+                for (let j in face_vertex_indices) {
+                    const index = face_vertex_indices[j];
+                    verts_arr.push(vert_data[index][0]); // x
+                    verts_arr.push(vert_data[index][1]); // y
+                    verts_arr.push(vert_data[index][2]); // z
+                }
+            }
+
+            const verts = new Float32Array(verts_arr);
             const geometry = new THREE.BufferGeometry();
-            geometry.setAttribute( 'position', new THREE.BufferAttribute( verts, 3 ) );
+            // TODO TypeError: can't access property "length", c[1] is undefined
+            geometry.setAttribute( 'position', new THREE.BufferAttribute( verts, face_data[1].length ) );
             const material = new THREE.MeshBasicMaterial( { color: CONFIG.materialColor } );
             solidMesh = new THREE.Mesh( geometry, material );
             scene.add(solidMesh);
@@ -98,12 +141,17 @@ async function draw(filepath, filename) {
 
         canvas.addEventListener("mousemove", (e) => {
             if (e.buttons === 0) {
+                // Set these to prevent camera jumping around
+                lastMouseX = e.clientX;
+                lastMouseY = e.clientY;
                 return;
             }
             const directionX = e.clientX < lastMouseX ? -1 : 1;
             const directionY = e.clientY < lastMouseY ? 1 : -1;
-            camera.position.x += CONFIG.cameraSpeed * directionX;
-            camera.position.y += CONFIG.cameraSpeed * directionY;
+            const diffX = Math.abs(e.clientX - lastMouseX);
+            const diffY = Math.abs(e.clientY - lastMouseY);
+            camera.position.x += CONFIG.cameraSpeed * directionX * diffX;
+            camera.position.y += CONFIG.cameraSpeed * directionY * diffY;
             lastMouseX = e.clientX;
             lastMouseY = e.clientY;
             // camera.lookAt(0, 0, 0);
@@ -128,13 +176,3 @@ async function draw(filepath, filename) {
     }
 
 }
-
-draw('/models/cube.obj', 'cube.obj');
-
-document.getElementById('icosphere-button').addEventListener("click", function () {
-    draw('/models/test.obj', 'icosphere.obj');
-});
-
-document.getElementById('cube-button').addEventListener("click", function () {
-    draw('/models/cube.obj', 'cube.obj');
-});
