@@ -168,6 +168,8 @@ function watch() {
     gulp.watch(paths.colors.src, css);
     gulp.watch(paths.html.src, gulp.parallel(html, css));
     gulp.watch(paths.js.src, js);
+    gulp.watch(paths.models.src, models);
+    gulp.watch(paths.img.src, img);
 }
 
 const buildTask = gulp.series(clean, gulp.parallel([files, fonts, models, nodeFonts, img, videos, html, css, js]));

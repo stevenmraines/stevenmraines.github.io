@@ -1,0 +1,12 @@
+# Blender 5.1.0 MTL File: 'skull reshaped.blend'
+# www.blender.org
+
+newmtl UV_Test
+Ns 1000.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 9.450000
+d 1.000000
+illum 1
+map_Kd skull_albedo_128.png

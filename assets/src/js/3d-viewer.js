@@ -4,9 +4,12 @@ const CONFIG = {
     fillColor: 0x2c2a30,
 
     materialColor: 0xff0000,
+    materialOpacity: 0,
 
     cameraDistance: 10,
     cameraSpeed: 0.01,
+
+    rotationSpeed: 0.1,
 
     ambientLightColor: 0xffffff,
     ambientLightStrength: 0.3,
@@ -16,8 +19,9 @@ const CONFIG = {
 
 const icosphereButton = document.getElementById('icosphere-button');
 const cubeButton = document.getElementById('cube-button');
+const skullButton = document.getElementById('skull-button');
 
-if (icosphereButton && cubeButton) {
+if (icosphereButton && cubeButton && skullButton) {
     icosphereButton.addEventListener("click", function () {
         draw('/models/test.obj', 'icosphere.obj');
     });
@@ -25,9 +29,13 @@ if (icosphereButton && cubeButton) {
     cubeButton.addEventListener("click", function () {
         draw('/models/cube.obj', 'cube.obj');
     });
+
+    skullButton.addEventListener("click", function () {
+        draw('/models/skull.obj', 'skull.obj');
+    });
 }
 
-async function draw(filepath, filename) {
+async function draw(filepath = '', filename = '') {
 
     try {
 
@@ -99,13 +107,20 @@ async function draw(filepath, filename) {
             reader.readAsText(file);
         }
 
-        const file = await createFile(filepath, filename, 'model/obj');
-        readObjFile(file);
+        if (filepath !== '' && filename !== '') {
+            const file = await createFile(filepath, filename, 'model/obj');
+            readObjFile(file);
+        }
 
         function buildMesh() {
+            // TODO Scene is not resetting correctly when clicking multiple buttons
             if (solidMesh) {
                 scene.remove(solidMesh);
                 solidMesh.material.dispose();
+            }
+
+            if (face_data.length === 0) {
+                return;
             }
 
             let verts_arr = [];
@@ -122,9 +137,10 @@ async function draw(filepath, filename) {
 
             const verts = new Float32Array(verts_arr);
             const geometry = new THREE.BufferGeometry();
-            // TODO TypeError: can't access property "length", c[1] is undefined
-            geometry.setAttribute( 'position', new THREE.BufferAttribute( verts, face_data[1].length ) );
+            geometry.setAttribute( 'position', new THREE.BufferAttribute( verts, 3 ) );
             const material = new THREE.MeshBasicMaterial( { color: CONFIG.materialColor } );
+            material.opacity = CONFIG.materialOpacity;
+            material.transparent = CONFIG.materialOpacity < 1.0;
             solidMesh = new THREE.Mesh( geometry, material );
             scene.add(solidMesh);
 
@@ -140,27 +156,37 @@ async function draw(filepath, filename) {
         let lastMouseY = 0;
 
         canvas.addEventListener("mousemove", (e) => {
+            const isRotating = e.buttons !== 0 && e.shiftKey;
+
             if (e.buttons === 0) {
                 // Set these to prevent camera jumping around
                 lastMouseX = e.clientX;
                 lastMouseY = e.clientY;
                 return;
             }
+
             const directionX = e.clientX < lastMouseX ? -1 : 1;
             const directionY = e.clientY < lastMouseY ? 1 : -1;
             const diffX = Math.abs(e.clientX - lastMouseX);
             const diffY = Math.abs(e.clientY - lastMouseY);
-            camera.position.x += CONFIG.cameraSpeed * directionX * diffX;
-            camera.position.y += CONFIG.cameraSpeed * directionY * diffY;
+
+            if (isRotating) {
+                if (solidMesh) {
+                    // TODO This doesn't work, docs say something about use Object3D.rotation, look into that. The page also seems to lag quite a bit if you try to rotate a lot
+                    // solidMesh.geometry.rotateY(CONFIG.rotationSpeed * directionX * diffX);
+                }
+            } else {
+                camera.position.x += CONFIG.cameraSpeed * directionX * diffX;
+                camera.position.y += CONFIG.cameraSpeed * directionY * diffY;
+            }
+
             lastMouseX = e.clientX;
             lastMouseY = e.clientY;
-            // camera.lookAt(0, 0, 0);
         });
 
         canvas.addEventListener("wheel", (e) => {
             // Forward appears to be z -1
             camera.position.z += CONFIG.cameraSpeed * e.deltaY;
-            // camera.lookAt(0, 0, 0);
         });
 
         function animate() {
@@ -176,3 +202,5 @@ async function draw(filepath, filename) {
     }
 
 }
+
+draw();
