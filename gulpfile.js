@@ -56,9 +56,10 @@ const paths = {
     },
     js: {
         src: [
+            'assets/src/js/OBJHandler.js',
             'assets/src/js/base.js',
             'assets/src/js/background.js',
-            'assets/src/js/3d-viewer.js',
+            'assets/src/js/3d-viewer.js'
         ],
         dest: 'public/js',
     },
