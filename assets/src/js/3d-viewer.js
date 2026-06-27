@@ -3,23 +3,26 @@ const THREE = require('three');
 const CONFIG = {
     fillColor: 0x2c2a30,
 
-    materialColor: 0xff0000,
-    materialOpacity: 0,
+    materialColor: 0x0033ff,
+    materialOpacity: 1.0,
 
     cameraDistance: 10,
     cameraSpeed: 0.01,
 
-    rotationSpeed: 0.1,
+    rotationSpeed: 0.01,
 
     ambientLightColor: 0xffffff,
     ambientLightStrength: 0.3,
     directionalLightColor: 0xffffff,
-    directionalLightStrength: 0.8,
+    directionalLightStrength: 0,
 };
 
+const canvas = document.getElementById("3d-viewer-canvas");
 const icosphereButton = document.getElementById('icosphere-button');
 const cubeButton = document.getElementById('cube-button');
 const skullButton = document.getElementById('skull-button');
+
+let autoRotate = true;
 
 if (icosphereButton && cubeButton && skullButton) {
     icosphereButton.addEventListener("click", function () {
@@ -39,9 +42,9 @@ async function draw(filepath = '', filename = '') {
 
     try {
 
-        const canvas = document.getElementById("3d-viewer-canvas");
-        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+        autoRotate = true;
 
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(CONFIG.fillColor);
 
@@ -56,7 +59,7 @@ async function draw(filepath = '', filename = '') {
         directional.position.set(3, 5, 6);
         scene.add(directional);
 
-        let solidMesh;
+        let solidMesh, wireframe_lines;
 
         async function createFile(path, filename, type) {
             let response = await fetch(path);
@@ -113,12 +116,6 @@ async function draw(filepath = '', filename = '') {
         }
 
         function buildMesh() {
-            // TODO Scene is not resetting correctly when clicking multiple buttons
-            if (solidMesh) {
-                scene.remove(solidMesh);
-                solidMesh.material.dispose();
-            }
-
             if (face_data.length === 0) {
                 return;
             }
@@ -137,19 +134,18 @@ async function draw(filepath = '', filename = '') {
 
             const verts = new Float32Array(verts_arr);
             const geometry = new THREE.BufferGeometry();
-            geometry.setAttribute( 'position', new THREE.BufferAttribute( verts, 3 ) );
-            const material = new THREE.MeshBasicMaterial( { color: CONFIG.materialColor } );
+            geometry.setAttribute( 'position', new THREE.BufferAttribute(verts, 3 ));
+            const material = new THREE.MeshBasicMaterial({ color: CONFIG.materialColor });
             material.opacity = CONFIG.materialOpacity;
             material.transparent = CONFIG.materialOpacity < 1.0;
-            solidMesh = new THREE.Mesh( geometry, material );
-            scene.add(solidMesh);
+            solidMesh = new THREE.Mesh(geometry, material);
 
-            const wireframe = new THREE.WireframeGeometry( geometry );
-            const line = new THREE.LineSegments( wireframe );
-            line.material.depthWrite = false;
-            line.material.opacity = 0.25;
-            line.material.transparent = true;
-            scene.add( line );
+            const wireframe = new THREE.WireframeGeometry(geometry);
+            wireframe_lines = new THREE.LineSegments(wireframe);
+            // TODO Not sure this is working
+            wireframe_lines.material.depthWrite = false;
+            wireframe_lines.material.opacity = 0.25;
+            wireframe_lines.material.transparent = true;
         }
 
         let lastMouseX = 0;
@@ -172,8 +168,10 @@ async function draw(filepath = '', filename = '') {
 
             if (isRotating) {
                 if (solidMesh) {
-                    // TODO This doesn't work, docs say something about use Object3D.rotation, look into that. The page also seems to lag quite a bit if you try to rotate a lot
-                    // solidMesh.geometry.rotateY(CONFIG.rotationSpeed * directionX * diffX);
+                    autoRotate = false;
+                    // TODO Docs say something about use Object3D.rotation, look into that. The page also seems to lag quite a bit if you try to rotate a lot
+                    solidMesh.rotateY(CONFIG.rotationSpeed * directionX * diffX);
+                    wireframe_lines.rotateY(CONFIG.rotationSpeed * directionX * diffX);
                 }
             } else {
                 camera.position.x += CONFIG.cameraSpeed * directionX * diffX;
@@ -191,7 +189,21 @@ async function draw(filepath = '', filename = '') {
 
         function animate() {
             requestAnimationFrame(animate);
-            buildMesh();
+            if (! solidMesh) {
+                buildMesh();
+            }
+            if (solidMesh) {
+                // TODO Not sure if needed?
+                // scene.remove(solidMesh);
+                // scene.remove(wireframe_lines);
+                // solidMesh.material.dispose();
+                if (autoRotate) {
+                    solidMesh.rotateY(THREE.MathUtils.degToRad(0.5));
+                    wireframe_lines.rotateY(THREE.MathUtils.degToRad(0.5));
+                }
+                scene.add(solidMesh);
+                scene.add(wireframe_lines);
+            }
             renderer.render(scene, camera);
         }
 
@@ -203,4 +215,7 @@ async function draw(filepath = '', filename = '') {
 
 }
 
-draw();
+// TODO Maybe stop bundling every js file into one script so we don't have to do things like this
+if (canvas) {
+    draw();
+}
