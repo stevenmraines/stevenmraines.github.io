@@ -3,7 +3,7 @@ const THREE = require('three');
 const CONFIG = {
     fillColor: 0x2c2a30,
 
-    materialColor: 0x0033ff,
+    materialColor: 0xffffff,
     materialOpacity: 1.0,
 
     cameraDistance: 10,
@@ -12,9 +12,9 @@ const CONFIG = {
     rotationSpeed: 0.01,
 
     ambientLightColor: 0xffffff,
-    ambientLightStrength: 0.3,
+    ambientLightStrength: 0.15,
     directionalLightColor: 0xffffff,
-    directionalLightStrength: 0,
+    directionalLightStrength: 0.75,
 };
 
 const canvas = document.getElementById("3d-viewer-canvas");
@@ -67,8 +67,9 @@ async function draw(filepath = '', filename = '') {
             return new File([data], filename, { type });
         }
 
-        let vert_data = [];
-        let face_data = [];
+        let vert_data = {};
+        let face_data = { "vertices": {}, "uvs": {} };
+        let uv_data = {};
 
         function readObjFile(file) {
             const reader = new FileReader();
@@ -76,6 +77,7 @@ async function draw(filepath = '', filename = '') {
             reader.onload = () => {
                 let vert_index = 0;
                 let face_index = 0;
+                let uv_index = 0;
                 const lines = reader.result.split('\n');
 
                 for (let i = 0; i < lines.length; i++) {
@@ -87,18 +89,28 @@ async function draw(filepath = '', filename = '') {
 
                     if (line.startsWith('v ')) {
                         vert_index++;
-                        // TODO Each vertex needs to appear once per triangle
                         let [x, y, z] = line.split(' ').slice(1).map(parseFloat);
                         vert_data[vert_index] = [x,y,z];
                     }
 
                     if (line.startsWith('f ')) {
                         face_index++;
-                        face_data[face_index] = line.split(' ')
+                        face_data.vertices[face_index] = line.split(' ')
                             .slice(1)
                             .map((value) => {
                                 return value.split('/').slice(0,1).map(parseFloat)[0];
                             });
+                        face_data.uvs[face_index] = line.split(' ')
+                            .slice(1)
+                            .map((value) => {
+                                return value.split('/').slice(1,2).map(parseFloat)[0];
+                            });
+                    }
+
+                    if (line.startsWith('vt ')) {
+                        uv_index++;
+                        let [u,v] = line.split(' ').slice(1).map(parseFloat);
+                        uv_data[uv_index] = [u,v];
                     }
                 }
             };
@@ -116,14 +128,15 @@ async function draw(filepath = '', filename = '') {
         }
 
         function buildMesh() {
-            if (face_data.length === 0) {
+            if (Object.keys(face_data.vertices).length === 0) {
                 return;
             }
 
             let verts_arr = [];
+            let uv_arr = [];
 
-            for (let i in face_data) {
-                const face_vertex_indices = face_data[i];
+            for (let i in face_data.vertices) {
+                const face_vertex_indices = face_data.vertices[i];
                 for (let j in face_vertex_indices) {
                     const index = face_vertex_indices[j];
                     verts_arr.push(vert_data[index][0]); // x
@@ -132,10 +145,26 @@ async function draw(filepath = '', filename = '') {
                 }
             }
 
+            for (let i in face_data.uvs) {
+                const face_uv_indices = face_data.uvs[i];
+                for (let j in face_uv_indices) {
+                    const index = face_uv_indices[j];
+                    uv_arr.push(uv_data[index][0]); // u
+                    uv_arr.push(uv_data[index][1]); // v
+                }
+            }
+
+            const textureLoader = new THREE.TextureLoader();
+            // TODO Get texture map from .mtl file
+            const texture = textureLoader.load('/models/skull_albedo_128.png');
             const verts = new Float32Array(verts_arr);
+            const uvs = new Float32Array(uv_arr);
             const geometry = new THREE.BufferGeometry();
             geometry.setAttribute( 'position', new THREE.BufferAttribute(verts, 3 ));
-            const material = new THREE.MeshBasicMaterial({ color: CONFIG.materialColor });
+            geometry.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
+            // TODO Get the normal data from the .obj file instead
+            geometry.computeVertexNormals();
+            const material = new THREE.MeshStandardMaterial({ map: texture, color: CONFIG.materialColor });
             material.opacity = CONFIG.materialOpacity;
             material.transparent = CONFIG.materialOpacity < 1.0;
             solidMesh = new THREE.Mesh(geometry, material);
@@ -144,7 +173,7 @@ async function draw(filepath = '', filename = '') {
             wireframe_lines = new THREE.LineSegments(wireframe);
             // TODO Not sure this is working
             wireframe_lines.material.depthWrite = false;
-            wireframe_lines.material.opacity = 0.25;
+            wireframe_lines.material.opacity = 0.15;
             wireframe_lines.material.transparent = true;
         }
 
