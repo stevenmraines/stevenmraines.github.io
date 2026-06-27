@@ -57,9 +57,14 @@ const paths = {
     js: {
         src: [
             'assets/src/js/base.js',
-            'assets/src/js/background.js'
+            'assets/src/js/background.js',
+            'assets/src/js/3d-viewer.js',
         ],
         dest: 'public/js',
+    },
+    models: {
+        src: 'assets/models/*',
+        dest: 'public/models',
     },
     nodeFonts: {
         src: 'node_modules/devicon/fonts/*',
@@ -132,6 +137,11 @@ function js() {
         .pipe(connect.reload());
 }
 
+function models() {
+    return gulp.src(paths.models.src)
+        .pipe(gulp.dest(paths.models.dest));
+}
+
 function nodeFonts() {
     return gulp.src(paths.nodeFonts.src)
         .pipe(gulp.dest(paths.nodeFonts.dest));
@@ -160,7 +170,7 @@ function watch() {
     gulp.watch(paths.js.src, js);
 }
 
-const buildTask = gulp.series(clean, gulp.parallel([files, fonts, nodeFonts, img, videos, html, css, js]));
+const buildTask = gulp.series(clean, gulp.parallel([files, fonts, models, nodeFonts, img, videos, html, css, js]));
 const serveTask = gulp.series(buildTask, serve);
 const watchTask = gulp.series(serveTask, watch);
 const watchNoBuildTask = gulp.series(serve, watch);
