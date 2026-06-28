@@ -13,9 +13,18 @@ const CONFIG = {
     rotationSpeed: 0.01,
 
     ambientLightColor: 0xffffff,
-    ambientLightStrength: 0.15,
-    directionalLightColor: 0xffffff,
-    directionalLightStrength: 0.75,
+    ambientLightStrength: 0.2,
+    directionalLightColor: 0xddffff,
+    directionalLightStrength: 0.85,
+
+    meshWireframeOpacity: 0,
+
+    planeWidth: 30,
+    planeHeight: 30,
+    planeWidthSegments: 10,
+    planeHeightSegments: 10,
+    planeColor: 0x39383c,
+    planeOpacity: 0,
 };
 
 const canvas = document.getElementById("3d-viewer-canvas");
@@ -57,19 +66,49 @@ async function draw(filepath = '', filename = '') {
         const directional = new THREE.DirectionalLight(CONFIG.directionalLightColor, CONFIG.directionalLightStrength);
 
         scene.add(ambient);
-        directional.position.set(3, 5, 6);
+        directional.position.set(4, 3, 4);
+        directional.lookAt(0,0,0);
         scene.add(directional);
 
         const obj_handler = new OBJHandler();
-        let solidMesh, wireframe_lines;
+        let solidMesh, wireframe_lines, plane, plane_wireframe;
         let vert_data = {};
-        let face_data = { "vertices": {}, "uvs": {} };
+        let face_data = { "vertices": {}, "uvs": {}, "normals": {} };
         let uv_data = {};
+        let normal_data = {};
         let mtl_filenames = [];
 
         if (filepath !== '' && filename !== '') {
             const file = await obj_handler.createFile(filepath, filename, 'model/obj');
-            [vert_data, face_data, uv_data, mtl_filenames] = obj_handler.readOBJFile(file);
+            [vert_data, face_data, uv_data, normal_data, mtl_filenames] = obj_handler.readOBJFile(file);
+        }
+
+        function buildPlane() {
+            // TODO Figure out if there's a way to make this not triangulated
+            const geometry = new THREE.PlaneGeometry(
+                CONFIG.planeWidth,
+                CONFIG.planeHeight,
+                CONFIG.planeWidthSegments,
+                CONFIG.planeHeightSegments
+            );
+
+            const material = new THREE.MeshBasicMaterial({
+                color: CONFIG.planeColor,
+                opacity: CONFIG.planeOpacity,
+                transparent: true,
+            });
+
+            plane = new THREE.Mesh(geometry, material);
+            plane.position.set(0,-4,0);
+            plane.rotateX(THREE.MathUtils.degToRad(-90));
+
+            const wireframe = new THREE.WireframeGeometry(geometry);
+            plane_wireframe = new THREE.LineSegments(wireframe);
+            plane_wireframe.material.depthWrite = false;
+            plane_wireframe.material.opacity = 0.25;
+            plane_wireframe.material.transparent = true;
+            plane_wireframe.position.set(0,-4,0);
+            plane_wireframe.rotateX(THREE.MathUtils.degToRad(-90));
         }
 
         function buildMesh() {
@@ -79,6 +118,7 @@ async function draw(filepath = '', filename = '') {
 
             let verts_arr = [];
             let uv_arr = [];
+            let normal_arr = [];
 
             for (let i in face_data.vertices) {
                 const face_vertex_indices = face_data.vertices[i];
@@ -99,16 +139,26 @@ async function draw(filepath = '', filename = '') {
                 }
             }
 
+            for (let i in face_data.normals) {
+                const face_normal_indices = face_data.normals[i];
+                for (let j in face_normal_indices) {
+                    const index = face_normal_indices[j];
+                    normal_arr.push(normal_data[index][0]); // x
+                    normal_arr.push(normal_data[index][1]); // y
+                    normal_arr.push(normal_data[index][2]); // z
+                }
+            }
+
             const textureLoader = new THREE.TextureLoader();
             // TODO Get texture map from .mtl file
             const texture = textureLoader.load('/models/skull_albedo_128.png');
             const verts = new Float32Array(verts_arr);
             const uvs = new Float32Array(uv_arr);
+            const normals = new Float32Array(normal_arr);
             const geometry = new THREE.BufferGeometry();
             geometry.setAttribute( 'position', new THREE.BufferAttribute(verts, 3 ));
             geometry.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
-            // TODO Get the normal data from the .obj file instead
-            geometry.computeVertexNormals();
+            geometry.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
             const material = new THREE.MeshStandardMaterial({ map: texture, color: CONFIG.materialColor });
             material.opacity = CONFIG.materialOpacity;
             material.transparent = CONFIG.materialOpacity < 1.0;
@@ -118,7 +168,7 @@ async function draw(filepath = '', filename = '') {
             wireframe_lines = new THREE.LineSegments(wireframe);
             // TODO Not sure this is working
             wireframe_lines.material.depthWrite = false;
-            wireframe_lines.material.opacity = 0.15;
+            wireframe_lines.material.opacity = CONFIG.meshWireframeOpacity;
             wireframe_lines.material.transparent = true;
         }
 
@@ -164,9 +214,15 @@ async function draw(filepath = '', filename = '') {
 
         function animate() {
             requestAnimationFrame(animate);
+
             if (! solidMesh) {
                 buildMesh();
             }
+
+            if (! plane) {
+                buildPlane();
+            }
+
             if (solidMesh) {
                 // TODO Not sure if needed?
                 // scene.remove(solidMesh);
@@ -176,9 +232,16 @@ async function draw(filepath = '', filename = '') {
                     solidMesh.rotateY(THREE.MathUtils.degToRad(0.5));
                     wireframe_lines.rotateY(THREE.MathUtils.degToRad(0.5));
                 }
+
                 scene.add(solidMesh);
                 scene.add(wireframe_lines);
             }
+
+            if (plane) {
+                scene.add(plane);
+                scene.add(plane_wireframe);
+            }
+
             renderer.render(scene, camera);
         }
 

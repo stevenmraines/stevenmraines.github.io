@@ -8,8 +8,9 @@ class OBJHandler {
 
     readOBJFile(file) {
         let vert_data = {};
-        let face_data = { "vertices": {}, "uvs": {} };
+        let face_data = { "vertices": {}, "uvs": {}, "normals": {} };
         let uv_data = {};
+        let normal_data = {};
         let mtl_filenames = [];
 
         const reader = new FileReader();
@@ -18,6 +19,7 @@ class OBJHandler {
             let vert_index = 0;
             let face_index = 0;
             let uv_index = 0;
+            let normal_index = 0;
             const lines = reader.result.split('\n');
 
             for (let i = 0; i < lines.length; i++) {
@@ -49,12 +51,23 @@ class OBJHandler {
                         .map((value) => {
                             return value.split('/').slice(1,2).map(parseFloat)[0];
                         });
+                    face_data.normals[face_index] = line.split(' ')
+                        .slice(1)
+                        .map((value) => {
+                            return value.split('/').slice(2,3).map(parseFloat)[0];
+                        });
                 }
 
                 if (line.startsWith('vt ')) {
                     uv_index++;
                     let [u,v] = line.split(' ').slice(1).map(parseFloat);
                     uv_data[uv_index] = [u,v];
+                }
+
+                if (line.startsWith('vn ')) {
+                    normal_index++;
+                    let [x,y,z] = line.split(' ').slice(1).map(parseFloat);
+                    normal_data[normal_index] = [x,y,z];
                 }
             }
         };
@@ -65,7 +78,7 @@ class OBJHandler {
 
         reader.readAsText(file);
 
-        return [vert_data, face_data, uv_data, mtl_filenames]
+        return [vert_data, face_data, uv_data, normal_data, mtl_filenames]
     }
 
 }
