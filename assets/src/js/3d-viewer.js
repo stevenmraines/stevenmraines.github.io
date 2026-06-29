@@ -186,7 +186,10 @@ async function draw(objFilePath = '') {
 
             if (texture_map) {
                 const textureLoader = new THREE.TextureLoader();
-                material.map = textureLoader.load('/models/' + texture_map);
+                const texture = textureLoader.load('/models/' + texture_map);
+                texture.magFilter = THREE.NearestFilter;
+                texture.minFilter = THREE.NearestFilter;
+                material.map = texture;
                 const texture_preview = document.getElementById('texture-preview');
                 texture_preview.src = '/models/' + texture_map;
 
