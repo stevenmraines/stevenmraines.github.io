@@ -17,10 +17,12 @@
 @@include('./partials/background.html')
 
 <div class="content">
-  <button id="icosphere-button" class="btn bg-viridian2">Icosphere</button>
-  <button id="cube-button" class="btn bg-orange2">Cube</button>
-  <button id="skull-button" class="btn bg-viridian2">Skull</button>
-  <button id="compass-button" class="btn bg-orange2">Compass</button>
+  <button class="load-obj-button btn bg-viridian2" data-filename="test.obj">Icosphere</button>
+  <button class="load-obj-button btn bg-orange2" data-filename="cube.obj">Cube</button>
+  <button class="load-obj-button btn bg-viridian2" data-filename="skull.obj">Skull</button>
+  <!-- TODO Figure out how to handle compass materials and multi meshes -->
+  <button class="load-obj-button btn bg-orange2" data-filename="compass.obj" data-rotation="90/0/0" data-scale="25/25/25">Compass</button>
+  <button class="load-obj-button btn bg-viridian2" data-filename="spidey.obj">Spider-Man</button>
 </div>
 
 <canvas id="3d-viewer-canvas" class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-[900px] h-[600px] border-2 border-black"></canvas>
@@ -36,6 +38,7 @@
     <span class="absolute top-8 right-2 text-xs">
       Scroll to zoom
     </span>
+
     <label class="absolute top-2 left-2 pointer-events-auto">
       Wireframe
       <input type="checkbox" id="show-wireframe" />
@@ -44,6 +47,11 @@
       Texture Preview
       <input type="checkbox" id="show-texture-preview" />
     </label>
+    <label class="absolute top-12 left-2 pointer-events-auto">
+      Texture Filtering
+      <input type="checkbox" id="texture-filtering" />
+    </label>
+
     <!-- TODO Add a placeholder img, like "No Texture" or whatever -->
     <img src="#" id="texture-preview" class="absolute right-[2px] bottom-[2px] w-1/4 h-auto hidden" />
   </div>

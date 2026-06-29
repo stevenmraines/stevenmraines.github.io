@@ -27,35 +27,48 @@ const CONFIG = {
     planeOpacity: 0,
 };
 
+let current_obj_file_path = '';
+let current_rotation = new THREE.Vector3(0,0,0);
+let current_scale = new THREE.Vector3(1,1,1);
+let renderer;
+
 const canvas = document.getElementById("3d-viewer-canvas");
-const icosphereButton = document.getElementById('icosphere-button');
-const cubeButton = document.getElementById('cube-button');
-const skullButton = document.getElementById('skull-button');
-const compassButton = document.getElementById('compass-button');
 const show_wireframe_input = document.getElementById('show-wireframe');
 const show_texture_preview_input = document.getElementById('show-texture-preview');
+const texture_filtering_input = document.getElementById('texture-filtering');
 
 let autoRotate = true;
 let show_wireframe = false;
 let show_texture_preview = false;
+let filter_texture = false;
 
-if (icosphereButton && cubeButton && skullButton && compassButton && show_wireframe_input) {
-    icosphereButton.addEventListener("click", function () {
-        draw('/models/test.obj');
-    });
+if (show_wireframe_input) {
+    const obj_buttons = document.getElementsByClassName('load-obj-button');
 
-    cubeButton.addEventListener("click", function () {
-        draw('/models/cube.obj');
-    });
+    for (let obj_button of obj_buttons) {
+        const obj_filename = obj_button.dataset.filename;
+        let rx = 0;
+        let ry = 0;
+        let rz = 0;
+        let sx = 1;
+        let sy = 1;
+        let sz = 1;
 
-    skullButton.addEventListener("click", function () {
-        draw('/models/skull.obj');
-    });
+        if (obj_button.dataset.rotation) {
+            [rx, ry, rz] = obj_button.dataset.rotation.split('/').map(parseFloat);
+        }
 
-    // TODO Figure out how to handle compass materials and multi meshes
-    compassButton.addEventListener("click", function () {
-        draw('/models/compass.obj', new THREE.Vector3(90,0,0), new THREE.Vector3(25,25,25));
-    });
+        if (obj_button.dataset.scale) {
+            [sx, sy, sz] = obj_button.dataset.scale.split('/').map(parseFloat);
+        }
+
+        const rotation = new THREE.Vector3(rx, ry, rz);
+        const scale = new THREE.Vector3(sx, sy, sz);
+
+        obj_button.addEventListener('click', function () {
+            draw('/models/' + obj_filename, rotation, scale);
+        });
+    }
 
     show_wireframe_input.addEventListener('click', function () {
         show_wireframe = show_wireframe_input.checked;
@@ -71,15 +84,29 @@ if (icosphereButton && cubeButton && skullButton && compassButton && show_wirefr
             texture_preview.classList.add('hidden');
         }
     });
+
+    texture_filtering_input.addEventListener('click', function () {
+        filter_texture = texture_filtering_input.checked;
+        if (current_obj_file_path) {
+            draw(current_obj_file_path, current_rotation, current_scale);
+        }
+    });
 }
 
 async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale = new THREE.Vector3(1,1,1)) {
+
+    current_obj_file_path = objFilePath;
+    current_rotation = rotation;
+    current_scale = scale;
 
     try {
 
         autoRotate = true;
 
-        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+        if (! renderer) {
+            renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+        }
+
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(CONFIG.fillColor);
 
@@ -197,8 +224,12 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
             if (texture_map) {
                 const textureLoader = new THREE.TextureLoader();
                 const texture = textureLoader.load('/models/' + texture_map);
-                texture.magFilter = THREE.NearestFilter;
-                texture.minFilter = THREE.NearestFilter;
+
+                if (! filter_texture) {
+                    texture.magFilter = THREE.NearestFilter;
+                    texture.minFilter = THREE.NearestFilter;
+                }
+
                 material.map = texture;
                 const texture_preview = document.getElementById('texture-preview');
                 texture_preview.src = '/models/' + texture_map;
