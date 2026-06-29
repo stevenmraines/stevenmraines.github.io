@@ -36,19 +36,19 @@ let autoRotate = true;
 
 if (icosphereButton && cubeButton && skullButton) {
     icosphereButton.addEventListener("click", function () {
-        draw('/models/test.obj', 'icosphere.obj');
+        draw('/models/test.obj');
     });
 
     cubeButton.addEventListener("click", function () {
-        draw('/models/cube.obj', 'cube.obj');
+        draw('/models/cube.obj');
     });
 
     skullButton.addEventListener("click", function () {
-        draw('/models/skull.obj', 'skull.obj');
+        draw('/models/skull.obj');
     });
 }
 
-async function draw(filepath = '', filename = '') {
+async function draw(objFilePath = '') {
 
     try {
 
@@ -72,15 +72,23 @@ async function draw(filepath = '', filename = '') {
 
         const obj_handler = new OBJHandler();
         let solidMesh, wireframe_lines, plane, plane_wireframe;
-        let vert_data = {};
+        let vertex_data = {};
         let face_data = { "vertices": {}, "uvs": {}, "normals": {} };
         let uv_data = {};
         let normal_data = {};
-        let mtl_filenames = [];
+        let texture_map = '';
 
-        if (filepath !== '' && filename !== '') {
-            const file = await obj_handler.createFile(filepath, filename, 'model/obj');
-            [vert_data, face_data, uv_data, normal_data, mtl_filenames] = obj_handler.readOBJFile(file);
+        if (objFilePath !== '') {
+            let mtllib = [];
+            let usemtl = [];
+            let filename = objFilePath.split('/')[2];
+            const obj_file = await obj_handler.createFile(objFilePath, filename, 'model/obj');
+            [vertex_data, face_data, uv_data, normal_data, mtllib, usemtl] = await obj_handler.readObjFile(obj_file);
+
+            if (mtllib.length > 0 && usemtl.length > 0) {
+                const mtl_file = await obj_handler.createFile('/models/' + mtllib[0], mtllib[0], 'model/mtl');
+                texture_map = await obj_handler.readMtlFile(mtl_file, usemtl[0]);
+            }
         }
 
         function buildPlane() {
@@ -124,9 +132,9 @@ async function draw(filepath = '', filename = '') {
                 const face_vertex_indices = face_data.vertices[i];
                 for (let j in face_vertex_indices) {
                     const index = face_vertex_indices[j];
-                    verts_arr.push(vert_data[index][0]); // x
-                    verts_arr.push(vert_data[index][1]); // y
-                    verts_arr.push(vert_data[index][2]); // z
+                    verts_arr.push(vertex_data[index][0]); // x
+                    verts_arr.push(vertex_data[index][1]); // y
+                    verts_arr.push(vertex_data[index][2]); // z
                 }
             }
 
@@ -149,9 +157,6 @@ async function draw(filepath = '', filename = '') {
                 }
             }
 
-            const textureLoader = new THREE.TextureLoader();
-            // TODO Get texture map from .mtl file
-            const texture = textureLoader.load('/models/skull_albedo_128.png');
             const verts = new Float32Array(verts_arr);
             const uvs = new Float32Array(uv_arr);
             const normals = new Float32Array(normal_arr);
@@ -159,7 +164,13 @@ async function draw(filepath = '', filename = '') {
             geometry.setAttribute( 'position', new THREE.BufferAttribute(verts, 3 ));
             geometry.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
             geometry.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
-            const material = new THREE.MeshStandardMaterial({ map: texture, color: CONFIG.materialColor });
+            const material = new THREE.MeshStandardMaterial({ color: CONFIG.materialColor });
+
+            if (texture_map) {
+                const textureLoader = new THREE.TextureLoader();
+                material.map = textureLoader.load('/models/' + texture_map);
+            }
+
             material.opacity = CONFIG.materialOpacity;
             material.transparent = CONFIG.materialOpacity < 1.0;
             solidMesh = new THREE.Mesh(geometry, material);

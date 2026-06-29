@@ -6,21 +6,21 @@ class OBJHandler {
         return new File([data], filename, { type });
     }
 
-    readOBJFile(file) {
-        let vert_data = {};
+    async readObjFile(file) {
+        let vertex_data = {};
         let face_data = { "vertices": {}, "uvs": {}, "normals": {} };
         let uv_data = {};
         let normal_data = {};
-        let mtl_filenames = [];
+        let mtllib = [];
+        let usemtl = [];
+        const file_content = await file.text();
 
-        const reader = new FileReader();
-
-        reader.onload = () => {
+        try {
             let vert_index = 0;
             let face_index = 0;
             let uv_index = 0;
             let normal_index = 0;
-            const lines = reader.result.split('\n');
+            const lines = file_content.split('\n');
 
             for (let i = 0; i < lines.length; i++) {
                 const line = lines[i].trim();
@@ -30,13 +30,17 @@ class OBJHandler {
                 }
 
                 if (line.startsWith('mtllib ')) {
-                    mtl_filenames.push(line.split(' ').slice(1));
+                    mtllib.push(line.split(' ')[1]);
+                }
+
+                if (line.startsWith('usemtl ')) {
+                    usemtl.push(line.split(' ')[1]);
                 }
 
                 if (line.startsWith('v ')) {
                     vert_index++;
                     let [x, y, z] = line.split(' ').slice(1).map(parseFloat);
-                    vert_data[vert_index] = [x,y,z];
+                    vertex_data[vert_index] = [x,y,z];
                 }
 
                 if (line.startsWith('f ')) {
@@ -70,15 +74,41 @@ class OBJHandler {
                     normal_data[normal_index] = [x,y,z];
                 }
             }
-        };
+        } catch (e) {
+            console.log("Error reading obj file", e);
+        }
 
-        reader.onerror = () => {
-            console.log("Error reading obj file");
-        };
+        return [vertex_data, face_data, uv_data, normal_data, mtllib, usemtl]
+    }
 
-        reader.readAsText(file);
+    async readMtlFile(file, usemtl) {
+        let texture_map = '';
+        let current_mtl = '';
+        const file_content = await file.text();
 
-        return [vert_data, face_data, uv_data, normal_data, mtl_filenames]
+        try {
+            const lines = file_content.split('\n');
+
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
+
+                if (!line) {
+                    continue;
+                }
+
+                if (line.startsWith('newmtl')) {
+                    current_mtl = line.split(' ')[1];
+                }
+
+                if (line.startsWith('map_Kd') && current_mtl === usemtl) {
+                    texture_map = line.split(' ')[1];
+                }
+            }
+        } catch(e) {
+            console.log('Error reading mtl file', e);
+        }
+
+        return texture_map;
     }
 
 }
