@@ -31,6 +31,7 @@ const canvas = document.getElementById("3d-viewer-canvas");
 const icosphereButton = document.getElementById('icosphere-button');
 const cubeButton = document.getElementById('cube-button');
 const skullButton = document.getElementById('skull-button');
+const compassButton = document.getElementById('compass-button');
 const show_wireframe_input = document.getElementById('show-wireframe');
 const show_texture_preview_input = document.getElementById('show-texture-preview');
 
@@ -38,7 +39,7 @@ let autoRotate = true;
 let show_wireframe = false;
 let show_texture_preview = false;
 
-if (icosphereButton && cubeButton && skullButton && show_wireframe_input) {
+if (icosphereButton && cubeButton && skullButton && compassButton && show_wireframe_input) {
     icosphereButton.addEventListener("click", function () {
         draw('/models/test.obj');
     });
@@ -49,6 +50,11 @@ if (icosphereButton && cubeButton && skullButton && show_wireframe_input) {
 
     skullButton.addEventListener("click", function () {
         draw('/models/skull.obj');
+    });
+
+    // TODO Figure out how to handle compass materials and multi meshes
+    compassButton.addEventListener("click", function () {
+        draw('/models/compass.obj', new THREE.Vector3(90,0,0), new THREE.Vector3(25,25,25));
     });
 
     show_wireframe_input.addEventListener('click', function () {
@@ -67,7 +73,7 @@ if (icosphereButton && cubeButton && skullButton && show_wireframe_input) {
     });
 }
 
-async function draw(objFilePath = '') {
+async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale = new THREE.Vector3(1,1,1)) {
 
     try {
 
@@ -182,6 +188,10 @@ async function draw(objFilePath = '') {
             geometry.setAttribute( 'position', new THREE.BufferAttribute(verts, 3 ));
             geometry.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
             geometry.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
+            geometry.rotateX(THREE.MathUtils.degToRad(rotation.x));
+            geometry.rotateY(THREE.MathUtils.degToRad(rotation.y));
+            geometry.rotateZ(THREE.MathUtils.degToRad(rotation.z));
+            geometry.scale(scale.x, scale.y, scale.z);
             const material = new THREE.MeshStandardMaterial({ color: CONFIG.materialColor });
 
             if (texture_map) {
