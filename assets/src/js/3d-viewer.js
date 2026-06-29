@@ -17,7 +17,7 @@ const CONFIG = {
     directionalLightColor: 0xddffff,
     directionalLightStrength: 0.85,
 
-    meshWireframeOpacity: 0,
+    meshWireframeOpacity: 0.25,
 
     planeWidth: 30,
     planeHeight: 30,
@@ -31,10 +31,14 @@ const canvas = document.getElementById("3d-viewer-canvas");
 const icosphereButton = document.getElementById('icosphere-button');
 const cubeButton = document.getElementById('cube-button');
 const skullButton = document.getElementById('skull-button');
+const show_wireframe_input = document.getElementById('show-wireframe');
+const show_texture_preview_input = document.getElementById('show-texture-preview');
 
 let autoRotate = true;
+let show_wireframe = false;
+let show_texture_preview = false;
 
-if (icosphereButton && cubeButton && skullButton) {
+if (icosphereButton && cubeButton && skullButton && show_wireframe_input) {
     icosphereButton.addEventListener("click", function () {
         draw('/models/test.obj');
     });
@@ -45,6 +49,21 @@ if (icosphereButton && cubeButton && skullButton) {
 
     skullButton.addEventListener("click", function () {
         draw('/models/skull.obj');
+    });
+
+    show_wireframe_input.addEventListener('click', function () {
+        show_wireframe = show_wireframe_input.checked;
+    });
+
+    show_texture_preview_input.addEventListener('click', function () {
+        show_texture_preview = show_texture_preview_input.checked;
+        const texture_preview = document.getElementById('texture-preview');
+        // TODO Set visibility on page load since the browser likes to maintain state, do the same with the wireframe input
+        if (show_texture_preview) {
+            texture_preview.classList.remove('hidden');
+        } else {
+            texture_preview.classList.add('hidden');
+        }
     });
 }
 
@@ -79,8 +98,7 @@ async function draw(objFilePath = '') {
         let texture_map = '';
 
         if (objFilePath !== '') {
-            let mtllib = [];
-            let usemtl = [];
+            let mtllib, usemtl;
             let filename = objFilePath.split('/')[2];
             const obj_file = await obj_handler.createFile(objFilePath, filename, 'model/obj');
             [vertex_data, face_data, uv_data, normal_data, mtllib, usemtl] = await obj_handler.readObjFile(obj_file);
@@ -169,6 +187,12 @@ async function draw(objFilePath = '') {
             if (texture_map) {
                 const textureLoader = new THREE.TextureLoader();
                 material.map = textureLoader.load('/models/' + texture_map);
+                const texture_preview = document.getElementById('texture-preview');
+                texture_preview.src = '/models/' + texture_map;
+
+                if (show_texture_preview) {
+                    texture_preview.classList.remove('hidden');
+                }
             }
 
             material.opacity = CONFIG.materialOpacity;
@@ -187,6 +211,7 @@ async function draw(objFilePath = '') {
         let lastMouseX = 0;
         let lastMouseY = 0;
 
+        // TODO Add these event listeners to the window rather than the canvas (except for zoom)
         canvas.addEventListener("mousemove", (e) => {
             const isRotating = e.buttons !== 0 && e.shiftKey;
 
@@ -245,7 +270,12 @@ async function draw(objFilePath = '') {
                 }
 
                 scene.add(solidMesh);
-                scene.add(wireframe_lines);
+
+                if (show_wireframe) {
+                    scene.add(wireframe_lines);
+                } else {
+                    scene.remove(wireframe_lines);
+                }
             }
 
             if (plane) {

@@ -115,6 +115,9 @@
                         }
                     }
                 }
+                & > li:last-child {
+                    @apply border-b-0;
+                }
             }
         }
     }
