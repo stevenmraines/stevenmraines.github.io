@@ -363,6 +363,7 @@ function expand3DViewer() {
 }
 
 function collapse3DViewer() {
+    // TODO do renderer.dispose() or whatever is needed to stop rendering the viewer
     cards_container.classList.add('flex-row');
     cards_container.classList.remove('flex-col');
 
