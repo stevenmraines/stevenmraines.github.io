@@ -6,6 +6,7 @@ class OBJHandler {
         return new File([data], filename, { type });
     }
 
+    // TODO Handle multiple meshes
     async readObjFile(file) {
         let vertex_data = {};
         let face_data = { "vertices": {}, "uvs": {}, "normals": {} };
