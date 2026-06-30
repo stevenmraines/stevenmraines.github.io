@@ -7,6 +7,7 @@
   <title>Steven Raines - 3D Modeling</title>
 
   <link rel="stylesheet" href="css/base.min.css" type="text/css">
+  <link rel="stylesheet" href="css/3d-modeling.min.css" type="text/css">
 
   <!-- Let the browser know this page is optimized for mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,32 +17,63 @@
 @@include('./partials/nav.html')
 @@include('./partials/background.html')
 
-<div class="content">
-  <button class="load-obj-button btn bg-viridian2" data-filename="test.obj">Icosphere</button>
-  <button class="load-obj-button btn bg-orange2" data-filename="cube.obj">Cube</button>
-  <button class="load-obj-button btn bg-viridian2" data-filename="skull.obj">Skull</button>
-  <!-- TODO Figure out how to handle compass materials and multi meshes -->
-  <button class="load-obj-button btn bg-orange2" data-filename="compass.obj" data-rotation="90/0/0" data-scale="25/25/25">Compass</button>
-  <button class="load-obj-button btn bg-viridian2" data-filename="spidey.obj">Spider-Man</button>
-  <button class="load-obj-button btn bg-orange2" data-filename="batman.obj">Batman Beyond</button>
-  <button class="load-obj-button btn bg-viridian2" data-filename="lever.obj" data-scale="5/5/5">Lever</button>
-  <button class="load-obj-button btn bg-orange2" data-filename="motel.obj">Motel Scene</button>
+<div class="content pointer-events-none">
+  <div id="cards-container" class="flex flex-row justify-between">
+    <div class="card">
+      <div class="card-content">
+        <img src="/img/" alt="A 3D model">
+        <h6>Skull</h6>
+        <p>A low-poly skull that I did for modeling practice</p>
+        <a href="#" class="load-obj-button pointer-events-auto" data-filename="skull.obj">See More ></a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <img src="/img/" alt="A 3D model">
+        <h6>Compass</h6>
+        <p>A compass item which I modeled for a Godot game</p>
+        <a href="#" class="load-obj-button pointer-events-auto" data-filename="compass.obj" data-rotation="90/0/0" data-scale="25/25/25">See More ></a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <img src="/img/" alt="A 3D model">
+        <h6>Spectacular Spider-Man</h6>
+        <p>My first attempt at a character model</p>
+        <a href="#" class="load-obj-button pointer-events-auto" data-filename="spidey.obj">See More ></a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <img src="/img/" alt="A 3D model">
+        <h6>Batman Beyond</h6>
+        <p>My second attempt at modeling a character</p>
+        <a href="#" class="load-obj-button pointer-events-auto" data-filename="batman.obj">See More ></a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <img src="/img/" alt="A 3D model">
+        <h6>Soulsborne style lever</h6>
+        <p>A lever for controlling an elevator in a Souls-like game I'm making in Godot</p>
+        <a href="#" class="load-obj-button pointer-events-auto" data-filename="lever.obj" data-scale="5/5/5">See More ></a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <img src="/img/" alt="A 3D model">
+        <h6>Motel room scene</h6>
+        <p>A low-poly motel room scene which I modeled while following a YouTube tutorial</p>
+        <a href="#" class="load-obj-button pointer-events-auto" data-filename="motel.obj">See More ></a>
+      </div>
+    </div>
+  </div>
 </div>
 
-<canvas id="3d-viewer-canvas" class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-[900px] h-[600px] border-2 border-black"></canvas>
+<canvas id="model-viewer-canvas" class="viewer-collapsed"></canvas>
 
-<div class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-[900px] h-[600px] pointer-events-none">
-  <div class="relative h-[600px] text-light-gray pointer-events-none">
-    <span class="absolute top-2 right-2 text-xs">
-      Left click to pan
-    </span>
-    <span class="absolute top-5 right-2 text-xs">
-      Left click + shift to rotate
-    </span>
-    <span class="absolute top-8 right-2 text-xs">
-      Scroll to zoom
-    </span>
-
+<div id="model-viewer-overlay" class="viewer-collapsed">
+  <div id="model-viewer-overlay-content" class="viewer-collapsed">
     <label class="absolute top-2 left-2 pointer-events-auto">
       Wireframe
       <input type="checkbox" id="show-wireframe" />
@@ -55,8 +87,20 @@
       <input type="checkbox" id="texture-filtering" />
     </label>
 
+    <button id="model-viewer-close" class="btn bg-viridian2 absolute top-2 right-2 cursor-pointer text-white pointer-events-auto">X</button>
+
+    <span class="absolute bottom-8 left-2 text-xs">
+        Left click to pan
+      </span>
+    <span class="absolute bottom-5 left-2 text-xs">
+        Left click + shift to rotate
+      </span>
+    <span class="absolute bottom-2 left-2 text-xs">
+        Scroll to zoom
+      </span>
+
     <!-- TODO Add a placeholder img, like "No Texture" or whatever -->
-    <img src="#" id="texture-preview" class="absolute right-[2px] bottom-[2px] w-1/4 h-auto hidden" />
+    <img src="#" id="texture-preview" />
   </div>
 </div>
 

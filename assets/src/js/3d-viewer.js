@@ -32,10 +32,14 @@ let current_rotation = new THREE.Vector3(0,0,0);
 let current_scale = new THREE.Vector3(1,1,1);
 let renderer;
 
-const canvas = document.getElementById("3d-viewer-canvas");
+const canvas = document.getElementById("model-viewer-canvas");
+const overlay = document.getElementById('model-viewer-overlay');
+const overlay_content = document.getElementById('model-viewer-overlay-content');
+const cards_container = document.getElementById('cards-container');
 const show_wireframe_input = document.getElementById('show-wireframe');
 const show_texture_preview_input = document.getElementById('show-texture-preview');
 const texture_filtering_input = document.getElementById('texture-filtering');
+const model_viewer_close = document.getElementById('model-viewer-close');
 
 let autoRotate = true;
 let show_wireframe = false;
@@ -79,9 +83,9 @@ if (show_wireframe_input) {
         const texture_preview = document.getElementById('texture-preview');
         // TODO Set visibility on page load since the browser likes to maintain state, do the same with the wireframe input
         if (show_texture_preview) {
-            texture_preview.classList.remove('hidden');
+            texture_preview.style.display = 'block';
         } else {
-            texture_preview.classList.add('hidden');
+            texture_preview.style.display = 'none';
         }
     });
 
@@ -91,6 +95,8 @@ if (show_wireframe_input) {
             draw(current_obj_file_path, current_rotation, current_scale);
         }
     });
+
+    model_viewer_close.addEventListener('click', collapse3DViewer);
 }
 
 async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale = new THREE.Vector3(1,1,1)) {
@@ -101,11 +107,15 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
 
     try {
 
+        expand3DViewer();
+
         autoRotate = true;
 
         if (! renderer) {
             renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
         }
+
+        renderer.dispose();
 
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(CONFIG.fillColor);
@@ -338,7 +348,30 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
 
 }
 
-// TODO Maybe stop bundling every js file into one script so we don't have to do things like this
-if (canvas) {
-    draw();
+function expand3DViewer() {
+    cards_container.classList.remove('flex-row');
+    cards_container.classList.add('flex-col');
+
+    canvas.classList.remove('viewer-collapsed');
+    canvas.classList.add('viewer-expanded');
+
+    overlay.classList.remove('viewer-collapsed');
+    overlay.classList.add('viewer-expanded');
+
+    overlay_content.classList.remove('viewer-collapsed');
+    overlay_content.classList.add('viewer-expanded');
+}
+
+function collapse3DViewer() {
+    cards_container.classList.add('flex-row');
+    cards_container.classList.remove('flex-col');
+
+    canvas.classList.add('viewer-collapsed');
+    canvas.classList.remove('viewer-expanded');
+
+    overlay.classList.add('viewer-collapsed');
+    overlay.classList.remove('viewer-expanded');
+
+    overlay_content.classList.add('viewer-collapsed');
+    overlay_content.classList.remove('viewer-expanded');
 }
