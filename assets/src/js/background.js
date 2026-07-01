@@ -29,8 +29,10 @@ const CONFIG_DEFAULTS = {
 
 function showError(msg) {
     const box = document.getElementById("error-box");
-    box.style.display = "block";
-    box.textContent = "Error: " + msg;
+    if (box) {
+        box.style.display = "block";
+        box.textContent = "Error: " + msg;
+    }
     console.error(msg);
 }
 
@@ -39,6 +41,7 @@ window.addEventListener("error", (e) => showError(e.message));
 try {
 
     initCookies();
+    setInputs();
 
     document.getElementById('fill-color-input').addEventListener("change", function (e) {
         setCookie('fill_color', hex2Str(e.target.value));
@@ -171,43 +174,7 @@ try {
         edgeUniforms.uHighlightColor.value.set(new THREE.Color(str2Hex(getCookie('highlight_color'))));
         edgeUniforms.uRadius.value = parseFloat(getCookie('mouse_edge_radius'));
 
-        document.getElementById('fill-color-input').value = hex2Str(CONFIG_DEFAULTS.fillColor);
-        document.getElementById('edge-color-input').value = hex2Str(CONFIG_DEFAULTS.edgeColor);
-        document.getElementById('highlight-color-input').value = hex2Str(CONFIG_DEFAULTS.highlightColor);
-        document.getElementById('fill-color-variation-slider').value = CONFIG_DEFAULTS.fillColorVariation;
-        document.getElementById('pixel-size-slider').value = CONFIG_DEFAULTS.pixelSize;
-        document.getElementById('jitter-amount-slider').value = CONFIG_DEFAULTS.jitterAmount;
-        document.getElementById('x-segments-slider').value = CONFIG_DEFAULTS.segmentsX;
-        document.getElementById('y-segments-slider').value = CONFIG_DEFAULTS.segmentsY;
-        document.getElementById('base-relief-slider').value = CONFIG_DEFAULTS.baseRelief;
-        document.getElementById('mouse-deform-radius-slider').value = CONFIG_DEFAULTS.mouseDeformRadius;
-        document.getElementById('mouse-deform-strength-slider').value = CONFIG_DEFAULTS.mouseDeformStrength;
-        document.getElementById('mouse-edge-radius-slider').value = CONFIG_DEFAULTS.mouseEdgeRadius;
-        document.getElementById('camera-distance-slider').value = CONFIG_DEFAULTS.cameraDistance;
-        document.getElementById('ambient-light-color-input').value = hex2Str(CONFIG_DEFAULTS.ambientLightColor);
-        document.getElementById('ambient-light-strength-slider').value = CONFIG_DEFAULTS.ambientLightStrength;
-        document.getElementById('directional-light-color-input').value = hex2Str(CONFIG_DEFAULTS.directionalLightColor);
-        document.getElementById('directional-light-strength-slider').value = CONFIG_DEFAULTS.directionalLightStrength;
-
-        document.getElementById('fill-color-value').textContent = hex2Str(CONFIG_DEFAULTS.fillColor);
-        document.getElementById('edge-color-value').textContent = hex2Str(CONFIG_DEFAULTS.edgeColor);
-        document.getElementById('highlight-color-value').textContent = hex2Str(CONFIG_DEFAULTS.highlightColor);
-        document.getElementById('fill-color-variation-value').textContent = CONFIG_DEFAULTS.fillColorVariation;
-        document.getElementById('pixel-size-value').textContent = CONFIG_DEFAULTS.pixelSize;
-        document.getElementById('jitter-amount-value').textContent = CONFIG_DEFAULTS.jitterAmount;
-        document.getElementById('x-segments-value').textContent = CONFIG_DEFAULTS.segmentsX;
-        document.getElementById('y-segments-value').textContent = CONFIG_DEFAULTS.segmentsY;
-        document.getElementById('base-relief-value').textContent = CONFIG_DEFAULTS.baseRelief;
-        document.getElementById('mouse-deform-radius-value').textContent = CONFIG_DEFAULTS.mouseDeformRadius;
-        document.getElementById('mouse-deform-strength-value').textContent = CONFIG_DEFAULTS.mouseDeformStrength;
-        document.getElementById('mouse-edge-radius-value').textContent = CONFIG_DEFAULTS.mouseEdgeRadius;
-        document.getElementById('camera-distance-value').textContent = CONFIG_DEFAULTS.cameraDistance;
-        document.getElementById('ambient-light-color-value').textContent = hex2Str(CONFIG_DEFAULTS.ambientLightColor);
-        document.getElementById('ambient-light-strength-value').textContent = CONFIG_DEFAULTS.ambientLightStrength;
-        document.getElementById('directional-light-color-value').textContent = hex2Str(CONFIG_DEFAULTS.directionalLightColor);
-        document.getElementById('directional-light-strength-value').textContent = CONFIG_DEFAULTS.directionalLightStrength;
-
-        renderer.dispose();
+        resetInputs();
         buildMesh();
         onResize();
         updateAmbientLight();
@@ -457,6 +424,7 @@ try {
         updateDeformation();
         renderer.render(scene, camera);
     }
+
     animate();
 
 } catch (err) {
@@ -464,7 +432,6 @@ try {
 }
 
 function initCookies() {
-    // Set default cookie values
     if (! getCookie('fill_color')) {
         setCookie('fill_color', hex2Str(CONFIG_DEFAULTS.fillColor));
         setCookie('edge_color', hex2Str(CONFIG_DEFAULTS.edgeColor));
@@ -484,6 +451,83 @@ function initCookies() {
         setCookie('directional_light_color', hex2Str(CONFIG_DEFAULTS.directionalLightColor));
         setCookie('directional_light_strength', CONFIG_DEFAULTS.directionalLightStrength);
     }
+}
+
+function setInputs() {
+    // TODO I don't know what gave me the idea that cookie names couldn't be camel case...but they can. Rename them to match the config props just to make life simpler
+    document.getElementById('fill-color-input').value = hex2Str(getCookie('fill_color'));
+    document.getElementById('edge-color-input').value = hex2Str(getCookie('edge_color'));
+    document.getElementById('highlight-color-input').value = hex2Str(getCookie('highlight_color'));
+    document.getElementById('fill-color-variation-slider').value = getCookie('fill_color_variation');
+    document.getElementById('pixel-size-slider').value = getCookie('pixel_size');
+    document.getElementById('jitter-amount-slider').value = getCookie('jitter_amount');
+    document.getElementById('x-segments-slider').value = getCookie('segments_x');
+    document.getElementById('y-segments-slider').value = getCookie('segments_y');
+    document.getElementById('base-relief-slider').value = getCookie('base_relief');
+    document.getElementById('mouse-deform-radius-slider').value = getCookie('mouse_deform_radius');
+    document.getElementById('mouse-deform-strength-slider').value = getCookie('mouse_deform_strength');
+    document.getElementById('mouse-edge-radius-slider').value = getCookie('mouse_edge_radius');
+    document.getElementById('camera-distance-slider').value = getCookie('camera_distance');
+    document.getElementById('ambient-light-color-input').value = hex2Str(getCookie('ambient_light_color'));
+    document.getElementById('ambient-light-strength-slider').value = getCookie('ambient_light_strength');
+    document.getElementById('directional-light-color-input').value = hex2Str(getCookie('directional_light_color'));
+    document.getElementById('directional-light-strength-slider').value = getCookie('directional_light_strength');
+
+    document.getElementById('fill-color-value').textContent = hex2Str(getCookie('fill_color'));
+    document.getElementById('edge-color-value').textContent = hex2Str(getCookie('edge_color'));
+    document.getElementById('highlight-color-value').textContent = hex2Str(getCookie('highlight_color'));
+    document.getElementById('fill-color-variation-value').textContent = getCookie('fill_color_variation');
+    document.getElementById('pixel-size-value').textContent = getCookie('pixel_size');
+    document.getElementById('jitter-amount-value').textContent = getCookie('jitter_amount');
+    document.getElementById('x-segments-value').textContent = getCookie('segments_x');
+    document.getElementById('y-segments-value').textContent = getCookie('segments_y');
+    document.getElementById('base-relief-value').textContent = getCookie('base_relief');
+    document.getElementById('mouse-deform-radius-value').textContent = getCookie('mouse_deform_radius');
+    document.getElementById('mouse-deform-strength-value').textContent = getCookie('mouse_deform_strength');
+    document.getElementById('mouse-edge-radius-value').textContent = getCookie('mouse_edge_radius');
+    document.getElementById('camera-distance-value').textContent = getCookie('camera_distance');
+    document.getElementById('ambient-light-color-value').textContent = hex2Str(getCookie('ambient_light_color'));
+    document.getElementById('ambient-light-strength-value').textContent = getCookie('ambient_light_strength');
+    document.getElementById('directional-light-color-value').textContent = hex2Str(getCookie('directional_light_color'));
+    document.getElementById('directional-light-strength-value').textContent = getCookie('directional_light_strength');
+}
+
+function resetInputs() {
+    document.getElementById('fill-color-input').value = hex2Str(CONFIG_DEFAULTS.fillColor);
+    document.getElementById('edge-color-input').value = hex2Str(CONFIG_DEFAULTS.edgeColor);
+    document.getElementById('highlight-color-input').value = hex2Str(CONFIG_DEFAULTS.highlightColor);
+    document.getElementById('fill-color-variation-slider').value = CONFIG_DEFAULTS.fillColorVariation;
+    document.getElementById('pixel-size-slider').value = CONFIG_DEFAULTS.pixelSize;
+    document.getElementById('jitter-amount-slider').value = CONFIG_DEFAULTS.jitterAmount;
+    document.getElementById('x-segments-slider').value = CONFIG_DEFAULTS.segmentsX;
+    document.getElementById('y-segments-slider').value = CONFIG_DEFAULTS.segmentsY;
+    document.getElementById('base-relief-slider').value = CONFIG_DEFAULTS.baseRelief;
+    document.getElementById('mouse-deform-radius-slider').value = CONFIG_DEFAULTS.mouseDeformRadius;
+    document.getElementById('mouse-deform-strength-slider').value = CONFIG_DEFAULTS.mouseDeformStrength;
+    document.getElementById('mouse-edge-radius-slider').value = CONFIG_DEFAULTS.mouseEdgeRadius;
+    document.getElementById('camera-distance-slider').value = CONFIG_DEFAULTS.cameraDistance;
+    document.getElementById('ambient-light-color-input').value = hex2Str(CONFIG_DEFAULTS.ambientLightColor);
+    document.getElementById('ambient-light-strength-slider').value = CONFIG_DEFAULTS.ambientLightStrength;
+    document.getElementById('directional-light-color-input').value = hex2Str(CONFIG_DEFAULTS.directionalLightColor);
+    document.getElementById('directional-light-strength-slider').value = CONFIG_DEFAULTS.directionalLightStrength;
+
+    document.getElementById('fill-color-value').textContent = hex2Str(CONFIG_DEFAULTS.fillColor);
+    document.getElementById('edge-color-value').textContent = hex2Str(CONFIG_DEFAULTS.edgeColor);
+    document.getElementById('highlight-color-value').textContent = hex2Str(CONFIG_DEFAULTS.highlightColor);
+    document.getElementById('fill-color-variation-value').textContent = CONFIG_DEFAULTS.fillColorVariation;
+    document.getElementById('pixel-size-value').textContent = CONFIG_DEFAULTS.pixelSize;
+    document.getElementById('jitter-amount-value').textContent = CONFIG_DEFAULTS.jitterAmount;
+    document.getElementById('x-segments-value').textContent = CONFIG_DEFAULTS.segmentsX;
+    document.getElementById('y-segments-value').textContent = CONFIG_DEFAULTS.segmentsY;
+    document.getElementById('base-relief-value').textContent = CONFIG_DEFAULTS.baseRelief;
+    document.getElementById('mouse-deform-radius-value').textContent = CONFIG_DEFAULTS.mouseDeformRadius;
+    document.getElementById('mouse-deform-strength-value').textContent = CONFIG_DEFAULTS.mouseDeformStrength;
+    document.getElementById('mouse-edge-radius-value').textContent = CONFIG_DEFAULTS.mouseEdgeRadius;
+    document.getElementById('camera-distance-value').textContent = CONFIG_DEFAULTS.cameraDistance;
+    document.getElementById('ambient-light-color-value').textContent = hex2Str(CONFIG_DEFAULTS.ambientLightColor);
+    document.getElementById('ambient-light-strength-value').textContent = CONFIG_DEFAULTS.ambientLightStrength;
+    document.getElementById('directional-light-color-value').textContent = hex2Str(CONFIG_DEFAULTS.directionalLightColor);
+    document.getElementById('directional-light-strength-value').textContent = CONFIG_DEFAULTS.directionalLightStrength;
 }
 
 function hex2Str(hex) {
