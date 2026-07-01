@@ -44,135 +44,135 @@ try {
     setInputs();
 
     document.getElementById('fill-color-input').addEventListener("change", function (e) {
-        setCookie('fill_color', hex2Str(e.target.value));
+        setCookie('fillColor', hex2Str(e.target.value));
         document.getElementById('fill-color-value').textContent = hex2Str(e.target.value);
         buildMesh();
     });
 
     document.getElementById('edge-color-input').addEventListener("change", function (e) {
-        setCookie('edge_color', hex2Str(e.target.value));
+        setCookie('edgeColor', hex2Str(e.target.value));
         edgeUniforms.uEdgeColor.value.set(new THREE.Color(str2Hex(e.target.value)));
         document.getElementById('edge-color-value').textContent = hex2Str(e.target.value);
         buildMesh();
     });
 
     document.getElementById('highlight-color-input').addEventListener("change", function (e) {
-        setCookie('highlight_color', hex2Str(e.target.value));
+        setCookie('highlightColor', hex2Str(e.target.value));
         edgeUniforms.uHighlightColor.value.set(new THREE.Color(str2Hex(e.target.value)));
         document.getElementById('highlight-color-value').textContent = hex2Str(e.target.value);
         buildMesh();
     });
 
     document.getElementById('fill-color-variation-slider').addEventListener("change", function (e) {
-        setCookie('fill_color_variation', e.target.value);
+        setCookie('fillColorVariation', e.target.value);
         document.getElementById('fill-color-variation-value').textContent = e.target.value;
         buildMesh();
     });
 
     document.getElementById('pixel-size-slider').addEventListener("change", function (e) {
-        setCookie('pixel_size', e.target.value);
+        setCookie('pixelSize', e.target.value);
         document.getElementById('pixel-size-value').textContent = e.target.value;
         buildMesh();
         onResize();
     });
 
     document.getElementById('jitter-amount-slider').addEventListener("change", function (e) {
-        setCookie('jitter_amount', e.target.value);
+        setCookie('jitterAmount', e.target.value);
         document.getElementById('jitter-amount-value').textContent = e.target.value;
         buildMesh();
     });
 
     document.getElementById('x-segments-slider').addEventListener("change", function (e) {
-        setCookie('segments_x', e.target.value);
+        setCookie('segmentsX', e.target.value);
         document.getElementById('x-segments-value').textContent = e.target.value;
         buildMesh();
     });
 
     document.getElementById('y-segments-slider').addEventListener("change", function (e) {
-        setCookie('segments_y', e.target.value);
+        setCookie('segmentsY', e.target.value);
         document.getElementById('y-segments-value').textContent = e.target.value;
         buildMesh();
     });
 
     document.getElementById('base-relief-slider').addEventListener("change", function (e) {
-        setCookie('base_relief', e.target.value);
+        setCookie('baseRelief', e.target.value);
         document.getElementById('base-relief-value').textContent = e.target.value;
         buildMesh();
     });
 
     document.getElementById('mouse-deform-radius-slider').addEventListener("change", function (e) {
-        setCookie('mouse_deform_radius', e.target.value);
+        setCookie('mouseDeformRadius', e.target.value);
         document.getElementById('mouse-deform-radius-value').textContent = e.target.value;
         buildMesh();
     });
 
     document.getElementById('mouse-deform-strength-slider').addEventListener("change", function (e) {
-        setCookie('mouse_deform_strength', e.target.value);
+        setCookie('mouseDeformStrength', e.target.value);
         document.getElementById('mouse-deform-strength-value').textContent = e.target.value;
         buildMesh();
     });
 
     document.getElementById('mouse-edge-radius-slider').addEventListener("change", function (e) {
-        setCookie('mouse_edge_radius', e.target.value);
+        setCookie('mouseEdgeRadius', e.target.value);
         edgeUniforms.uRadius.value = parseFloat(e.target.value);
         document.getElementById('mouse-edge-radius-value').textContent = e.target.value;
         buildMesh();
     });
 
     document.getElementById('camera-distance-slider').addEventListener("change", function (e) {
-        setCookie('camera_distance', e.target.value);
+        setCookie('cameraDistance', e.target.value);
         document.getElementById('camera-distance-value').textContent = e.target.value;
         buildMesh();
     });
 
     document.getElementById('ambient-light-color-input').addEventListener("change", function (e) {
-        setCookie('ambient_light_color', hex2Str(e.target.value));
+        setCookie('ambientLightColor', hex2Str(e.target.value));
         document.getElementById('ambient-light-color-value').textContent = hex2Str(e.target.value);
         updateAmbientLight();
     });
 
     document.getElementById('ambient-light-strength-slider').addEventListener("change", function (e) {
-        setCookie('ambient_light_strength', e.target.value);
+        setCookie('ambientLightStrength', e.target.value);
         document.getElementById('ambient-light-strength-value').textContent = e.target.value;
         buildMesh();
         updateAmbientLight();
     });
 
     document.getElementById('directional-light-color-input').addEventListener("change", function (e) {
-        setCookie('directional_light_color', hex2Str(e.target.value));
+        setCookie('directionalLightColor', hex2Str(e.target.value));
         document.getElementById('directional-light-color-value').textContent = hex2Str(e.target.value);
         updateAmbientLight();
     });
 
     document.getElementById('directional-light-strength-slider').addEventListener("change", function (e) {
-        setCookie('directional_light_strength', e.target.value);
+        setCookie('directionalLightStrength', e.target.value);
         document.getElementById('directional-light-strength-value').textContent = e.target.value;
         buildMesh();
         updateAmbientLight();
     });
 
     document.getElementById('reset').addEventListener("click", function (e) {
-        setCookie('fill_color', hex2Str(CONFIG_DEFAULTS.fillColor));
-        setCookie('edge_color', hex2Str(CONFIG_DEFAULTS.edgeColor));
-        setCookie('highlight_color', hex2Str(CONFIG_DEFAULTS.highlightColor));
-        setCookie('fill_color_variation', CONFIG_DEFAULTS.fillColorVariation);
-        setCookie('pixel_size', CONFIG_DEFAULTS.pixelSize);
-        setCookie('jitter_amount', CONFIG_DEFAULTS.jitterAmount);
-        setCookie('segments_x', CONFIG_DEFAULTS.segmentsX);
-        setCookie('segments_y', CONFIG_DEFAULTS.segmentsY);
-        setCookie('base_relief', CONFIG_DEFAULTS.baseRelief);
-        setCookie('mouse_deform_radius', CONFIG_DEFAULTS.mouseDeformRadius);
-        setCookie('mouse_deform_strength', CONFIG_DEFAULTS.mouseDeformStrength);
-        setCookie('mouse_edge_radius', CONFIG_DEFAULTS.mouseEdgeRadius);
-        setCookie('camera_distance', CONFIG_DEFAULTS.cameraDistance);
-        setCookie('ambient_light_color', hex2Str(CONFIG_DEFAULTS.ambientLightColor));
-        setCookie('ambient_light_strength', CONFIG_DEFAULTS.ambientLightStrength);
-        setCookie('directional_light_color', hex2Str(CONFIG_DEFAULTS.directionalLightColor));
-        setCookie('directional_light_strength', CONFIG_DEFAULTS.directionalLightStrength);
+        setCookie('fillColor', hex2Str(CONFIG_DEFAULTS.fillColor));
+        setCookie('edgeColor', hex2Str(CONFIG_DEFAULTS.edgeColor));
+        setCookie('highlightColor', hex2Str(CONFIG_DEFAULTS.highlightColor));
+        setCookie('fillColorVariation', CONFIG_DEFAULTS.fillColorVariation);
+        setCookie('pixelSize', CONFIG_DEFAULTS.pixelSize);
+        setCookie('jitterAmount', CONFIG_DEFAULTS.jitterAmount);
+        setCookie('segmentsX', CONFIG_DEFAULTS.segmentsX);
+        setCookie('segmentsY', CONFIG_DEFAULTS.segmentsY);
+        setCookie('baseRelief', CONFIG_DEFAULTS.baseRelief);
+        setCookie('mouseDeformRadius', CONFIG_DEFAULTS.mouseDeformRadius);
+        setCookie('mouseDeformStrength', CONFIG_DEFAULTS.mouseDeformStrength);
+        setCookie('mouseEdgeRadius', CONFIG_DEFAULTS.mouseEdgeRadius);
+        setCookie('cameraDistance', CONFIG_DEFAULTS.cameraDistance);
+        setCookie('ambientLightColor', hex2Str(CONFIG_DEFAULTS.ambientLightColor));
+        setCookie('ambientLightStrength', CONFIG_DEFAULTS.ambientLightStrength);
+        setCookie('directionalLightColor', hex2Str(CONFIG_DEFAULTS.directionalLightColor));
+        setCookie('directionalLightStrength', CONFIG_DEFAULTS.directionalLightStrength);
 
-        edgeUniforms.uEdgeColor.value.set(new THREE.Color(str2Hex(getCookie('edge_color'))));
-        edgeUniforms.uHighlightColor.value.set(new THREE.Color(str2Hex(getCookie('highlight_color'))));
-        edgeUniforms.uRadius.value = parseFloat(getCookie('mouse_edge_radius'));
+        edgeUniforms.uEdgeColor.value.set(new THREE.Color(str2Hex(getCookie('edgeColor'))));
+        edgeUniforms.uHighlightColor.value.set(new THREE.Color(str2Hex(getCookie('highlightColor'))));
+        edgeUniforms.uRadius.value = parseFloat(getCookie('mouseEdgeRadius'));
 
         resetInputs();
         buildMesh();
@@ -184,20 +184,20 @@ try {
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(str2Hex(getCookie('fill_color')));
+    scene.background = new THREE.Color(str2Hex(getCookie('fillColor')));
 
     const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-    camera.position.set(0, 0, parseInt(getCookie('camera_distance')));
-    // TODO Something strange going on with camera_distance, if you change it and then go to another page, it's visually not correct even though the cookie value is, resetting also seems broken until going to another page
+    camera.position.set(0, 0, parseInt(getCookie('cameraDistance')));
+    // TODO Something strange going on with cameraDistance, if you change it and then go to another page, it's visually not correct even though the cookie value is, resetting also seems broken until going to another page
     camera.lookAt(0, 0, 0);
 
-    const ambient = new THREE.AmbientLight(getCookie('ambient_light_color'), parseFloat(getCookie('ambient_light_strength')));
-    const directional = new THREE.DirectionalLight(getCookie('directional_light_color'), parseFloat(getCookie('directional_light_strength')));
+    const ambient = new THREE.AmbientLight(getCookie('ambientLightColor'), parseFloat(getCookie('ambientLightStrength')));
+    const directional = new THREE.DirectionalLight(getCookie('directionalLightColor'), parseFloat(getCookie('directionalLightStrength')));
 
     function getPlaneSize() {
         const aspect = window.innerWidth / window.innerHeight;
         const vFov = (camera.fov * Math.PI) / 180;
-        const visibleHeight = 2 * Math.tan(vFov / 2) * parseInt(getCookie('camera_distance'));
+        const visibleHeight = 2 * Math.tan(vFov / 2) * parseInt(getCookie('cameraDistance'));
         const visibleWidth = visibleHeight * aspect;
         const overscan = 1.3;
         return { width: visibleWidth * overscan, height: visibleHeight * overscan };
@@ -208,10 +208,10 @@ try {
     let currentPositions;
 
     const edgeUniforms = {
-        uEdgeColor: { value: new THREE.Color(str2Hex(getCookie('edge_color'))) },
-        uHighlightColor: { value: new THREE.Color(str2Hex(getCookie('highlight_color'))) },
+        uEdgeColor: { value: new THREE.Color(str2Hex(getCookie('edgeColor'))) },
+        uHighlightColor: { value: new THREE.Color(str2Hex(getCookie('highlightColor'))) },
         uMouse: { value: new THREE.Vector3(9999, 9999, 9999) },
-        uRadius: { value: parseFloat(getCookie('mouse_edge_radius')) },
+        uRadius: { value: parseFloat(getCookie('mouseEdgeRadius')) },
     };
 
     function buildMesh() {
@@ -228,13 +228,13 @@ try {
         let geo = new THREE.PlaneGeometry(
             width,
             height,
-            parseInt(getCookie('segments_x')),
-            parseInt(getCookie('segments_y'))
+            parseInt(getCookie('segmentsX')),
+            parseInt(getCookie('segmentsY'))
         );
 
         const pos = geo.attributes.position;
-        const cellW = width / parseInt(getCookie('segments_x'));
-        const cellH = height / parseInt(getCookie('segments_y'));
+        const cellW = width / parseInt(getCookie('segmentsX'));
+        const cellH = height / parseInt(getCookie('segmentsY'));
 
         for (let i = 0; i < pos.count; i++) {
             const x = pos.getX(i);
@@ -245,10 +245,10 @@ try {
 
             let nx = x;
             let ny = y;
-            let nz = (Math.random() - 0.5) * parseFloat(getCookie('base_relief'));
+            let nz = (Math.random() - 0.5) * parseFloat(getCookie('baseRelief'));
 
-            if (!onEdgeX) nx += (Math.random() - 0.5) * cellW * parseFloat(getCookie('jitter_amount'));
-            if (!onEdgeY) ny += (Math.random() - 0.5) * cellH * parseFloat(getCookie('jitter_amount'));
+            if (!onEdgeX) nx += (Math.random() - 0.5) * cellW * parseFloat(getCookie('jitterAmount'));
+            if (!onEdgeY) ny += (Math.random() - 0.5) * cellH * parseFloat(getCookie('jitterAmount'));
             if (onEdgeX || onEdgeY) nz *= 0.3;
 
             pos.setXYZ(i, nx, ny, nz);
@@ -261,11 +261,11 @@ try {
          * Give each triangle a slight random tint around the base fill
          * color so that the facets are visually distinguishable.
          */
-        const baseColor = new THREE.Color(hex2Str(getCookie('fill_color')));
+        const baseColor = new THREE.Color(hex2Str(getCookie('fillColor')));
         const colors = new Float32Array(geo.attributes.position.count * 3);
         const triCount = geo.attributes.position.count / 3;
         for (let t = 0; t < triCount; t++) {
-            const variation = (Math.random() - 0.5) * parseFloat(getCookie('fill_color_variation'));
+            const variation = (Math.random() - 0.5) * parseFloat(getCookie('fillColorVariation'));
             const c = baseColor.clone();
             c.r = THREE.MathUtils.clamp(c.r + variation, 0, 1);
             c.g = THREE.MathUtils.clamp(c.g + variation, 0, 1);
@@ -327,13 +327,13 @@ try {
 
     function updateAmbientLight() {
         scene.remove(ambient);
-        ambient.color.set(str2Hex(getCookie('ambient_light_color')));
-        ambient.intensity = parseFloat(getCookie('ambient_light_strength'));
+        ambient.color.set(str2Hex(getCookie('ambientLightColor')));
+        ambient.intensity = parseFloat(getCookie('ambientLightStrength'));
         scene.add(ambient);
         directional.position.set(3, 5, 6);
         scene.remove(directional);
-        directional.color.set(str2Hex(getCookie('directional_light_color')));
-        directional.intensity = parseFloat(getCookie('directional_light_strength'));
+        directional.color.set(str2Hex(getCookie('directionalLightColor')));
+        directional.intensity = parseFloat(getCookie('directionalLightStrength'));
         scene.add(directional);
     }
 
@@ -343,8 +343,8 @@ try {
         const w = window.innerWidth;
         const h = window.innerHeight;
 
-        const lowW = Math.max(1, Math.floor(w / parseFloat(getCookie('pixel_size'))));
-        const lowH = Math.max(1, Math.floor(h / parseFloat(getCookie('pixel_size'))));
+        const lowW = Math.max(1, Math.floor(w / parseFloat(getCookie('pixelSize'))));
+        const lowH = Math.max(1, Math.floor(h / parseFloat(getCookie('pixelSize'))));
 
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
@@ -383,8 +383,8 @@ try {
 
     function updateDeformation() {
         const posAttr = planeGeo.attributes.position;
-        const radius = parseFloat(getCookie('mouse_deform_radius'));
-        const strength = parseFloat(getCookie('mouse_deform_strength'));
+        const radius = parseFloat(getCookie('mouseDeformRadius'));
+        const strength = parseFloat(getCookie('mouseDeformStrength'));
 
         for (let i = 0; i < posAttr.count; i++) {
             const ix = i * 3;
@@ -432,64 +432,63 @@ try {
 }
 
 function initCookies() {
-    if (! getCookie('fill_color')) {
-        setCookie('fill_color', hex2Str(CONFIG_DEFAULTS.fillColor));
-        setCookie('edge_color', hex2Str(CONFIG_DEFAULTS.edgeColor));
-        setCookie('highlight_color', hex2Str(CONFIG_DEFAULTS.highlightColor));
-        setCookie('fill_color_variation', CONFIG_DEFAULTS.fillColorVariation);
-        setCookie('pixel_size', CONFIG_DEFAULTS.pixelSize);
-        setCookie('segments_x', CONFIG_DEFAULTS.segmentsX);
-        setCookie('segments_y', CONFIG_DEFAULTS.segmentsY);
-        setCookie('jitter_amount', CONFIG_DEFAULTS.jitterAmount);
-        setCookie('base_relief', CONFIG_DEFAULTS.baseRelief);
-        setCookie('mouse_deform_radius', CONFIG_DEFAULTS.mouseDeformRadius);
-        setCookie('mouse_deform_strength', CONFIG_DEFAULTS.mouseDeformStrength);
-        setCookie('mouse_edge_radius', CONFIG_DEFAULTS.mouseEdgeRadius);
-        setCookie('camera_distance', CONFIG_DEFAULTS.cameraDistance);
-        setCookie('ambient_light_color', hex2Str(CONFIG_DEFAULTS.ambientLightColor));
-        setCookie('ambient_light_strength', CONFIG_DEFAULTS.ambientLightStrength);
-        setCookie('directional_light_color', hex2Str(CONFIG_DEFAULTS.directionalLightColor));
-        setCookie('directional_light_strength', CONFIG_DEFAULTS.directionalLightStrength);
+    if (! getCookie('fillColor')) {
+        setCookie('fillColor', hex2Str(CONFIG_DEFAULTS.fillColor));
+        setCookie('edgeColor', hex2Str(CONFIG_DEFAULTS.edgeColor));
+        setCookie('highlightColor', hex2Str(CONFIG_DEFAULTS.highlightColor));
+        setCookie('fillColorVariation', CONFIG_DEFAULTS.fillColorVariation);
+        setCookie('pixelSize', CONFIG_DEFAULTS.pixelSize);
+        setCookie('segmentsX', CONFIG_DEFAULTS.segmentsX);
+        setCookie('segmentsY', CONFIG_DEFAULTS.segmentsY);
+        setCookie('jitterAmount', CONFIG_DEFAULTS.jitterAmount);
+        setCookie('baseRelief', CONFIG_DEFAULTS.baseRelief);
+        setCookie('mouseDeformRadius', CONFIG_DEFAULTS.mouseDeformRadius);
+        setCookie('mouseDeformStrength', CONFIG_DEFAULTS.mouseDeformStrength);
+        setCookie('mouseEdgeRadius', CONFIG_DEFAULTS.mouseEdgeRadius);
+        setCookie('cameraDistance', CONFIG_DEFAULTS.cameraDistance);
+        setCookie('ambientLightColor', hex2Str(CONFIG_DEFAULTS.ambientLightColor));
+        setCookie('ambientLightStrength', CONFIG_DEFAULTS.ambientLightStrength);
+        setCookie('directionalLightColor', hex2Str(CONFIG_DEFAULTS.directionalLightColor));
+        setCookie('directionalLightStrength', CONFIG_DEFAULTS.directionalLightStrength);
     }
 }
 
 function setInputs() {
-    // TODO I don't know what gave me the idea that cookie names couldn't be camel case...but they can. Rename them to match the config props just to make life simpler
-    document.getElementById('fill-color-input').value = hex2Str(getCookie('fill_color'));
-    document.getElementById('edge-color-input').value = hex2Str(getCookie('edge_color'));
-    document.getElementById('highlight-color-input').value = hex2Str(getCookie('highlight_color'));
-    document.getElementById('fill-color-variation-slider').value = getCookie('fill_color_variation');
-    document.getElementById('pixel-size-slider').value = getCookie('pixel_size');
-    document.getElementById('jitter-amount-slider').value = getCookie('jitter_amount');
-    document.getElementById('x-segments-slider').value = getCookie('segments_x');
-    document.getElementById('y-segments-slider').value = getCookie('segments_y');
-    document.getElementById('base-relief-slider').value = getCookie('base_relief');
-    document.getElementById('mouse-deform-radius-slider').value = getCookie('mouse_deform_radius');
-    document.getElementById('mouse-deform-strength-slider').value = getCookie('mouse_deform_strength');
-    document.getElementById('mouse-edge-radius-slider').value = getCookie('mouse_edge_radius');
-    document.getElementById('camera-distance-slider').value = getCookie('camera_distance');
-    document.getElementById('ambient-light-color-input').value = hex2Str(getCookie('ambient_light_color'));
-    document.getElementById('ambient-light-strength-slider').value = getCookie('ambient_light_strength');
-    document.getElementById('directional-light-color-input').value = hex2Str(getCookie('directional_light_color'));
-    document.getElementById('directional-light-strength-slider').value = getCookie('directional_light_strength');
+    document.getElementById('fill-color-input').value = hex2Str(getCookie('fillColor'));
+    document.getElementById('edge-color-input').value = hex2Str(getCookie('edgeColor'));
+    document.getElementById('highlight-color-input').value = hex2Str(getCookie('highlightColor'));
+    document.getElementById('fill-color-variation-slider').value = getCookie('fillColorVariation');
+    document.getElementById('pixel-size-slider').value = getCookie('pixelSize');
+    document.getElementById('jitter-amount-slider').value = getCookie('jitterAmount');
+    document.getElementById('x-segments-slider').value = getCookie('segmentsX');
+    document.getElementById('y-segments-slider').value = getCookie('segmentsY');
+    document.getElementById('base-relief-slider').value = getCookie('baseRelief');
+    document.getElementById('mouse-deform-radius-slider').value = getCookie('mouseDeformRadius');
+    document.getElementById('mouse-deform-strength-slider').value = getCookie('mouseDeformStrength');
+    document.getElementById('mouse-edge-radius-slider').value = getCookie('mouseEdgeRadius');
+    document.getElementById('camera-distance-slider').value = getCookie('cameraDistance');
+    document.getElementById('ambient-light-color-input').value = hex2Str(getCookie('ambientLightColor'));
+    document.getElementById('ambient-light-strength-slider').value = getCookie('ambientLightStrength');
+    document.getElementById('directional-light-color-input').value = hex2Str(getCookie('directionalLightColor'));
+    document.getElementById('directional-light-strength-slider').value = getCookie('directionalLightStrength');
 
-    document.getElementById('fill-color-value').textContent = hex2Str(getCookie('fill_color'));
-    document.getElementById('edge-color-value').textContent = hex2Str(getCookie('edge_color'));
-    document.getElementById('highlight-color-value').textContent = hex2Str(getCookie('highlight_color'));
-    document.getElementById('fill-color-variation-value').textContent = getCookie('fill_color_variation');
-    document.getElementById('pixel-size-value').textContent = getCookie('pixel_size');
-    document.getElementById('jitter-amount-value').textContent = getCookie('jitter_amount');
-    document.getElementById('x-segments-value').textContent = getCookie('segments_x');
-    document.getElementById('y-segments-value').textContent = getCookie('segments_y');
-    document.getElementById('base-relief-value').textContent = getCookie('base_relief');
-    document.getElementById('mouse-deform-radius-value').textContent = getCookie('mouse_deform_radius');
-    document.getElementById('mouse-deform-strength-value').textContent = getCookie('mouse_deform_strength');
-    document.getElementById('mouse-edge-radius-value').textContent = getCookie('mouse_edge_radius');
-    document.getElementById('camera-distance-value').textContent = getCookie('camera_distance');
-    document.getElementById('ambient-light-color-value').textContent = hex2Str(getCookie('ambient_light_color'));
-    document.getElementById('ambient-light-strength-value').textContent = getCookie('ambient_light_strength');
-    document.getElementById('directional-light-color-value').textContent = hex2Str(getCookie('directional_light_color'));
-    document.getElementById('directional-light-strength-value').textContent = getCookie('directional_light_strength');
+    document.getElementById('fill-color-value').textContent = hex2Str(getCookie('fillColor'));
+    document.getElementById('edge-color-value').textContent = hex2Str(getCookie('edgeColor'));
+    document.getElementById('highlight-color-value').textContent = hex2Str(getCookie('highlightColor'));
+    document.getElementById('fill-color-variation-value').textContent = getCookie('fillColorVariation');
+    document.getElementById('pixel-size-value').textContent = getCookie('pixelSize');
+    document.getElementById('jitter-amount-value').textContent = getCookie('jitterAmount');
+    document.getElementById('x-segments-value').textContent = getCookie('segmentsX');
+    document.getElementById('y-segments-value').textContent = getCookie('segmentsY');
+    document.getElementById('base-relief-value').textContent = getCookie('baseRelief');
+    document.getElementById('mouse-deform-radius-value').textContent = getCookie('mouseDeformRadius');
+    document.getElementById('mouse-deform-strength-value').textContent = getCookie('mouseDeformStrength');
+    document.getElementById('mouse-edge-radius-value').textContent = getCookie('mouseEdgeRadius');
+    document.getElementById('camera-distance-value').textContent = getCookie('cameraDistance');
+    document.getElementById('ambient-light-color-value').textContent = hex2Str(getCookie('ambientLightColor'));
+    document.getElementById('ambient-light-strength-value').textContent = getCookie('ambientLightStrength');
+    document.getElementById('directional-light-color-value').textContent = hex2Str(getCookie('directionalLightColor'));
+    document.getElementById('directional-light-strength-value').textContent = getCookie('directionalLightStrength');
 }
 
 function resetInputs() {
