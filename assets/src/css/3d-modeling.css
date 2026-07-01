@@ -1,6 +1,7 @@
 @reference "./base.css";
 
 #model-viewer-canvas, #model-viewer-overlay {
+    /* TODO The transition here isn't working for some reason */
     @apply absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-[width,height] duration-500;
 }
 

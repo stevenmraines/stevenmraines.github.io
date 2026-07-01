@@ -165,7 +165,7 @@
  */
 @layer components {
     .content {
-        @apply relative z-1;
+        @apply relative z-1 px-6 pb-6;
     }
 
     .btn {
