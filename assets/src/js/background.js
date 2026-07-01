@@ -149,10 +149,6 @@ try {
     });
 
     document.getElementById('reset').addEventListener("click", function (e) {
-        edgeUniforms.uEdgeColor.value.set(new THREE.Color(str2Hex(getCookie('edge_color'))));
-        edgeUniforms.uHighlightColor.value.set(new THREE.Color(str2Hex(getCookie('highlight_color'))));
-        edgeUniforms.uRadius.value = parseFloat(getCookie('mouse_edge_radius'));
-
         setCookie('fill_color', hex2Str(CONFIG_DEFAULTS.fillColor));
         setCookie('edge_color', hex2Str(CONFIG_DEFAULTS.edgeColor));
         setCookie('highlight_color', hex2Str(CONFIG_DEFAULTS.highlightColor));
@@ -170,6 +166,10 @@ try {
         setCookie('ambient_light_strength', CONFIG_DEFAULTS.ambientLightStrength);
         setCookie('directional_light_color', hex2Str(CONFIG_DEFAULTS.directionalLightColor));
         setCookie('directional_light_strength', CONFIG_DEFAULTS.directionalLightStrength);
+
+        edgeUniforms.uEdgeColor.value.set(new THREE.Color(str2Hex(getCookie('edge_color'))));
+        edgeUniforms.uHighlightColor.value.set(new THREE.Color(str2Hex(getCookie('highlight_color'))));
+        edgeUniforms.uRadius.value = parseFloat(getCookie('mouse_edge_radius'));
 
         document.getElementById('fill-color-input').value = hex2Str(CONFIG_DEFAULTS.fillColor);
         document.getElementById('edge-color-input').value = hex2Str(CONFIG_DEFAULTS.edgeColor);
@@ -207,6 +207,7 @@ try {
         document.getElementById('directional-light-color-value').textContent = hex2Str(CONFIG_DEFAULTS.directionalLightColor);
         document.getElementById('directional-light-strength-value').textContent = CONFIG_DEFAULTS.directionalLightStrength;
 
+        renderer.dispose();
         buildMesh();
         onResize();
         updateAmbientLight();
@@ -221,7 +222,6 @@ try {
     const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
     camera.position.set(0, 0, parseInt(getCookie('camera_distance')));
     // TODO Something strange going on with camera_distance, if you change it and then go to another page, it's visually not correct even though the cookie value is, resetting also seems broken until going to another page
-    console.log(camera.position.z)
     camera.lookAt(0, 0, 0);
 
     const ambient = new THREE.AmbientLight(getCookie('ambient_light_color'), parseFloat(getCookie('ambient_light_strength')));
