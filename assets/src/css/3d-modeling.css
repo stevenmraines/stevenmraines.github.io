@@ -22,10 +22,12 @@
 }
 
 .viewer-expanded {
-    @apply w-[900px] h-[600px];
+    width: 900px;
+    height: 600px;
 }
 
 .viewer-collapsed {
     /* TODO Removing the hidden class here gets us kind of half way towards the transition working, but I think three.js is setting inline styles for width and height on the canvas which are overriding any w/h styles applied with tailwind */
-    @apply hidden w-0 h-0;
+    width: 0;
+    height: 0;
 }

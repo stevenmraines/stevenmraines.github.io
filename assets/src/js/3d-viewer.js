@@ -4,6 +4,7 @@ const OBJHandler = require('./OBJHandler.js');
 const CONFIG = {
     canvasWidth: 900,
     canvasHeight: 600,
+    transitionDuration: 500,
 
     fillColor: 0x2c2a30,
 
@@ -366,12 +367,12 @@ function expand3DViewer() {
 
     overlay_content.classList.remove('viewer-collapsed');
     overlay_content.classList.add('viewer-expanded');
+
+    setTimeout(() => overlay.style.display = 'block', CONFIG.transitionDuration);
 }
 
 function collapse3DViewer() {
-    // TODO do renderer.dispose() or whatever is needed to stop rendering the viewer
-    cards_container.classList.add('flex-row');
-    cards_container.classList.remove('flex-col');
+    overlay.style.display = 'none';
 
     canvas.classList.add('viewer-collapsed');
     canvas.classList.remove('viewer-expanded');
@@ -381,4 +382,14 @@ function collapse3DViewer() {
 
     overlay_content.classList.add('viewer-collapsed');
     overlay_content.classList.remove('viewer-expanded');
+
+    // TODO Make sure this is all that is needed to stop rendering the viewer
+    renderer.dispose();
+    canvas.style.width = '0px';
+    canvas.style.height = '0px';
+
+    setTimeout(function () {
+        cards_container.classList.add('flex-row');
+        cards_container.classList.remove('flex-col');
+    }, CONFIG.transitionDuration);
 }
