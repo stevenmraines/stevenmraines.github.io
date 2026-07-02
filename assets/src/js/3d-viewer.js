@@ -4,7 +4,7 @@ const OBJHandler = require('./OBJHandler.js');
 const CONFIG = {
     fillColor: 0x2c2a30,
 
-    materialColor: 0xffffff,
+    materialColor: 0x999999,
     materialOpacity: 1.0,
 
     cameraDistance: 10,
@@ -39,6 +39,8 @@ const cards_container = document.getElementById('cards-container');
 const show_wireframe_input = document.getElementById('show-wireframe');
 const show_texture_preview_input = document.getElementById('show-texture-preview');
 const texture_filtering_input = document.getElementById('texture-filtering');
+const texture_placeholder = document.getElementById('texture-placeholder');
+const texture_image = document.getElementById('texture-image');
 const model_viewer_close = document.getElementById('model-viewer-close');
 
 let autoRotate = true;
@@ -80,13 +82,10 @@ if (show_wireframe_input) {
 
     show_texture_preview_input.addEventListener('click', function () {
         show_texture_preview = show_texture_preview_input.checked;
-        const texture_preview = document.getElementById('texture-preview');
         // TODO Set visibility on page load since the browser likes to maintain state, do the same with the wireframe input
-        if (show_texture_preview) {
-            texture_preview.style.display = 'block';
-        } else {
-            texture_preview.style.display = 'none';
-        }
+        const hasTexture = ! texture_image.src.endsWith('#');
+        texture_image.style.display = show_texture_preview && hasTexture ? 'block' : 'none';
+        texture_placeholder.style.display = show_texture_preview && ! hasTexture ? 'block' : 'none';
     });
 
     texture_filtering_input.addEventListener('click', function () {
@@ -229,7 +228,7 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
             geometry.rotateY(THREE.MathUtils.degToRad(rotation.y));
             geometry.rotateZ(THREE.MathUtils.degToRad(rotation.z));
             geometry.scale(scale.x, scale.y, scale.z);
-            const material = new THREE.MeshStandardMaterial({ color: CONFIG.materialColor });
+            const material = new THREE.MeshStandardMaterial({});
 
             if (texture_map) {
                 const textureLoader = new THREE.TextureLoader();
@@ -241,13 +240,15 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
                 }
 
                 material.map = texture;
-                const texture_preview = document.getElementById('texture-preview');
-                texture_preview.src = '/models/' + texture_map;
-
-                if (show_texture_preview) {
-                    texture_preview.classList.remove('hidden');
-                }
+                texture_image.src = '/models/' + texture_map;
+            } else {
+                texture_image.src = '#';
+                material.color.setHex(CONFIG.materialColor);
             }
+
+            const hasTexture = ! texture_image.src.endsWith('#');
+            texture_image.style.display = show_texture_preview && hasTexture ? 'block' : 'none';
+            texture_placeholder.style.display = show_texture_preview && ! hasTexture ? 'block' : 'none';
 
             material.opacity = CONFIG.materialOpacity;
             material.transparent = CONFIG.materialOpacity < 1.0;

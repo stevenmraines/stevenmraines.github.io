@@ -74,6 +74,7 @@
 
 <div id="model-viewer-overlay" class="viewer-collapsed">
   <div id="model-viewer-overlay-content" class="viewer-collapsed">
+    <!-- TODO Force these inputs like we had to do with the settings -->
     <label class="absolute top-2 left-2 pointer-events-auto">
       Wireframe
       <input type="checkbox" id="show-wireframe" />
@@ -99,8 +100,8 @@
         Scroll to zoom
       </span>
 
-    <!-- TODO Add a placeholder img, like "No Texture" or whatever -->
-    <img src="#" id="texture-preview" />
+    <img src="/models/no-texture.png" id="texture-placeholder" class="texture-preview" />
+    <img src="#" id="texture-image" class="texture-preview" />
   </div>
 </div>
 

@@ -17,7 +17,7 @@
     @apply relative text-light-gray pointer-events-none;
 }
 
-#texture-preview {
+.texture-preview {
     @apply absolute right-[2px] bottom-[2px] w-1/4 h-auto hidden;
 }
 
