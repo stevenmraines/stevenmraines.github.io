@@ -2,6 +2,9 @@ const THREE = require('three');
 const OBJHandler = require('./OBJHandler.js');
 
 const CONFIG = {
+    canvasWidth: 900,
+    canvasHeight: 600,
+
     fillColor: 0x2c2a30,
 
     materialColor: 0x999999,
@@ -17,7 +20,7 @@ const CONFIG = {
     directionalLightColor: 0xddffff,
     directionalLightStrength: 0.85,
 
-    meshWireframeOpacity: 0.25,
+    meshWireframeOpacity: 0.5,
 
     planeWidth: 30,
     planeHeight: 30,
@@ -119,7 +122,9 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(CONFIG.fillColor);
 
-        const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+        renderer.setSize(CONFIG.canvasWidth, CONFIG.canvasHeight);
+        let aspect = CONFIG.canvasWidth / CONFIG.canvasHeight;
+        const camera = new THREE.PerspectiveCamera(45, aspect, 0.1, 100);
         camera.position.set(0, 0, CONFIG.cameraDistance);
         camera.lookAt(0, 0, 0);
 
