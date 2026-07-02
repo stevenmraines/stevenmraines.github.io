@@ -359,6 +359,7 @@ function expand3DViewer() {
     cards_container.classList.remove('flex-row');
     cards_container.classList.add('flex-col');
 
+    // TODO It would be even cooler if the width/height were applied one after the other rather than at the same time
     canvas.classList.remove('viewer-collapsed');
     canvas.classList.add('viewer-expanded');
 
