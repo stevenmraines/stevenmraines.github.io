@@ -8,27 +8,16 @@ const connect = require('gulp-connect');
 // Rename files and their extensions
 const rename = require('gulp-rename');
 
-// Needed to make sourcemap file with Browserify
-const sourcemaps = require('gulp-sourcemaps');
-
-// Minify JS
-const uglify = require('gulp-uglify');
-
-// Bundle NPM packages with my JS files
-const browserify = require('browserify');
+// Bundles ES modules, splits shared code into chunks, minifies, sourcemaps
+const esbuild = require('esbuild');
 
 // Delete files and directories
 const del = require('del');
 
-// Browserify.bundle() returns a text stream, but Gulp uses a streaming vinyl object, this is needed to translate
-const srcVinyl = require('vinyl-source-stream');
-
-// Some gulp plugins don't support streaming vinyl objects, so a buffered vinyl object is needed
-const buffer = require('vinyl-buffer');
-
 // Allow including partials in HTML files
 const fileInclude = require('gulp-file-include');
 
+// TODO All these paths are gonna be screwed up now because I restructured everything
 const paths = {
     root: 'public',
     css: {
@@ -55,12 +44,11 @@ const paths = {
         dest: 'public/img',
     },
     js: {
-        src: [
-            'assets/src/js/OBJHandler.js',
-            'assets/src/js/base.js',
-            'assets/src/js/background.js',
-            'assets/src/js/3d-viewer.js'
-        ],
+        entryPoints: {
+            common: 'assets/src/js/entries/common.js',
+            viewer: 'assets/src/js/entries/viewer.js',
+        },
+        watch: 'assets/src/js/**/*.js',
         dest: 'public/js',
     },
     models: {
@@ -117,25 +105,21 @@ function img() {
         .pipe(gulp.dest(paths.img.dest));
 }
 
-function js() {
-    const options = {
-        debug: true,  // Debug == make sourcemaps
-    };
-
-    /*
-     * The srcVinyl arg 'bundle.js' doesn't actually exist, .bundle() prints to stdout,
-     * bundle.js is just a 'pretend' filename other streams in the pipeline may use.
-     */
-    return browserify(paths.js.src, options)
-        .bundle()
-        .pipe(srcVinyl('bundle.js'))
-        .pipe(buffer())
-        .pipe(sourcemaps.init({ loadMaps: true }))
-        .pipe(uglify())
-        .pipe(rename({ basename: 'main', suffix: '.min' }))  // Bundle everything into js/main.min.js
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest(paths.js.dest))
-        .pipe(connect.reload());
+// TODO This is gonna be broken
+async function js() {
+    await esbuild.build({
+        entryPoints: paths.js.entryPoints,
+        outdir: paths.js.dest,
+        entryNames: '[name].min',
+        chunkNames: 'chunks/[name]-[hash]',
+        bundle: true,
+        splitting: true,
+        format: 'esm', // Required for splitting; matches type="module"
+        minify: true,
+        sourcemap: true,
+        target: ['es2020'],
+    });
+    connect.reload();
 }
 
 function models() {
@@ -168,7 +152,7 @@ function watch() {
     gulp.watch(paths.css.src, css);
     gulp.watch(paths.colors.src, css);
     gulp.watch(paths.html.src, gulp.parallel(html, css));
-    gulp.watch(paths.js.src, js);
+    gulp.watch(paths.js.watch, js);
     gulp.watch(paths.models.src, models);
     gulp.watch(paths.img.src, img);
 }

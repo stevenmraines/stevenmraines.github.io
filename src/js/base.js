@@ -15,6 +15,7 @@ const SUB_MENU_CLASS = 'sub-menu';
  * PAGE SETUP
  ***********************************************************************************************************************
  */
+// TODO Wrap other js code in this
 document.addEventListener('DOMContentLoaded', function() {
 	addEventListeners();
 });

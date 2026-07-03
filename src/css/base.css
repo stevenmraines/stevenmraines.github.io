@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "./colors.css";
+@import "../../node_modules/tailwindcss/dist/lib.d.mts";
+@import "colors.css";
 @source "../js/base.js";
 @source "../js/3d-viewer.js";
 
@@ -8,26 +8,6 @@
  * FONTS
  ***********************************************************************************************************************
  */
-@font-face {
-    font-family: "PixelifySans-Bold";
-    src: url("/css/fonts/PixelifySans-Bold.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "PixelifySans-Medium";
-    src: url("/css/fonts/PixelifySans-Medium.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "PixelifySans-Regular";
-    src: url("/css/fonts/PixelifySans-Regular.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "PixelifySans-SemiBold";
-    src: url("/css/fonts/PixelifySans-SemiBold.ttf") format("truetype");
-}
-
 @font-face {
     font-family: "SFPixelate";
     src: url("/css/fonts/SFPixelate.ttf") format("truetype");
