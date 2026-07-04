@@ -1,4 +1,4 @@
-@import "../../node_modules/tailwindcss/dist/lib.d.mts";
+@import "tailwindcss";
 @import "./colors.css";
 @source "../js/base.js";
 @source "../js/3d-viewer.js";

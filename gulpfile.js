@@ -23,6 +23,9 @@ const paths = {
         src: 'src/css/*.css',
         dest: 'public/css',
     },
+    colors: {
+        src: 'src/css/colors.css',
+    },
     files: {
         src: 'assets/files/*',
         dest: 'public/files',
@@ -67,9 +70,9 @@ function clean() {
 
 function css() {
     return gulp.src(paths.css.src, { sourcemaps: true })
-        .pipe(postcss([
-            require('@tailwindcss/postcss')(),
-        ]))
+        .pipe(postcss((file) => ({
+            plugins: [require('@tailwindcss/postcss')()],
+        })))
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest(paths.css.dest, { sourcemaps: '.' }))
         .pipe(connect.reload());
@@ -109,7 +112,7 @@ async function js() {
         chunkNames: 'chunks/[name]-[hash]',
         bundle: true,
         splitting: true,
-        format: 'esm', // Required for splitting; matches type="module"
+        format: 'esm', // required for splitting; matches type="module"
         minify: true,
         sourcemap: true,
         target: ['es2020'],
@@ -145,6 +148,7 @@ function videos() {
 
 function watch() {
     gulp.watch(paths.css.src, css);
+    gulp.watch(paths.colors.src, css);
     gulp.watch(paths.html.src, gulp.parallel(html, css));
     gulp.watch(paths.js.watch, js);
     gulp.watch(paths.models.src, models);
