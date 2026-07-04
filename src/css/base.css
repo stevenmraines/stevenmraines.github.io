@@ -1,5 +1,5 @@
 @import "../../node_modules/tailwindcss/dist/lib.d.mts";
-@import "colors.css";
+@import "./colors.css";
 @source "../js/base.js";
 @source "../js/3d-viewer.js";
 

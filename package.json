@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/stevenmraines/stevenmraines.github.io#readme",
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.2.1",
+    "@tailwindcss/postcss": "^4.3.2",
     "del": "^6.0.0",
     "esbuild": "^0.28.1",
     "gulp": "^4.0.2",
@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "devicon": "^2.14.0",
-    "tailwindcss": "^4.2.1",
+    "tailwindcss": "^4.3.2",
     "three": "^0.149.0"
   }
 }
