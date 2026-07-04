@@ -143,16 +143,18 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
         let face_data = { "vertices": {}, "uvs": {}, "normals": {} };
         let uv_data = {};
         let normal_data = {};
+        let subdir = '';
         let texture_map = '';
 
         if (objFilePath !== '') {
             let mtllib, usemtl;
-            let filename = objFilePath.split('/')[2];
+            subdir = objFilePath.split('/')[2];
+            let filename = objFilePath.split('/')[3];
             const obj_file = await obj_handler.createFile(objFilePath, filename, 'model/obj');
             [vertex_data, face_data, uv_data, normal_data, mtllib, usemtl] = await obj_handler.readObjFile(obj_file);
 
             if (mtllib.length > 0 && usemtl.length > 0) {
-                const mtl_file = await obj_handler.createFile('/models/' + mtllib[0], mtllib[0], 'model/mtl');
+                const mtl_file = await obj_handler.createFile('/models/' + subdir + '/' + mtllib[0], mtllib[0], 'model/mtl');
                 texture_map = await obj_handler.readMtlFile(mtl_file, usemtl[0]);
             }
         }
@@ -238,7 +240,7 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
 
             if (texture_map) {
                 const textureLoader = new THREE.TextureLoader();
-                const texture = textureLoader.load('/models/' + texture_map);
+                const texture = textureLoader.load('/models/' + subdir + '/' + texture_map);
 
                 if (! filter_texture) {
                     texture.magFilter = THREE.NearestFilter;
@@ -246,7 +248,7 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
                 }
 
                 material.map = texture;
-                texture_image.src = '/models/' + texture_map;
+                texture_image.src = '/models/' + subdir + '/' + texture_map;
             } else {
                 texture_image.src = '#';
                 material.color.setHex(CONFIG.materialColor);
@@ -291,7 +293,6 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
             if (isRotating) {
                 if (solidMesh) {
                     autoRotate = false;
-                    // TODO Docs say something about use Object3D.rotation, look into that. The page also seems to lag quite a bit if you try to rotate a lot
                     solidMesh.rotateY(CONFIG.rotationSpeed * directionX * diffX);
                     wireframe_lines.rotateY(CONFIG.rotationSpeed * directionX * diffX);
                 }
