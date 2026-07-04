@@ -91,7 +91,7 @@
                 }
             }
             & ul.sub-menu {
-                @apply absolute top-full left-0 w-50 bg-dark-gray border-2 border-black text-nowrap opacity-0 transition-opacity duration-300;
+                @apply absolute top-full left-0 w-72 bg-dark-gray border-2 border-black text-nowrap opacity-0 transition-opacity duration-300;
                 & > li {
                     @apply border-b-2 border-black;
                     & > a {
@@ -240,9 +240,9 @@ html, body {
 }
 
 #github-link img {
-    @apply mask-[url('/img/github-logo-pixelated-no-text.png')];
+    @apply mask-[url('/images/icons/github-logo-pixelated-no-text.png')];
 }
 
 #linkedin-link img {
-    @apply w-8/10 h-8/10 mask-[url('/img/linkedin-logo-pixelated.png')];
+    @apply w-8/10 h-8/10 mask-[url('/images/icons/linkedin-logo-pixelated.png')];
 }
