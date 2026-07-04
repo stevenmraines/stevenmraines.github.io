@@ -38,7 +38,7 @@ const paths = {
         src: 'src/html/**/*.html',
         dest: 'public',
     },
-    img: {
+    images: {
         src: 'assets/images/**/*',
         dest: 'public/images',
     },
@@ -100,8 +100,8 @@ function html() {
 }
 
 function images() {
-    return gulp.src(paths.img.src)
-        .pipe(gulp.dest(paths.img.dest));
+    return gulp.src(paths.images.src)
+        .pipe(gulp.dest(paths.images.dest));
 }
 
 async function js() {
@@ -152,7 +152,7 @@ function watch() {
     gulp.watch(paths.html.src, gulp.parallel(html, css));
     gulp.watch(paths.js.watch, js);
     gulp.watch(paths.models.src, models);
-    gulp.watch(paths.img.src, images);
+    gulp.watch(paths.images.src, images);
 }
 
 const buildTask = gulp.series(clean, gulp.parallel([files, fonts, models, nodeFonts, images, videos, html, css, js]));
