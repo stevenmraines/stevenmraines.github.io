@@ -4,7 +4,7 @@ const OBJHandler = require('./OBJHandler.js');
 const CONFIG = {
     canvasWidth: 900,
     canvasHeight: 600,
-    transitionDuration: 500,
+    transitionDuration: 350,
 
     fillColor: 0x2c2a30,
 
@@ -123,7 +123,7 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(CONFIG.fillColor);
 
-        renderer.setSize(CONFIG.canvasWidth, CONFIG.canvasHeight);
+        renderer.setSize(CONFIG.canvasWidth, CONFIG.canvasHeight, false);
         let aspect = CONFIG.canvasWidth / CONFIG.canvasHeight;
         const camera = new THREE.PerspectiveCamera(45, aspect, 0.1, 100);
         camera.position.set(0, 0, CONFIG.cameraDistance);
@@ -360,38 +360,62 @@ function expand3DViewer() {
     cards_container.classList.remove('flex-row');
     cards_container.classList.add('flex-col');
 
-    // TODO It would be even cooler if the width/height were applied one after the other rather than at the same time
-    canvas.classList.remove('viewer-collapsed');
-    canvas.classList.add('viewer-expanded');
+    canvas.classList.remove('viewer-w-collapsed');
+    canvas.classList.add('viewer-w-expanded');
+    // TODO Figure out what works better, these classes, or just hard-coding the widht and height
+    canvas.style.width = '900px';
 
-    overlay.classList.remove('viewer-collapsed');
-    overlay.classList.add('viewer-expanded');
+    setTimeout(function () {
+        // canvas.classList.remove('viewer-h-collapsed');
+        // canvas.classList.add('viewer-h-expanded');
+        canvas.style.height = '600px';
 
-    overlay_content.classList.remove('viewer-collapsed');
-    overlay_content.classList.add('viewer-expanded');
+        setTimeout(function () {
+            overlay.classList.remove('viewer-w-collapsed');
+            overlay.classList.remove('viewer-h-collapsed');
+            overlay.classList.add('viewer-w-expanded');
+            overlay.classList.add('viewer-h-expanded');
 
-    setTimeout(() => overlay.style.display = 'block', CONFIG.transitionDuration);
+            overlay_content.classList.remove('viewer-w-collapsed');
+            overlay_content.classList.remove('viewer-h-collapsed');
+            overlay_content.classList.add('viewer-w-expanded');
+            overlay_content.classList.add('viewer-h-expanded');
+
+            overlay.style.display = 'block';
+        }, CONFIG.transitionDuration * 1.5);
+    }, CONFIG.transitionDuration * 0.5);
 }
 
 function collapse3DViewer() {
     overlay.style.display = 'none';
 
-    canvas.classList.add('viewer-collapsed');
-    canvas.classList.remove('viewer-expanded');
+    canvas.classList.add('viewer-h-collapsed');
+    canvas.classList.remove('viewer-h-expanded');
 
-    overlay.classList.add('viewer-collapsed');
-    overlay.classList.remove('viewer-expanded');
+    overlay.classList.add('viewer-h-collapsed');
+    overlay.classList.add('viewer-w-collapsed');
+    overlay.classList.remove('viewer-h-expanded');
+    overlay.classList.remove('viewer-w-expanded');
 
-    overlay_content.classList.add('viewer-collapsed');
-    overlay_content.classList.remove('viewer-expanded');
+    overlay_content.classList.add('viewer-h-collapsed');
+    overlay_content.classList.add('viewer-w-collapsed');
+    overlay_content.classList.remove('viewer-h-expanded');
+    overlay_content.classList.remove('viewer-w-expanded');
 
-    // TODO Make sure this is all that is needed to stop rendering the viewer
-    renderer.dispose();
-    canvas.style.width = '0px';
     canvas.style.height = '0px';
 
     setTimeout(function () {
-        cards_container.classList.add('flex-row');
-        cards_container.classList.remove('flex-col');
-    }, CONFIG.transitionDuration);
+        canvas.classList.add('viewer-w-collapsed');
+        canvas.classList.remove('viewer-w-expanded');
+
+        // TODO Make sure this is all that is needed to stop rendering the viewer
+        renderer.dispose();
+        canvas.style.width = '0px';
+
+        setTimeout(function () {
+            cards_container.classList.add('flex-row');
+            cards_container.classList.remove('flex-col');
+        }, CONFIG.transitionDuration * 1.5);
+    }, CONFIG.transitionDuration * 0.5);
+
 }

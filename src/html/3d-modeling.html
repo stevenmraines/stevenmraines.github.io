@@ -71,9 +71,9 @@
   </div>
 </div>
 
-<canvas id="model-viewer-canvas" class="viewer-collapsed"></canvas>
+<canvas id="model-viewer-canvas" class="viewer-w-collapsed viewer-h-collapsed"></canvas>
 
-<div id="model-viewer-overlay" class="viewer-collapsed hidden">
+<div id="model-viewer-overlay" class="viewer-w-collapsed viewer-h-collapsed hidden">
   <div id="model-viewer-overlay-content" class="viewer-collapsed">
     <!-- TODO Force these inputs like we had to do with the settings -->
     <label class="absolute top-2 left-2 pointer-events-auto">
@@ -89,7 +89,7 @@
       <input type="checkbox" id="texture-filtering" />
     </label>
 
-    <button id="model-viewer-close" class="btn bg-viridian2 absolute top-2 right-2 cursor-pointer text-white pointer-events-auto">X</button>
+    <button id="model-viewer-close" class="btn">X</button>
 
     <span class="absolute bottom-8 left-2 text-xs">
         Left click to pan
@@ -103,6 +103,7 @@
 
     <img src="/models/no-texture.png" id="texture-placeholder" class="texture-preview" />
     <img src="#" id="texture-image" class="texture-preview" />
+    <div id="multiple-texture-container"></div>
   </div>
 </div>
 

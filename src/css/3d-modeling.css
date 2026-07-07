@@ -1,8 +1,7 @@
 @reference "./base.css";
 
 #model-viewer-canvas, #model-viewer-overlay {
-    /* TODO The transition here isn't working, something to do with the hidden class on .viewer-collapsed */
-    @apply absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-[width,height] duration-500;
+    @apply absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-[width,height] duration-350;
 }
 
 #model-viewer-canvas {
@@ -17,17 +16,26 @@
     @apply relative text-light-gray pointer-events-none;
 }
 
+#model-viewer-close {
+    @apply bg-transparent text-light-gray border border-light-gray absolute top-2 right-2 w-7 h-7 leading-6 cursor-pointer pointer-events-auto;
+}
+
 .texture-preview {
     @apply absolute right-[2px] bottom-[2px] w-1/4 h-auto hidden;
 }
 
-.viewer-expanded {
+.viewer-w-expanded {
     width: 900px;
+}
+
+.viewer-w-collapsed {
+    width: 0;
+}
+
+.viewer-h-expanded {
     height: 600px;
 }
 
-.viewer-collapsed {
-    /* TODO Removing the hidden class here gets us kind of half way towards the transition working, but I think three.js is setting inline styles for width and height on the canvas which are overriding any w/h styles applied with tailwind */
-    width: 0;
+.viewer-h-collapsed {
     height: 0;
 }
