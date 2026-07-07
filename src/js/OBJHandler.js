@@ -14,6 +14,8 @@ class OBJHandler {
         let normal_data = {};
         let mtllib = [];
         let usemtl = [];
+        let vert_count = 0;
+        let tri_count = 0;
         const file_content = await file.text();
 
         try {
@@ -42,6 +44,7 @@ class OBJHandler {
                     vert_index++;
                     let [x, y, z] = line.split(' ').slice(1).map(parseFloat);
                     vertex_data[vert_index] = [x,y,z];
+                    vert_count++;
                 }
 
                 if (line.startsWith('f ')) {
@@ -61,6 +64,7 @@ class OBJHandler {
                         .map((value) => {
                             return value.split('/').slice(2,3).map(parseFloat)[0];
                         });
+                    tri_count++;
                 }
 
                 if (line.startsWith('vt ')) {
@@ -79,7 +83,7 @@ class OBJHandler {
             console.log("Error reading obj file", e);
         }
 
-        return [vertex_data, face_data, uv_data, normal_data, mtllib, usemtl]
+        return [vertex_data, face_data, uv_data, normal_data, mtllib, usemtl, vert_count, tri_count]
     }
 
     async readMtlFile(file, usemtl) {

@@ -57,7 +57,7 @@
         <img src="/images/models/lever-preview.png" alt="A 3D model of an ornate lever">
         <h6>Soulsborne style lever</h6>
         <p>A lever for controlling an elevator in a Souls-like game I'm making in Godot</p>
-        <a href="#" class="load-obj-button" data-filename="lever/lever.obj" data-scale="5/5/5">See More ></a>
+        <a href="#" class="load-obj-button" data-filename="lever/lever.obj" data-scale="5/5/5" data-position="0/-1.5/0">See More ></a>
       </div>
     </div>
     <div class="card pointer-events-auto">
@@ -75,35 +75,39 @@
 
 <div id="model-viewer-overlay" class="viewer-w-collapsed viewer-h-collapsed hidden">
   <div id="model-viewer-overlay-content" class="viewer-collapsed">
-    <!-- TODO Force these inputs like we had to do with the settings -->
-    <label class="absolute top-2 left-2 pointer-events-auto">
-      Wireframe
-      <input type="checkbox" id="show-wireframe" />
-    </label>
-    <label class="absolute top-7 left-2 pointer-events-auto">
-      Texture Preview
-      <input type="checkbox" id="show-texture-preview" />
-    </label>
-    <label class="absolute top-12 left-2 pointer-events-auto">
-      Texture Filtering
-      <input type="checkbox" id="texture-filtering" />
-    </label>
+    <span id="vert-count" class="absolute top-2 left-2 text-sm"></span>
+    <span id="tri-count" class="absolute top-5 left-2 text-sm"></span>
 
     <button id="model-viewer-close" class="btn">X</button>
 
-    <span class="absolute bottom-8 left-2 text-xs">
-        Left click to pan
-      </span>
-    <span class="absolute bottom-5 left-2 text-xs">
-        Left click + shift to rotate
-      </span>
-    <span class="absolute bottom-2 left-2 text-xs">
-        Scroll to zoom
-      </span>
+    <span class="absolute bottom-8 left-2 text-sm">
+      Left click to pan
+    </span>
+    <span class="absolute bottom-5 left-2 text-sm">
+      Left click + shift to rotate
+    </span>
+    <span class="absolute bottom-2 left-2 text-sm">
+      Scroll to zoom
+    </span>
 
     <img src="/models/no-texture.png" id="texture-placeholder" class="texture-preview" />
     <img src="#" id="texture-image" class="texture-preview" />
     <div id="multiple-texture-container"></div>
+
+    <div class="absolute bg-black -bottom-7 h-7 leading-7 left-0 right-0 flex justify-between align-middle px-2">
+      <label class="pointer-events-auto cursor-pointer">
+        Wireframe
+        <input type="checkbox" id="show-wireframe" />
+      </label>
+      <label class="pointer-events-auto cursor-pointer">
+        Texture Preview
+        <input type="checkbox" id="show-texture-preview" />
+      </label>
+      <label class="pointer-events-auto cursor-pointer">
+        Texture Filtering
+        <input type="checkbox" id="texture-filtering" />
+      </label>
+    </div>
   </div>
 </div>
 

@@ -537,6 +537,7 @@ function str2Hex(str) {
     return typeof str === 'string' ? parseInt(str.substring(1), 16) : str;
 }
 
+// TODO Deduplicate this once we fix whatever is wrong with our bundling stuff (it's also in 3d-viewer.js)
 function getCookie(cookie, default_value = '') {
     const match = document.cookie
         .split('; ')

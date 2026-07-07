@@ -17,7 +17,7 @@
 }
 
 #model-viewer-close {
-    @apply bg-transparent text-light-gray border border-light-gray absolute top-2 right-2 w-7 h-7 leading-6 cursor-pointer pointer-events-auto;
+    @apply bg-transparent text-light-gray border border-light-gray absolute top-2 right-2 w-7 h-7 leading-6.5 cursor-pointer pointer-events-auto;
 }
 
 .texture-preview {

@@ -31,9 +31,11 @@ const CONFIG = {
     planeOpacity: 0,
 };
 
+let autoRotate = true;
 let current_obj_file_path = '';
 let current_rotation = new THREE.Vector3(0,0,0);
 let current_scale = new THREE.Vector3(1,1,1);
+let current_position = new THREE.Vector3(0,0,0);
 let renderer;
 
 const canvas = document.getElementById("model-viewer-canvas");
@@ -46,11 +48,8 @@ const texture_filtering_input = document.getElementById('texture-filtering');
 const texture_placeholder = document.getElementById('texture-placeholder');
 const texture_image = document.getElementById('texture-image');
 const model_viewer_close = document.getElementById('model-viewer-close');
-
-let autoRotate = true;
-let show_wireframe = false;
-let show_texture_preview = false;
-let filter_texture = false;
+const vert_count_element = document.getElementById('vert-count');
+const tri_count_element = document.getElementById('tri-count');
 
 if (show_wireframe_input) {
     const obj_buttons = document.getElementsByClassName('load-obj-button');
@@ -63,6 +62,9 @@ if (show_wireframe_input) {
         let sx = 1;
         let sy = 1;
         let sz = 1;
+        let px = 0;
+        let py = 0;
+        let pz = 0;
 
         if (obj_button.dataset.rotation) {
             [rx, ry, rz] = obj_button.dataset.rotation.split('/').map(parseFloat);
@@ -72,28 +74,39 @@ if (show_wireframe_input) {
             [sx, sy, sz] = obj_button.dataset.scale.split('/').map(parseFloat);
         }
 
+        if (obj_button.dataset.position) {
+            [px, py, pz] = obj_button.dataset.position.split('/').map(parseFloat);
+        }
+
         const rotation = new THREE.Vector3(rx, ry, rz);
         const scale = new THREE.Vector3(sx, sy, sz);
+        const position = new THREE.Vector3(px, py, pz);
 
         obj_button.addEventListener('click', function () {
-            draw('/models/' + obj_filename, rotation, scale);
+            draw('/models/' + obj_filename, rotation, scale, position);
         });
     }
 
+    show_wireframe_input.checked = parseBoolean(getCookie('showWireframe', false));
+
     show_wireframe_input.addEventListener('click', function () {
-        show_wireframe = show_wireframe_input.checked;
+        setCookie('showWireframe', show_wireframe_input.checked);
     });
 
+    show_texture_preview_input.checked = parseBoolean(getCookie('showTexturePreview', false));
+
+    // TODO These are always false for some reason I think...maybe a problem with the default?
     show_texture_preview_input.addEventListener('click', function () {
-        show_texture_preview = show_texture_preview_input.checked;
-        // TODO Set visibility on page load since the browser likes to maintain state, do the same with the wireframe input
+        setCookie('showTexturePreview', show_texture_preview_input.checked);
         const hasTexture = ! texture_image.src.endsWith('#');
-        texture_image.style.display = show_texture_preview && hasTexture ? 'block' : 'none';
-        texture_placeholder.style.display = show_texture_preview && ! hasTexture ? 'block' : 'none';
+        texture_image.style.display = parseBoolean(getCookie('showTexturePreview', false)) && hasTexture ? 'block' : 'none';
+        texture_placeholder.style.display = parseBoolean(getCookie('showTexturePreview', false)) && ! hasTexture ? 'block' : 'none';
     });
+
+    texture_filtering_input.checked = parseBoolean(getCookie('filterTexture', false));
 
     texture_filtering_input.addEventListener('click', function () {
-        filter_texture = texture_filtering_input.checked;
+        setCookie('filterTexture', texture_filtering_input.checked);
         if (current_obj_file_path) {
             draw(current_obj_file_path, current_rotation, current_scale);
         }
@@ -102,11 +115,12 @@ if (show_wireframe_input) {
     model_viewer_close.addEventListener('click', collapse3DViewer);
 }
 
-async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale = new THREE.Vector3(1,1,1)) {
+async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale = new THREE.Vector3(1,1,1), position = new THREE.Vector3(0,0,0)) {
 
     current_obj_file_path = objFilePath;
     current_rotation = rotation;
     current_scale = scale;
+    current_position = position;
 
     try {
 
@@ -145,13 +159,17 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
         let normal_data = {};
         let subdir = '';
         let texture_map = '';
+        let vert_count = 0;
+        let tri_count = 0;
 
         if (objFilePath !== '') {
             let mtllib, usemtl;
             subdir = objFilePath.split('/')[2];
             let filename = objFilePath.split('/')[3];
             const obj_file = await obj_handler.createFile(objFilePath, filename, 'model/obj');
-            [vertex_data, face_data, uv_data, normal_data, mtllib, usemtl] = await obj_handler.readObjFile(obj_file);
+            [vertex_data, face_data, uv_data, normal_data, mtllib, usemtl, vert_count, tri_count] = await obj_handler.readObjFile(obj_file);
+            vert_count_element.innerText = `Vertices: ${vert_count}`;
+            tri_count_element.innerText = `Tris: ${tri_count}`;
 
             if (mtllib.length > 0 && usemtl.length > 0) {
                 const mtl_file = await obj_handler.createFile('/models/' + subdir + '/' + mtllib[0], mtllib[0], 'model/mtl');
@@ -236,13 +254,14 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
             geometry.rotateY(THREE.MathUtils.degToRad(rotation.y));
             geometry.rotateZ(THREE.MathUtils.degToRad(rotation.z));
             geometry.scale(scale.x, scale.y, scale.z);
+            geometry.translate(position.x, position.y, position.z);
             const material = new THREE.MeshStandardMaterial({});
 
             if (texture_map) {
                 const textureLoader = new THREE.TextureLoader();
                 const texture = textureLoader.load('/models/' + subdir + '/' + texture_map);
 
-                if (! filter_texture) {
+                if (! parseBoolean(getCookie('filterTexture', false))) {
                     texture.magFilter = THREE.NearestFilter;
                     texture.minFilter = THREE.NearestFilter;
                 }
@@ -255,8 +274,8 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
             }
 
             const hasTexture = ! texture_image.src.endsWith('#');
-            texture_image.style.display = show_texture_preview && hasTexture ? 'block' : 'none';
-            texture_placeholder.style.display = show_texture_preview && ! hasTexture ? 'block' : 'none';
+            texture_image.style.display = parseBoolean(getCookie('showTexturePreview', false)) && hasTexture ? 'block' : 'none';
+            texture_placeholder.style.display = parseBoolean(getCookie('showTexturePreview', false)) && ! hasTexture ? 'block' : 'none';
 
             material.opacity = CONFIG.materialOpacity;
             material.transparent = CONFIG.materialOpacity < 1.0;
@@ -333,7 +352,7 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
 
                 scene.add(solidMesh);
 
-                if (show_wireframe) {
+                if (parseBoolean(getCookie('showWireframe', false))) {
                     scene.add(wireframe_lines);
                 } else {
                     scene.remove(wireframe_lines);
@@ -418,4 +437,20 @@ function collapse3DViewer() {
         }, CONFIG.transitionDuration * 1.5);
     }, CONFIG.transitionDuration * 0.5);
 
+}
+
+function getCookie(cookie, default_value = '') {
+    const match = document.cookie
+        .split('; ')
+        .find((c) => c.startsWith(cookie + '='));
+
+    return match ? match.slice(cookie.length + 1) : default_value;
+}
+
+function setCookie(cookie, value) {
+    document.cookie = `${cookie}=${value}; Secure`;
+}
+
+function parseBoolean(value) {
+    return JSON.parse(value);
 }
