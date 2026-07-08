@@ -108,7 +108,7 @@ if (show_wireframe_input) {
     texture_filtering_input.addEventListener('click', function () {
         setCookie('filterTexture', texture_filtering_input.checked);
         if (current_obj_file_path) {
-            draw(current_obj_file_path, current_rotation, current_scale);
+            draw(current_obj_file_path, current_rotation, current_scale, current_position);
         }
     });
 
