@@ -1,0 +1,63 @@
+<header class="fixed top-0 left-0 right-0 z-3">
+  <nav class="relative">
+    <a id="bg-settings-toggle" class="absolute left-6 top-1/2 -translate-y-1/2 cursor-pointer">
+      Settings
+    </a>
+    <!-- This needs to have the same positioning as bg-settings-toggle -->
+    <div class="absolute left-6 top-1/2 -translate-y-1/2 pointer-events-none">
+      <div class="relative">
+        <div id="settings-message" class="opacity-0 absolute -top-2 -right-43 w-30">
+          <img src="/images/icons/arrow.png" alt="arrow" class="w-full h-auto pixelated" />
+          <span class="text-white">Try playing with the settings</span>
+        </div>
+      </div>
+    </div>
+    <ul id="main-menu">
+      <li>
+        <a href="/">Home</a>
+      </li>
+      <li class="relative">
+        <a href="#" class="sub-menu-parent">Projects</a>
+        <ul class="sub-menu">
+          <li>
+            <a href="#">Web Dev</a>
+          </li>
+          <li>
+            <a href="#">Other Programming Projects</a>
+          </li>
+          <li>
+            <a href="/pixel-art.html">Pixel Art</a>
+          </li>
+          <li>
+            <a href="/3d-modeling.html">3D Modeling</a>
+          </li>
+          <li>
+            <a href="#">Rainmeter Skins</a>
+          </li>
+          <li>
+            <a href="/splats.html">Gaussian Splatting</a>
+          </li>
+        </ul>
+        <div id="projects-message" class="opacity-0 absolute top-4/10 -left-3/10 w-30 pointer-events-none">
+          <img src="/images/icons/arrow.png" alt="arrow" class="w-full h-auto pixelated -rotate-30 -scale-x-100" />
+          <span class="text-white">Or checking out some of my projects</span>
+        </div>
+      </li>
+      <li>
+        <a href="/articles.html">Blog</a>
+      </li>
+      <li>
+        <a href="/about.html">About Me</a>
+      </li>
+    </ul>
+    <div class="absolute right-4 top-1/2 -translate-y-1/2 h-9/10 text-right">
+      <a id="linkedin-link" href="https://www.linkedin.com/in/steven-raines-648086404/" target="blank">
+        <img src="#" alt="linkedin logo" class="pixelated" />
+      </a>
+      <a id="github-link" href="https://github.com/stevenmraines" target="blank">
+        <!-- TODO This is looking weird when hovered, also it's the wrong color when hovered -->
+        <img src="#" alt="github logo" class="pixelated" />
+      </a>
+    </div>
+  </nav>
+</header>

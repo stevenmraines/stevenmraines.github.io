@@ -1,0 +1,41 @@
+@reference "./base.css";
+
+#model-viewer-canvas, #model-viewer-overlay {
+    @apply absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-[width,height] duration-350;
+}
+
+#model-viewer-canvas {
+    @apply border-2 border-black;
+}
+
+#model-viewer-overlay {
+    @apply pointer-events-none;
+}
+
+#model-viewer-overlay-content {
+    @apply relative text-light-gray pointer-events-none;
+}
+
+#model-viewer-close {
+    @apply bg-transparent text-light-gray border border-light-gray absolute top-2 right-2 w-7 h-7 leading-6.5 cursor-pointer pointer-events-auto;
+}
+
+.texture-preview {
+    @apply absolute right-[2px] bottom-[2px] w-1/4 h-auto hidden;
+}
+
+.viewer-w-expanded {
+    width: 900px;
+}
+
+.viewer-w-collapsed {
+    width: 0;
+}
+
+.viewer-h-expanded {
+    height: 600px;
+}
+
+.viewer-h-collapsed {
+    height: 0;
+}

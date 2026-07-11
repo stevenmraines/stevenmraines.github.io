@@ -8,23 +8,11 @@ const connect = require('gulp-connect');
 // Rename files and their extensions
 const rename = require('gulp-rename');
 
-// Needed to make sourcemap file with Browserify
-const sourcemaps = require('gulp-sourcemaps');
-
-// Minify JS
-const uglify = require('gulp-uglify');
-
-// Bundle NPM packages with my JS files
-const browserify = require('browserify');
+// Bundles ES modules, splits shared code into chunks, minifies, sourcemaps
+const esbuild = require('esbuild');
 
 // Delete files and directories
 const del = require('del');
-
-// Browserify.bundle() returns a text stream, but Gulp uses a streaming vinyl object, this is needed to translate
-const srcVinyl = require('vinyl-source-stream');
-
-// Some gulp plugins don't support streaming vinyl objects, so a buffered vinyl object is needed
-const buffer = require('vinyl-buffer');
 
 // Allow including partials in HTML files
 const fileInclude = require('gulp-file-include');
@@ -32,11 +20,11 @@ const fileInclude = require('gulp-file-include');
 const paths = {
     root: 'public',
     css: {
-        src: 'assets/src/css/*.css',
+        src: 'src/css/*.css',
         dest: 'public/css',
     },
     colors: {
-        src: 'assets/src/css/colors.css',
+        src: 'src/css/colors.css',
     },
     files: {
         src: 'assets/files/*',
@@ -47,24 +35,23 @@ const paths = {
         dest: 'public/css/fonts',
     },
     html: {
-        src: 'assets/src/**/*.html',
+        src: 'src/html/**/*.html',
         dest: 'public',
     },
-    img: {
-        src: 'assets/img/*',
-        dest: 'public/img',
+    images: {
+        src: 'assets/images/**/*',
+        dest: 'public/images',
     },
     js: {
-        src: [
-            'assets/src/js/OBJHandler.js',
-            'assets/src/js/base.js',
-            'assets/src/js/background.js',
-            'assets/src/js/3d-viewer.js'
-        ],
+        bundles: {
+            common: 'src/js/bundles/common.js',
+            modelViewer: 'src/js/bundles/3d-viewer.js',
+        },
+        watch: 'src/js/**/*.js',
         dest: 'public/js',
     },
     models: {
-        src: 'assets/models/*',
+        src: 'assets/models/**/*',
         dest: 'public/models',
     },
     nodeFonts: {
@@ -83,9 +70,9 @@ function clean() {
 
 function css() {
     return gulp.src(paths.css.src, { sourcemaps: true })
-        .pipe(postcss([
-            require('@tailwindcss/postcss')(),
-        ]))
+        .pipe(postcss((file) => ({
+            plugins: [require('@tailwindcss/postcss')()],
+        })))
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest(paths.css.dest, { sourcemaps: '.' }))
         .pipe(connect.reload());
@@ -112,30 +99,25 @@ function html() {
         .pipe(connect.reload());
 }
 
-function img() {
-    return gulp.src(paths.img.src)
-        .pipe(gulp.dest(paths.img.dest));
+function images() {
+    return gulp.src(paths.images.src)
+        .pipe(gulp.dest(paths.images.dest));
 }
 
-function js() {
-    const options = {
-        debug: true,  // Debug == make sourcemaps
-    };
-
-    /*
-     * The srcVinyl arg 'bundle.js' doesn't actually exist, .bundle() prints to stdout,
-     * bundle.js is just a 'pretend' filename other streams in the pipeline may use.
-     */
-    return browserify(paths.js.src, options)
-        .bundle()
-        .pipe(srcVinyl('bundle.js'))
-        .pipe(buffer())
-        .pipe(sourcemaps.init({ loadMaps: true }))
-        .pipe(uglify())
-        .pipe(rename({ basename: 'main', suffix: '.min' }))  // Bundle everything into js/main.min.js
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest(paths.js.dest))
-        .pipe(connect.reload());
+async function js() {
+    await esbuild.build({
+        entryPoints: paths.js.bundles,
+        outdir: paths.js.dest,
+        entryNames: '[name].min',
+        chunkNames: 'chunks/[name]-[hash]',
+        bundle: true,
+        splitting: true,
+        format: 'esm', // required for splitting; matches type="module"
+        minify: true,
+        sourcemap: true,
+        target: ['es2020'],
+    });
+    connect.reload();
 }
 
 function models() {
@@ -168,12 +150,12 @@ function watch() {
     gulp.watch(paths.css.src, css);
     gulp.watch(paths.colors.src, css);
     gulp.watch(paths.html.src, gulp.parallel(html, css));
-    gulp.watch(paths.js.src, js);
+    gulp.watch(paths.js.watch, js);
     gulp.watch(paths.models.src, models);
-    gulp.watch(paths.img.src, img);
+    gulp.watch(paths.images.src, images);
 }
 
-const buildTask = gulp.series(clean, gulp.parallel([files, fonts, models, nodeFonts, img, videos, html, css, js]));
+const buildTask = gulp.series(clean, gulp.parallel([files, fonts, models, nodeFonts, images, videos, html, css, js]));
 const serveTask = gulp.series(buildTask, serve);
 const watchTask = gulp.series(serveTask, watch);
 const watchNoBuildTask = gulp.series(serve, watch);

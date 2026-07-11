@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>Steven Raines - 3D Modeling</title>
+
+  <link rel="stylesheet" href="css/base.min.css" type="text/css">
+  <link rel="stylesheet" href="css/3d-modeling.min.css" type="text/css">
+
+  <!-- Let the browser know this page is optimized for mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+@@include('./partials/nav.html')
+@@include('./partials/background.html')
+
+<div class="content pointer-events-none">
+  <div id="cards-container" class="flex flex-row justify-between flex-wrap gap-6">
+    <div class="card pointer-events-auto">
+      <div class="card-content">
+        <img src="/images/models/skull-preview.png" alt="A 3D model of a skull">
+        <h6>Skull</h6>
+        <p>A low-poly skull that I did for modeling practice</p>
+        <a href="#" class="load-obj-button" data-filename="skull/skull.obj">See More ></a>
+      </div>
+    </div>
+    <div class="card pointer-events-auto">
+      <div class="card-content">
+        <img src="/images/models/raptor-preview.png" alt="A 3D model of a velociraptor">
+        <h6>Velociraptor</h6>
+        <p>An enemy I'm working on for a Godot game</p>
+        <a href="#" class="load-obj-button" data-filename="raptor/raptor.obj">See More ></a>
+      </div>
+    </div>
+    <div class="card pointer-events-auto">
+      <div class="card-content">
+        <img src="/images/models/spidey-preview.png" alt="A 3D model of Spider-Man">
+        <h6>Spectacular Spider-Man</h6>
+        <p>My first attempt at a character model</p>
+        <a href="#" class="load-obj-button" data-filename="spidey/spidey.obj">See More ></a>
+      </div>
+    </div>
+    <div class="card pointer-events-auto">
+      <div class="card-content">
+        <img src="/images/models/batman-preview.png" alt="A 3D model of Batman">
+        <h6>Batman Beyond</h6>
+        <p>My second attempt at modeling a character</p>
+        <a href="#" class="load-obj-button" data-filename="batman/batman.obj">See More ></a>
+      </div>
+    </div>
+    <div class="card pointer-events-auto">
+      <div class="card-content">
+        <img src="/images/models/lever-preview.png" alt="A 3D model of an ornate lever">
+        <h6>Soulsborne style lever</h6>
+        <p>A lever for controlling an elevator in a Souls-like game I'm making in Godot</p>
+        <a href="#" class="load-obj-button" data-filename="lever/lever.obj" data-scale="5/5/5" data-position="0/-1.5/0">See More ></a>
+      </div>
+    </div>
+    <div class="card pointer-events-auto">
+      <div class="card-content">
+        <img src="/images/models/motel-preview.png" alt="A 3D model of a motel room set">
+        <h6>Motel room scene</h6>
+        <p>A low-poly motel room scene which I modeled while following a YouTube tutorial</p>
+        <a href="#" class="load-obj-button" data-filename="motel/motel.obj">See More ></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<canvas id="model-viewer-canvas" class="viewer-w-collapsed viewer-h-collapsed"></canvas>
+
+<div id="model-viewer-overlay" class="viewer-w-collapsed viewer-h-collapsed hidden">
+  <div id="model-viewer-overlay-content" class="viewer-collapsed">
+    <span id="vert-count" class="absolute top-2 left-2 text-sm"></span>
+    <span id="tri-count" class="absolute top-5 left-2 text-sm"></span>
+
+    <button id="model-viewer-close" class="btn">X</button>
+
+    <span class="absolute bottom-8 left-2 text-sm">
+      Left click to pan
+    </span>
+    <span class="absolute bottom-5 left-2 text-sm">
+      Left click + shift to rotate
+    </span>
+    <span class="absolute bottom-2 left-2 text-sm">
+      Scroll to zoom
+    </span>
+
+    <img src="/models/no-texture.png" id="texture-placeholder" class="texture-preview" />
+    <img src="#" id="texture-image" class="texture-preview" />
+    <div id="multiple-texture-container"></div>
+
+    <div class="absolute bg-black -bottom-7 h-7 leading-7 left-0 right-0 flex justify-between align-middle px-2">
+      <label class="pointer-events-auto cursor-pointer">
+        Wireframe
+        <input type="checkbox" id="show-wireframe" />
+      </label>
+      <label class="pointer-events-auto cursor-pointer">
+        Texture Preview
+        <input type="checkbox" id="show-texture-preview" />
+      </label>
+      <label class="pointer-events-auto cursor-pointer">
+        Texture Filtering
+        <input type="checkbox" id="texture-filtering" />
+      </label>
+    </div>
+  </div>
+</div>
+
+<script src="js/common.min.js" type="module"></script>
+<script src="js/modelViewer.min.js" type="module"></script>
+</body>
+</html>
