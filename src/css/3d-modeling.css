@@ -20,8 +20,32 @@
     @apply bg-transparent text-light-gray border border-light-gray absolute top-2 right-2 w-7 h-7 leading-6.5 cursor-pointer pointer-events-auto;
 }
 
-.texture-preview {
+#texture-placeholder {
     @apply absolute right-[2px] bottom-[2px] w-1/4 h-auto hidden;
+}
+
+#texture-preview-window {
+    @apply absolute right-[2px] bottom-[2px] w-1/4 h-auto hidden;
+
+    & #prev-texture, & #next-texture {
+        @apply absolute -top-6 bg-light-gray text-black w-5 h-5 rounded-full pointer-events-auto;
+    }
+
+    & #prev-texture {
+        @apply left-1;
+    }
+
+    & #next-texture {
+        @apply right-1;
+    }
+
+    & #texture-filename {
+        @apply absolute -top-5.25 left-1/2 -translate-x-1/2 w-7/10 overflow-hidden text-ellipsis text-center;
+    }
+
+    & > #texture-image-container > img {
+        @apply w-full h-full;
+    }
 }
 
 .viewer-w-expanded {

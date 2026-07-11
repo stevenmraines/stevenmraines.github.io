@@ -89,9 +89,18 @@
       Scroll to zoom
     </span>
 
-    <img src="/models/no-texture.png" id="texture-placeholder" class="texture-preview" />
-    <img src="#" id="texture-image" class="texture-preview" />
-    <div id="multiple-texture-container"></div>
+    <img src="/models/no-texture.png" id="texture-placeholder" class="texture-preview" alt="a missing texture placeholder image" />
+
+    <div id="texture-preview-window">
+      <div class="relative">
+        <button id="prev-texture" class="btn"><</button>
+        <!--TODO Add tooltip with full texture filename for when there's overflow, not a big deal but would be nice I guess-->
+        <span id="texture-filename" class="text-xs"></span>
+        <button id="next-texture" class="btn">></button>
+      </div>
+      <!-- TODO Something weird happening with the motel bed texture here, it seems to just show the tv texture twice -->
+      <div id="texture-image-container"></div>
+    </div>
 
     <div class="absolute bg-black -bottom-7 h-7 leading-7 left-0 right-0 flex justify-between align-middle px-2">
       <label class="pointer-events-auto cursor-pointer">
