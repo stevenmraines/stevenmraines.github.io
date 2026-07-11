@@ -6,8 +6,8 @@ export default class OBJHandler {
         return new File([data], filename, { type });
     }
 
-    // TODO Handle multiple meshes
     async readObjFile(file) {
+        let objects = {};
         let vertex_data = {};
         let face_data = { "vertices": {}, "uvs": {}, "normals": {} };
         let uv_data = {};
@@ -16,6 +16,7 @@ export default class OBJHandler {
         let usemtl = [];
         let vert_count = 0;
         let tri_count = 0;
+        let current_object = '';
         const file_content = await file.text();
 
         try {
@@ -30,6 +31,17 @@ export default class OBJHandler {
 
                 if (! line) {
                     continue;
+                }
+
+                if (line.startsWith('o ')) {
+                    current_object = line.split(' ')[1];
+                    vertex_data = {};
+                    face_data = { "vertices": {}, "uvs": {}, "normals": {} };
+                    uv_data = {};
+                    normal_data = {};
+                    // TODO When to do this? Is it even necessary? And what about usemtl?
+                    // mtllib = [];
+                    usemtl = [];
                 }
 
                 if (line.startsWith('mtllib ')) {
@@ -78,12 +90,23 @@ export default class OBJHandler {
                     let [x,y,z] = line.split(' ').slice(1).map(parseFloat);
                     normal_data[normal_index] = [x,y,z];
                 }
+
+                if (current_object) {
+                    objects[current_object] = {
+                        "v": vertex_data,
+                        "f": face_data,
+                        "vt": uv_data,
+                        "vn": normal_data,
+                        "mtllib": mtllib,
+                        "usemtl": usemtl,
+                    };
+                }
             }
         } catch (e) {
             console.log("Error reading obj file", e);
         }
 
-        return [vertex_data, face_data, uv_data, normal_data, mtllib, usemtl, vert_count, tri_count]
+        return [objects, vert_count, tri_count];
     }
 
     async readMtlFile(file, usemtl) {

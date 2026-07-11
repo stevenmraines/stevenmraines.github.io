@@ -48,6 +48,7 @@ const show_texture_preview_input = document.getElementById('show-texture-preview
 const texture_filtering_input = document.getElementById('texture-filtering');
 const texture_placeholder = document.getElementById('texture-placeholder');
 const texture_image = document.getElementById('texture-image');
+const multiple_texture_container = document.getElementById('multiple-texture-container');
 const model_viewer_close = document.getElementById('model-viewer-close');
 const vert_count_element = document.getElementById('vert-count');
 const tri_count_element = document.getElementById('tri-count');
@@ -128,6 +129,8 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
 
         autoRotate = true;
 
+        multiple_texture_container.replaceChildren();
+
         if (! renderer) {
             renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
         }
@@ -152,28 +155,29 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
         scene.add(directional);
 
         const obj_handler = new OBJHandler();
-        let solidMesh, wireframe_lines, plane, plane_wireframe;
-        let vertex_data = {};
-        let face_data = { "vertices": {}, "uvs": {}, "normals": {} };
-        let uv_data = {};
-        let normal_data = {};
+        let objects = {};
+        let meshes = [];
+        let mesh_wireframes = [];
+        let plane, plane_wireframe;
         let subdir = '';
-        let texture_map = '';
         let vert_count = 0;
         let tri_count = 0;
 
         if (objFilePath !== '') {
-            let mtllib, usemtl;
             subdir = objFilePath.split('/')[2];
             let filename = objFilePath.split('/')[3];
             const obj_file = await obj_handler.createFile(objFilePath, filename, 'model/obj');
-            [vertex_data, face_data, uv_data, normal_data, mtllib, usemtl, vert_count, tri_count] = await obj_handler.readObjFile(obj_file);
+            [objects, vert_count, tri_count] = await obj_handler.readObjFile(obj_file);
             vert_count_element.innerText = `Vertices: ${vert_count}`;
             tri_count_element.innerText = `Tris: ${tri_count}`;
 
-            if (mtllib.length > 0 && usemtl.length > 0) {
-                const mtl_file = await obj_handler.createFile('/models/' + subdir + '/' + mtllib[0], mtllib[0], 'model/mtl');
-                texture_map = await obj_handler.readMtlFile(mtl_file, usemtl[0]);
+            for (let object_name of Object.keys(objects)) {
+                const mtllib = objects[object_name].mtllib;
+                const usemtl = objects[object_name].usemtl;
+                if (mtllib.length > 0 && usemtl.length > 0) {
+                    const mtl_file = await obj_handler.createFile('/models/' + subdir + '/' + mtllib[0], mtllib[0], 'model/mtl');
+                    objects[object_name].texture = await obj_handler.readMtlFile(mtl_file, usemtl[0]);
+                }
             }
         }
 
@@ -205,87 +209,93 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
             plane_wireframe.rotateX(THREE.MathUtils.degToRad(-90));
         }
 
-        function buildMesh() {
-            if (Object.keys(face_data.vertices).length === 0) {
-                return;
-            }
+        function buildMeshes() {
+            for (let object_name of Object.keys(objects)) {
+                const object = objects[object_name];
 
-            let verts_arr = [];
-            let uv_arr = [];
-            let normal_arr = [];
-
-            for (let i in face_data.vertices) {
-                const face_vertex_indices = face_data.vertices[i];
-                for (let j in face_vertex_indices) {
-                    const index = face_vertex_indices[j];
-                    verts_arr.push(vertex_data[index][0]); // x
-                    verts_arr.push(vertex_data[index][1]); // y
-                    verts_arr.push(vertex_data[index][2]); // z
-                }
-            }
-
-            for (let i in face_data.uvs) {
-                const face_uv_indices = face_data.uvs[i];
-                for (let j in face_uv_indices) {
-                    const index = face_uv_indices[j];
-                    uv_arr.push(uv_data[index][0]); // u
-                    uv_arr.push(uv_data[index][1]); // v
-                }
-            }
-
-            for (let i in face_data.normals) {
-                const face_normal_indices = face_data.normals[i];
-                for (let j in face_normal_indices) {
-                    const index = face_normal_indices[j];
-                    normal_arr.push(normal_data[index][0]); // x
-                    normal_arr.push(normal_data[index][1]); // y
-                    normal_arr.push(normal_data[index][2]); // z
-                }
-            }
-
-            const verts = new Float32Array(verts_arr);
-            const uvs = new Float32Array(uv_arr);
-            const normals = new Float32Array(normal_arr);
-            const geometry = new THREE.BufferGeometry();
-            geometry.setAttribute( 'position', new THREE.BufferAttribute(verts, 3 ));
-            geometry.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
-            geometry.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
-            geometry.rotateX(THREE.MathUtils.degToRad(rotation.x));
-            geometry.rotateY(THREE.MathUtils.degToRad(rotation.y));
-            geometry.rotateZ(THREE.MathUtils.degToRad(rotation.z));
-            geometry.scale(scale.x, scale.y, scale.z);
-            geometry.translate(position.x, position.y, position.z);
-            const material = new THREE.MeshStandardMaterial({});
-
-            if (texture_map) {
-                const textureLoader = new THREE.TextureLoader();
-                const texture = textureLoader.load('/models/' + subdir + '/' + texture_map);
-
-                if (! parseBoolean(getCookie('filterTexture', false))) {
-                    texture.magFilter = THREE.NearestFilter;
-                    texture.minFilter = THREE.NearestFilter;
+                if (Object.keys(object.f.vertices).length === 0) {
+                    return;
                 }
 
-                material.map = texture;
-                texture_image.src = '/models/' + subdir + '/' + texture_map;
-            } else {
-                texture_image.src = '#';
-                material.color.setHex(CONFIG.materialColor);
+                let verts_arr = [];
+                let uv_arr = [];
+                let normal_arr = [];
+
+                for (let i in object.f.vertices) {
+                    const face_vertex_indices = object.f.vertices[i];
+                    for (let j in face_vertex_indices) {
+                        const index = face_vertex_indices[j];
+                        verts_arr.push(object.v[index][0]); // x
+                        verts_arr.push(object.v[index][1]); // y
+                        verts_arr.push(object.v[index][2]); // z
+                    }
+                }
+
+                for (let i in object.f.uvs) {
+                    const face_uv_indices = object.f.uvs[i];
+                    for (let j in face_uv_indices) {
+                        const index = face_uv_indices[j];
+                        uv_arr.push(object.vt[index][0]); // u
+                        uv_arr.push(object.vt[index][1]); // v
+                    }
+                }
+
+                for (let i in object.f.normals) {
+                    const face_normal_indices = object.f.normals[i];
+                    for (let j in face_normal_indices) {
+                        const index = face_normal_indices[j];
+                        normal_arr.push(object.vn[index][0]); // x
+                        normal_arr.push(object.vn[index][1]); // y
+                        normal_arr.push(object.vn[index][2]); // z
+                    }
+                }
+
+                const verts = new Float32Array(verts_arr);
+                const uvs = new Float32Array(uv_arr);
+                const normals = new Float32Array(normal_arr);
+                const geometry = new THREE.BufferGeometry();
+                geometry.setAttribute( 'position', new THREE.BufferAttribute(verts, 3 ));
+                geometry.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
+                geometry.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
+                geometry.rotateX(THREE.MathUtils.degToRad(rotation.x));
+                geometry.rotateY(THREE.MathUtils.degToRad(rotation.y));
+                geometry.rotateZ(THREE.MathUtils.degToRad(rotation.z));
+                geometry.scale(scale.x, scale.y, scale.z);
+                geometry.translate(position.x, position.y, position.z);
+                const material = new THREE.MeshStandardMaterial({});
+
+                if (object.texture) {
+                    const textureLoader = new THREE.TextureLoader();
+                    const texture = textureLoader.load('/models/' + subdir + '/' + object.texture);
+
+                    if (! parseBoolean(getCookie('filterTexture', false))) {
+                        texture.magFilter = THREE.NearestFilter;
+                        texture.minFilter = THREE.NearestFilter;
+                    }
+
+                    material.map = texture;
+                    // TODO I guess every obj should just use multi texture container now?
+                    texture_image.src = '/models/' + subdir + '/' + object.texture;
+                } else {
+                    texture_image.src = '#';
+                    material.color.setHex(CONFIG.materialColor);
+                }
+
+                const hasTexture = ! texture_image.src.endsWith('#');
+                texture_image.style.display = parseBoolean(getCookie('showTexturePreview', false)) && hasTexture ? 'block' : 'none';
+                texture_placeholder.style.display = parseBoolean(getCookie('showTexturePreview', false)) && ! hasTexture ? 'block' : 'none';
+
+                material.opacity = CONFIG.materialOpacity;
+                material.transparent = CONFIG.materialOpacity < 1.0;
+                meshes.push(new THREE.Mesh(geometry, material));
+
+                const wireframe = new THREE.WireframeGeometry(geometry);
+                const wireframe_lines = new THREE.LineSegments(wireframe);
+                wireframe_lines.material.depthWrite = false;
+                wireframe_lines.material.opacity = CONFIG.meshWireframeOpacity;
+                wireframe_lines.material.transparent = true;
+                mesh_wireframes.push(wireframe_lines);
             }
-
-            const hasTexture = ! texture_image.src.endsWith('#');
-            texture_image.style.display = parseBoolean(getCookie('showTexturePreview', false)) && hasTexture ? 'block' : 'none';
-            texture_placeholder.style.display = parseBoolean(getCookie('showTexturePreview', false)) && ! hasTexture ? 'block' : 'none';
-
-            material.opacity = CONFIG.materialOpacity;
-            material.transparent = CONFIG.materialOpacity < 1.0;
-            solidMesh = new THREE.Mesh(geometry, material);
-
-            const wireframe = new THREE.WireframeGeometry(geometry);
-            wireframe_lines = new THREE.LineSegments(wireframe);
-            wireframe_lines.material.depthWrite = false;
-            wireframe_lines.material.opacity = CONFIG.meshWireframeOpacity;
-            wireframe_lines.material.transparent = true;
         }
 
         // TODO I'm all over the place with my camel space and snake case
@@ -309,10 +319,10 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
             const diffY = Math.abs(e.clientY - lastMouseY);
 
             if (isRotating) {
-                if (solidMesh) {
+                for (let i in meshes) {
                     autoRotate = false;
-                    solidMesh.rotateY(CONFIG.rotationSpeed * directionX * diffX);
-                    wireframe_lines.rotateY(CONFIG.rotationSpeed * directionX * diffX);
+                    meshes[i].rotateY(CONFIG.rotationSpeed * directionX * diffX);
+                    mesh_wireframes[i].rotateY(CONFIG.rotationSpeed * directionX * diffX);
                 }
             } else {
                 camera.position.x += CONFIG.cameraSpeed * directionX * diffX;
@@ -331,30 +341,32 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
         function animate() {
             requestAnimationFrame(animate);
 
-            if (! solidMesh) {
-                buildMesh();
+            if (! meshes.length) {
+                buildMeshes();
             }
 
             if (! plane) {
                 buildPlane();
             }
 
-            if (solidMesh) {
+            for (let i in meshes) {
+                const mesh = meshes[i];
+                const wireframe = mesh_wireframes[i];
                 // TODO Not sure if needed?
-                // scene.remove(solidMesh);
-                // scene.remove(wireframe_lines);
-                // solidMesh.material.dispose();
+                // scene.remove(mesh);
+                // scene.remove(wireframe);
+                // mesh.material.dispose();
                 if (autoRotate) {
-                    solidMesh.rotateY(THREE.MathUtils.degToRad(0.5));
-                    wireframe_lines.rotateY(THREE.MathUtils.degToRad(0.5));
+                    mesh.rotateY(THREE.MathUtils.degToRad(0.5));
+                    wireframe.rotateY(THREE.MathUtils.degToRad(0.5));
                 }
 
-                scene.add(solidMesh);
+                scene.add(mesh);
 
                 if (parseBoolean(getCookie('showWireframe', false))) {
-                    scene.add(wireframe_lines);
+                    scene.add(wireframe);
                 } else {
-                    scene.remove(wireframe_lines);
+                    scene.remove(wireframe);
                 }
             }
 
