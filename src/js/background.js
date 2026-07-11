@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { getCookie, setCookie, hex2Str, str2Hex } from './util';
 
 const CONFIG_DEFAULTS = {
     fillColor: 0x2c2a30,
@@ -27,6 +28,7 @@ const CONFIG_DEFAULTS = {
     directionalLightStrength: 0.8,
 };
 
+// TODO Get rid of this stuff since we're not using it
 function showError(msg) {
     const box = document.getElementById("error-box");
     if (box) {
@@ -527,25 +529,4 @@ function resetInputs() {
     document.getElementById('ambient-light-strength-value').textContent = CONFIG_DEFAULTS.ambientLightStrength;
     document.getElementById('directional-light-color-value').textContent = hex2Str(CONFIG_DEFAULTS.directionalLightColor);
     document.getElementById('directional-light-strength-value').textContent = CONFIG_DEFAULTS.directionalLightStrength;
-}
-
-function hex2Str(hex) {
-    return typeof hex === 'number' ? '#' + hex.toString(16).padStart(6, '0').toLowerCase() : hex;
-}
-
-function str2Hex(str) {
-    return typeof str === 'string' ? parseInt(str.substring(1), 16) : str;
-}
-
-// TODO Deduplicate this once we fix whatever is wrong with our bundling stuff (it's also in 3d-viewer.js)
-function getCookie(cookie, default_value = '') {
-    const match = document.cookie
-        .split('; ')
-        .find((c) => c.startsWith(cookie + '='));
-
-    return match ? match.slice(cookie.length + 1) : default_value;
-}
-
-function setCookie(cookie, value) {
-    document.cookie = `${cookie}=${value}; Secure`;
 }

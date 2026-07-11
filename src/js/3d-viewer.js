@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import OBJHandler from './OBJHandler.js';
+import { getCookie, setCookie, parseBoolean } from './util';
 
 const CONFIG = {
     canvasWidth: 900,
@@ -435,20 +436,4 @@ function collapse3DViewer() {
         }, CONFIG.transitionDuration * 1.5);
     }, CONFIG.transitionDuration * 0.5);
 
-}
-
-function getCookie(cookie, default_value = '') {
-    const match = document.cookie
-        .split('; ')
-        .find((c) => c.startsWith(cookie + '='));
-
-    return match ? match.slice(cookie.length + 1) : default_value;
-}
-
-function setCookie(cookie, value) {
-    document.cookie = `${cookie}=${value}; Secure`;
-}
-
-function parseBoolean(value) {
-    return JSON.parse(value);
 }
