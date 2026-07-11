@@ -1,4 +1,3 @@
-// Only loaded on pages that show the 3D viewer
-// TODO This isn't even doing anything, and we're still doing the requires in 3d-viewer.js
-// import '../OBJHandler.js';
+// Only loaded on pages that show the 3D viewer.
+// 3d-viewer.js imports OBJHandler.js itself, so nothing else needs to here.
 import '../3d-viewer.js';

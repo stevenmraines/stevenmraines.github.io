@@ -1,4 +1,4 @@
-const THREE = require('three');
+import * as THREE from 'three';
 
 const CONFIG_DEFAULTS = {
     fillColor: 0x2c2a30,

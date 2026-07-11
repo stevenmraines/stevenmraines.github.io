@@ -1,4 +1,4 @@
-class OBJHandler {
+export default class OBJHandler {
 
     async createFile(path, filename, type) {
         let response = await fetch(path);
@@ -117,5 +117,3 @@ class OBJHandler {
     }
 
 }
-
-module.exports = OBJHandler;

@@ -1,5 +1,5 @@
-const THREE = require('three');
-const OBJHandler = require('./OBJHandler.js');
+import * as THREE from 'three';
+import OBJHandler from './OBJHandler.js';
 
 const CONFIG = {
     canvasWidth: 900,
