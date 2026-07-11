@@ -95,7 +95,6 @@ if (show_wireframe_input) {
 
     show_texture_preview_input.checked = parseBoolean(getCookie('showTexturePreview', false));
 
-    // TODO These are always false for some reason I think...maybe a problem with the default?
     show_texture_preview_input.addEventListener('click', function () {
         setCookie('showTexturePreview', show_texture_preview_input.checked);
         const hasTexture = ! texture_image.src.endsWith('#');
@@ -283,7 +282,6 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
 
             const wireframe = new THREE.WireframeGeometry(geometry);
             wireframe_lines = new THREE.LineSegments(wireframe);
-            // TODO Not sure this is working
             wireframe_lines.material.depthWrite = false;
             wireframe_lines.material.opacity = CONFIG.meshWireframeOpacity;
             wireframe_lines.material.transparent = true;
