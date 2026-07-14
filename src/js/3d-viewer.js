@@ -279,6 +279,7 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
                          * and how many vertices does it span?
                          */
                         // TODO There are at least 3 tris on the dc17 model that are missing textures, but everything else looks good
+                        // TODO There are some tris messed up on the lightsabers as well
                         face_vertex_groups[current_texture.map] = { start, length };
                         // TODO I suppose this won't work if a material has just one triangular face, but we'll cross that bridge when we come to it I guess
                         if (previous_texture && current_texture !== previous_texture) {
