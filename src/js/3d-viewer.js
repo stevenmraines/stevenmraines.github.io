@@ -197,10 +197,19 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
 
             for (let object_name of Object.keys(objects)) {
                 const mtllib = objects[object_name].mtllib;
-                const usemtl = objects[object_name].usemtl;
-                if (mtllib.length > 0 && usemtl.length > 0) {
-                    const mtl_file = await obj_handler.createFile('/models/' + subdir + '/' + mtllib[0], mtllib[0], 'model/mtl');
-                    objects[object_name].texture = await obj_handler.readMtlFile(mtl_file, usemtl[0]);
+                const mtl_data = objects[object_name].usemtl;
+                if (mtllib.length > 0 && mtl_data.length > 0) {
+                    for (let index in mtl_data) {
+                        const mtl_name = mtl_data[index].material;
+                        const mtl_file = await obj_handler.createFile('/models/' + subdir + '/' + mtllib[0], mtllib[0], 'model/mtl');
+                        if (! Object.hasOwn(objects[object_name], 'textures')) {
+                            objects[object_name].textures = [];
+                        }
+                        objects[object_name].textures.push({
+                            'map': await obj_handler.readMtlFile(mtl_file, mtl_name),
+                            'faces': mtl_data[index].faces,
+                        });
+                    }
                 }
             }
         }
@@ -235,6 +244,7 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
 
         function buildMeshes() {
             let counter = 0;
+
             for (let object_name of Object.keys(objects)) {
                 const object = objects[object_name];
 
@@ -245,6 +255,10 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
                 let verts_arr = [];
                 let uv_arr = [];
                 let normal_arr = [];
+                let face_vertex_groups = {};
+                let start = 0;
+                let length = 0;
+                let previous_texture, current_texture;
 
                 for (let i in object.f.vertices) {
                     const face_vertex_indices = object.f.vertices[i];
@@ -253,6 +267,17 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
                         verts_arr.push(object.v[index][0]); // x
                         verts_arr.push(object.v[index][1]); // y
                         verts_arr.push(object.v[index][2]); // z
+                        length++;
+                    }
+                    if (object.textures) {
+                        current_texture = object.textures.find((t) => t.faces.includes(parseInt(i)));
+                        if (previous_texture && current_texture !== previous_texture) {
+                            // TODO what you actually need is just two numbers per material: where in the buffer does this material's faces start, and how many vertices does it span
+                            face_vertex_groups[current_texture.map] = { start, length };
+                            length = 0;
+                        }
+                        previous_texture = current_texture;
+                        start++;
                     }
                 }
 
@@ -287,40 +312,73 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
                 geometry.rotateZ(THREE.MathUtils.degToRad(rotation.z));
                 geometry.scale(scale.x, scale.y, scale.z);
                 geometry.translate(position.x, position.y, position.z);
-                const material = new THREE.MeshStandardMaterial({});
-                const texture_image = document.createElement('img');
-                texture_image.style.display = 'none';
-                if (counter === 0) {
-                    texture_image.style.display = 'inline';
-                    texture_filename.innerText = object.texture;
-                }
-                texture_image_container.appendChild(texture_image);
+                geometry.clearGroups();
+                const materials = [];
 
-                if (object.texture) {
-                    const textureLoader = new THREE.TextureLoader();
-                    const texture = textureLoader.load('/models/' + subdir + '/' + object.texture);
+                let texture_counter = 0;
 
-                    if (! parseBoolean(getCookie('filterTexture', false))) {
-                        texture.magFilter = THREE.NearestFilter;
-                        texture.minFilter = THREE.NearestFilter;
+                if (object.textures) {
+                    for (let texture of object.textures) {
+                        const material = new THREE.MeshStandardMaterial({});
+                        texture_preview_window.style.display = 'block';
+                        texture_placeholder.style.display = 'none';
+                        const texture_image = document.createElement('img');
+                        texture_image.style.display = 'none';
+                        if (counter === 0) {
+                            texture_image.style.display = 'inline';
+                            texture_filename.innerText = texture.map;
+                        }
+                        texture_image_container.appendChild(texture_image);
+
+                        const textureLoader = new THREE.TextureLoader();
+                        const loaded_texture = textureLoader.load('/models/' + subdir + '/' + texture.map);
+
+                        if (! parseBoolean(getCookie('filterTexture', false))) {
+                            loaded_texture.magFilter = THREE.NearestFilter;
+                            loaded_texture.minFilter = THREE.NearestFilter;
+                        }
+
+                        material.map = loaded_texture;
+                        texture_image.src = '/models/' + subdir + '/' + texture.map;
+                        texture_image.dataset.filename = texture.map;
+                        texture_image.style.display = 'none';
+
+                        if (texture_counter === 0) {
+                            texture_image.style.display = 'inline';
+                        }
+
+                        const hasTexture = ! texture_image.src.endsWith('#');
+                        texture_preview_window.style.display = parseBoolean(getCookie('showTexturePreview', false)) && hasTexture ? 'block' : 'none';
+                        texture_placeholder.style.display = parseBoolean(getCookie('showTexturePreview', false)) && ! hasTexture ? 'block' : 'none';
+
+                        material.opacity = CONFIG.materialOpacity;
+                        material.transparent = true;
+                        material.side = THREE.DoubleSide;
+                        materials.push(material);
+
+                        if (object.textures.length > 1 && face_vertex_groups[texture.map]) {
+                            const start = face_vertex_groups[texture.map].start;
+                            const length = face_vertex_groups[texture.map].length;
+                            geometry.addGroup(start, length, materials.length - 1);
+                        }
+
+                        texture_counter++;
                     }
-
-                    material.map = texture;
-                    texture_image.src = '/models/' + subdir + '/' + object.texture;
-                    texture_image.dataset.filename = object.texture;
                 } else {
-                    texture_image.src = '#';
+                    texture_placeholder.style.display = 'block';
+                    texture_preview_window.style.display = 'none';
+                    const material = new THREE.MeshStandardMaterial({});
+                    material.opacity = CONFIG.materialOpacity;
+                    material.transparent = true;
                     material.color.setHex(CONFIG.materialColor);
+                    materials.push(material);
                 }
 
-                const hasTexture = ! texture_image.src.endsWith('#');
-                texture_preview_window.style.display = parseBoolean(getCookie('showTexturePreview', false)) && hasTexture ? 'block' : 'none';
-                texture_placeholder.style.display = parseBoolean(getCookie('showTexturePreview', false)) && ! hasTexture ? 'block' : 'none';
-
-                material.opacity = CONFIG.materialOpacity;
-                material.transparent = true;
-                material.side = THREE.DoubleSide;
-                meshes.push(new THREE.Mesh(geometry, material));
+                if (object.textures && object.textures.length > 1) {
+                    meshes.push(new THREE.Mesh(geometry, materials));
+                } else {
+                    meshes.push(new THREE.Mesh(geometry, materials[0]));
+                }
 
                 const wireframe = new THREE.WireframeGeometry(geometry);
                 const wireframe_lines = new THREE.LineSegments(wireframe);
