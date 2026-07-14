@@ -260,7 +260,9 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
                 let length = 0;
                 let previous_texture, current_texture;
 
+                // i == the face index
                 for (let i in object.f.vertices) {
+                    // face_vertex_indices == the indices of the vertices that make up the face at index i
                     const face_vertex_indices = object.f.vertices[i];
                     for (let j in face_vertex_indices) {
                         const index = face_vertex_indices[j];
@@ -271,13 +273,19 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
                     }
                     if (object.textures) {
                         current_texture = object.textures.find((t) => t.faces.includes(parseInt(i)));
+                        /*
+                         * What we need is just two numbers per material/texture:
+                         * where in the buffer does this material's faces start,
+                         * and how many vertices does it span?
+                         */
+                        // TODO There are at least 3 tris on the dc17 model that are missing textures, but everything else looks good
+                        face_vertex_groups[current_texture.map] = { start, length };
+                        // TODO I suppose this won't work if a material has just one triangular face, but we'll cross that bridge when we come to it I guess
                         if (previous_texture && current_texture !== previous_texture) {
-                            // TODO what you actually need is just two numbers per material: where in the buffer does this material's faces start, and how many vertices does it span
-                            face_vertex_groups[current_texture.map] = { start, length };
+                            start += length;
                             length = 0;
                         }
                         previous_texture = current_texture;
-                        start++;
                     }
                 }
 
