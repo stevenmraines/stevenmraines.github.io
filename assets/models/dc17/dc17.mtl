@@ -1,0 +1,52 @@
+# Blender 4.3.0 MTL File: 'dc17.blend'
+# www.blender.org
+
+newmtl models/weapons2/dc17/attachment_block.grid
+Ns 0.000010
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd attachment_block.jpg
+
+newmtl models/weapons2/dc17/barrel_grip.grid
+Ns 0.000010
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd barrel_grip.jpg
+
+newmtl models/weapons2/dc17/body.grid
+Ns 0.000010
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd body_with_glow.jpg
+
+newmtl models/weapons2/dc17/grip.grid
+Ns 0.000010
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd grip.jpg
+
+newmtl models/weapons2/dc17/rifle_attachment.grid
+Ns 0.000010
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd rifle_attachment.jpg

@@ -17,6 +17,8 @@ export default class OBJHandler {
         let vert_count = 0;
         let tri_count = 0;
         let current_object = '';
+        let current_mtl = '';
+        let current_mtl_obj = {};
         const file_content = await file.text();
 
         try {
@@ -39,8 +41,6 @@ export default class OBJHandler {
                     face_data = { "vertices": {}, "uvs": {}, "normals": {} };
                     uv_data = {};
                     normal_data = {};
-                    // TODO When to do this? Is it even necessary? And what about usemtl?
-                    // mtllib = [];
                     usemtl = [];
                 }
 
@@ -49,7 +49,11 @@ export default class OBJHandler {
                 }
 
                 if (line.startsWith('usemtl ')) {
-                    usemtl.push(line.split(' ')[1]);
+                    current_mtl = line.split(' ')[1];
+                    current_mtl_obj = structuredClone({});
+                    current_mtl_obj.material = current_mtl;
+                    current_mtl_obj.faces = [];
+                    usemtl.push(current_mtl_obj);
                 }
 
                 if (line.startsWith('v ')) {
@@ -77,6 +81,9 @@ export default class OBJHandler {
                             return value.split('/').slice(2,3).map(parseFloat)[0];
                         });
                     tri_count++;
+                    if (current_mtl_obj.faces) {
+                        current_mtl_obj.faces.push(face_index);
+                    }
                 }
 
                 if (line.startsWith('vt ')) {
