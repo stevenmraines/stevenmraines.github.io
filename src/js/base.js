@@ -64,7 +64,6 @@ function onWindowResize(event) {
 }
 
 function onDocumentScroll(event) {
-	console.log('scrolling');
 	windowHeight = window.innerHeight;
 	screenTopY = window.scrollY;
 	screenBottomY = screenTopY + windowHeight;

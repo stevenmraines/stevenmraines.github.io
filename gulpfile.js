@@ -46,6 +46,7 @@ const paths = {
         bundles: {
             common: 'src/js/bundles/common.js',
             modelViewer: 'src/js/bundles/3d-viewer.js',
+            pixelArt: 'src/js/bundles/pixel-art.js',
         },
         watch: 'src/js/**/*.js',
         dest: 'public/js',

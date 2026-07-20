@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import OBJHandler from './OBJHandler.js';
 import { getCookie, setCookie, parseBoolean } from './util';
-import {max} from "three/nodes";
 
 const CONFIG = {
     canvasWidth: 900,
@@ -498,8 +497,8 @@ function expand3DViewer() {
     canvas.style.width = '900px';
 
     setTimeout(function () {
-        // canvas.classList.remove('viewer-h-collapsed');
-        // canvas.classList.add('viewer-h-expanded');
+        canvas.classList.remove('viewer-h-collapsed');
+        canvas.classList.add('viewer-h-expanded');
         canvas.style.height = '600px';
 
         setTimeout(function () {

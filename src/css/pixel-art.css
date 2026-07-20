@@ -1,0 +1,33 @@
+@reference "./base.css";
+
+.pixel-art-preview {
+    @apply w-[300px] h-[250px] rounded-t-sm border-b border-light-gray;
+}
+
+#full-view-container {
+    @apply absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-[width,height] duration-350 bg-[#2c2a30] border-2 border-black;
+}
+
+#full-view-container-close {
+    @apply bg-transparent text-light-gray border border-light-gray absolute top-2 right-2 w-7 h-7 leading-6.5 cursor-pointer;
+}
+
+#pixel-art-full-view {
+    @apply w-[900px] h-[600px] max-h-full object-contain;
+}
+
+.viewer-w-expanded {
+    width: 900px;
+}
+
+.viewer-w-collapsed {
+    width: 0;
+}
+
+.viewer-h-expanded {
+    height: 600px;
+}
+
+.viewer-h-collapsed {
+    height: 0;
+}

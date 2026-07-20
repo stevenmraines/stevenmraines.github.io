@@ -7,6 +7,7 @@
     <title>Steven Raines - Pixel Art</title>
 
     <link rel="stylesheet" href="css/base.min.css" type="text/css">
+    <link rel="stylesheet" href="css/pixel-art.min.css" type="text/css">
 
     <!-- Let the browser know this page is optimized for mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,35 +17,45 @@
 @@include('./partials/nav.html')
 @@include('./partials/background.html')
 
-<div class="content">
-    <div class="flex justify-around">
-        <div class="card">
+<div class="content pointer-events-none">
+    <div id="cards-container" class="flex justify-between flex-wrap gap-6">
+        <div class="card pointer-events-auto">
             <div class="card-content">
-                <img src="/images/pixel_art/astrogoblin-char.png" alt="pixel art">
-                <h6>Astrogoblin Portraits</h6>
-                <p>Pixel art portraits of the members of the YouTube channel Astrogoblin</p>
-                <a href="#">Read More ></a>
+                <!-- TODO These pixel-art-preview divs are blowing out their container to the right a little bit, figure out how to fix the width -->
+                <div class="pixel-art-preview bg-[url(/images/pixel_art/astrogoblin-char.png)] bg-position-[left_-14rem_top_-22rem]"></div>
+                <h6>Astrogoblin Portrait #1</h6>
+                <p>A pixel art portrait of Charlotte Avery from the YouTube channel Astrogoblin</p>
+                <a href="#" class="load-art-button" data-src="/images/pixel_art/astrogoblin-char.png">See More ></a>
             </div>
         </div>
-        <div class="card">
+        <div class="card pointer-events-auto">
             <div class="card-content">
-                <img src="/images/pixel_art/astrogoblin-pat.png" alt="pixel art">
-                <h6>Astrogoblin Portraits</h6>
-                <p>Pixel art portraits of the members of the YouTube channel Astrogoblin</p>
-                <a href="#">Read More ></a>
+                <div class="pixel-art-preview bg-[url(/images/pixel_art/astrogoblin-pat.png)] bg-position-[left_-21rem_top_0rem]"></div>
+                <h6>Astrogoblin Portrait #2</h6>
+                <p>A pixel art portrait of Patrick Brown from the YouTube channel Astrogoblin</p>
+                <a href="#" class="load-art-button" data-src="/images/pixel_art/astrogoblin-pat.png">See More ></a>
             </div>
         </div>
-        <div class="card">
+        <div class="card pointer-events-auto">
             <div class="card-content">
-                <img src="/images/pixel_art/astrogoblin-jacob.png" alt="pixel art">
-                <h6>Astrogoblin Portraits</h6>
-                <p>Pixel art portraits of the members of the YouTube channel Astrogoblin</p>
-                <a href="#">Read More ></a>
+                <div class="pixel-art-preview bg-[url(/images/pixel_art/astrogoblin-jacob.png)] bg-position-[right_-14rem_top_-22rem]"></div>
+                <h6>Astrogoblin Portrait #3</h6>
+                <p>A pixel art portrait of Jacob Fullerton from the YouTube channel Astrogoblin</p>
+                <a href="#" class="load-art-button" data-src="/images/pixel_art/astrogoblin-jacob.png">See More ></a>
             </div>
         </div>
     </div>
 </div>
 
+<div id="full-view-container" class="viewer-w-collapsed viewer-h-collapsed hidden">
+    <div id="full-view-container-content" class="relative viewer-w-collapsed viewer-h-collapsed">
+        <button id="full-view-container-close" class="btn hidden">X</button>
+        <!-- TODO This is also blowing out the height, extending beyond past the bottom of it's parent -->
+        <img src="#" id="pixel-art-full-view" alt="Pixel art" />
+    </div>
+</div>
+
 <script src="js/common.min.js" type="module"></script>
+<script src="js/pixelArt.min.js" type="module"></script>
 </body>
 </html>
