@@ -33,20 +33,23 @@ function expandViewer(src) {
     cards_container.classList.remove('flex-row');
     cards_container.classList.add('flex-col');
 
+    full_view_container.style.display = 'block';
+    full_view_container.classList.remove('viewer-w-collapsed');
+    full_view_container.classList.add('viewer-w-expanded');
+    full_view_container.style.width = '900px';
+
+    full_view_container_content.classList.remove('viewer-w-collapsed');
+    full_view_container_content.classList.add('viewer-w-expanded');
+
     setTimeout(function () {
-        full_view_container.style.display = 'block';
-        full_view_container.classList.remove('viewer-w-collapsed');
-        full_view_container.classList.add('viewer-w-expanded');
-        full_view_container.style.width = '900px';
-        full_view_container_content.classList.remove('viewer-w-collapsed');
-        full_view_container_content.classList.add('viewer-w-expanded');
+        full_view_container.classList.remove('viewer-h-collapsed');
+        full_view_container.classList.add('viewer-h-expanded');
+        full_view_container.style.height = '600px';
+
+        full_view_container_content.classList.remove('viewer-h-collapsed');
+        full_view_container_content.classList.add('viewer-h-expanded');
 
         setTimeout(function () {
-            full_view_container.classList.remove('viewer-h-collapsed');
-            full_view_container.classList.add('viewer-h-expanded');
-            full_view_container.style.height = '600px';
-            full_view_container_content.classList.remove('viewer-h-collapsed');
-            full_view_container_content.classList.add('viewer-h-expanded');
             full_view_container_close.style.display = 'block';
         }, CONFIG.transitionDuration * 1.5);
     }, CONFIG.transitionDuration * 0.5);
@@ -58,6 +61,7 @@ function collapseViewer() {
     full_view_container.classList.add('viewer-h-collapsed');
     full_view_container.classList.remove('viewer-h-expanded');
     full_view_container.style.height = '0px';
+
     full_view_container_content.classList.add('viewer-h-collapsed');
     full_view_container_content.classList.remove('viewer-h-expanded');
 
@@ -65,12 +69,15 @@ function collapseViewer() {
         full_view_container.classList.add('viewer-w-collapsed');
         full_view_container.classList.remove('viewer-w-expanded');
         full_view_container.style.width = '0px';
+
         full_view_container_content.classList.add('viewer-w-collapsed');
         full_view_container_content.classList.remove('viewer-w-expanded');
 
         setTimeout(function () {
             full_view_container.style.display = 'none';
+
             pixel_art_full_view.src = '#';
+
             cards_container.classList.add('flex-row');
             cards_container.classList.remove('flex-col');
         }, CONFIG.transitionDuration * 1.5);
