@@ -26,7 +26,6 @@ function addEventListeners() {
     });
 }
 
-// TODO pixel_art_full_view img isn't resizing like I want when expanding/collapsing
 function expandViewer(src) {
     pixel_art_full_view.src = src;
 
@@ -34,9 +33,10 @@ function expandViewer(src) {
     cards_container.classList.add('flex-col');
 
     full_view_container.style.display = 'block';
+    // Trigger a forced reflow so that the initial width: 0 state is respected and the width transition works properly
+    full_view_container.offsetWidth;
     full_view_container.classList.remove('viewer-w-collapsed');
     full_view_container.classList.add('viewer-w-expanded');
-    full_view_container.style.width = '900px';
 
     full_view_container_content.classList.remove('viewer-w-collapsed');
     full_view_container_content.classList.add('viewer-w-expanded');
@@ -44,7 +44,6 @@ function expandViewer(src) {
     setTimeout(function () {
         full_view_container.classList.remove('viewer-h-collapsed');
         full_view_container.classList.add('viewer-h-expanded');
-        full_view_container.style.height = '600px';
 
         full_view_container_content.classList.remove('viewer-h-collapsed');
         full_view_container_content.classList.add('viewer-h-expanded');
@@ -60,7 +59,6 @@ function collapseViewer() {
 
     full_view_container.classList.add('viewer-h-collapsed');
     full_view_container.classList.remove('viewer-h-expanded');
-    full_view_container.style.height = '0px';
 
     full_view_container_content.classList.add('viewer-h-collapsed');
     full_view_container_content.classList.remove('viewer-h-expanded');
@@ -68,7 +66,6 @@ function collapseViewer() {
     setTimeout(function () {
         full_view_container.classList.add('viewer-w-collapsed');
         full_view_container.classList.remove('viewer-w-expanded');
-        full_view_container.style.width = '0px';
 
         full_view_container_content.classList.add('viewer-w-collapsed');
         full_view_container_content.classList.remove('viewer-w-expanded');

@@ -21,7 +21,7 @@
     <div id="cards-container" class="flex justify-between flex-wrap gap-6">
         <div class="card pointer-events-auto">
             <div class="card-content">
-                <!-- TODO These pixel-art-preview divs are blowing out their container to the right a little bit, figure out how to fix the width -->
+                <!-- TODO These pixel-art-preview divs are blowing out their container to the right a little bit (see how I fixed this on #pixel-art-full-view) -->
                 <div class="pixel-art-preview bg-[url(/images/pixel_art/astrogoblin-char.png)] bg-position-[left_-14rem_top_-22rem]"></div>
                 <h6>Astrogoblin Portrait #1</h6>
                 <p>A pixel art portrait of Charlotte Avery from the YouTube channel Astrogoblin</p>
@@ -50,7 +50,6 @@
 <div id="full-view-container" class="viewer-w-collapsed viewer-h-collapsed hidden">
     <div id="full-view-container-content" class="relative viewer-w-collapsed viewer-h-collapsed">
         <button id="full-view-container-close" class="btn hidden">X</button>
-        <!-- TODO This is also blowing out the height, extending beyond past the bottom of it's parent -->
         <img src="#" id="pixel-art-full-view" alt="Pixel art" />
     </div>
 </div>
