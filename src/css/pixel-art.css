@@ -17,12 +17,25 @@
     @apply overflow-hidden;
 }
 
+#full-view-container-overlay {
+    @apply w-full h-full relative z-1;
+}
+
 #full-view-container-close {
     @apply bg-transparent text-light-gray border border-light-gray absolute top-2 right-2 w-7 h-7 leading-6.5 cursor-pointer;
 }
 
+#prev-image,
+#next-image {
+    @apply absolute left-2 top-1/2 -translate-y-1/2 text-black bg-light-gray w-7 h-7 text-xl rounded-full;
+}
+
+#next-image {
+    @apply left-auto right-3;
+}
+
 #pixel-art-full-view {
-    @apply w-full h-full max-w-full max-h-full object-contain;
+    @apply absolute top-0 pointer-events-none w-full h-full max-w-full max-h-full object-contain;
 }
 
 .viewer-w-expanded {

@@ -25,7 +25,14 @@
                 <div class="pixel-art-preview bg-[url(/images/pixel_art/astrogoblin-char.png)] bg-position-[left_-14rem_top_-22rem]"></div>
                 <h6>Astrogoblin Portrait #1</h6>
                 <p>A pixel art portrait of Charlotte Avery from the YouTube channel Astrogoblin</p>
-                <a href="#" class="load-art-button" data-src="/images/pixel_art/astrogoblin-char.png">See More ></a>
+                <a
+                        href="#"
+                        class="load-art-button"
+                        data-src-1="/images/pixel_art/astrogoblin-char.png"
+                        data-src-2="https://picsum.photos/900/600"
+                >
+                    See More >
+                </a>
             </div>
         </div>
         <div class="card pointer-events-auto">
@@ -33,7 +40,7 @@
                 <div class="pixel-art-preview bg-[url(/images/pixel_art/astrogoblin-pat.png)] bg-position-[left_-21rem_top_0rem]"></div>
                 <h6>Astrogoblin Portrait #2</h6>
                 <p>A pixel art portrait of Patrick Brown from the YouTube channel Astrogoblin</p>
-                <a href="#" class="load-art-button" data-src="/images/pixel_art/astrogoblin-pat.png">See More ></a>
+                <a href="#" class="load-art-button" data-src-1="/images/pixel_art/astrogoblin-pat.png">See More ></a>
             </div>
         </div>
         <div class="card pointer-events-auto">
@@ -41,7 +48,7 @@
                 <div class="pixel-art-preview bg-[url(/images/pixel_art/astrogoblin-jacob.png)] bg-position-[right_-14rem_top_-22rem]"></div>
                 <h6>Astrogoblin Portrait #3</h6>
                 <p>A pixel art portrait of Jacob Fullerton from the YouTube channel Astrogoblin</p>
-                <a href="#" class="load-art-button" data-src="/images/pixel_art/astrogoblin-jacob.png">See More ></a>
+                <a href="#" class="load-art-button" data-src-1="/images/pixel_art/astrogoblin-jacob.png">See More ></a>
             </div>
         </div>
     </div>
@@ -49,7 +56,11 @@
 
 <div id="full-view-container" class="viewer-w-collapsed viewer-h-collapsed hidden">
     <div id="full-view-container-content" class="relative viewer-w-collapsed viewer-h-collapsed">
-        <button id="full-view-container-close" class="btn hidden">X</button>
+        <div id="full-view-container-overlay" class="hidden">
+            <button id="full-view-container-close" class="btn">X</button>
+            <button id="prev-image" class="btn hidden"><</button>
+            <button id="next-image" class="btn hidden">></button>
+        </div>
         <img src="#" id="pixel-art-full-view" alt="Pixel art" />
     </div>
 </div>

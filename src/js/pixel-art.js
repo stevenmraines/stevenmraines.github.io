@@ -2,27 +2,63 @@ const CONFIG = {
     transitionDuration: 350,
 };
 
-let cards_container, full_view_container, full_view_container_content, pixel_art_full_view, full_view_container_close;
+let cards_container,
+    full_view_container,
+    full_view_container_content,
+    full_view_container_overlay,
+    full_view_container_close,
+    prev_image,
+    next_image,
+    pixel_art_full_view;
+
+let clicked_card_sources = [];
+let current_source_index = 0;
 
 document.addEventListener('DOMContentLoaded', function () {
     cards_container = document.getElementById('cards-container');
     full_view_container = document.getElementById('full-view-container');
     full_view_container_content = document.getElementById('full-view-container-content');
-    pixel_art_full_view = document.getElementById('pixel-art-full-view');
+    full_view_container_overlay = document.getElementById('full-view-container-overlay');
     full_view_container_close = document.getElementById('full-view-container-close');
+    prev_image = document.getElementById('prev-image');
+    next_image = document.getElementById('next-image');
+    pixel_art_full_view = document.getElementById('pixel-art-full-view');
     addEventListeners();
 });
 
 function addEventListeners() {
-    const buttons = document.getElementsByClassName('load-art-button');
-    for (let button of buttons) {
+    for (let button of document.getElementsByClassName('load-art-button')) {
         button.addEventListener('click', function (e) {
-            expandViewer(e.target.dataset.src);
+            clicked_card_sources = [];
+            current_source_index = 0;
+            let i = 1;
+            while (e.target.dataset.hasOwnProperty(`src-${i}`)) {
+                if (i === 1) {
+                    expandViewer(e.target.dataset['src-1']);
+                }
+                clicked_card_sources.push(e.target.dataset[`src-${i}`]);
+                i++;
+            }
+            prev_image.style.display = i === 2 ? 'none' : 'block';
+            next_image.style.display = i === 2 ? 'none' : 'block';
+            console.log(clicked_card_sources)
         });
     }
 
     full_view_container_close.addEventListener('click', function () {
         collapseViewer();
+    });
+
+    prev_image.addEventListener('click', function () {
+        current_source_index = Math.max(0, current_source_index - 1);
+        pixel_art_full_view.src = clicked_card_sources[current_source_index];
+        console.log(current_source_index)
+    });
+
+    next_image.addEventListener('click', function () {
+        current_source_index = Math.min(current_source_index + 1, clicked_card_sources.length - 1);
+        pixel_art_full_view.src = clicked_card_sources[current_source_index];
+        console.log(current_source_index)
     });
 }
 
@@ -49,13 +85,13 @@ function expandViewer(src) {
         full_view_container_content.classList.add('viewer-h-expanded');
 
         setTimeout(function () {
-            full_view_container_close.style.display = 'block';
+            full_view_container_overlay.style.display = 'block';
         }, CONFIG.transitionDuration * 1.5);
     }, CONFIG.transitionDuration * 0.5);
 }
 
 function collapseViewer() {
-    full_view_container_close.style.display = 'none';
+    full_view_container_overlay.style.display = 'none';
 
     full_view_container.classList.add('viewer-h-collapsed');
     full_view_container.classList.remove('viewer-h-expanded');
