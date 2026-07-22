@@ -16,27 +16,31 @@
 @@include('./partials/nav.html')
 @@include('./partials/background.html')
 
-<!-- TODO https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding/ -->
-<div class="content">
-    <div id="cards-container" class="flex justify-center-safe flex-wrap gap-6">
+<div class="content pointer-events-none">
+    <div id="cards-container" class="flex justify-center-safe flex-wrap gap-6 flex-col">
         <div class="card">
             <div class="card-content">
                 <img src="/images/splats/splat-tori.png" alt="a screenshot of a gaussian splat of my cat">
                 <h6>Tori</h6>
                 <p>A splat of my cat, Tori, sleeping on my bed</p>
-                <a href="https://superspl.at/scene/55afd983" class="load-splat-button">See More ></a>
+                <a href="javascript:void(0);" data-src="https://superspl.at/s?id=55afd983" class="load-splat-button pointer-events-auto" onclick="document.getElementById('splat-viewer').src = event.target.dataset.src">See More ></a>
             </div>
         </div>
+
         <div class="card">
             <div class="card-content">
                 <img src="/images/splats/splat-bedroom.png" alt="a screenshot of a gaussian splat of my bedroom">
                 <h6>My Bedroom</h6>
                 <p>A failed splat of my bedroom</p>
-                <a href="https://superspl.at/scene/127a926f" class="load-splat-button">See More ></a>
+                <a href="javascript:void(0);" data-src="https://superspl.at/s?id=127a926f" class="load-splat-button pointer-events-auto" onclick="document.getElementById('splat-viewer').src = event.target.dataset.src">See More ></a>
             </div>
         </div>
     </div>
 </div>
+
+<!-- TODO I think our positioning stuff here is screwing with the position when in full screen -->
+<!--<iframe class="fixed left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-[width,height] duration-350 bg-[#2c2a30] border-2 border-black pointer-events-auto" width="900px" height="600px" allow="fullscreen; xr-spatial-tracking" src="https://superspl.at/s?id=55afd983"></iframe>-->
+<iframe id="splat-viewer" class="fixed left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-[width,height] duration-350 bg-[#2c2a30] border-2 border-black pointer-events-auto" width="900px" height="600px" allow="fullscreen; xr-spatial-tracking" src="https://superspl.at/s?id=127a926f"></iframe>
 
 <script src="js/common.min.js" type="module"></script>
 </body>
