@@ -21,7 +21,6 @@
     <div id="cards-container" class="flex justify-between flex-wrap gap-6">
         <div class="card pointer-events-auto">
             <div class="card-content">
-                <!-- TODO These pixel-art-preview divs are blowing out their container to the right a little bit (see how I fixed this on #pixel-art-full-view) -->
                 <div class="pixel-art-preview bg-[url(/images/pixel_art/astrogoblin-char.png)] bg-position-[left_-14rem_top_-22rem]"></div>
                 <h6>Astrogoblin Portrait #1</h6>
                 <p>A pixel art portrait of Charlotte Avery from the YouTube channel Astrogoblin</p>
@@ -29,7 +28,7 @@
                         href="#"
                         class="load-art-button"
                         data-src-1="/images/pixel_art/astrogoblin-char.png"
-                        data-src-2="https://picsum.photos/900/600"
+                        data-src-2="/images/pixel_art/astrogoblin-char-reference.jpg"
                 >
                     See More >
                 </a>
@@ -40,7 +39,14 @@
                 <div class="pixel-art-preview bg-[url(/images/pixel_art/astrogoblin-pat.png)] bg-position-[left_-21rem_top_0rem]"></div>
                 <h6>Astrogoblin Portrait #2</h6>
                 <p>A pixel art portrait of Patrick Brown from the YouTube channel Astrogoblin</p>
-                <a href="#" class="load-art-button" data-src-1="/images/pixel_art/astrogoblin-pat.png">See More ></a>
+                <a
+                        href="#"
+                        class="load-art-button"
+                        data-src-1="/images/pixel_art/astrogoblin-pat.png"
+                        data-src-2="/images/pixel_art/astrogoblin-pat-reference.jpg"
+                >
+                    See More >
+                </a>
             </div>
         </div>
         <div class="card pointer-events-auto">
@@ -48,7 +54,14 @@
                 <div class="pixel-art-preview bg-[url(/images/pixel_art/astrogoblin-jacob.png)] bg-position-[right_-14rem_top_-22rem]"></div>
                 <h6>Astrogoblin Portrait #3</h6>
                 <p>A pixel art portrait of Jacob Fullerton from the YouTube channel Astrogoblin</p>
-                <a href="#" class="load-art-button" data-src-1="/images/pixel_art/astrogoblin-jacob.png">See More ></a>
+                <a
+                        href="#"
+                        class="load-art-button"
+                        data-src-1="/images/pixel_art/astrogoblin-jacob.png"
+                        data-src-2="/images/pixel_art/astrogoblin-jacob-reference.jpg"
+                >
+                    See More >
+                </a>
             </div>
         </div>
     </div>
@@ -66,6 +79,6 @@
 </div>
 
 <script src="js/common.min.js" type="module"></script>
-<script src="js/pixelArt.min.js" type="module"></script>
+<script src="js/pixel-art.min.js" type="module"></script>
 </body>
 </html>

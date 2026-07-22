@@ -168,7 +168,7 @@
         }
 
         & > .card-content {
-            @apply flex flex-col h-full justify-between;
+            @apply flex flex-col h-full justify-between overflow-hidden;
 
             & > img {
                 @apply w-[300px] h-[250px] rounded-t-sm border-b border-light-gray;
