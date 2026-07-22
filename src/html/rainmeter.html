@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>Steven Raines - Pixel Art</title>
+
+  <link rel="stylesheet" href="css/base.min.css" type="text/css">
+  <link rel="stylesheet" href="css/pixel-art.min.css" type="text/css">
+
+  <!-- Let the browser know this page is optimized for mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+@@include('./partials/nav.html')
+@@include('./partials/background.html')
+
+<div class="content pointer-events-none">
+  <div id="cards-container" class="flex justify-center-safe flex-wrap gap-6">
+    <div class="card pointer-events-auto">
+      <div class="card-content">
+        <div class="pixel-art-preview bg-[url(/images/rainmeter/animus-skinpack3.png)] bg-contain bg-no-repeat bg-center"></div>
+        <h6>Animus Skinpack</h6>
+        <p>A Rainmeter skinpack based on the UI from the game Assassin's Creed 2</p>
+        <a
+                href="javascript:void(0);"
+                class="load-art-button"
+                data-src-1="/images/rainmeter/animus-skinpack1.png"
+                data-src-2="/images/rainmeter/animus-skinpack2.jpg"
+                data-src-3="/images/rainmeter/animus-skinpack3.png"
+        >
+          See More >
+        </a>
+      </div>
+    </div>
+    <div class="card pointer-events-auto">
+      <div class="card-content">
+        <div class="pixel-art-preview bg-[url(/images/rainmeter/deus-ex-skinpack4.png)] bg-contain bg-no-repeat bg-center"></div>
+        <h6>Deus Ex: Human Revolution Skinpack</h6>
+        <p>A Rainmeter skinpack based on the UI from the game Deus Ex: Human Revolution</p>
+        <a
+                href="javascript:void(0);"
+                class="load-art-button"
+                data-src-1="/images/rainmeter/deus-ex-skinpack1.png"
+                data-src-2="/images/rainmeter/deus-ex-skinpack2.jpg"
+                data-src-3="/images/rainmeter/deus-ex-skinpack3.jpg"
+                data-src-4="/images/rainmeter/deus-ex-skinpack4.png"
+        >
+          See More >
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="full-view-container" class="viewer-w-collapsed viewer-h-collapsed hidden">
+  <div id="full-view-container-content" class="relative viewer-w-collapsed viewer-h-collapsed">
+    <div id="full-view-container-overlay" class="hidden">
+      <button id="full-view-container-close" class="btn">X</button>
+      <button id="prev-image" class="btn hidden"><</button>
+      <button id="next-image" class="btn hidden">></button>
+    </div>
+    <img src="#" id="pixel-art-full-view" alt="Pixel art" />
+  </div>
+</div>
+
+<script src="js/common.min.js" type="module"></script>
+<script src="js/pixel-art.min.js" type="module"></script>
+</body>
+</html>
