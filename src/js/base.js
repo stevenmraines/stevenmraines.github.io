@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
  */
 function addEventListeners() {
 	window.addEventListener('resize', onWindowResize);
-	document.addEventListener('scroll', onDocumentScroll);
 
 	const bgToggle = document.getElementById(BG_SETTINGS_TOGGLE_ID);
 
@@ -61,12 +60,6 @@ function addEventListeners() {
 
 function onWindowResize(event) {
 
-}
-
-function onDocumentScroll(event) {
-	windowHeight = window.innerHeight;
-	screenTopY = window.scrollY;
-	screenBottomY = screenTopY + windowHeight;
 }
 
 function onBgSettingsToggleClick(event) {

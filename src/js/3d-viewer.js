@@ -435,6 +435,7 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
         });
 
         canvas.addEventListener("wheel", (e) => {
+            e.preventDefault();
             // Forward appears to be z -1
             camera.position.z += CONFIG.cameraSpeed * e.deltaY;
         });

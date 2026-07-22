@@ -41,7 +41,6 @@ function addEventListeners() {
             }
             prev_image.style.display = i === 2 ? 'none' : 'block';
             next_image.style.display = i === 2 ? 'none' : 'block';
-            console.log(clicked_card_sources)
         });
     }
 
@@ -52,13 +51,11 @@ function addEventListeners() {
     prev_image.addEventListener('click', function () {
         current_source_index = Math.max(0, current_source_index - 1);
         pixel_art_full_view.src = clicked_card_sources[current_source_index];
-        console.log(current_source_index)
     });
 
     next_image.addEventListener('click', function () {
         current_source_index = Math.min(current_source_index + 1, clicked_card_sources.length - 1);
         pixel_art_full_view.src = clicked_card_sources[current_source_index];
-        console.log(current_source_index)
     });
 }
 

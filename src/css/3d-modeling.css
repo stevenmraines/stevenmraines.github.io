@@ -1,7 +1,7 @@
 @reference "./base.css";
 
 #model-viewer-canvas, #model-viewer-overlay {
-    @apply absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-[width,height] duration-350;
+    @apply fixed left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-[width,height] duration-350;
 }
 
 #model-viewer-canvas {
