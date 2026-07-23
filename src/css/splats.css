@@ -10,7 +10,7 @@
     @apply fixed left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-[width,height] duration-350 bg-[#2c2a30] border-2 border-black pointer-events-auto;
 
     & > #splat-viewer-close {
-        @apply bg-[rgba(0,0,0,0.3)] text-[rgb(224,220,221)] rounded-[6px] absolute top-2 right-2 w-7 h-7 leading-6.5 cursor-pointer;
+        @apply bg-[rgba(0,0,0,0.3)] text-[rgb(224,220,221)] rounded-[6px] absolute top-[16px] right-[12px] w-7 h-7 leading-6.5 cursor-pointer;
         font-family: "Arial", sans-serif;
 
         &:hover {
