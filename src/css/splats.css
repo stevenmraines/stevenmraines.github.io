@@ -12,6 +12,8 @@
     & > #splat-viewer-close {
         @apply bg-[rgba(0,0,0,0.3)] text-[rgb(224,220,221)] rounded-[6px] absolute top-[16px] right-[12px] w-7 h-7 leading-6.5 cursor-pointer;
         font-family: "Arial", sans-serif;
+        /* TODO This seems to be making the white part of the text semi-transparent */
+        -webkit-text-stroke: 2px rgba(0,0,0,0.3);
 
         &:hover {
             filter: brightness(2);
