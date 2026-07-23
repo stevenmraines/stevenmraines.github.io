@@ -7,6 +7,7 @@
     <title>Steven Raines - Gaussian Splats</title>
 
     <link rel="stylesheet" href="css/base.min.css" type="text/css">
+    <link rel="stylesheet" href="css/splats.min.css" type="text/css">
 
     <!-- Let the browser know this page is optimized for mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,13 +18,15 @@
 @@include('./partials/background.html')
 
 <div class="content pointer-events-none">
-    <div id="cards-container" class="flex justify-center-safe flex-wrap gap-6 flex-col">
+    <div id="cards-container" class="flex justify-center-safe flex-wrap gap-6">
         <div class="card">
             <div class="card-content">
                 <img src="/images/splats/splat-tori.png" alt="a screenshot of a gaussian splat of my cat">
                 <h6>Tori</h6>
                 <p>A splat of my cat, Tori, sleeping on my bed</p>
-                <a href="javascript:void(0);" data-src="https://superspl.at/s?id=55afd983" class="load-splat-button pointer-events-auto" onclick="document.getElementById('splat-viewer').src = event.target.dataset.src">See More ></a>
+                <a href="javascript:void(0);" class="load-splat-button" data-src="https://superspl.at/s?id=55afd983">
+                    See More >
+                </a>
             </div>
         </div>
 
@@ -32,16 +35,83 @@
                 <img src="/images/splats/splat-bedroom.png" alt="a screenshot of a gaussian splat of my bedroom">
                 <h6>My Bedroom</h6>
                 <p>A failed splat of my bedroom</p>
-                <a href="javascript:void(0);" data-src="https://superspl.at/s?id=127a926f" class="load-splat-button pointer-events-auto" onclick="document.getElementById('splat-viewer').src = event.target.dataset.src">See More ></a>
+                <a href="javascript:void(0);" class="load-splat-button" data-src="https://superspl.at/s?id=127a926f">
+                    See More >
+                </a>
             </div>
         </div>
     </div>
 </div>
 
-<!-- TODO I think our positioning stuff here is screwing with the position when in full screen -->
-<!--<iframe class="fixed left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-[width,height] duration-350 bg-[#2c2a30] border-2 border-black pointer-events-auto" width="900px" height="600px" allow="fullscreen; xr-spatial-tracking" src="https://superspl.at/s?id=55afd983"></iframe>-->
-<iframe id="splat-viewer" class="fixed left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-[width,height] duration-350 bg-[#2c2a30] border-2 border-black pointer-events-auto" width="900px" height="600px" allow="fullscreen; xr-spatial-tracking" src="https://superspl.at/s?id=127a926f"></iframe>
+<div id="splat-viewer-container" class="viewer-w-collapsed viewer-h-collapsed hidden">
+    <!-- TODO Match tooltip styling to the Supersplat viewer style -->
+    <button id="splat-viewer-close" class="hidden" title="Close">X</button>
+    <iframe id="splat-viewer" width="900px" height="600px" allow="fullscreen; xr-spatial-tracking"></iframe>
+</div>
 
 <script src="js/common.min.js" type="module"></script>
+<script>
+    // Just going to inline script this since it's pretty simple
+    const CONFIG = {
+        transitionDuration: 350,
+    };
+
+    let cards_container,
+        splat_viewer_container,
+        splat_viewer_close,
+        splat_viewer;
+
+    document.addEventListener('DOMContentLoaded', function () {
+        cards_container = document.getElementById('cards-container');
+        splat_viewer_container = document.getElementById('splat-viewer-container');
+        splat_viewer_close = document.getElementById('splat-viewer-close');
+        splat_viewer = document.getElementById('splat-viewer');
+        addEventListeners();
+    });
+
+    function addEventListeners() {
+        for (let button of document.getElementsByClassName('load-splat-button')) {
+            button.addEventListener('click', function (event) {
+                expandViewer(event.target.dataset.src);
+            });
+        }
+
+        splat_viewer_close.addEventListener('click', collapseViewer);
+    }
+
+    function expandViewer(src) {
+        cards_container.classList.add('flex-col');
+        splat_viewer_container.style.display = 'block';
+        splat_viewer_container.classList.remove('viewer-w-collapsed');
+        splat_viewer_container.classList.add('viewer-w-expanded');
+
+        setTimeout(function () {
+            splat_viewer_container.classList.remove('viewer-h-collapsed');
+            splat_viewer_container.classList.add('viewer-h-expanded');
+
+            setTimeout(function () {
+                splat_viewer_close.style.display = 'block';
+                splat_viewer.src = src;
+            }, CONFIG.transitionDuration * 1.5);
+        }, CONFIG.transitionDuration * 0.5);
+    }
+
+    function collapseViewer() {
+        splat_viewer.src = '';
+        splat_viewer_close.style.display = 'none';
+        splat_viewer_container.classList.remove('viewer-h-expanded');
+        splat_viewer_container.classList.add('viewer-h-collapsed');
+
+        setTimeout(function () {
+            splat_viewer_container.classList.remove('viewer-w-expanded');
+            splat_viewer_container.classList.add('viewer-w-collapsed');
+
+            setTimeout(function () {
+                splat_viewer_container.style.display = 'none';
+                cards_container.classList.remove('flex-col');
+            }, CONFIG.transitionDuration * 1.5);
+        }, CONFIG.transitionDuration * 0.5);
+    }
+</script>
 </body>
 </html>

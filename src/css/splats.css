@@ -1,0 +1,37 @@
+@reference "./base.css";
+
+.load-splat-button {
+    @apply pointer-events-auto;
+}
+
+#splat-viewer-container {
+    /* TODO This transition duration should also be a tailwind variable */
+    /* TODO Running into that issue again where the width transition isn't working */
+    @apply fixed left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-[width,height] duration-350 bg-[#2c2a30] border-2 border-black pointer-events-auto;
+
+    & > #splat-viewer-close {
+        @apply bg-[rgba(0,0,0,0.3)] text-[rgb(224,220,221)] rounded-[6px] absolute top-2 right-2 w-7 h-7 leading-6.5 cursor-pointer;
+        font-family: "Arial", sans-serif;
+
+        &:hover {
+            filter: brightness(2);
+        }
+    }
+}
+
+/* TODO These pixel values really need to be tailwind vars if we're gonna use them everywhere like this */
+.viewer-w-expanded {
+    width: 900px;
+}
+
+.viewer-w-collapsed {
+    width: 0;
+}
+
+.viewer-h-expanded {
+    height: 600px;
+}
+
+.viewer-h-collapsed {
+    height: 0;
+}
