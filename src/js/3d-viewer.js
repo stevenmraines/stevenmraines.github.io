@@ -426,6 +426,7 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
                     mesh_wireframes[i].rotateY(CONFIG.rotationSpeed * directionX * diffX);
                 }
             } else {
+                // TODO Mouse pan can kind of jump way off to the side sometimes, seems inconsistent, not sure how to recreate it
                 camera.position.x += CONFIG.cameraSpeed * directionX * diffX;
                 camera.position.y += CONFIG.cameraSpeed * directionY * diffY;
             }

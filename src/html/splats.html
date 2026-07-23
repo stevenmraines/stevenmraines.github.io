@@ -80,6 +80,11 @@
     }
 
     function expandViewer(src) {
+        if (splat_viewer_container.style.display === 'block') {
+            splat_viewer.src = src;
+            return;
+        }
+
         cards_container.classList.add('flex-col');
         splat_viewer_container.style.display = 'block';
         splat_viewer_container.classList.remove('viewer-w-collapsed');
