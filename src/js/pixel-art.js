@@ -61,6 +61,9 @@ function addEventListeners() {
         srcElement.src = src;
         if (otherElement) otherElement.style.display = 'none';
         viewerElement.style.display = 'block';
+        // TODO Call .stop() when switching?
+        if (src.endsWith('mp4')) viewerElement.load();
+        if (src.endsWith('mp4')) viewerElement.play();
     });
 
     next_image.addEventListener('click', function () {
@@ -72,6 +75,8 @@ function addEventListeners() {
         srcElement.src = src;
         if (otherElement) otherElement.style.display = 'none';
         viewerElement.style.display = 'block';
+        if (src.endsWith('mp4')) viewerElement.load();
+        if (src.endsWith('mp4')) viewerElement.play();
     });
 }
 
@@ -81,6 +86,7 @@ function expandViewer(src) {
     let otherElement = src.endsWith('mp4') ? pixel_art_full_view : video_player;
     srcElement.src = src;
     if (otherElement) otherElement.style.display = 'none';
+    if (src.endsWith('mp4')) viewerElement.load();
 
     cards_container.classList.remove('flex-row');
     cards_container.classList.add('flex-col');
@@ -104,6 +110,7 @@ function expandViewer(src) {
         setTimeout(function () {
             full_view_container_overlay.style.display = 'block';
             viewerElement.style.display = 'block';
+            if (src.endsWith('mp4')) viewerElement.play();
         }, CONFIG.transitionDuration * 1.5);
     }, CONFIG.transitionDuration * 0.5);
 }
