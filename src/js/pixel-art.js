@@ -61,7 +61,7 @@ function addEventListeners() {
         srcElement.src = src;
         if (otherElement) otherElement.style.display = 'none';
         viewerElement.style.display = 'block';
-        // TODO Call .stop() when switching?
+        if (src.endsWith('mp4')) viewerElement.pause();
         if (src.endsWith('mp4')) viewerElement.load();
         if (src.endsWith('mp4')) viewerElement.play();
     });
@@ -75,6 +75,7 @@ function addEventListeners() {
         srcElement.src = src;
         if (otherElement) otherElement.style.display = 'none';
         viewerElement.style.display = 'block';
+        if (src.endsWith('mp4')) viewerElement.pause();
         if (src.endsWith('mp4')) viewerElement.load();
         if (src.endsWith('mp4')) viewerElement.play();
     });
@@ -116,6 +117,8 @@ function expandViewer(src) {
 }
 
 function collapseViewer() {
+    if (video_player) video_player.pause();
+
     full_view_container_overlay.style.display = 'none';
 
     full_view_container.classList.add('viewer-h-collapsed');
