@@ -11,7 +11,11 @@ let cards_container,
     next_image,
     pixel_art_full_view,
     video_player,
-    video_player_source;
+    video_player_source,
+    project_text_container,
+    project_title,
+    project_description_body,
+    project_description_footer;
 
 let clicked_card_sources = [];
 let current_source_index = 0;
@@ -27,6 +31,10 @@ document.addEventListener('DOMContentLoaded', function () {
     pixel_art_full_view = document.getElementById('pixel-art-full-view');
     video_player = document.getElementById('video-player');
     video_player_source = document.getElementById('video-player-source');
+    project_text_container = document.getElementById('project-text-container');
+    project_title = document.getElementById('project-title');
+    project_description_body = document.getElementById('project-description-body');
+    project_description_footer = document.getElementById('project-description-footer');
     addEventListeners();
 });
 
@@ -38,7 +46,7 @@ function addEventListeners() {
             let i = 1;
             while (e.target.dataset.hasOwnProperty(`src-${i}`)) {
                 if (i === 1) {
-                    expandViewer(e.target.dataset['src-1']);
+                    expandViewer(e.target);
                 }
                 clicked_card_sources.push(e.target.dataset[`src-${i}`]);
                 i++;
@@ -81,10 +89,50 @@ function addEventListeners() {
     });
 }
 
-function expandViewer(src) {
+function showProjectTextContainer(target) {
+    project_title.innerText = target.dataset.hasOwnProperty('title') ? target.dataset.title : '';
+    project_description_body.innerText = target.dataset.description ? target.dataset.description : '';
+    project_description_footer.replaceChildren();
+    if (target.dataset.link) {
+        const link = document.createElement('a');
+        link.href = target.dataset.link;
+        /*
+         * Very cool that target.dataset['src-1'] is retained as-is,
+         * but "data-link-text" becomes target.dataset.linkText.
+         * Not annoying at all.
+         */
+        link.innerText = target.dataset.linkText ? target.dataset.linkText : 'See on GitHub >';
+        link.target = '_blank';
+        project_description_footer.appendChild(link);
+    }
+    project_text_container.style.opacity = 1;
+}
+
+function hideProjectTextContainer() {
+    project_text_container.style.opacity = 0;
+    // TODO This doesn't appear to actually be clearing the text
+    project_title.innerText = '';
+    project_description_body.innerText = '';
+    project_description_footer.replaceChildren();
+}
+
+function expandViewer(target) {
+    const src = target.dataset['src-1'];
     let srcElement = src.endsWith('mp4') ? video_player_source : pixel_art_full_view;
     let viewerElement = src.endsWith('mp4') ? video_player : pixel_art_full_view;
     let otherElement = src.endsWith('mp4') ? pixel_art_full_view : video_player;
+    let timeouts_finished = false;
+
+    // TODO load event seems to fire before the browser actually displays the image
+    viewerElement.addEventListener(src.endsWith('mp4') ? 'loadeddata' : 'load', function () {
+        const checkTimeoutInterval = setInterval(function () {
+            if (timeouts_finished) {
+                showProjectTextContainer(target);
+                clearInterval(checkTimeoutInterval);
+            }
+        }, 100);
+    });
+
     srcElement.src = src;
     if (otherElement) otherElement.style.display = 'none';
     if (src.endsWith('mp4')) viewerElement.load();
@@ -112,12 +160,15 @@ function expandViewer(src) {
             full_view_container_overlay.style.display = 'block';
             viewerElement.style.display = 'block';
             if (src.endsWith('mp4')) viewerElement.play();
+            timeouts_finished = true;
         }, CONFIG.transitionDuration * 1.5);
     }, CONFIG.transitionDuration * 0.5);
 }
 
 function collapseViewer() {
     if (video_player) video_player.pause();
+
+    hideProjectTextContainer();
 
     full_view_container_overlay.style.display = 'none';
 
