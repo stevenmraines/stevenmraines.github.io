@@ -90,6 +90,9 @@ function addEventListeners() {
 }
 
 function showProjectTextContainer(target) {
+    if (! project_text_container) {
+        return;
+    }
     project_title.innerText = target.dataset.hasOwnProperty('title') ? target.dataset.title : '';
     project_description_body.innerText = target.dataset.description ? target.dataset.description : '';
     project_description_footer.replaceChildren();
@@ -109,6 +112,9 @@ function showProjectTextContainer(target) {
 }
 
 function hideProjectTextContainer() {
+    if (! project_text_container) {
+        return;
+    }
     project_text_container.style.opacity = 0;
     // TODO This doesn't appear to actually be clearing the text
     project_title.innerText = '';
