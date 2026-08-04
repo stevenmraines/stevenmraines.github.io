@@ -15,7 +15,8 @@ let cards_container,
     project_text_container,
     project_title,
     project_description_body,
-    project_description_footer;
+    project_description_footer,
+    target;
 
 let clicked_card_sources = [];
 let current_source_index = 0;
@@ -46,9 +47,10 @@ function addEventListeners() {
             let i = 1;
             while (e.target.dataset.hasOwnProperty(`src-${i}`)) {
                 if (i === 1) {
-                    expandViewer(e.target);
+                    target = e.target;
+                    expandViewer();
                 }
-                clicked_card_sources.push(e.target.dataset[`src-${i}`]);
+                clicked_card_sources.push(target.dataset[`src-${i}`]);
                 i++;
             }
             prev_image.style.display = i === 2 ? 'none' : 'block';
@@ -89,12 +91,18 @@ function addEventListeners() {
     });
 }
 
-function showProjectTextContainer(target) {
-    if (! project_text_container) {
+function showProjectTextContainer() {
+    if (! project_text_container || ! target) {
         return;
     }
     project_title.innerText = target.dataset.hasOwnProperty('title') ? target.dataset.title : '';
-    project_description_body.innerText = target.dataset.description ? target.dataset.description : '';
+    project_description_body.replaceChildren();
+    if (target.dataset.hasOwnProperty('description')) {
+        const description = document.getElementById(target.dataset.description).cloneNode(true);
+        description.removeAttribute('id');
+        project_description_body.appendChild(description);
+        description.style.display = 'block';
+    }
     project_description_footer.replaceChildren();
     if (target.dataset.link) {
         const link = document.createElement('a');
@@ -116,13 +124,16 @@ function hideProjectTextContainer() {
         return;
     }
     project_text_container.style.opacity = 0;
-    // TODO This doesn't appear to actually be clearing the text
     project_title.innerText = '';
-    project_description_body.innerText = '';
+    project_description_body.replaceChildren();
     project_description_footer.replaceChildren();
 }
 
-function expandViewer(target) {
+function expandViewer() {
+    if (! target) {
+        return;
+    }
+
     const src = target.dataset['src-1'];
     let srcElement = src.endsWith('mp4') ? video_player_source : pixel_art_full_view;
     let viewerElement = src.endsWith('mp4') ? video_player : pixel_art_full_view;
@@ -137,11 +148,16 @@ function expandViewer(target) {
                 clearInterval(checkTimeoutInterval);
             }
         }, 100);
-    });
+    }, { once: true }); // Use once so the listener is not invoked for projects that were previously clicked
 
     srcElement.src = src;
     if (otherElement) otherElement.style.display = 'none';
     if (src.endsWith('mp4')) viewerElement.load();
+
+    // Viewer was already expanded when target was clicked, no need to actually wait for the timeouts
+    if (full_view_container.style.display === 'block') {
+        timeouts_finished = true;
+    }
 
     cards_container.classList.remove('flex-row');
     cards_container.classList.add('flex-col');

@@ -30,13 +30,21 @@
                 class="load-art-button"
                 data-src-1="/images/programming/personal-website.png"
                 data-title="Personal Website"
-                data-description="hello this is my website"
+                data-description="personal-website-description"
                 data-link="https://github.com/stevenmraines/stevenmraines.github.io"
                 data-link-text="See on GitHub >"
         >
           See More >
         </a>
       </div>
+    </div>
+
+    <div id="personal-website-description" class="hidden">
+      <ul>
+        <li>Components stylized with Tailwind CSS</li>
+        <li>Background and 3D model viewer coded using Three.js</li>
+        <li>Source files are minified and bundled with Gulp</li>
+      </ul>
     </div>
 
     <div class="card pointer-events-auto">
@@ -51,11 +59,23 @@
                 data-src-2="/videos/pi-theater-algolia-search.mp4"
                 data-src-3="/videos/pi-theater-upload.mp4"
                 data-title="Pi Theater 2"
+                data-description="pi-theater-2-description"
                 data-link="https://github.com/stevenmraines/pi_theater_2"
         >
           See More >
         </a>
       </div>
+    </div>
+
+    <div id="pi-theater-2-description" class="hidden">
+      <ul>
+        <li>Served from a Raspberry Pi with an external drive for storage</li>
+        <li>PHP back-end with Laravel and a MySQL database</li>
+        <li>Front-end that utilizes Bootstrap and Vue</li>
+        <li>Utilizes Algolia Instant Search components for Vue</li>
+        <li>Data for newly added movies and shows pulled from IMDb API</li>
+        <li>ImageMagick automatically resizes poster images to the correct size on the back-end</li>
+      </ul>
     </div>
 
     <div class="card pointer-events-auto">
@@ -67,12 +87,31 @@
                 href="javascript:void(0);"
                 class="load-art-button"
                 data-src-1="/images/programming/yt-downloader.png"
+                data-src-2="/images/programming/yt-downloader1.png"
+                data-src-3="/images/programming/yt-downloader2.png"
+                data-src-4="/images/programming/yt-downloader3.png"
+                data-src-5="/images/programming/yt-downloader4.png"
+                data-src-6="/images/programming/yt-downloader5.png"
+                data-src-7="/images/programming/yt-downloader6.png"
                 data-title="Yt-Downloader"
+                data-description="yt-downloader-description"
                 data-link="https://github.com/stevenmraines/yt-downloader"
         >
           See More >
         </a>
       </div>
+    </div>
+
+    <div id="yt-downloader-description" class="hidden">
+      <ul>
+        <li>Built using the Godot game engine</li>
+        <li>Integrates with the yt-dlp command line utility</li>
+        <li>Copy downloaded files to a USB hard drive</li>
+        <li>Upload downloaded files to a remote server using SSH</li>
+        <li>Queue multiple processes, pause their execution, or terminate them</li>
+        <li>Automatically delete files from their download location after copying or uploading</li>
+        <li>Backup entire playlists with just a few clicks</li>
+      </ul>
     </div>
 
     <div class="card pointer-events-auto">
@@ -84,12 +123,22 @@
                 href="javascript:void(0);"
                 class="load-art-button"
                 data-src-1="/videos/godot-psx-test-intro.mp4"
+                data-src-2="/videos/godot-psx-test-gameplay.mp4"
                 data-title="Untitled Horror Game"
+                data-description="godot-psx-test-description"
                 data-link="https://github.com/stevenmraines/Godot-PSX-Test"
         >
           See More >
         </a>
       </div>
+    </div>
+
+    <div id="godot-psx-test-description" class="hidden">
+      <ul>
+        <li>Cutscenes scripted in-engine using PhantomCamera addon</li>
+        <li>Enemy AI behavior trees created with Beehave addon</li>
+        <li>Custom in-game console offers commands for debugging</li>
+      </ul>
     </div>
 
     <div class="card pointer-events-auto">
@@ -102,11 +151,23 @@
                 class="load-art-button"
                 data-src-1="/videos/mech-game.mp4"
                 data-title="Mech Strategy Game"
+                data-description="mech-strategy-game-description"
                 data-link="https://github.com/stevenmraines/mech-game"
         >
           See More >
         </a>
       </div>
+    </div>
+
+    <div id="mech-strategy-game-description" class="hidden">
+      <ul>
+        <li>Gameplay inspired by FTL and the XCOM games</li>
+        <li>Control a squad of 2-4 mechs</li>
+        <li>Grid-based movement and turn-based gameplay</li>
+        <li>Manage power between different mech parts and systems</li>
+        <li>Choose between melee, long-range, energy, and ballistic weapons</li>
+        <li>Manage mech weight to choose your balance between mobility and firepower</li>
+      </ul>
     </div>
 
     <div class="card pointer-events-auto">
@@ -119,6 +180,7 @@
                 class="load-art-button"
                 data-src-1="/images/programming/lunacid-type.png"
                 data-title="Untitled Fantasy Game"
+                data-description="lunacid-type-description"
                 data-link="https://github.com/stevenmraines/lunacid-type"
         >
           See More >
@@ -126,11 +188,21 @@
       </div>
     </div>
 
+    <div id="lunacid-type-description" class="hidden">
+      <ul>
+        <li>Inspired by Lunacid and Soulsborne games</li>
+        <li>Will feature first-person melee combat</li>
+        <li>Player will be able to wield spells and a variety of weapons</li>
+        <li>Features false walls and climbable ladders and ropes</li>
+        <li>Maps created using the func_godot addon for Godot and NetRadiant</li>
+      </ul>
+    </div>
+
     <div class="card pointer-events-auto">
       <div class="card-content">
         <div class="pixel-art-preview bg-[url(/images/programming/space-invaders1.jpg)] bg-contain bg-no-repeat bg-center"></div>
         <h6>Space Invaders</h6>
-        <p>The classic Atari game, remade in Java for one of my university group projects</p>
+        <p>The classic Atari game, remade in Java for a group project in my Intro to Object-Oriented Programming class</p>
         <a
                 href="javascript:void(0);"
                 class="load-art-button"
@@ -138,6 +210,7 @@
                 data-src-2="/images/programming/space-invaders2.jpg"
                 data-src-3="/images/programming/space-invaders3.jpg"
                 data-title="Space Invaders"
+                data-description="space-invaders-description"
                 data-link="https://github.com/stevenmraines/SpaceInvaders"
         >
           See More >
@@ -145,21 +218,39 @@
       </div>
     </div>
 
+    <div id="space-invaders-description" class="hidden">
+      <ul>
+        <li>Coded in Java using the Swing GUI toolkit</li>
+        <li>Features a bonus gattling gun weapon that can be used after picking up ammo</li>
+        <li>Programmed as part of a group project for my UNCW Intro to OOP class</li>
+      </ul>
+    </div>
+
     <div class="card pointer-events-auto">
       <div class="card-content">
         <div class="pixel-art-preview bg-[url(/images/programming/answer-me-this1.jpg)] bg-contain bg-no-repeat bg-center"></div>
         <h6>Answer Me This</h6>
-        <p>A Blackboard-style application which was conceived for a group project in my Software Engineering class</p>
+        <p>An application which was conceived for a group project in my Software Engineering class</p>
         <a
                 href="javascript:void(0);"
                 class="load-art-button"
                 data-src-1="/images/programming/answer-me-this1.jpg"
                 data-src-2="/images/programming/answer-me-this2.jpg"
                 data-title="Answer Me This"
+                data-description="answer-me-this-description"
         >
           See More >
         </a>
       </div>
+    </div>
+
+    <div id="answer-me-this-description" class="hidden">
+      <ul>
+        <li>A quiz application programmed in .NET</li>
+        <li>Designed to help teachers increase student participation</li>
+        <li>Teachers can monitor the entire class or individual student results</li>
+        <li>Created for a group project in my UNCW Software Engineering class</li>
+      </ul>
     </div>
 
     <div class="card pointer-events-auto">
@@ -174,10 +265,45 @@
                 data-src-2="/images/programming/game-start2.jpg"
                 data-src-3="/images/programming/game-start3.jpg"
                 data-title="Game Start"
+                data-description="game-start-description"
         >
           See More >
         </a>
       </div>
+    </div>
+
+    <div id="game-start-description" class="hidden">
+      <ul>
+        <li></li>
+      </ul>
+    </div>
+
+    <div class="card pointer-events-auto">
+      <div class="card-content">
+        <div class="pixel-art-preview bg-[url(/images/programming/java-world-clock1.jpg)] bg-contain bg-no-repeat bg-center"></div>
+        <h6>Java World Clock</h6>
+        <p>A Java application for viewing the time in multiple different timezones simultaneously</p>
+        <a
+                href="javascript:void(0);"
+                class="load-art-button"
+                data-src-1="/images/programming/java-world-clock1.jpg"
+                data-src-2="/images/programming/java-world-clock2.jpg"
+                data-src-3="/images/programming/java-world-clock3.jpg"
+                data-title="Java World Clock"
+                data-description="java-world-clock-description"
+                data-link="https://github.com/stevenmraines/JavaWorldClock"
+        >
+          See More >
+        </a>
+      </div>
+    </div>
+
+    <div id="java-world-clock-description" class="hidden">
+      <ul>
+        <li>View up to eight different timezones at once</li>
+        <li>Developed at the request of a friend who works customer support for Apple</li>
+        <li>Assisted him in working with clients in different countries around the world</li>
+      </ul>
     </div>
 
   </div>
@@ -207,5 +333,14 @@
 
 <script src="js/common.min.js" type="module"></script>
 <script src="js/pixel-art.min.js" type="module"></script>
+<!--<script src="https://cjrtnc.leaningtech.com/4.3/loader.js"></script>-->
+<script>
+  <!-- TODO Get this working so you can play space invaders in the browser -->
+  // (async function startSpaceInvaders () {
+  //   await cheerpjInit({ version: 17 });
+  //   cheerpjCreateDisplay(800, 600);
+  //   await cheerpjRunJar("/app/space-invaders/space-invaders.jar");
+  // })();
+</script>
 </body>
 </html>

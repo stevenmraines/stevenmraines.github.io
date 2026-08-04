@@ -63,6 +63,10 @@ const paths = {
         src: 'assets/videos/*.mp4',
         dest: 'public/videos',
     },
+    spaceInvaders: {
+        src: 'assets/space-invaders/**/*',
+        dest: 'public/space-invaders',
+    },
 };
 
 function clean() {
@@ -86,6 +90,11 @@ function cleanJs() {
 function files() {
     return gulp.src(paths.files.src)
         .pipe(gulp.dest(paths.files.dest));
+}
+
+function spaceInvaders() {
+    return gulp.src(paths.spaceInvaders.src)
+        .pipe(gulp.dest(paths.spaceInvaders.dest));
 }
 
 function fonts() {
@@ -154,9 +163,11 @@ function watch() {
     gulp.watch(paths.js.watch, js);
     gulp.watch(paths.models.src, models);
     gulp.watch(paths.images.src, images);
+    gulp.watch(paths.videos.src, videos);
+    gulp.watch(paths.spaceInvaders.src, spaceInvaders);
 }
 
-const buildTask = gulp.series(clean, gulp.parallel([files, fonts, models, nodeFonts, images, videos, html, css, js]));
+const buildTask = gulp.series(clean, gulp.parallel([files, spaceInvaders, fonts, models, nodeFonts, images, videos, html, css, js]));
 const serveTask = gulp.series(buildTask, serve);
 const watchTask = gulp.series(serveTask, watch);
 const watchNoBuildTask = gulp.series(serve, watch);
