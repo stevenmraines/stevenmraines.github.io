@@ -7,9 +7,9 @@ let cards_container,
     full_view_container_content,
     full_view_container_overlay,
     full_view_container_close,
-    prev_image,
-    next_image,
-    pixel_art_full_view,
+    prev_project,
+    next_project,
+    full_view_img,
     video_player,
     video_player_source,
     project_text_container,
@@ -27,9 +27,9 @@ document.addEventListener('DOMContentLoaded', function () {
     full_view_container_content = document.getElementById('full-view-container-content');
     full_view_container_overlay = document.getElementById('full-view-container-overlay');
     full_view_container_close = document.getElementById('full-view-container-close');
-    prev_image = document.getElementById('prev-image');
-    next_image = document.getElementById('next-image');
-    pixel_art_full_view = document.getElementById('pixel-art-full-view');
+    prev_project = document.getElementById('prev-project');
+    next_project = document.getElementById('next-project');
+    full_view_img = document.getElementById('full-view-img');
     video_player = document.getElementById('video-player');
     video_player_source = document.getElementById('video-player-source');
     project_text_container = document.getElementById('project-text-container');
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function addEventListeners() {
-    for (let button of document.getElementsByClassName('load-art-button')) {
+    for (let button of document.getElementsByClassName('load-project-button')) {
         button.addEventListener('click', function (e) {
             clicked_card_sources = [];
             current_source_index = 0;
@@ -53,8 +53,8 @@ function addEventListeners() {
                 clicked_card_sources.push(target.dataset[`src-${i}`]);
                 i++;
             }
-            prev_image.style.display = i === 2 ? 'none' : 'block';
-            next_image.style.display = i === 2 ? 'none' : 'block';
+            prev_project.style.display = i === 2 ? 'none' : 'block';
+            next_project.style.display = i === 2 ? 'none' : 'block';
         });
     }
 
@@ -62,12 +62,12 @@ function addEventListeners() {
         collapseViewer();
     });
 
-    prev_image.addEventListener('click', function () {
+    prev_project.addEventListener('click', function () {
         current_source_index = Math.max(0, current_source_index - 1);
         const src = clicked_card_sources[current_source_index];
-        let srcElement = src.endsWith('mp4') ? video_player_source : pixel_art_full_view;
-        let viewerElement = src.endsWith('mp4') ? video_player : pixel_art_full_view;
-        let otherElement = src.endsWith('mp4') ? pixel_art_full_view : video_player;
+        let srcElement = src.endsWith('mp4') ? video_player_source : full_view_img;
+        let viewerElement = src.endsWith('mp4') ? video_player : full_view_img;
+        let otherElement = src.endsWith('mp4') ? full_view_img : video_player;
         srcElement.src = src;
         if (otherElement) otherElement.style.display = 'none';
         viewerElement.style.display = 'block';
@@ -76,12 +76,12 @@ function addEventListeners() {
         if (src.endsWith('mp4')) viewerElement.play();
     });
 
-    next_image.addEventListener('click', function () {
+    next_project.addEventListener('click', function () {
         current_source_index = Math.min(current_source_index + 1, clicked_card_sources.length - 1);
         const src = clicked_card_sources[current_source_index];
-        let srcElement = src.endsWith('mp4') ? video_player_source : pixel_art_full_view;
-        let viewerElement = src.endsWith('mp4') ? video_player : pixel_art_full_view;
-        let otherElement = src.endsWith('mp4') ? pixel_art_full_view : video_player;
+        let srcElement = src.endsWith('mp4') ? video_player_source : full_view_img;
+        let viewerElement = src.endsWith('mp4') ? video_player : full_view_img;
+        let otherElement = src.endsWith('mp4') ? full_view_img : video_player;
         srcElement.src = src;
         if (otherElement) otherElement.style.display = 'none';
         viewerElement.style.display = 'block';
@@ -135,9 +135,9 @@ function expandViewer() {
     }
 
     const src = target.dataset['src-1'];
-    let srcElement = src.endsWith('mp4') ? video_player_source : pixel_art_full_view;
-    let viewerElement = src.endsWith('mp4') ? video_player : pixel_art_full_view;
-    let otherElement = src.endsWith('mp4') ? pixel_art_full_view : video_player;
+    let srcElement = src.endsWith('mp4') ? video_player_source : full_view_img;
+    let viewerElement = src.endsWith('mp4') ? video_player : full_view_img;
+    let otherElement = src.endsWith('mp4') ? full_view_img : video_player;
     let timeouts_finished = false;
 
     // TODO load event seems to fire before the browser actually displays the image
@@ -210,9 +210,9 @@ function collapseViewer() {
         setTimeout(function () {
             full_view_container.style.display = 'none';
 
-            pixel_art_full_view.src = '#';
+            full_view_img.src = '#';
             if (video_player_source) video_player_source.src = '#';
-            pixel_art_full_view.style.display = 'none';
+            full_view_img.style.display = 'none';
             if (video_player) video_player.style.display = 'none';
 
             cards_container.classList.add('flex-row');
