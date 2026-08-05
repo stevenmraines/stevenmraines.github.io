@@ -192,23 +192,6 @@
             }
         }
     }
-
-    .project-text-container {
-        /* right-6 needs to match the right padding of .content */
-        @apply fixed top-1/2 right-6 -translate-y-1/2 w-[0.225] transition-opacity duration-175 z-2;
-
-        & > #project-title {
-            @apply text-center;
-        }
-
-        & > #project-description-body {
-            @apply text-wrap text-clip;
-        }
-
-        & > #project-description-footer {
-            @apply text-right;
-        }
-    }
 }
 
 /*

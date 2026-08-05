@@ -159,8 +159,8 @@ function expandViewer() {
         timeouts_finished = true;
     }
 
-    cards_container.classList.remove('flex-row');
-    cards_container.classList.add('flex-col');
+    cards_container.classList.remove('cards-container-collapsed');
+    cards_container.classList.add('cards-container-expanded');
 
     full_view_container.style.display = 'block';
     // Trigger a forced reflow so that the initial width: 0 state is respected and the width transition works properly
@@ -215,8 +215,8 @@ function collapseViewer() {
             full_view_img.style.display = 'none';
             if (video_player) video_player.style.display = 'none';
 
-            cards_container.classList.add('flex-row');
-            cards_container.classList.remove('flex-col');
+            cards_container.classList.remove('cards-container-expanded');
+            cards_container.classList.add('cards-container-collapsed');
         }, CONFIG.transitionDuration * 1.5);
     }, CONFIG.transitionDuration * 0.5);
 }

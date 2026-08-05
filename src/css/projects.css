@@ -5,7 +5,8 @@
 }
 
 #full-view-container {
-    @apply fixed left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-[width,height] duration-350 bg-[#2c2a30] border-2 border-black;
+    /*TODO Update gaussian splat viewer and 3d viewer to use these values for top and translate-y*/
+    @apply fixed left-1/2 top-11/20 -translate-y-11/20 -translate-x-1/2 transition-[width,height] duration-350 bg-[#2c2a30] border-2 border-black;
 }
 
 #full-view-container-content {
@@ -43,8 +44,26 @@
     @apply pointer-events-auto;
 }
 
+.project-text-container {
+    /* right-6 needs to match the right padding of .content */
+    @apply fixed right-6 top-11/20 -translate-y-11/20 w-[22vw] transition-opacity duration-175 z-2;
+
+    & > #project-title {
+        @apply text-center;
+    }
+
+    & > #project-description-body {
+        @apply text-wrap text-clip;
+    }
+
+    & > #project-description-footer {
+        @apply text-right;
+    }
+}
+
 .viewer-w-expanded {
-    width: 900px;
+    /*width: 900px;*/
+    width: 50vw;
 }
 
 .viewer-w-collapsed {
@@ -52,9 +71,21 @@
 }
 
 .viewer-h-expanded {
-    height: 600px;
+    /*height: 600px;*/
+    height: calc(0.75 * 50vw);
 }
 
 .viewer-h-collapsed {
     height: 0;
+}
+
+.cards-container-collapsed {
+    width: 100%;
+    flex-direction: row;
+}
+
+/*TODO Our cards have a fixed width and height, so they're expanding beyond this when the screen is more narrow*/
+.cards-container-expanded {
+    width: 22vw;
+    flex-direction: column;
 }
