@@ -1,0 +1,5 @@
+@reference "./base.css";
+
+#full-view-container {
+    @apply left-1/2 -translate-x-1/2;
+}
