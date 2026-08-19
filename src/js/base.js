@@ -10,6 +10,8 @@ const PROJECTS_MESSAGE_ID = 'projects-message';
 const MAIN_MENU_ID = 'main-menu';
 const SUB_MENU_CLASS = 'sub-menu';
 
+// TODO Add some class here to be put on images that we can attach a click handler to do a fullscreen preview, seems the easiest way to do that
+
 /*
  ***********************************************************************************************************************
  * PAGE SETUP

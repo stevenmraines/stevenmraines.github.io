@@ -145,6 +145,14 @@
  ***********************************************************************************************************************
  */
 @layer components {
+    .center-x {
+        @apply absolute left-1/2 -translate-x-1/2;
+    }
+
+    .center-y {
+        @apply absolute top-1/2 -translate-y-1/2;
+    }
+
     .content {
         @apply relative z-1 px-6 pb-6;
     }
