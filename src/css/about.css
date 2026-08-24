@@ -1,1 +1,28 @@
 @reference "./base.css";
+
+@theme {
+    --animate-slide-in-left: slide-in-left 1.5s ease-out forwards;
+
+    @keyframes slide-in-left {
+        0% { right: -32rem; }
+        100% { right: 32rem; }
+    }
+}
+
+@layer components {
+    .blur-container {
+        @apply bg-dark-gray-trans backdrop-blur-xs p-10 border-2 border-black;
+    }
+}
+
+#blur-container {
+    scroll-snap-type: y mandatory;
+
+    & > * {
+        scroll-snap-align: center;
+    }
+
+    & > *:first-child {
+        scroll-snap-align: end;
+    }
+}

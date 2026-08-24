@@ -17,95 +17,107 @@
     @@include('./partials/nav.html')
     @@include('./partials/background.html')
 
-    <div class="content">
-        <div class="h-screen mx-[20%] relative">
-            <div class="absolute top-8/20 -translate-y-8/20 bg-dark-gray-trans backdrop-blur-xs p-10 rounded-lg border-2 border-black">
-                <div>
-                    <h4 class="text-center mb-6">
-                        "Steve is the mythical full stack engineer that can handle deep engineering
-                        tasks AND make it well designed too. Would gladly hire again!"
+    <div class="content h-full">
+        <div class="h-full relative">
+            <div id="blur-container" class="absolute left-24 top-9/20 -translate-y-9/20 blur-container w-[80%] h-[81%] pr-72 pb-0 overflow-scroll no-scrollbar">
+                <div class="pt-18 h-full">
+                    <h1 class="text-center"><span class="font-outline">Steven Raines</span></h1>
+                    <h2 class="text-center">Full-Stack Web Developer</h2>
+                    <h4 class="text-center mb-3">(Amateur Game Developer)</h4>
+                    <h4 class="text-center animate-fade-in [animation-delay:1.5s] opacity-0">
+                        <span class="relative animate-pulse">
+                            Scroll Down
+                            <img src="/images/icons/arrow.png" alt="arrow icon" class="absolute top-2 -right-8 rotate-160 -scale-x-100" />
+                        </span>
                     </h4>
-                    <h6 class="text-right">
-                        <a href="https://www.linkedin.com/in/benclaar/" target="_blank">
-                            - Ben Claar, CEO at Piestar
-                        </a>
-                    </h6>
+                </div>
+
+                <div class="relative h-full">
+                    <div class="flex justify-between gap-12 center-x center-y w-[80%]">
+                        <img src="/images/other/jk2.png" alt="ree" class="w-auto h-[300px]" />
+
+                        <p class="text-justify">
+                            When I was a teen, I played a game called Star Wars Jedi Knight II: Jedi Outcast on PC.
+                            One day my friend showed me a website where you could download "mods" for the game, and this
+                            unexpectedly started me on my journey as a software developer.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="relative h-full">
+                    <div class="flex justify-between gap-12 center-x center-y w-[80%]">
+                        <img src="/images/other/radiant1.jpg" alt="ree" class="w-auto h-[300px]" title="GTK Radiant, the map editing software for the Jedi Knight games" />
+
+                        <p class="text-justify order-first">
+                            By making mods I learned about 3D modeling, particle effects, shaders, making maps, level scripting, and
+                            learning how to use software like Photoshop.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="relative h-full">
+                    <div class="flex justify-between gap-12 center-x center-y w-[80%]">
+                        <img src="/images/photos/uncw-hawk-statue.jpg" alt="ree" class="w-auto h-[300px]" />
+
+                        <p class="text-justify">
+                            After graduating from high school, I completed an Associate in Science degree from Cape Fear
+                            Community College before transfering to the University of North Carolina at Wilmington.
+                            At UNCW I majored in Computer Science with a concentration on Digital Arts since there was no
+                            full game dev major.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="relative h-full">
+                    <div class="flex justify-between gap-12 center-x center-y w-[80%]">
+                        <img src="/images/photos/queensboro-luncheon.jpg" alt="ree" class="w-auto h-[300px]" />
+
+                        <p class="text-justify order-first">
+                            After graduation, I began learning web dev and landed my first job as a junior web developer at
+                            Queensboro Shirt Company, a local screen print and embroidery business where I worked for three
+                            years.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="relative h-full">
+                    <div class="flex justify-between gap-12 center-x center-y w-[80%]">
+                        <img src="/images/photos/piestar-na-pali-coast-tour.jpg" alt="ree" class="w-auto h-[300px]" />
+
+                        <p class="text-justify">
+                            I was let go from Queensboro shortly after the COVID lockdown began.
+                            After an unsuccessful stint trying my hand at being a self-employed game dev,
+                            I landed my next job as a web developer with Piestar.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- TODO Add something about how I'm looking for work now -->
+                <div class="relative h-full">
+                    <div class="flex justify-between gap-12 center-x center-y w-[80%]">
+                        <h3>
+                            hire me plz
+                        </h3>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="mb-15">
-            <div class="flex justify-between mb-12 mx-70">
-                <div class="self-center">
-                    <h2 class="text-center">Hi, I'm <span class="font-outline">Steven Raines</span></h2>
-                    <h3 class="text-center">Full-Stack Web Developer</h3>
-                    <h5 class="text-center">(Amateur Game Developer)</h5>
-                </div>
-                <img src="/images/photos/profile-photo.png" alt="ree" class="w-[300px] h-[300px]" />
-            </div>
-
-            <div class="relative min-h-[300px] mb-12">
-                <div class="clear-both flex justify-between gap-24 center-x">
-                    <img src="/images/other/jk2.png" alt="ree" class="w-auto h-[300px]" />
-
-                    <p class="text-justify">
-                        When I was a teen, I played a game called Star Wars Jedi Knight II: Jedi Outcast on PC.
-                        One day my friend showed me a website where you could download "mods" for the game, and this
-                        unexpectedly started me on my journey as a software developer.
-                    </p>
-                </div>
-            </div>
-
-            <div class="relative min-h-[300px] mb-12">
-                <div class="clear-both flex justify-between gap-24 center-x">
-                    <img src="/images/other/radiant1.jpg" alt="ree" class="w-auto h-[300px]" title="GTK Radiant, the map editing software for the Jedi Knight games" />
-
-                    <p class="text-justify order-first">
-                        By making mods I learned about 3D modeling, particle effects, shaders, making maps, level scripting, and
-                        learning how to use software like Photoshop.
-                    </p>
-                </div>
-            </div>
-
-            <div class="relative min-h-[300px] mb-12">
-                <div class="clear-both flex justify-between gap-24 center-x">
-                    <img src="/images/photos/uncw-hawk-statue.jpg" alt="ree" class="w-auto h-[300px]" />
-
-                    <p class="text-justify">
-                        After graduating from high school, I completed an Associate in Science degree from Cape Fear
-                        Community College before transfering to the University of North Carolina at Wilmington.
-                        At UNCW I majored in Computer Science with a concentration on Digital Arts since there was no
-                        full game dev major.
-                    </p>
-                </div>
-            </div>
-
-            <div class="relative min-h-[300px] mb-12">
-                <div class="clear-both flex justify-between gap-24 center-x">
-                    <img src="/images/photos/queensboro-luncheon.jpg" alt="ree" class="w-auto h-[300px]" />
-
-                    <p class="text-justify order-first">
-                        After graduation, I began learning web dev and landed my first job as a junior web developer at
-                        Queensboro Shirt Company, a local screen print and embroidery business where I worked for three
-                        years.
-                    </p>
-                </div>
-            </div>
-
-            <div class="relative min-h-[300px] mb-12">
-                <div class="clear-both flex justify-between gap-24 center-x">
-                    <img src="/images/photos/piestar-na-pali-coast-tour.jpg" alt="ree" class="w-auto h-[300px]" />
-
-                    <p class="text-justify">
-                        I was let go from Queensboro shortly after the COVID lockdown began.
-                        After an unsuccessful stint trying my hand at being a self-employed game dev,
-                        I landed my next job as a web developer with Piestar.
-                    </p>
-                </div>
+            <img src="/images/photos/profile-photo.png" alt="ree" class="w-[375px] h-[375px] absolute right-24 top-40 border border-orange2" />
+            <div id="recommendation" class="absolute right-32 top-126 z-2 bg-viridian2 border border-white max-w-[500px] p-6 animate-slide-in-left">
+                <p class="mb-2">
+                    "Steve is the mythical full stack engineer that can handle deep engineering
+                    tasks AND make it well designed too. Would gladly hire again!"
+                </p>
+                <span class="float-right">
+                    <a href="https://www.linkedin.com/in/benclaar/" target="_blank" class="text-white">
+                        - Ben Claar, CEO at Piestar
+                    </a>
+                </span>
             </div>
         </div>
     </div>
 
     <script src="js/common.min.js" type="module"></script>
+    <script src="js/about.min.js" type="module"></script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 @import "./colors.css";
 @source "../js/base.js";
 @source "../js/3d-viewer.js";
+@source "../js/about.js";
 
 /*
  ***********************************************************************************************************************
@@ -57,6 +58,28 @@
     --font-sans: SFPixelate, sans-serif;
     --font-outline: SFPixelateShaded, sans-serif;
     --font-bold: SFPixelate-Bold, sans-serif;
+
+    --animate-fade-in: fade-in .35s ease-out forwards;
+
+    @keyframes fade-in {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+}
+
+/*
+ ***********************************************************************************************************************
+ * UTILITIES
+ ***********************************************************************************************************************
+ */
+@layer utilities {
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
 }
 
 /*
