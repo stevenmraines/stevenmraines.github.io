@@ -247,6 +247,8 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
             prev_texture_button.style.display = 'none';
             next_texture_button.style.display = 'none';
 
+            let mesh_counter = 0;
+
             for (let object_name of Object.keys(objects)) {
                 const object = objects[object_name];
 
@@ -330,7 +332,7 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
 
                 if (object.textures) {
                     for (let i in object.textures) {
-                        if (parseInt(i) > 0) {
+                        if (parseInt(i) > 0 || mesh_counter > 0) {
                             // If there's more than one texture map, enable the prev/next buttons
                             prev_texture_button.style.display = 'inline';
                             next_texture_button.style.display = 'inline';
@@ -341,7 +343,18 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
                         texture_placeholder.style.display = 'none';
                         const texture_image = document.createElement('img');
                         texture_image.style.display = 'none';
-                        texture_image_container.appendChild(texture_image);
+
+                        let image_exists = false;
+
+                        for (let child of texture_image_container.children) {
+                            if (child.src && child.src.includes('/models/' + subdir + '/' + texture.map)) {
+                                image_exists = true;
+                            }
+                        }
+
+                        if (! image_exists) {
+                            texture_image_container.appendChild(texture_image);
+                        }
 
                         const textureLoader = new THREE.TextureLoader();
                         const loaded_texture = textureLoader.load('/models/' + subdir + '/' + texture.map);
@@ -356,7 +369,7 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
                         texture_image.dataset.filename = texture.map;
                         texture_image.style.display = 'none';
 
-                        if (texture_counter === 0) {
+                        if (texture_counter === 0 && mesh_counter === 0) {
                             texture_image.style.display = 'inline';
                             texture_filename.innerText = texture.map;
                         }
@@ -400,6 +413,8 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
                 wireframe_lines.material.opacity = CONFIG.meshWireframeOpacity;
                 wireframe_lines.material.transparent = true;
                 mesh_wireframes.push(wireframe_lines);
+
+                mesh_counter++;
             }
         }
 
