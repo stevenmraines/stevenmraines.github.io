@@ -145,6 +145,7 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
     current_rotation = rotation;
     current_scale = scale;
     current_position = position;
+    current_texture_image = 0;
 
     try {
 
@@ -242,8 +243,6 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
         }
 
         function buildMeshes() {
-            let counter = 0;
-
             for (let object_name of Object.keys(objects)) {
                 const object = objects[object_name];
 
@@ -326,16 +325,13 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
                 let texture_counter = 0;
 
                 if (object.textures) {
-                    for (let texture of object.textures) {
+                    for (let i in object.textures) {
+                        const texture = object.textures[i];
                         const material = new THREE.MeshStandardMaterial({});
                         texture_preview_window.style.display = 'block';
                         texture_placeholder.style.display = 'none';
                         const texture_image = document.createElement('img');
                         texture_image.style.display = 'none';
-                        if (counter === 0) {
-                            texture_image.style.display = 'inline';
-                            texture_filename.innerText = texture.map;
-                        }
                         texture_image_container.appendChild(texture_image);
 
                         const textureLoader = new THREE.TextureLoader();
@@ -353,6 +349,7 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
 
                         if (texture_counter === 0) {
                             texture_image.style.display = 'inline';
+                            texture_filename.innerText = texture.map;
                         }
 
                         const hasTexture = ! texture_image.src.endsWith('#');
@@ -394,8 +391,6 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
                 wireframe_lines.material.opacity = CONFIG.meshWireframeOpacity;
                 wireframe_lines.material.transparent = true;
                 mesh_wireframes.push(wireframe_lines);
-
-                counter++;
             }
         }
 
@@ -455,10 +450,6 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
             for (let i in meshes) {
                 const mesh = meshes[i];
                 const wireframe = mesh_wireframes[i];
-                // TODO Not sure if needed?
-                // scene.remove(mesh);
-                // scene.remove(wireframe);
-                // mesh.material.dispose();
                 if (autoRotate) {
                     mesh.rotateY(THREE.MathUtils.degToRad(0.5));
                     wireframe.rotateY(THREE.MathUtils.degToRad(0.5));
@@ -495,7 +486,6 @@ function expand3DViewer() {
 
     canvas.classList.remove('viewer-w-collapsed');
     canvas.classList.add('viewer-w-expanded');
-    // TODO Figure out what works better, these classes, or just hard-coding the widht and height
     canvas.style.width = '900px';
 
     setTimeout(function () {
