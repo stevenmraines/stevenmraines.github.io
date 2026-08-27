@@ -243,6 +243,10 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
         }
 
         function buildMeshes() {
+            // Hide these by default, they'll be shown below if there's more than one texture map
+            prev_texture_button.style.display = 'none';
+            next_texture_button.style.display = 'none';
+
             for (let object_name of Object.keys(objects)) {
                 const object = objects[object_name];
 
@@ -326,6 +330,11 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
 
                 if (object.textures) {
                     for (let i in object.textures) {
+                        if (parseInt(i) > 0) {
+                            // If there's more than one texture map, enable the prev/next buttons
+                            prev_texture_button.style.display = 'inline';
+                            next_texture_button.style.display = 'inline';
+                        }
                         const texture = object.textures[i];
                         const material = new THREE.MeshStandardMaterial({});
                         texture_preview_window.style.display = 'block';
