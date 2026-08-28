@@ -8,9 +8,12 @@ const BG_SETTINGS_ID = 'bg-settings';
 const SETTINGS_MESSAGE_ID = 'settings-message';
 const PROJECTS_MESSAGE_ID = 'projects-message';
 const MAIN_MENU_ID = 'main-menu';
+const FULLSCREEN_WRAPPER_ID = 'fullscreen-wrapper';
+const FULLSCREEN_IMG_ID = 'fullscreen-img';
+const FULLSCREEN_CLOSE_ID = 'fullscreen-close';
 const SUB_MENU_CLASS = 'sub-menu';
-
-// TODO Add some class here to be put on images that we can attach a click handler to do a fullscreen preview, seems the easiest way to do that
+const FULLSCREEN_PREVIEW_CLASS = 'fullscreen-preview';
+const OPACITY_TRANSITION_DURATION = 300;
 
 /*
  ***********************************************************************************************************************
@@ -58,6 +61,22 @@ function addEventListeners() {
 			subMenu.style.opacity = 0;
 		});
 	}
+
+	// Set an interval to check for dynamically created fullscreen-preview images and attach the necessary click handler
+	setInterval(function () {
+		for (let img of document.getElementsByClassName(FULLSCREEN_PREVIEW_CLASS)) {
+			if (! img.dataset.hasOwnProperty('clickBound')) {
+				img.addEventListener('click', onFullscreenPreviewClicked);
+				img.title = 'Click for fullscreen view';
+				img.dataset.clickBound = 'true';
+			}
+		}
+	}, 1000);
+
+
+	document.getElementById(FULLSCREEN_CLOSE_ID).addEventListener('click', onFullscreenCloseClicked);
+
+	document.addEventListener('keyup', onKeyUp);
 }
 
 function onWindowResize(event) {
@@ -72,6 +91,70 @@ function onBgSettingsToggleClick(event) {
 
 function onBgSettingsCloseClick(event) {
 	document.getElementById(BG_SETTINGS_ID).classList.add('-translate-x-1/1');
+}
+
+function onKeyUp(event) {
+	if ((event.key && event.key.toLocaleLowerCase() === 'escape') || (event.code && event.code.toLocaleLowerCase() === 'escape')) {
+		onFullscreenCloseClicked();
+	}
+}
+
+function onFullscreenPreviewClicked(event) {
+	let src = '';
+
+	if (event.target.src) {
+		src = event.target.src;
+	}
+
+	if (! src) {
+		let bg = window.getComputedStyle(event.target).backgroundImage;
+
+		if (bg && bg !== 'none') {
+			if (bg.startsWith('url(')) {
+				const regex = /url\(["']?([^"')]+)["']?\)/i;
+				const result = regex.exec(bg);
+				if (result && result.length > 1) {
+					bg = result[1];
+				}
+			}
+
+			src = bg;
+		}
+	}
+
+	if (! src) {
+		return;
+	}
+
+	const fullscreen_wrapper = document.getElementById(FULLSCREEN_WRAPPER_ID);
+	const fullscreen_img = document.getElementById(FULLSCREEN_IMG_ID);
+
+	if (! fullscreen_img || ! fullscreen_wrapper) {
+		return;
+	}
+
+	fullscreen_img.src = src;
+	fullscreen_wrapper.style.display = 'block';
+
+	// Force a reflow so the browser commits the current opacity-0 state
+	void fullscreen_wrapper.offsetHeight;
+
+	fullscreen_wrapper.classList.remove('opacity-0');
+}
+
+function onFullscreenCloseClicked(event = null) {
+	const fullscreen_wrapper = document.getElementById(FULLSCREEN_WRAPPER_ID);
+	const fullscreen_img = document.getElementById(FULLSCREEN_IMG_ID);
+
+	if (! fullscreen_img || ! fullscreen_wrapper) {
+		return;
+	}
+
+	fullscreen_wrapper.classList.add('opacity-0');
+	setTimeout(function () {
+		fullscreen_wrapper.style.display = 'none';
+		fullscreen_img.src = '#';
+	}, OPACITY_TRANSITION_DURATION);
 }
 
 /*

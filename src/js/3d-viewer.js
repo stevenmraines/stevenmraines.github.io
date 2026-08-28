@@ -342,6 +342,7 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
                         texture_preview_window.style.display = 'block';
                         texture_placeholder.style.display = 'none';
                         const texture_image = document.createElement('img');
+                        texture_image.classList.add('fullscreen-preview');
                         texture_image.style.display = 'none';
 
                         let image_exists = false;

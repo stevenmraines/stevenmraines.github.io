@@ -228,6 +228,14 @@
             }
         }
     }
+
+    .fullscreen-preview {
+        @apply cursor-pointer pointer-events-auto;
+    }
+
+    #fullscreen-close {
+        @apply bg-light-gray text-black border-2 border-black absolute top-3 right-3 w-7 h-7 leading-6.5 cursor-pointer pointer-events-auto;
+    }
 }
 
 /*
