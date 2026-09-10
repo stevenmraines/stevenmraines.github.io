@@ -74,7 +74,9 @@ function addEventListeners() {
 	}, 1000);
 
 
-	document.getElementById(FULLSCREEN_CLOSE_ID).addEventListener('click', onFullscreenCloseClicked);
+	if (document.getElementById(FULLSCREEN_CLOSE_ID)) {
+		document.getElementById(FULLSCREEN_CLOSE_ID).addEventListener('click', onFullscreenCloseClicked);
+	}
 
 	document.addEventListener('keyup', onKeyUp);
 }

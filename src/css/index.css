@@ -1,6 +1,8 @@
 @reference "./base.css";
 
 #welcome-message {
+    @apply opacity-0 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-1 font-outline text-6xl lg:text-8xl;
+
     animation: fade-in 1s 1s ease-out forwards;
 }
 
@@ -10,22 +12,6 @@
 
 #projects-message {
     animation: fade-in 1s 4s ease-out forwards;
-}
-
-#error-box {
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    right: 1rem;
-    z-index: 999;
-    background: #b00020;
-    color: #fff;
-    font-family: monospace;
-    font-size: 0.8rem;
-    padding: 1rem;
-    white-space: pre-wrap;
-    display: none;
-    border-radius: 4px;
 }
 
 /*

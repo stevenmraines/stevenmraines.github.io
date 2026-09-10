@@ -10,8 +10,8 @@ const CONFIG_DEFAULTS = {
 
     pixelSize: 0.75,
 
-    segmentsX: 26,
-    segmentsY: 16,
+    segmentsX: 66,
+    segmentsY: 56,
 
     jitterAmount: 0.85,
     baseRelief: 0.45,
@@ -27,18 +27,6 @@ const CONFIG_DEFAULTS = {
     directionalLightColor: 0xffffff,
     directionalLightStrength: 0.8,
 };
-
-// TODO Get rid of this stuff since we're not using it
-function showError(msg) {
-    const box = document.getElementById("error-box");
-    if (box) {
-        box.style.display = "block";
-        box.textContent = "Error: " + msg;
-    }
-    console.error(msg);
-}
-
-window.addEventListener("error", (e) => showError(e.message));
 
 try {
 
@@ -230,13 +218,13 @@ try {
         let geo = new THREE.PlaneGeometry(
             width,
             height,
-            parseInt(getCookie('segmentsX')),
-            parseInt(getCookie('segmentsY'))
+            parseInt(getCalculatedSegmentsX(getCookie('segmentsX'))),
+            parseInt(getCalculatedSegmentsY(getCookie('segmentsY')))
         );
 
         const pos = geo.attributes.position;
-        const cellW = width / parseInt(getCookie('segmentsX'));
-        const cellH = height / parseInt(getCookie('segmentsY'));
+        const cellW = width / parseInt(getCalculatedSegmentsX(getCookie('segmentsX')));
+        const cellH = height / parseInt(getCalculatedSegmentsY(getCookie('segmentsY')));
 
         for (let i = 0; i < pos.count; i++) {
             const x = pos.getX(i);
@@ -430,7 +418,7 @@ try {
     animate();
 
 } catch (err) {
-    showError(err.message + "\n" + (err.stack || ""));
+    console.log(err);
 }
 
 function initCookies() {
@@ -529,4 +517,18 @@ function resetInputs() {
     document.getElementById('ambient-light-strength-value').textContent = CONFIG_DEFAULTS.ambientLightStrength;
     document.getElementById('directional-light-color-value').textContent = hex2Str(CONFIG_DEFAULTS.directionalLightColor);
     document.getElementById('directional-light-strength-value').textContent = CONFIG_DEFAULTS.directionalLightStrength;
+}
+
+function getCalculatedSegmentsX(segmentsX) {
+    if (typeof segmentsX === 'string') {
+        segmentsX = parseInt(segmentsX);
+    }
+    return Math.trunc(window.innerWidth / segmentsX);
+}
+
+function getCalculatedSegmentsY(segmentsY) {
+    if (typeof segmentsY === 'string') {
+        segmentsY = parseInt(segmentsY);
+    }
+    return Math.trunc(window.innerHeight / segmentsY);
 }
