@@ -19,7 +19,12 @@
 }
 
 #full-view-container-close {
-    @apply bg-transparent text-light-gray border border-light-gray absolute top-2 right-2 w-7 h-7 leading-6.5 cursor-pointer pointer-events-auto;
+    @apply bg-transparent text-light-gray border border-light-gray absolute top-2 right-2 w-7 h-7 leading-6.5
+        cursor-pointer pointer-events-auto transition-[background,color] duration-300;
+
+    &:hover {
+        @apply bg-light-gray text-black border-black;
+    }
 }
 
 #prev-project,
@@ -83,6 +88,84 @@
 }
 
 .cards-container-expanded {
-    width: 19vw;
+    width: 21vw;
     flex-direction: column;
+}
+
+@media (max-width: theme('screens.lg')) {
+    #full-view-container {
+        @apply relative w-4/5 min-h-2/3 overflow-auto top-7/20 mb-6;
+    }
+
+    #full-view-container-content {
+        @apply w-full h-full min-h-full;
+    }
+
+    #full-view-container-overlay {
+        @apply h-full;
+    }
+
+    #full-view-img {
+        @apply h-full;
+    }
+
+    .cards-container-expanded {
+        @apply w-1/2 absolute left-1/2 -translate-x-1/2;
+
+        & .card {
+            @apply max-w-full;
+        }
+    }
+}
+
+@media (max-width: theme('screens.md')) {
+    #full-view-container {
+        @apply relative w-9/10 min-h-1/2 overflow-auto top-1/4 mb-6;
+    }
+
+    #full-view-container-content {
+        @apply w-full h-full min-h-full;
+    }
+
+    #full-view-container-overlay {
+        @apply h-full;
+    }
+
+    #full-view-img {
+        @apply h-full;
+    }
+
+    .cards-container-expanded {
+        @apply w-1/2 absolute left-1/2 -translate-x-1/2;
+
+        & .card {
+            @apply max-w-full;
+        }
+    }
+}
+
+@media (max-width: theme('screens.sm')) {
+    #full-view-container {
+        @apply relative w-9/10 min-h-1/2 overflow-auto top-1/4 mb-6;
+    }
+
+    #full-view-container-content {
+        @apply w-full h-full min-h-full;
+    }
+
+    #full-view-container-overlay {
+        @apply h-full;
+    }
+
+    #full-view-img {
+        @apply h-full;
+    }
+
+    .cards-container-expanded {
+        @apply w-3/5 absolute left-1/2 -translate-x-1/2;
+
+        & .card {
+            @apply max-w-full;
+        }
+    }
 }
