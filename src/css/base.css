@@ -54,6 +54,15 @@
  * TAILWIND OVERRIDES
  ***********************************************************************************************************************
  */
+@theme static {
+    /* Defining these so we can get them on the js side */
+    --breakpoint-sm: 40rem;
+    --breakpoint-md: 48rem;
+    --breakpoint-lg: 64rem;
+    --breakpoint-xl: 80rem;
+    --breakpoint-2xl: 96rem;
+}
+
 @theme {
     --font-sans: SFPixelate, sans-serif;
     --font-outline: SFPixelateShaded, sans-serif;
@@ -72,14 +81,16 @@
  * UTILITIES
  ***********************************************************************************************************************
  */
-@layer utilities {
-    .no-scrollbar::-webkit-scrollbar {
+@utility no-scrollbar {
+    &::-webkit-scrollbar {
         display: none;
     }
-    .no-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+@utility fullscreen-preview {
+    @apply cursor-pointer pointer-events-auto;
 }
 
 /*
@@ -227,10 +238,6 @@
                 }
             }
         }
-    }
-
-    .fullscreen-preview {
-        @apply cursor-pointer pointer-events-auto;
     }
 
     #fullscreen-close {

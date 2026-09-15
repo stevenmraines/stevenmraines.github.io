@@ -1,7 +1,7 @@
 @reference "./base.css";
 
 #welcome-message {
-    @apply opacity-0 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-1 font-outline text-6xl lg:text-8xl;
+    @apply opacity-0 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-1 font-outline text-6xl md:text-7xl lg:text-8xl;
 
     animation: fade-in 1s 1s ease-out forwards;
 }

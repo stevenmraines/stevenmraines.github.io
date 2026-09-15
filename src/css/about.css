@@ -9,13 +9,17 @@
     }
 }
 
-@layer components {
-    .blur-container {
-        @apply bg-dark-gray-trans backdrop-blur-xs p-10 border-2 border-black;
-    }
+#profile-photo {
+    @apply w-[375px] h-[375px] absolute right-24 top-40 border border-orange2;
+}
+
+#recommendation {
+    @apply absolute right-32 top-126 z-2 bg-viridian2 border border-white max-w-[500px] p-6;
 }
 
 #blur-container {
+    @apply absolute left-24 top-9/20 -translate-y-9/20 bg-dark-gray-trans backdrop-blur-xs p-10 border-2 border-black w-[80%] h-[81%] pr-72 pb-0 overflow-scroll;
+
     scroll-snap-type: y mandatory;
 
     & > * {
@@ -24,5 +28,142 @@
 
     & > *:first-child {
         scroll-snap-align: end;
+    }
+}
+
+#title-container {
+    @apply pt-18 h-full;
+}
+
+.timeline-image {
+    @apply relative bg-contain bg-top bg-no-repeat min-h-[300px];
+}
+
+@media (max-width: theme('screens.xl')) {
+    #blur-container {
+        @apply pr-10;
+    }
+
+    #profile-photo {
+        @apply w-[325px] h-[325px] top-50 right-6;
+    }
+
+    #recommendation {
+        @apply max-w-[400px] right-18 text-sm;
+    }
+
+    #title-container {
+        @apply mb-16 pr-60;
+
+        & h1 {
+            @apply text-6xl mb-6;
+        }
+        & h2 {
+            @apply text-5xl mb-6;
+        }
+        & h4 {
+            @apply text-3xl;
+        }
+    }
+
+    .timeline-image {
+        @apply bg-center;
+    }
+}
+
+/* About 1070px, between lg and xl */
+@media (max-width: 67rem) {
+    #blur-container {
+        @apply pr-10 left-1/2 -translate-x-1/2;
+    }
+
+    #title-container {
+        @apply pt-56 pr-0;
+    }
+
+    #profile-photo {
+        @apply w-[250px] h-[250px] left-1/2 -translate-x-1/2 top-1/20 -translate-y-1/20;
+    }
+
+    #recommendation {
+        @apply right-5 top-6/32 text-xs max-w-[325px];
+    }
+}
+
+/* About 920px */
+@media (max-width: 58rem) {
+    #recommendation {
+        @apply -right-2 max-w-[275px];
+    }
+}
+
+@media (max-width: theme('screens.lg')) {
+    #blur-container {
+        @apply pr-10 left-1/2 -translate-x-1/2;
+    }
+
+    .timeline-image {
+        @apply bg-center;
+    }
+}
+
+@media (max-width: theme('screens.md')) {
+    #blur-container {
+        @apply pr-10 left-1/2 -translate-x-1/2;
+    }
+
+    #title-container {
+        @apply pt-70;
+
+        & h1 {
+            @apply text-5xl mb-3;
+        }
+        & h2 {
+            @apply text-4xl mb-3;
+        }
+        & h4 {
+            @apply text-2xl;
+        }
+    }
+
+    #recommendation {
+        @apply -right-3 max-w-[225px];
+    }
+
+    .timeline-image {
+        @apply bg-center;
+    }
+}
+
+@media (max-width: theme('screens.sm')) {
+    #blur-container {
+        @apply pr-10 left-1/2 -translate-x-1/2;
+    }
+
+    #profile-photo {
+        @apply w-[275px] h-[275px];
+    }
+
+    #title-container {
+        @apply mb-30 pt-65;
+
+        & h1 {
+            @apply text-4xl mb-5;
+        }
+        & h2 {
+            @apply text-3xl mb-5;
+        }
+        & h4 {
+            @apply text-xl;
+        }
+    }
+
+    #recommendation {
+        /* TODO Move this to the final panel or something */
+        @apply hidden;
+    }
+
+    .timeline-image {
+        @apply bg-center;
     }
 }
