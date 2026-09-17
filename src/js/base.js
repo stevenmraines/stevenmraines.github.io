@@ -109,12 +109,9 @@ function onWindowResize(event) {
 }
 
 function onMobileNavToggle(event) {
-	const mobileNav = document.getElementById(MOBILE_NAV);
-	const mobileNavClose = document.getElementById(MOBILE_NAV_CLOSE_ID);
-	const mobileNavOpen = document.getElementById(MOBILE_NAV_OPEN_ID);
-	mobileNav.classList.toggle('hidden');
-	mobileNavClose.classList.toggle('hidden');
-	mobileNavOpen.classList.toggle('hidden');
+	document.getElementById(MOBILE_NAV_CLOSE_ID).classList.toggle('hidden');
+	document.getElementById(MOBILE_NAV_OPEN_ID).classList.toggle('hidden');
+	document.getElementById(MOBILE_NAV).classList.toggle('-translate-x-1/1');
 }
 
 function onMobileNavProjectsToggleClick(event) {

@@ -185,6 +185,8 @@
         }
 
         #mobile-nav {
+            @apply transition-transform duration-300;
+
             li {
                 @apply mb-2;
             }
