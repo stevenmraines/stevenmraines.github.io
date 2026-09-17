@@ -1,5 +1,66 @@
-<header class="fixed top-0 left-0 right-0 z-3">
+<!-- MOBILE NAV -->
+<button id="mobile-nav-open" class="nav:hidden fixed z-3 ml-4 mt-4 bg-viridian2 rounded-sm">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+       stroke-width="2" stroke="currentColor" class="w-10 h-10 text-black border-2 border-black rounded-sm">
+    <path stroke-linecap="round" stroke-linejoin="round"
+          d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+  </svg>
+</button>
+<header id="mobile-nav" class="nav:hidden hidden fixed z-3 w-3/5 h-screen pl-4 pt-4 bg-dark-gray">
   <nav class="relative">
+    <ul>
+      <li>
+        <a href="/">Home</a>
+      </li>
+      <li>
+        <a id="projects-toggle" href="javascript:void(0)">Projects ></a>
+        <ul id="projects-ul" class="hidden ml-6">
+          <li>
+            <a href="/programming.html">Programming Projects</a>
+          </li>
+          <li>
+            <a href="/pixel-art.html">Pixel Art</a>
+          </li>
+          <li>
+            <a href="/3d-modeling.html">3D Modeling</a>
+          </li>
+          <li>
+            <a href="/rainmeter.html">Rainmeter Skins</a>
+          </li>
+          <li>
+            <a href="/splats.html">Gaussian Splatting</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="/about.html">About Me</a>
+      </li>
+      <li>
+        <a href="/files/resume.pdf" download="steven_m_raines_resume.pdf">
+          My Resume
+        </a>
+      </li>
+      <li>
+        <a class="linkedin-link" href="https://www.linkedin.com/in/steven-raines-648086404/" target="blank">
+          <img src="#" alt="linkedin logo" class="pixelated" />
+        </a>
+        <a class="github-link" href="https://github.com/stevenmraines" target="blank">
+          <img src="#" alt="github logo" class="pixelated" />
+        </a>
+      </li>
+    </ul>
+    <button
+      id="mobile-nav-close"
+      class="hidden absolute right-4 top-0 flex items-center justify-center bg-viridian2 border-2 border-black rounded-sm text-black text-xl pt-[.25rem] leading-none aspect-square h-[1.6em]"
+    >
+      X
+    </button>
+  </nav>
+</header>
+
+<!-- DESKTOP NAV -->
+<header class="max-nav:hidden fixed top-0 left-0 right-0 z-3">
+  <nav id="desktop-nav" class="relative">
     <a id="bg-settings-toggle" class="absolute left-6 top-1/2 -translate-y-1/2 cursor-pointer">
       Settings
     </a>
@@ -53,10 +114,10 @@
       </li>
     </ul>
     <div class="absolute right-4 top-1/2 -translate-y-1/2 h-9/10 text-right">
-      <a id="linkedin-link" href="https://www.linkedin.com/in/steven-raines-648086404/" target="blank">
+      <a class="linkedin-link" href="https://www.linkedin.com/in/steven-raines-648086404/" target="blank">
         <img src="#" alt="linkedin logo" class="pixelated" />
       </a>
-      <a id="github-link" href="https://github.com/stevenmraines" target="blank">
+      <a class="github-link" href="https://github.com/stevenmraines" target="blank">
         <!-- TODO This is looking weird when hovered, also it's the wrong color when hovered -->
         <img src="#" alt="github logo" class="pixelated" />
       </a>

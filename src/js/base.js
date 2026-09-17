@@ -2,6 +2,11 @@ let windowHeight = 0;
 let screenTopY = 0;
 let screenBottomY = 0;
 
+const MOBILE_NAV_OPEN_ID = 'mobile-nav-open';
+const MOBILE_NAV_CLOSE_ID = 'mobile-nav-close';
+const MOBILE_NAV = 'mobile-nav';
+const MOBILE_NAV_PROJECTS_TOGGLE_ID = 'projects-toggle';
+const MOBILE_NAV_PROJECTS_UL_ID = 'projects-ul';
 const BG_SETTINGS_TOGGLE_ID = 'bg-settings-toggle';
 const BG_SETTINGS_CLOSE_ID = 'bg-settings-close';
 const BG_SETTINGS_ID = 'bg-settings';
@@ -30,6 +35,24 @@ document.addEventListener('DOMContentLoaded', function() {
  */
 function addEventListeners() {
 	window.addEventListener('resize', onWindowResize);
+
+	const mobileNavOpen = document.getElementById(MOBILE_NAV_OPEN_ID);
+
+	if (mobileNavOpen) {
+		mobileNavOpen.addEventListener('click', onMobileNavToggle);
+	}
+
+	const mobileNavClose = document.getElementById(MOBILE_NAV_CLOSE_ID);
+
+	if (mobileNavClose) {
+		mobileNavClose.addEventListener('click', onMobileNavToggle);
+	}
+
+	const mobileNavProjectsToggle = document.getElementById(MOBILE_NAV_PROJECTS_TOGGLE_ID);
+
+	if (mobileNavProjectsToggle) {
+		mobileNavProjectsToggle.addEventListener('click', onMobileNavProjectsToggleClick);
+	}
 
 	const bgToggle = document.getElementById(BG_SETTINGS_TOGGLE_ID);
 
@@ -83,6 +106,26 @@ function addEventListeners() {
 
 function onWindowResize(event) {
 
+}
+
+function onMobileNavToggle(event) {
+	const mobileNav = document.getElementById(MOBILE_NAV);
+	const mobileNavClose = document.getElementById(MOBILE_NAV_CLOSE_ID);
+	const mobileNavOpen = document.getElementById(MOBILE_NAV_OPEN_ID);
+	mobileNav.classList.toggle('hidden');
+	mobileNavClose.classList.toggle('hidden');
+	mobileNavOpen.classList.toggle('hidden');
+}
+
+function onMobileNavProjectsToggleClick(event) {
+	const mobileNavProjectsToggle = document.getElementById(MOBILE_NAV_PROJECTS_TOGGLE_ID);
+	const mobileNavProjectsUl = document.getElementById(MOBILE_NAV_PROJECTS_UL_ID);
+	let toggleText = 'Projects >';
+	if (mobileNavProjectsUl.classList.contains('hidden')) {
+		toggleText = 'Projects v';
+	}
+	mobileNavProjectsToggle.innerText = toggleText;
+	mobileNavProjectsUl.classList.toggle('hidden');
 }
 
 function onBgSettingsToggleClick(event) {
