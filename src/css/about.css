@@ -35,8 +35,31 @@
     @apply pt-18 h-full;
 }
 
+.timeline-container {
+    @apply flex justify-between items-start gap-12 w-[80%];
+}
+
+.timeline-image-container {
+    @apply flex flex-col gap-4 justify-center flex-1 w-full;
+}
+
 .timeline-image {
     @apply relative bg-contain bg-top bg-no-repeat min-h-[300px];
+}
+
+/* About 1490px, between xl and 2xl */
+@media (max-width: 93rem) {
+    #title-container {
+        & h1 {
+            @apply text-6xl mb-12;
+        }
+        & h2 {
+            @apply text-5xl mb-12;
+        }
+        & h4 {
+            @apply text-3xl mb-8;
+        }
+    }
 }
 
 @media (max-width: theme('screens.xl')) {
@@ -130,14 +153,18 @@
         @apply -right-3 max-w-[225px];
     }
 
+    .timeline-container {
+        @apply flex-col gap-3 items-center;
+    }
+
     .timeline-image {
-        @apply bg-center;
+        @apply bg-center bg-contain;
     }
 }
 
 @media (max-width: theme('screens.sm')) {
     #blur-container {
-        @apply pr-10 left-1/2 -translate-x-1/2;
+        @apply p-5 pb-0 left-1/2 -translate-x-1/2;
     }
 
     #profile-photo {
@@ -163,7 +190,31 @@
         @apply hidden;
     }
 
+    .timeline-container {
+        @apply flex-col gap-3 items-center;
+    }
+
     .timeline-image {
-        @apply bg-center;
+        @apply bg-center bg-contain;
+    }
+}
+
+@media (max-width: 38rem) {
+    #blur-container {
+        @apply w-19/20 h-19/20;
+    }
+
+    #profile-photo {
+        @apply w-[150px] h-[150px];
+    }
+
+    #title-container {
+        @apply pt-32;
+    }
+
+    #hire-me {
+        h6 {
+            @apply text-sm;
+        }
     }
 }
