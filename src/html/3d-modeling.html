@@ -19,7 +19,60 @@
 @@include('./partials/fullscreen-preview.html')
 
 <div class="content pointer-events-none">
-  <div id="cards-container" class="flex flex-row justify-center-safe flex-wrap gap-6">
+  <div id="model-viewer-container" class="viewer-w-collapsed viewer-h-collapsed">
+    <canvas id="model-viewer-canvas" class="viewer-w-collapsed viewer-h-collapsed"></canvas>
+
+    <div id="model-viewer-overlay" class="viewer-w-collapsed viewer-h-collapsed hidden">
+      <div id="model-viewer-overlay-content" class="viewer-w-collapsed viewer-h-collapsed">
+        <span id="vert-count" class="absolute top-2 left-2 text-sm"></span>
+        <span id="tri-count" class="absolute top-5 left-2 text-sm"></span>
+
+        <button id="model-viewer-close" class="btn">X</button>
+
+        <span class="absolute bottom-8 left-2 text-sm">
+          Left click to pan
+        </span>
+        <span class="absolute bottom-5 left-2 text-sm">
+          Left click + shift to rotate
+        </span>
+        <span class="absolute bottom-2 left-2 text-sm">
+          Scroll to zoom
+        </span>
+
+        <img src="/models/no-texture.png" id="texture-placeholder" class="texture-preview" alt="a missing texture placeholder image" />
+
+        <!-- TODO This is messed up with multi material and multi mesh scenes -->
+        <div id="texture-preview-window">
+          <div class="relative">
+            <button id="prev-texture" class="btn"><</button>
+            <!--TODO Add tooltip with full texture filename for when there's overflow, not a big deal but would be nice I guess-->
+            <span id="texture-filename" class="text-xs"></span>
+            <button id="next-texture" class="btn">></button>
+          </div>
+          <!-- TODO Television texture is showing twice, once for the TV itself, once for the remote, lamps and nightstands are also doubled because there are more than one of each of those -->
+          <div id="texture-image-container"></div>
+        </div>
+
+        <div class="absolute bg-black -bottom-7 h-7 leading-7 left-0 right-0 flex justify-between align-middle px-2">
+          <label class="pointer-events-auto cursor-pointer select-none">
+            Wireframe
+            <input type="checkbox" id="show-wireframe" />
+          </label>
+          <label class="pointer-events-auto cursor-pointer select-none">
+            Texture Preview
+            <input type="checkbox" id="show-texture-preview" />
+          </label>
+          <label class="pointer-events-auto cursor-pointer select-none">
+            Texture Filtering
+            <input type="checkbox" id="texture-filtering" />
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TODO at width 963px I noticed the anchor tag on these cards was sometimes being cut off when the model viewer was expanded -->
+  <div id="cards-container" class="flex justify-center-safe flex-wrap gap-6 cards-container-collapsed">
     <div class="card pointer-events-auto">
       <div class="card-content">
         <img class="project-preview" src="/images/models/skull-preview.png" alt="A 3D model of a skull">
@@ -141,56 +194,6 @@
           <a href="javascript:void(0);" class="load-obj-button" data-filename="saber_vindictive/saber-vindictive-staff.obj" data-scale="0.25/0.25/0.25">See More ></a>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-
-<canvas id="model-viewer-canvas" class="viewer-w-collapsed viewer-h-collapsed"></canvas>
-
-<div id="model-viewer-overlay" class="viewer-w-collapsed viewer-h-collapsed hidden">
-  <div id="model-viewer-overlay-content" class="viewer-w-collapsed viewer-h-collapsed">
-    <span id="vert-count" class="absolute top-2 left-2 text-sm"></span>
-    <span id="tri-count" class="absolute top-5 left-2 text-sm"></span>
-
-    <button id="model-viewer-close" class="btn">X</button>
-
-    <span class="absolute bottom-8 left-2 text-sm">
-      Left click to pan
-    </span>
-    <span class="absolute bottom-5 left-2 text-sm">
-      Left click + shift to rotate
-    </span>
-    <span class="absolute bottom-2 left-2 text-sm">
-      Scroll to zoom
-    </span>
-
-    <img src="/models/no-texture.png" id="texture-placeholder" class="texture-preview" alt="a missing texture placeholder image" />
-
-    <!-- TODO This is messed up with multi material and multi mesh scenes -->
-    <div id="texture-preview-window">
-      <div class="relative">
-        <button id="prev-texture" class="btn"><</button>
-        <!--TODO Add tooltip with full texture filename for when there's overflow, not a big deal but would be nice I guess-->
-        <span id="texture-filename" class="text-xs"></span>
-        <button id="next-texture" class="btn">></button>
-      </div>
-      <!-- TODO Television texture is showing twice, once for the TV itself, once for the remote, lamps and nightstands are also doubled because there are more than one of each of those -->
-      <div id="texture-image-container"></div>
-    </div>
-
-    <div class="absolute bg-black -bottom-7 h-7 leading-7 left-0 right-0 flex justify-between align-middle px-2">
-      <label class="pointer-events-auto cursor-pointer select-none">
-        Wireframe
-        <input type="checkbox" id="show-wireframe" />
-      </label>
-      <label class="pointer-events-auto cursor-pointer select-none">
-        Texture Preview
-        <input type="checkbox" id="show-texture-preview" />
-      </label>
-      <label class="pointer-events-auto cursor-pointer select-none">
-        Texture Filtering
-        <input type="checkbox" id="texture-filtering" />
-      </label>
     </div>
   </div>
 </div>

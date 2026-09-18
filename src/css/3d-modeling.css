@@ -1,5 +1,9 @@
 @reference "./base.css";
 
+#model-viewer-container {
+    @apply fixed mb-12 transition-[width,height] duration-350;
+}
+
 #model-viewer-canvas, #model-viewer-overlay {
     @apply fixed left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-[width,height] duration-350;
 }
@@ -62,4 +66,78 @@
 
 .viewer-h-collapsed {
     height: 0;
+}
+
+.cards-container-expanded {
+    @apply flex-col;
+}
+
+.cards-container-collapsed {
+    @apply flex-row;
+}
+
+@media (max-width: theme('screens.lg')) {
+    #model-viewer-container {
+        @apply relative;
+    }
+
+    #model-viewer-canvas {
+        @apply relative w-9/10 min-h-1/2 overflow-auto top-1/2 mb-6;
+    }
+
+    #model-viewer-overlay {
+        @apply absolute;
+    }
+
+    .cards-container-expanded {
+        @apply relative w-1/2 mx-auto;
+
+        & .card {
+            @apply max-w-full;
+        }
+    }
+}
+
+@media (max-width: theme('screens.md')) {
+    #model-viewer-container {
+        @apply relative;
+    }
+
+    #model-viewer-canvas {
+        @apply relative w-9/10 min-h-1/2 overflow-auto top-1/2 mb-6;
+    }
+
+    #model-viewer-overlay {
+        @apply absolute;
+    }
+
+    .cards-container-expanded {
+        @apply relative w-1/2 mx-auto;
+
+        & .card {
+            @apply max-w-full;
+        }
+    }
+}
+
+@media (max-width: theme('screens.sm')) {
+    #model-viewer-container {
+        @apply relative;
+    }
+
+    #model-viewer-canvas {
+        @apply relative w-9/10 min-h-1/2 overflow-auto top-1/2 mb-6;
+    }
+
+    #model-viewer-overlay {
+        @apply absolute;
+    }
+
+    .cards-container-expanded {
+        @apply relative w-4/5 mx-auto;
+
+        & .card {
+            @apply max-w-full;
+        }
+    }
 }

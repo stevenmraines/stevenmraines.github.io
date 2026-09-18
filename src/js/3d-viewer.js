@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import OBJHandler from './OBJHandler.js';
-import { getCookie, setCookie, parseBoolean } from './util';
+import { getCookie, setCookie, parseBoolean, getBreakpoint, remToPx } from './util';
 
 const CONFIG = {
     canvasWidth: 900,
@@ -40,6 +40,7 @@ let current_position = new THREE.Vector3(0,0,0);
 let current_texture_image = 0;
 let renderer;
 
+const canvas_container = document.getElementById("model-viewer-container");
 const canvas = document.getElementById("model-viewer-canvas");
 const overlay = document.getElementById('model-viewer-overlay');
 const overlay_content = document.getElementById('model-viewer-overlay-content');
@@ -506,14 +507,25 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
 }
 
 function expand3DViewer() {
-    cards_container.classList.remove('flex-row');
-    cards_container.classList.add('flex-col');
+    if (window.innerWidth <= remToPx(getBreakpoint('lg'))) {
+        scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    cards_container.classList.remove('cards-container-collapsed');
+    cards_container.classList.add('cards-container-expanded');
+
+    canvas_container.classList.remove('viewer-w-collapsed');
+    canvas_container.classList.add('viewer-w-expanded');
 
     canvas.classList.remove('viewer-w-collapsed');
     canvas.classList.add('viewer-w-expanded');
+    // TODO Is this necessary? This is what viewer-w-expanded applies
     canvas.style.width = '900px';
 
     setTimeout(function () {
+        canvas_container.classList.remove('viewer-h-collapsed');
+        canvas_container.classList.add('viewer-h-expanded');
+
         canvas.classList.remove('viewer-h-collapsed');
         canvas.classList.add('viewer-h-expanded');
         canvas.style.height = '600px';
@@ -537,6 +549,9 @@ function expand3DViewer() {
 function collapse3DViewer() {
     overlay.style.display = 'none';
 
+    canvas_container.classList.add('viewer-h-collapsed');
+    canvas_container.classList.remove('viewer-h-expanded');
+
     canvas.classList.add('viewer-h-collapsed');
     canvas.classList.remove('viewer-h-expanded');
 
@@ -553,6 +568,9 @@ function collapse3DViewer() {
     canvas.style.height = '0px';
 
     setTimeout(function () {
+        canvas_container.classList.add('viewer-w-collapsed');
+        canvas_container.classList.remove('viewer-w-expanded');
+
         canvas.classList.add('viewer-w-collapsed');
         canvas.classList.remove('viewer-w-expanded');
 
@@ -561,8 +579,8 @@ function collapse3DViewer() {
         canvas.style.width = '0px';
 
         setTimeout(function () {
-            cards_container.classList.add('flex-row');
-            cards_container.classList.remove('flex-col');
+            cards_container.classList.add('cards-container-collapsed');
+            cards_container.classList.remove('cards-container-expanded');
         }, CONFIG.transitionDuration * 1.5);
     }, CONFIG.transitionDuration * 0.5);
 
