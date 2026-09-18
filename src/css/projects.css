@@ -110,11 +110,15 @@
     }
 
     .cards-container-expanded {
-        @apply w-1/2 absolute left-1/2 -translate-x-1/2;
+        @apply w-1/2 mx-auto;
 
         & .card {
             @apply max-w-full;
         }
+    }
+
+    .project-text-container {
+        @apply relative w-2/3 mx-auto top-0 right-0 translate-0 my-8;
     }
 }
 
@@ -136,11 +140,15 @@
     }
 
     .cards-container-expanded {
-        @apply w-1/2 absolute left-1/2 -translate-x-1/2;
+        @apply w-1/2 mx-auto;
 
         & .card {
             @apply max-w-full;
         }
+    }
+
+    .project-text-container {
+        @apply relative w-2/3 mx-auto top-0 right-0 translate-0 my-8;
     }
 }
 
@@ -162,10 +170,14 @@
     }
 
     .cards-container-expanded {
-        @apply w-4/5 absolute left-1/2 -translate-x-1/2;
+        @apply w-4/5 mx-auto;
 
         & .card {
             @apply max-w-full;
         }
+    }
+
+    .project-text-container {
+        @apply relative w-4/5 mx-auto top-0 right-0 translate-0 my-8;
     }
 }

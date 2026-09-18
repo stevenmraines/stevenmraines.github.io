@@ -20,8 +20,14 @@
 @@include('./partials/fullscreen-preview.html')
 
 <div class="content pointer-events-none">
-  <div id="cards-container" class="flex justify-center-safe flex-wrap gap-6">
+  <!-- TODO opacity transition isn't working here when hiding the container -->
+  <div id="project-text-container" class="project-text-container opacity-0">
+    <h4 id="project-title"></h4>
+    <p id="project-description-body"></p>
+    <div id="project-description-footer"></div>
+  </div>
 
+  <div id="cards-container" class="flex justify-center-safe flex-wrap gap-6">
     <div class="card pointer-events-auto">
       <div class="card-content">
         <div class="project-preview bg-[url(/images/programming/personal-website.png)] bg-contain bg-no-repeat bg-center"></div>
@@ -47,7 +53,9 @@
       <ul class="list-disc">
         <li>Components stylized with Tailwind CSS</li>
         <li>Background and 3D model viewer coded using Three.js</li>
+        <li>Uses a custom OBJ file importer rather than the built-in Three.js importer</li>
         <li>Source files are minified and bundled with Gulp</li>
+        <li>Hosted on Github Pages with a custom domain name</li>
       </ul>
     </div>
 
@@ -330,13 +338,6 @@
     </div>
 
   </div>
-</div>
-
-<!-- TODO opacity transition isn't working here when hiding the container -->
-<div id="project-text-container" class="project-text-container opacity-0">
-  <h4 id="project-title"></h4>
-  <p id="project-description-body"></p>
-  <div id="project-description-footer"></div>
 </div>
 
 <script src="js/common.min.js" type="module"></script>
