@@ -34,8 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
  * Adds the various event listeners to the page.
  */
 function addEventListeners() {
-	window.addEventListener('resize', onWindowResize);
-
 	const mobileNavOpen = document.getElementById(MOBILE_NAV_OPEN_ID);
 
 	if (mobileNavOpen) {
@@ -106,10 +104,6 @@ function addEventListeners() {
 	}
 
 	document.addEventListener('keyup', onKeyUp);
-}
-
-function onWindowResize(event) {
-
 }
 
 function onMobileNavToggle(event) {

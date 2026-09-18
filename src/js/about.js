@@ -1,3 +1,5 @@
+import { getBreakpoint, remToPx } from './util';
+
 let blur_container, profile_photo, recommendation;
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -33,15 +35,4 @@ function onBlurContainerScroll(e) {
         recommendation.classList.add('[animation-direction:reverse]');
         recommendation.classList.add('[animation-fill-mode:forwards]');
     }
-}
-
-function getBreakpoint(breakpoint_name) {
-    return getComputedStyle(document.documentElement)
-        .getPropertyValue(`--breakpoint-${breakpoint_name}`)
-        .trim();
-}
-
-function remToPx(rem) {
-    const fontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-    return parseFloat(rem) * fontSize;
 }

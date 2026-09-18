@@ -21,3 +21,14 @@ export function hex2Str(hex) {
 export function str2Hex(str) {
     return typeof str === 'string' ? parseInt(str.substring(1), 16) : str;
 }
+
+export function getBreakpoint(breakpoint_name) {
+    return getComputedStyle(document.documentElement)
+        .getPropertyValue(`--breakpoint-${breakpoint_name}`)
+        .trim();
+}
+
+export function remToPx(rem) {
+    const fontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    return parseFloat(rem) * fontSize;
+}
