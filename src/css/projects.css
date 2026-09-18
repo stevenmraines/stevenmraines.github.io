@@ -162,7 +162,7 @@
     }
 
     .cards-container-expanded {
-        @apply w-3/5 absolute left-1/2 -translate-x-1/2;
+        @apply w-4/5 absolute left-1/2 -translate-x-1/2;
 
         & .card {
             @apply max-w-full;

@@ -1,7 +1,6 @@
-<!-- TODO Fullscreen on narrow screens should go by full width rather than full height -->
 <div id="fullscreen-wrapper" class="fixed inset-0 z-4 bg-black/50 opacity-0 hidden transition-opacity duration-300">
-    <div class="relative h-full w-auto md:w-full md:h-auto">
+    <div class="relative w-full h-auto landscape:h-full landscape:w-auto">
         <button id="fullscreen-close" class="z-5 btn" title="Close fullscreen view">X</button>
-        <img id="fullscreen-img" class="h-full w-auto md:w-full md:h-auto center-x center-y" src="#" alt="Fullscreen image view" />
+        <img id="fullscreen-img" class="center-x top-[50vh] -translate-y-1/2" src="#" alt="Fullscreen image view" />
     </div>
 </div>

@@ -101,6 +101,10 @@ function addEventListeners() {
 		document.getElementById(FULLSCREEN_CLOSE_ID).addEventListener('click', onFullscreenCloseClicked);
 	}
 
+	if (document.getElementById(FULLSCREEN_WRAPPER_ID)) {
+		document.getElementById(FULLSCREEN_WRAPPER_ID).addEventListener('click', onFullscreenCloseClicked);
+	}
+
 	document.addEventListener('keyup', onKeyUp);
 }
 

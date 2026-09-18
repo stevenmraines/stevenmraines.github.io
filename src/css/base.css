@@ -181,7 +181,7 @@
 
     @media (max-width: theme('breakpoint.nav')) {
         body {
-            @apply pt-0;
+            @apply pt-14;
         }
 
         #mobile-nav {
