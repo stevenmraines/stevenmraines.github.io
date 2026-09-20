@@ -1,4 +1,4 @@
-import { getBreakpoint, remToPx } from './util';
+import { getThemeVariable, remToPx } from './util';
 
 let blur_container, profile_photo, recommendation;
 
@@ -16,7 +16,7 @@ function addEventListeners() {
 
 function onBlurContainerScroll(e) {
     if (blur_container.scrollTop === 0) {
-        if (window.innerWidth < remToPx(getBreakpoint('xl'))) {
+        if (window.innerWidth < remToPx(getThemeVariable('--breakpoint-xl'))) {
             profile_photo.classList.remove('animate-fade-in');
             profile_photo.classList.remove('[animation-direction:reverse]');
             profile_photo.classList.remove('[animation-fill-mode:forwards]');
@@ -26,7 +26,7 @@ function onBlurContainerScroll(e) {
         recommendation.classList.remove('[animation-direction:reverse]');
         recommendation.classList.remove('[animation-fill-mode:forwards]');
     } else {
-        if (window.innerWidth < remToPx(getBreakpoint('xl'))) {
+        if (window.innerWidth < remToPx(getThemeVariable('--breakpoint-xl'))) {
             profile_photo.classList.add('animate-fade-in');
             profile_photo.classList.add('[animation-direction:reverse]');
             profile_photo.classList.add('[animation-fill-mode:forwards]');

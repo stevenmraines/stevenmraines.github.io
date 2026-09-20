@@ -22,9 +22,9 @@ export function str2Hex(str) {
     return typeof str === 'string' ? parseInt(str.substring(1), 16) : str;
 }
 
-export function getBreakpoint(breakpoint_name) {
+export function getThemeVariable(variable) {
     return getComputedStyle(document.documentElement)
-        .getPropertyValue(`--breakpoint-${breakpoint_name}`)
+        .getPropertyValue(variable)
         .trim();
 }
 

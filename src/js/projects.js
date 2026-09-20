@@ -1,4 +1,4 @@
-import { getBreakpoint, remToPx } from './util';
+import { getThemeVariable, remToPx } from './util';
 
 const CONFIG = {
     transitionDuration: 350,
@@ -57,7 +57,7 @@ function addEventListeners() {
             }
             prev_project.style.display = i === 2 ? 'none' : 'block';
             next_project.style.display = i === 2 ? 'none' : 'block';
-            if (window.innerWidth <= remToPx(getBreakpoint('lg'))) {
+            if (window.innerWidth <= remToPx(getThemeVariable('--breakpoint-lg'))) {
                 scrollTo({ top: 0, behavior: 'smooth' });
             }
         });

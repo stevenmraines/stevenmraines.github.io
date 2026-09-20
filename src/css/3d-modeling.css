@@ -1,11 +1,11 @@
 @reference "./base.css";
 
 #model-viewer-container {
-    @apply fixed mb-12 transition-[width,height] duration-350;
+    @apply fixed transition-[width,height] duration-(--viewer-transition-duration) pointer-events-auto;
 }
 
 #model-viewer-canvas, #model-viewer-overlay {
-    @apply fixed left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-[width,height] duration-350;
+    @apply fixed left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-[width,height] duration-(--viewer-transition-duration);
 }
 
 #model-viewer-canvas {
@@ -53,23 +53,24 @@
 }
 
 .viewer-w-expanded {
-    width: 900px;
+    @apply w-(--viewer-w-xl);
 }
 
 .viewer-w-collapsed {
-    width: 0;
+    @apply w-0;
+    border: none !important;
 }
 
 .viewer-h-expanded {
-    height: 600px;
+    @apply h-(--viewer-h-xl);
 }
 
 .viewer-h-collapsed {
-    height: 0;
+    @apply h-0;
 }
 
 .cards-container-expanded {
-    @apply flex-col;
+    @apply flex-col mt-12 lg:mt-0;
 }
 
 .cards-container-collapsed {
@@ -77,12 +78,20 @@
 }
 
 @media (max-width: theme('screens.lg')) {
+    .viewer-w-expanded {
+        @apply w-(--viewer-w-lg);
+    }
+
+    .viewer-h-expanded {
+        @apply h-(--viewer-h-lg);
+    }
+
     #model-viewer-container {
-        @apply relative;
+        @apply relative mx-auto;
     }
 
     #model-viewer-canvas {
-        @apply relative w-9/10 min-h-1/2 overflow-auto top-1/2 mb-6;
+        @apply relative overflow-auto top-1/2 mb-6;
     }
 
     #model-viewer-overlay {
@@ -99,12 +108,20 @@
 }
 
 @media (max-width: theme('screens.md')) {
+    .viewer-w-expanded {
+        @apply w-(--viewer-w-md);
+    }
+
+    .viewer-h-expanded {
+        @apply h-(--viewer-h-md);
+    }
+
     #model-viewer-container {
-        @apply relative;
+        @apply relative mx-auto;
     }
 
     #model-viewer-canvas {
-        @apply relative w-9/10 min-h-1/2 overflow-auto top-1/2 mb-6;
+        @apply relative overflow-auto top-1/2 mb-6;
     }
 
     #model-viewer-overlay {
@@ -121,12 +138,20 @@
 }
 
 @media (max-width: theme('screens.sm')) {
+    .viewer-w-expanded {
+        @apply w-(--viewer-w-sm);
+    }
+
+    .viewer-h-expanded {
+        @apply h-(--viewer-h-sm);
+    }
+
     #model-viewer-container {
-        @apply relative;
+        @apply relative mx-auto;
     }
 
     #model-viewer-canvas {
-        @apply relative w-9/10 min-h-1/2 overflow-auto top-1/2 mb-6;
+        @apply relative overflow-auto top-1/2 mb-6;
     }
 
     #model-viewer-overlay {

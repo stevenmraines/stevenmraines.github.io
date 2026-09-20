@@ -1,11 +1,9 @@
 import * as THREE from 'three';
 import OBJHandler from './OBJHandler.js';
-import { getCookie, setCookie, parseBoolean, getBreakpoint, remToPx } from './util';
+import { getCookie, setCookie, parseBoolean, getThemeVariable, remToPx } from './util';
 
 const CONFIG = {
-    canvasWidth: 900,
-    canvasHeight: 600,
-    transitionDuration: 350,
+    resizeHandlerTimeout: 250,
 
     fillColor: 0x2c2a30,
 
@@ -39,6 +37,29 @@ let current_scale = new THREE.Vector3(1,1,1);
 let current_position = new THREE.Vector3(0,0,0);
 let current_texture_image = 0;
 let renderer;
+let resize_timeout;
+let canvas_width,
+    canvas_height;
+
+const viewer_w_xl = remToPx(getThemeVariable('--viewer-w-xl'));
+const viewer_h_xl = remToPx(getThemeVariable('--viewer-h-xl'));
+
+const viewer_w_lg = remToPx(getThemeVariable('--viewer-w-lg'));
+const viewer_h_lg = remToPx(getThemeVariable('--viewer-h-lg'));
+
+const viewer_w_md = remToPx(getThemeVariable('--viewer-w-md'));
+const viewer_h_md = remToPx(getThemeVariable('--viewer-h-md'));
+
+const viewer_w_sm = remToPx(getThemeVariable('--viewer-w-sm'));
+const viewer_h_sm = remToPx(getThemeVariable('--viewer-h-sm'));
+
+const viewer_aspect_str = getThemeVariable('--viewer-aspect');
+const [w, h] = viewer_aspect_str.split('/').map(Number);
+const viewer_aspect = w / h;
+
+const viewer_transition_duration = getThemeVariable('--viewer-transition-duration');
+
+setCanvasDimensions();
 
 const canvas_container = document.getElementById("model-viewer-container");
 const canvas = document.getElementById("model-viewer-canvas");
@@ -140,6 +161,20 @@ next_texture_button.addEventListener('click', function () {
     texture_filename.innerText = image.dataset.filename;
 });
 
+window.addEventListener('resize', function () {
+    setCanvasDimensions();
+
+    if (canvas_container.classList.contains('viewer-w-collapsed')) {
+        return;
+    }
+
+    clearTimeout(resize_timeout);
+
+    resize_timeout = setTimeout(function () {
+        draw(current_obj_file_path, current_rotation, current_scale, current_position);
+    }, CONFIG.resizeHandlerTimeout);
+});
+
 async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale = new THREE.Vector3(1,1,1), position = new THREE.Vector3(0,0,0)) {
 
     current_obj_file_path = objFilePath;
@@ -165,9 +200,13 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(CONFIG.fillColor);
 
-        renderer.setSize(CONFIG.canvasWidth, CONFIG.canvasHeight, false);
-        let aspect = CONFIG.canvasWidth / CONFIG.canvasHeight;
-        const camera = new THREE.PerspectiveCamera(45, aspect, 0.1, 100);
+        /*
+         * We want to set false for updateStyle here because otherwise we won't get our nice width/height transition
+         * because those values will be automatically set rather than being set with our setTimeout functions.
+         */
+        renderer.setSize(canvas_width, canvas_height, false);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        const camera = new THREE.PerspectiveCamera(45, viewer_aspect, 0.1, 100);
         camera.position.set(0, 0, CONFIG.cameraDistance);
         camera.lookAt(0, 0, 0);
 
@@ -507,7 +546,7 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
 }
 
 function expand3DViewer() {
-    if (window.innerWidth <= remToPx(getBreakpoint('lg'))) {
+    if (window.innerWidth <= remToPx(getThemeVariable('--breakpoint-lg'))) {
         scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -519,8 +558,10 @@ function expand3DViewer() {
 
     canvas.classList.remove('viewer-w-collapsed');
     canvas.classList.add('viewer-w-expanded');
-    // TODO Is this necessary? This is what viewer-w-expanded applies
-    canvas.style.width = '900px';
+
+    // We need to set these dimensions manually to preserve the width/height transition
+    // TODO Actually this doesn't appear to be working rn lol
+    canvas.style.width = canvas_width + 'px';
 
     setTimeout(function () {
         canvas_container.classList.remove('viewer-h-collapsed');
@@ -528,7 +569,7 @@ function expand3DViewer() {
 
         canvas.classList.remove('viewer-h-collapsed');
         canvas.classList.add('viewer-h-expanded');
-        canvas.style.height = '600px';
+        canvas.style.height = canvas_height + 'px';
 
         setTimeout(function () {
             overlay.classList.remove('viewer-w-collapsed');
@@ -542,8 +583,8 @@ function expand3DViewer() {
             overlay_content.classList.add('viewer-h-expanded');
 
             overlay.style.display = 'block';
-        }, CONFIG.transitionDuration * 1.5);
-    }, CONFIG.transitionDuration * 0.5);
+        }, viewer_transition_duration * 1.5);
+    }, viewer_transition_duration * 0.5);
 }
 
 function collapse3DViewer() {
@@ -581,7 +622,27 @@ function collapse3DViewer() {
         setTimeout(function () {
             cards_container.classList.add('cards-container-collapsed');
             cards_container.classList.remove('cards-container-expanded');
-        }, CONFIG.transitionDuration * 1.5);
-    }, CONFIG.transitionDuration * 0.5);
+        }, viewer_transition_duration * 1.5);
+    }, viewer_transition_duration * 0.5);
 
+}
+
+function setCanvasDimensions() {
+    canvas_width = viewer_w_sm;
+    canvas_height = viewer_h_sm;
+
+    if (window.innerWidth > remToPx(getThemeVariable('--breakpoint-sm'))) {
+        canvas_width = viewer_w_md;
+        canvas_height = viewer_h_md;
+    }
+
+    if (window.innerWidth > remToPx(getThemeVariable('--breakpoint-md'))) {
+        canvas_width = viewer_w_lg;
+        canvas_height = viewer_h_lg;
+    }
+
+    if (window.innerWidth > remToPx(getThemeVariable('--breakpoint-lg'))) {
+        canvas_width = viewer_w_xl;
+        canvas_height = viewer_h_xl;
+    }
 }

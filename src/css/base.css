@@ -64,6 +64,21 @@
 
     /* About 830px, between md and lg */
     --breakpoint-nav: 52rem;
+
+    /* These are for the 3D modeling page */
+    --viewer-w-xl: 56.25rem; /* 900px */
+    --viewer-w-lg: 48rem; /* 768px */
+    --viewer-w-md: 40rem; /* 640px */
+    --viewer-w-sm: 21.25rem; /* 340px */
+
+    --viewer-h-xl: 37.5rem; /* 600px */
+    --viewer-h-lg: 32rem; /* 512px */
+    --viewer-h-md: 26.667rem; /* 427px */
+    --viewer-h-sm: 14.16rem; /* 227px */
+
+    --viewer-aspect: 3/2;
+
+    --viewer-transition-duration: 350;
 }
 
 @theme {
