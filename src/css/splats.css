@@ -7,7 +7,7 @@
 #splat-viewer-container {
     /* TODO This transition duration should also be a tailwind variable */
     /* TODO Running into that issue again where the width transition isn't working */
-    @apply fixed left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-[width,height] duration-350 bg-[#2c2a30] border-2 border-black pointer-events-auto;
+    @apply relative mx-auto mb-6 xl:fixed xl:m-0 xl:left-1/2 xl:top-1/2 xl:-translate-y-1/2 xl:-translate-x-1/2 transition-[width,height] duration-350 bg-[#2c2a30] border-2 border-black pointer-events-auto;
 
     & > #splat-viewer-close {
         @apply bg-[rgba(0,0,0,0.3)] text-[rgb(224,220,221)] rounded-[6px] absolute top-[16px] right-[12px] w-7 h-7 leading-6.5 cursor-pointer;
@@ -21,9 +21,8 @@
     }
 }
 
-/* TODO These pixel values really need to be tailwind vars if we're gonna use them everywhere like this */
 .viewer-w-expanded {
-    width: 900px;
+    @apply w-(--viewer-w-sm) md:w-(--viewer-w-md) lg:w-(--viewer-w-lg) xl:w-(--viewer-w-xl);
 }
 
 .viewer-w-collapsed {
@@ -31,9 +30,21 @@
 }
 
 .viewer-h-expanded {
-    height: 600px;
+    @apply h-(--viewer-h-sm) md:h-(--viewer-h-md) lg:h-(--viewer-h-lg) xl:h-(--viewer-h-xl);
 }
 
 .viewer-h-collapsed {
     height: 0;
+}
+
+.cards-container-collapsed {
+    @apply flex-row;
+}
+
+.cards-container-expanded {
+    @apply relative mx-auto mt-12 w-4/5 md:w-1/2 xl:m-0 xl:flex-col;
+
+    & .card {
+        @apply max-w-full md:max-w-[300px];
+    }
 }

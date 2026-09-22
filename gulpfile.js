@@ -48,6 +48,7 @@ const paths = {
             '3d-viewer': 'src/js/bundles/3d-viewer.js',
             'projects': 'src/js/bundles/projects.js',
             'about': 'src/js/bundles/about.js',
+            'splats': 'src/js/bundles/splats.js',
         },
         watch: 'src/js/**/*.js',
         dest: 'public/js',

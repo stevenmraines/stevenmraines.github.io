@@ -18,7 +18,13 @@
 @@include('./partials/background.html')
 
 <div class="content pointer-events-none">
-    <div id="cards-container" class="flex justify-center-safe flex-wrap gap-6">
+    <div id="splat-viewer-container" class="viewer-w-collapsed viewer-h-collapsed hidden">
+        <!-- TODO Match tooltip styling to the Supersplat viewer style -->
+        <button id="splat-viewer-close" class="hidden" title="Close">X</button>
+        <iframe id="splat-viewer" allow="fullscreen; xr-spatial-tracking"></iframe>
+    </div>
+
+    <div id="cards-container" class="flex justify-center-safe flex-wrap gap-6 cards-container-collapsed">
         <div class="card">
             <div class="card-content">
                 <img class="project-preview" src="/images/splats/splat-tori.png" alt="a screenshot of a gaussian splat of my cat">
@@ -47,80 +53,7 @@
     </div>
 </div>
 
-<div id="splat-viewer-container" class="viewer-w-collapsed viewer-h-collapsed hidden">
-    <!-- TODO Match tooltip styling to the Supersplat viewer style -->
-    <button id="splat-viewer-close" class="hidden" title="Close">X</button>
-    <iframe id="splat-viewer" width="900px" height="600px" allow="fullscreen; xr-spatial-tracking"></iframe>
-</div>
-
 <script src="js/common.min.js" type="module"></script>
-<script>
-    // Just going to inline script this since it's pretty simple
-    const CONFIG = {
-        transitionDuration: 350,
-    };
-
-    let cards_container,
-        splat_viewer_container,
-        splat_viewer_close,
-        splat_viewer;
-
-    document.addEventListener('DOMContentLoaded', function () {
-        cards_container = document.getElementById('cards-container');
-        splat_viewer_container = document.getElementById('splat-viewer-container');
-        splat_viewer_close = document.getElementById('splat-viewer-close');
-        splat_viewer = document.getElementById('splat-viewer');
-        addEventListeners();
-    });
-
-    function addEventListeners() {
-        for (let button of document.getElementsByClassName('load-splat-button')) {
-            button.addEventListener('click', function (event) {
-                expandViewer(event.target.dataset.src);
-            });
-        }
-
-        splat_viewer_close.addEventListener('click', collapseViewer);
-    }
-
-    function expandViewer(src) {
-        if (splat_viewer_container.style.display === 'block') {
-            splat_viewer.src = src;
-            return;
-        }
-
-        cards_container.classList.add('flex-col');
-        splat_viewer_container.style.display = 'block';
-        splat_viewer_container.classList.remove('viewer-w-collapsed');
-        splat_viewer_container.classList.add('viewer-w-expanded');
-
-        setTimeout(function () {
-            splat_viewer_container.classList.remove('viewer-h-collapsed');
-            splat_viewer_container.classList.add('viewer-h-expanded');
-
-            setTimeout(function () {
-                splat_viewer_close.style.display = 'block';
-                splat_viewer.src = src;
-            }, CONFIG.transitionDuration * 1.5);
-        }, CONFIG.transitionDuration * 0.5);
-    }
-
-    function collapseViewer() {
-        splat_viewer.src = '';
-        splat_viewer_close.style.display = 'none';
-        splat_viewer_container.classList.remove('viewer-h-expanded');
-        splat_viewer_container.classList.add('viewer-h-collapsed');
-
-        setTimeout(function () {
-            splat_viewer_container.classList.remove('viewer-w-expanded');
-            splat_viewer_container.classList.add('viewer-w-collapsed');
-
-            setTimeout(function () {
-                splat_viewer_container.style.display = 'none';
-                cards_container.classList.remove('flex-col');
-            }, CONFIG.transitionDuration * 1.5);
-        }, CONFIG.transitionDuration * 0.5);
-    }
-</script>
+<script src="js/splats.min.js" type="module"></script>
 </body>
 </html>
