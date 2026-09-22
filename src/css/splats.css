@@ -7,7 +7,7 @@
 #splat-viewer-container {
     /* TODO This transition duration should also be a tailwind variable */
     /* TODO Running into that issue again where the width transition isn't working */
-    @apply relative mx-auto mb-6 xl:fixed xl:m-0 xl:left-1/2 xl:top-1/2 xl:-translate-y-1/2 xl:-translate-x-1/2 transition-[width,height] duration-350 bg-[#2c2a30] border-2 border-black pointer-events-auto;
+    @apply relative mx-auto mb-6 2xl:fixed 2xl:m-0 2xl:left-1/2 2xl:top-1/2 2xl:-translate-y-1/2 2xl:-translate-x-1/2 transition-[width,height] duration-350 bg-[#2c2a30] border-2 border-black pointer-events-auto;
 
     & > #splat-viewer-close {
         @apply bg-[rgba(0,0,0,0.3)] text-[rgb(224,220,221)] rounded-[6px] absolute top-[16px] right-[12px] w-7 h-7 leading-6.5 cursor-pointer;
@@ -22,7 +22,7 @@
 }
 
 .viewer-w-expanded {
-    @apply w-(--viewer-w-sm) md:w-(--viewer-w-md) lg:w-(--viewer-w-lg) xl:w-(--viewer-w-xl);
+    @apply w-(--viewer-w-xs) sm:w-(--viewer-w-sm) md:w-(--viewer-w-md) lg:w-(--viewer-w-lg) xl:w-(--viewer-w-xl);
 }
 
 .viewer-w-collapsed {
@@ -30,7 +30,7 @@
 }
 
 .viewer-h-expanded {
-    @apply h-(--viewer-h-sm) md:h-(--viewer-h-md) lg:h-(--viewer-h-lg) xl:h-(--viewer-h-xl);
+    @apply h-(--viewer-h-xs) sm:h-(--viewer-h-sm) md:h-(--viewer-h-md) lg:h-(--viewer-h-lg) xl:h-(--viewer-h-xl);
 }
 
 .viewer-h-collapsed {
@@ -42,7 +42,7 @@
 }
 
 .cards-container-expanded {
-    @apply relative mx-auto mt-12 w-4/5 md:w-1/2 xl:m-0 xl:flex-col;
+    @apply relative mx-auto mt-12 w-4/5 sm:w-1/2 2xl:m-0 2xl:flex-col;
 
     & .card {
         @apply max-w-full md:max-w-[300px];

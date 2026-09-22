@@ -53,6 +53,9 @@ const viewer_h_md = remToPx(getThemeVariable('--viewer-h-md'));
 const viewer_w_sm = remToPx(getThemeVariable('--viewer-w-sm'));
 const viewer_h_sm = remToPx(getThemeVariable('--viewer-h-sm'));
 
+const viewer_w_xs = remToPx(getThemeVariable('--viewer-w-xs'));
+const viewer_h_xs = remToPx(getThemeVariable('--viewer-h-xs'));
+
 const viewer_aspect_str = getThemeVariable('--viewer-aspect');
 const [w, h] = viewer_aspect_str.split('/').map(Number);
 const viewer_aspect = w / h;
@@ -546,7 +549,7 @@ async function draw(objFilePath = '', rotation = new THREE.Vector3(0,0,0), scale
 }
 
 function expand3DViewer() {
-    if (window.innerWidth <= remToPx(getThemeVariable('--breakpoint-lg'))) {
+    if (window.innerWidth < remToPx(getThemeVariable('--breakpoint-2xl'))) {
         scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -628,20 +631,25 @@ function collapse3DViewer() {
 }
 
 function setCanvasDimensions() {
-    canvas_width = viewer_w_sm;
-    canvas_height = viewer_h_sm;
+    canvas_width = viewer_w_xs;
+    canvas_height = viewer_h_xs;
 
-    if (window.innerWidth > remToPx(getThemeVariable('--breakpoint-sm'))) {
+    if (window.innerWidth >= remToPx(getThemeVariable('--breakpoint-sm'))) {
+        canvas_width = viewer_w_sm;
+        canvas_height = viewer_h_sm;
+    }
+
+    if (window.innerWidth >= remToPx(getThemeVariable('--breakpoint-md'))) {
         canvas_width = viewer_w_md;
         canvas_height = viewer_h_md;
     }
 
-    if (window.innerWidth > remToPx(getThemeVariable('--breakpoint-md'))) {
+    if (window.innerWidth >= remToPx(getThemeVariable('--breakpoint-lg'))) {
         canvas_width = viewer_w_lg;
         canvas_height = viewer_h_lg;
     }
 
-    if (window.innerWidth > remToPx(getThemeVariable('--breakpoint-lg'))) {
+    if (window.innerWidth >= remToPx(getThemeVariable('--breakpoint-xl'))) {
         canvas_width = viewer_w_xl;
         canvas_height = viewer_h_xl;
     }

@@ -57,6 +57,7 @@ function addEventListeners() {
             }
             prev_project.style.display = i === 2 ? 'none' : 'block';
             next_project.style.display = i === 2 ? 'none' : 'block';
+            // TODO < 2xl? Make this same as 3D and splat pages? We'll also need to update projects.css if we do that
             if (window.innerWidth <= remToPx(getThemeVariable('--breakpoint-lg'))) {
                 scrollTo({ top: 0, behavior: 'smooth' });
             }

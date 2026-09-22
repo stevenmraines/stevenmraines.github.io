@@ -24,7 +24,7 @@ function addEventListeners() {
         button.addEventListener('click', function (event) {
             expandViewer(event.target.dataset.src);
 
-            if (window.innerWidth < remToPx(getThemeVariable('--breakpoint-xl'))) {
+            if (window.innerWidth < remToPx(getThemeVariable('--breakpoint-2xl'))) {
                 scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
@@ -79,8 +79,13 @@ function collapseViewer() {
 }
 
 function setSplatViewerDimensions() {
-    let viewer_width = remToPx(getThemeVariable('--viewer-w-sm'));
-    let viewer_height = remToPx(getThemeVariable('--viewer-h-sm'));
+    let viewer_width = remToPx(getThemeVariable('--viewer-w-xs'));
+    let viewer_height = remToPx(getThemeVariable('--viewer-h-xs'));
+
+    if (window.innerWidth >= remToPx(getThemeVariable('--breakpoint-sm'))) {
+        viewer_width = remToPx(getThemeVariable('--viewer-w-sm'));
+        viewer_height = remToPx(getThemeVariable('--viewer-h-sm'));
+    }
 
     if (window.innerWidth >= remToPx(getThemeVariable('--breakpoint-md'))) {
         viewer_width = remToPx(getThemeVariable('--viewer-w-md'));

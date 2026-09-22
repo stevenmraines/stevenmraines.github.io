@@ -1,11 +1,11 @@
 @reference "./base.css";
 
 #model-viewer-container {
-    @apply fixed transition-[width,height] duration-(--viewer-transition-duration) pointer-events-auto;
+    @apply relative mx-auto 2xl:mx-0 2xl:fixed 2xl:left-1/2 2xl:top-1/2 2xl:-translate-y-1/2 2xl:-translate-x-1/2 transition-[width,height] duration-(--viewer-transition-duration) pointer-events-auto;
 }
 
 #model-viewer-canvas, #model-viewer-overlay {
-    @apply fixed left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-[width,height] duration-(--viewer-transition-duration);
+    @apply transition-[width,height] duration-(--viewer-transition-duration);
 }
 
 #model-viewer-canvas {
@@ -13,7 +13,7 @@
 }
 
 #model-viewer-overlay {
-    @apply pointer-events-none;
+    @apply absolute inset-0 pointer-events-none;
 }
 
 #model-viewer-overlay-content {
@@ -53,7 +53,8 @@
 }
 
 .viewer-w-expanded {
-    @apply w-(--viewer-w-xl);
+    /* TODO This looks different from the other pages because the other pages it's always just 50vw */
+    @apply w-(--viewer-w-xs) sm:w-(--viewer-w-sm) md:w-(--viewer-w-md) lg:w-(--viewer-w-lg) xl:w-(--viewer-w-xl);
 }
 
 .viewer-w-collapsed {
@@ -62,7 +63,7 @@
 }
 
 .viewer-h-expanded {
-    @apply h-(--viewer-h-xl);
+    @apply h-(--viewer-h-xs) sm:h-(--viewer-h-sm) md:h-(--viewer-h-md) lg:h-(--viewer-h-lg) xl:h-(--viewer-h-xl);
 }
 
 .viewer-h-collapsed {
@@ -70,99 +71,13 @@
 }
 
 .cards-container-expanded {
-    @apply flex-col mt-12 lg:mt-0;
+    @apply relative mx-auto mt-12 w-4/5 sm:w-1/2 2xl:m-0 2xl:flex-col;
+
+    & .card {
+        @apply max-w-full md:max-w-[300px];
+    }
 }
 
 .cards-container-collapsed {
     @apply flex-row;
-}
-
-@media (max-width: theme('screens.lg')) {
-    .viewer-w-expanded {
-        @apply w-(--viewer-w-lg);
-    }
-
-    .viewer-h-expanded {
-        @apply h-(--viewer-h-lg);
-    }
-
-    #model-viewer-container {
-        @apply relative mx-auto;
-    }
-
-    #model-viewer-canvas {
-        @apply relative overflow-auto top-1/2 mb-6;
-    }
-
-    #model-viewer-overlay {
-        @apply absolute;
-    }
-
-    .cards-container-expanded {
-        @apply relative w-1/2 mx-auto;
-
-        & .card {
-            @apply max-w-full;
-        }
-    }
-}
-
-@media (max-width: theme('screens.md')) {
-    .viewer-w-expanded {
-        @apply w-(--viewer-w-md);
-    }
-
-    .viewer-h-expanded {
-        @apply h-(--viewer-h-md);
-    }
-
-    #model-viewer-container {
-        @apply relative mx-auto;
-    }
-
-    #model-viewer-canvas {
-        @apply relative overflow-auto top-1/2 mb-6;
-    }
-
-    #model-viewer-overlay {
-        @apply absolute;
-    }
-
-    .cards-container-expanded {
-        @apply relative w-1/2 mx-auto;
-
-        & .card {
-            @apply max-w-full;
-        }
-    }
-}
-
-@media (max-width: theme('screens.sm')) {
-    .viewer-w-expanded {
-        @apply w-(--viewer-w-sm);
-    }
-
-    .viewer-h-expanded {
-        @apply h-(--viewer-h-sm);
-    }
-
-    #model-viewer-container {
-        @apply relative mx-auto;
-    }
-
-    #model-viewer-canvas {
-        @apply relative overflow-auto top-1/2 mb-6;
-    }
-
-    #model-viewer-overlay {
-        @apply absolute;
-    }
-
-    .cards-container-expanded {
-        @apply relative w-4/5 mx-auto;
-
-        & .card {
-            @apply max-w-full;
-        }
-    }
 }

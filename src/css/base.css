@@ -67,14 +67,16 @@
 
     /* These are for the 3D modeling page */
     --viewer-w-xl: 56.25rem; /* 900px */
-    --viewer-w-lg: 48rem; /* 768px */
-    --viewer-w-md: 40rem; /* 640px */
-    --viewer-w-sm: 21.25rem; /* 340px */
+    --viewer-w-lg: 56.25rem; /* 900px */
+    --viewer-w-md: 48rem; /* 768px */
+    --viewer-w-sm: 40rem; /* 640px */
+    --viewer-w-xs: 21.25rem; /* 340px */
 
     --viewer-h-xl: 37.5rem; /* 600px */
-    --viewer-h-lg: 32rem; /* 512px */
-    --viewer-h-md: 26.667rem; /* 427px */
-    --viewer-h-sm: 14.16rem; /* 227px */
+    --viewer-h-lg: 37.5rem; /* 600px */
+    --viewer-h-md: 32rem; /* 512px */
+    --viewer-h-sm: 26.667rem; /* 427px */
+    --viewer-h-xs: 14.16rem; /* 227px */
 
     --viewer-aspect: 3/2;
 
