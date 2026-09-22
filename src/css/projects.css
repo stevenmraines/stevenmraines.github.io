@@ -2,7 +2,7 @@
 
 #full-view-container {
     /*TODO Update gaussian splat viewer and 3d viewer to use these values for left and translate-x, if we end up adding the project description text to those pages*/
-    @apply fixed left-9/20 top-1/2 -translate-y-1/2 -translate-x-9/20 transition-[width,height] duration-350 bg-[#2c2a30] border-2 border-black;
+    @apply relative mx-auto 2xl:fixed 2xl:left-9/20 2xl:top-1/2 2xl:-translate-y-1/2 2xl:-translate-x-9/20 transition-[width,height] duration-350 bg-[#2c2a30] border-2 border-black;
 }
 
 #full-view-container-content {
@@ -51,7 +51,7 @@
 
 .project-text-container {
     /* right-6 needs to match the right padding of .content */
-    @apply fixed right-6 top-1/2 -translate-y-1/2 w-[23vw] transition-opacity duration-175 z-2;
+    @apply relative mx-auto top-0 right-0 translate-0 my-8 w-4/5 md:w-2/3 2xl:w-[23vw] 2xl:fixed 2xl:right-6 2xl:top-1/2 2xl:-translate-y-1/2 transition-opacity duration-175 z-2;
 
     & > #project-title {
         @apply text-center;
@@ -67,36 +67,35 @@
 }
 
 .viewer-w-expanded {
-    width: 50vw;
+    @apply w-(--viewer-w-xs) sm:w-(--viewer-w-sm) md:w-(--viewer-w-md) lg:w-(--viewer-w-lg) xl:w-(--viewer-w-xl);
 }
 
 .viewer-w-collapsed {
-    width: 0;
+    @apply w-0;
+    border: none !important;
 }
 
 .viewer-h-expanded {
-    height: calc(0.75 * 50vw);
+    @apply h-(--viewer-h-xs) sm:h-(--viewer-h-sm) md:h-(--viewer-h-md) lg:h-(--viewer-h-lg) xl:h-(--viewer-h-xl);
 }
 
 .viewer-h-collapsed {
-    height: 0;
-}
-
-.cards-container-collapsed {
-    width: 100%;
-    flex-direction: row;
+    @apply h-0;
 }
 
 .cards-container-expanded {
-    width: 21vw;
-    flex-direction: column;
+    @apply relative mx-auto mt-12 w-4/5 sm:w-1/2 2xl:m-0 2xl:flex-col;
+
+    & .card {
+        @apply max-w-full md:max-w-[300px];
+    }
+}
+
+.cards-container-collapsed {
+    @apply flex-row;
 }
 
 @media (max-width: theme('screens.lg')) {
-    #full-view-container {
-        @apply relative w-4/5 min-h-2/3 overflow-auto top-7/20 mb-6;
-    }
-
     #full-view-container-content {
         @apply w-full h-full min-h-full;
     }
@@ -107,26 +106,10 @@
 
     #full-view-img {
         @apply h-full;
-    }
-
-    .cards-container-expanded {
-        @apply w-1/2 mx-auto;
-
-        & .card {
-            @apply max-w-full;
-        }
-    }
-
-    .project-text-container {
-        @apply relative w-2/3 mx-auto top-0 right-0 translate-0 my-8;
     }
 }
 
 @media (max-width: theme('screens.md')) {
-    #full-view-container {
-        @apply relative w-9/10 min-h-1/2 overflow-auto top-1/4 mb-6;
-    }
-
     #full-view-container-content {
         @apply w-full h-full min-h-full;
     }
@@ -137,26 +120,10 @@
 
     #full-view-img {
         @apply h-full;
-    }
-
-    .cards-container-expanded {
-        @apply w-1/2 mx-auto;
-
-        & .card {
-            @apply max-w-full;
-        }
-    }
-
-    .project-text-container {
-        @apply relative w-2/3 mx-auto top-0 right-0 translate-0 my-8;
     }
 }
 
 @media (max-width: theme('screens.sm')) {
-    #full-view-container {
-        @apply relative w-9/10 min-h-1/2 overflow-auto top-1/4 mb-6;
-    }
-
     #full-view-container-content {
         @apply w-full h-full min-h-full;
     }
@@ -167,17 +134,5 @@
 
     #full-view-img {
         @apply h-full;
-    }
-
-    .cards-container-expanded {
-        @apply w-4/5 mx-auto;
-
-        & .card {
-            @apply max-w-full;
-        }
-    }
-
-    .project-text-container {
-        @apply relative w-4/5 mx-auto top-0 right-0 translate-0 my-8;
     }
 }
