@@ -24,18 +24,18 @@
 
     <div id="model-viewer-overlay" class="viewer-w-collapsed viewer-h-collapsed hidden">
       <div id="model-viewer-overlay-content" class="viewer-w-collapsed viewer-h-collapsed">
-        <span id="vert-count" class="absolute top-2 left-2 text-sm"></span>
-        <span id="tri-count" class="absolute top-5 left-2 text-sm"></span>
+        <span id="vert-count" class="absolute top-2 left-2 text-xs md:text-sm"></span>
+        <span id="tri-count" class="absolute top-5 left-2 text-xs md:text-sm"></span>
 
         <button id="model-viewer-close" class="btn">X</button>
 
-        <span class="absolute bottom-8 left-2 text-sm">
+        <span class="absolute bottom-8 left-2 text-xs md:text-sm">
           Left click to pan
         </span>
-        <span class="absolute bottom-5 left-2 text-sm">
+        <span class="absolute bottom-5 left-2 text-xs md:text-sm">
           Left click + shift to rotate
         </span>
-        <span class="absolute bottom-2 left-2 text-sm">
+        <span class="absolute bottom-2 left-2 text-xs md:text-sm">
           Scroll to zoom
         </span>
 
@@ -53,16 +53,16 @@
           <div id="texture-image-container"></div>
         </div>
 
-        <div class="absolute bg-black -bottom-7 h-7 leading-7 left-0 right-0 flex justify-between align-middle px-2">
-          <label class="pointer-events-auto cursor-pointer select-none">
+        <div class="absolute bg-black -bottom-12 h-12 leading-12 sm:-bottom-7 sm:h-7 sm:leading-7 left-0 right-0 flex justify-between align-middle px-2">
+          <label class="pointer-events-auto cursor-pointer select-none text-xs md:text-sm text-wrap sm:text-nowrap max-w-16 sm:max-w-none">
             Wireframe
             <input type="checkbox" id="show-wireframe" />
           </label>
-          <label class="pointer-events-auto cursor-pointer select-none">
+          <label class="pointer-events-auto cursor-pointer select-none text-xs md:text-sm text-wrap sm:text-nowrap max-w-16 sm:max-w-none">
             Texture Preview
             <input type="checkbox" id="show-texture-preview" />
           </label>
-          <label class="pointer-events-auto cursor-pointer select-none">
+          <label class="pointer-events-auto cursor-pointer select-none text-xs md:text-sm text-wrap sm:text-nowrap max-w-16 sm:max-w-none">
             Texture Filtering
             <input type="checkbox" id="texture-filtering" />
           </label>
